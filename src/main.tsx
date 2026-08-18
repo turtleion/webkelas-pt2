@@ -3,6 +3,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { RequireAuth } from "@/components/RequireAuth";
 import { RequireAdmin } from "@/components/admin/RequireAdmin";
 import { RequireOwner } from "@/components/admin/RequireOwner";
+import { PreferencesProvider } from "@/context/PreferencesContext";
 import { VlyToolbar } from "../vly-toolbar-readonly.tsx";
 import React, { StrictMode, useEffect, lazy, Suspense } from "react";
 import { createRoot } from "react-dom/client";
@@ -18,6 +19,7 @@ const Pengumuman = lazy(() => import("./pages/Pengumuman.tsx"));
 const Agenda = lazy(() => import("./pages/Agenda.tsx"));
 const Galeri = lazy(() => import("./pages/Galeri.tsx"));
 const AuthPage = lazy(() => import("./pages/Auth.tsx"));
+const Settings = lazy(() => import("./pages/Settings.tsx"));
 const Dashboard = lazy(() => import("./pages/Dashboard.tsx"));
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 
@@ -29,6 +31,7 @@ const AdminSchedule = lazy(() => import("./pages/admin/AdminSchedule.tsx"));
 const AdminMembers = lazy(() => import("./pages/admin/AdminMembers.tsx"));
 const AdminGallery = lazy(() => import("./pages/admin/AdminGallery.tsx"));
 const AdminOrganization = lazy(() => import("./pages/admin/AdminOrganization.tsx"));
+const AdminTheme = lazy(() => import("./pages/admin/AdminTheme.tsx"));
 const AdminUsers = lazy(() => import("./pages/admin/AdminUsers.tsx"));
 
 // Simple loading fallback for route transitions
@@ -137,105 +140,116 @@ createRoot(document.getElementById("root")!).render(
       <ToolbarErrorBoundary>
         <VlyToolbar />
       </ToolbarErrorBoundary>
-      <BrowserRouter>
-        <RouteSyncer />
-        <ScrollToTop />
-        <Suspense fallback={<RouteLoading />}>
-          <Routes>
-            {/* Public Routes */}
-            <Route path="/" element={<Home />} />
-            <Route path="/anggota" element={<Anggota />} />
-            <Route path="/organisasi" element={<Organisasi />} />
-            <Route path="/jadwal" element={<Jadwal />} />
-            <Route path="/pengumuman" element={<Pengumuman />} />
-            <Route path="/agenda" element={<Agenda />} />
-            <Route path="/galeri" element={<Galeri />} />
-            <Route
-              path="/auth"
-              element={<AuthPage redirectAfterAuth="/dashboard" />}
-            />
-            <Route
-              path="/dashboard"
-              element={
-                <RequireAuth>
-                  <Dashboard />
-                </RequireAuth>
-              }
-            />
+      <PreferencesProvider>
+        <BrowserRouter>
+          <RouteSyncer />
+          <ScrollToTop />
+          <Suspense fallback={<RouteLoading />}>
+            <Routes>
+              {/* Public Routes */}
+              <Route path="/" element={<Home />} />
+              <Route path="/anggota" element={<Anggota />} />
+              <Route path="/organisasi" element={<Organisasi />} />
+              <Route path="/jadwal" element={<Jadwal />} />
+              <Route path="/pengumuman" element={<Pengumuman />} />
+              <Route path="/agenda" element={<Agenda />} />
+              <Route path="/galeri" element={<Galeri />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route
+                path="/auth"
+                element={<AuthPage redirectAfterAuth="/dashboard" />}
+              />
+              <Route
+                path="/dashboard"
+                element={
+                  <RequireAuth>
+                    <Dashboard />
+                  </RequireAuth>
+                }
+              />
 
-            {/* Admin Protected Routes */}
-            <Route
-              path="/admin"
-              element={
-                <RequireAdmin>
-                  <AdminDashboard />
-                </RequireAdmin>
-              }
-            />
-            <Route
-              path="/admin/pengumuman"
-              element={
-                <RequireAdmin>
-                  <AdminAnnouncements />
-                </RequireAdmin>
-              }
-            />
-            <Route
-              path="/admin/agenda"
-              element={
-                <RequireAdmin>
-                  <AdminAgenda />
-                </RequireAdmin>
-              }
-            />
-            <Route
-              path="/admin/jadwal"
-              element={
-                <RequireAdmin>
-                  <AdminSchedule />
-                </RequireAdmin>
-              }
-            />
-            <Route
-              path="/admin/anggota"
-              element={
-                <RequireAdmin>
-                  <AdminMembers />
-                </RequireAdmin>
-              }
-            />
-            <Route
-              path="/admin/galeri"
-              element={
-                <RequireAdmin>
-                  <AdminGallery />
-                </RequireAdmin>
-              }
-            />
-            <Route
-              path="/admin/organisasi"
-              element={
-                <RequireAdmin>
-                  <AdminOrganization />
-                </RequireAdmin>
-              }
-            />
+              {/* Admin Protected Routes */}
+              <Route
+                path="/admin"
+                element={
+                  <RequireAdmin>
+                    <AdminDashboard />
+                  </RequireAdmin>
+                }
+              />
+              <Route
+                path="/admin/pengumuman"
+                element={
+                  <RequireAdmin>
+                    <AdminAnnouncements />
+                  </RequireAdmin>
+                }
+              />
+              <Route
+                path="/admin/agenda"
+                element={
+                  <RequireAdmin>
+                    <AdminAgenda />
+                  </RequireAdmin>
+                }
+              />
+              <Route
+                path="/admin/jadwal"
+                element={
+                  <RequireAdmin>
+                    <AdminSchedule />
+                  </RequireAdmin>
+                }
+              />
+              <Route
+                path="/admin/anggota"
+                element={
+                  <RequireAdmin>
+                    <AdminMembers />
+                  </RequireAdmin>
+                }
+              />
+              <Route
+                path="/admin/galeri"
+                element={
+                  <RequireAdmin>
+                    <AdminGallery />
+                  </RequireAdmin>
+                }
+              />
+              <Route
+                path="/admin/organisasi"
+                element={
+                  <RequireAdmin>
+                    <AdminOrganization />
+                  </RequireAdmin>
+                }
+              />
+              <Route
+                path="/admin/theme"
+                element={
+                  <RequireAdmin>
+                    <AdminTheme />
+                  </RequireAdmin>
+                }
+              />
 
-            {/* Owner-Only Protected Routes */}
-            <Route
-              path="/admin/users"
-              element={
-                <RequireOwner>
-                  <AdminUsers />
-                </RequireOwner>
-              }
-            />
+              {/* Owner-Only Protected Routes */}
+              <Route
+                path="/admin/users"
+                element={
+                  <RequireOwner>
+                    <AdminUsers />
+                  </RequireOwner>
+                }
+              />
 
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Suspense>
-      </BrowserRouter>
-      <Toaster />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+        </BrowserRouter>
+        <Toaster />
+      </PreferencesProvider>
     </RootErrorBoundary>
   </StrictMode>,
 );

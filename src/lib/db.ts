@@ -434,3 +434,38 @@ export async function updateProfileRole(
   if (error) throw error;
   return data;
 }
+
+// ---------------------------------------------------------------------------
+// User Preferences API (per-user settings JSONB in profiles.settings)
+// ---------------------------------------------------------------------------
+export async function getUserSettings<T = Record<string, unknown>>(
+  userId: string
+): Promise<T | null> {
+  const { data, error } = await supabase
+    .from("profiles")
+    .select("settings")
+    .eq("id", userId)
+    .maybeSingle();
+
+  if (error) throw error;
+  const settings = data?.settings;
+  if (!settings || (typeof settings === "object" && Object.keys(settings as object).length === 0)) {
+    return null;
+  }
+  return settings as T;
+}
+
+export async function updateUserSettings<T = Record<string, unknown>>(
+  userId: string,
+  settings: T
+): Promise<void> {
+  const { error } = await supabase
+    .from("profiles")
+    .update({
+      settings: settings as unknown as Record<string, unknown>,
+      updated_at: new Date().toISOString(),
+    })
+    .eq("id", userId);
+
+  if (error) throw error;
+}

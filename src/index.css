@@ -264,3 +264,50 @@ body::after {
     }
   }
 }
+
+/* ------------------------------------------------------------------
+   Theme Specific Overrides
+------------------------------------------------------------------- */
+
+/* Glass Theme: heightened frosted glass cards and border glows */
+[data-theme="glass"] .glass {
+  background-color: var(--glass-bg, rgba(255, 255, 255, 0.45));
+  -webkit-backdrop-filter: blur(24px) saturate(1.4);
+  backdrop-filter: blur(24px) saturate(1.4);
+  border: 1px solid var(--glass-border, rgba(2, 132, 199, 0.2));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 8px 32px 0 rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="glass"] {
+  --radius: 0.75rem;
+}
+
+/* Cartoon Theme: vibrant, neo-brutalist pop styling */
+[data-theme="cartoon"] {
+  --radius: 0.85rem;
+}
+
+[data-theme="cartoon"] .glass,
+[data-theme="cartoon"] .card,
+[data-theme="cartoon"] button,
+[data-theme="cartoon"] .btn-primary,
+[data-theme="cartoon"] input,
+[data-theme="cartoon"] textarea,
+[data-theme="cartoon"] select {
+  box-shadow: 3px 3px 0px 0px #0f172a !important;
+  border-width: 2px !important;
+  border-color: #0f172a !important;
+}
+
+[data-theme="cartoon"] button:hover,
+[data-theme="cartoon"] .glass-hover:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0px 0px #0f172a !important;
+}
+
+[data-theme="cartoon"] button:active,
+[data-theme="cartoon"] .glass-hover:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px 0px #0f172a !important;
+}
+

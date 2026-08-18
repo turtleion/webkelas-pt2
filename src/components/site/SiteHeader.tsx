@@ -1,26 +1,32 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router";
-import { Menu, X, Shield, LayoutDashboard } from "lucide-react";
+import { Menu, X, Shield, LayoutDashboard, Settings, Globe } from "lucide-react";
 import { KelasMark } from "./KelasMark";
 import { useOrganization } from "@/hooks/use-organization";
 import { useAuth } from "@/hooks/use-auth";
+import { useTranslation } from "@/hooks/use-translation";
 import { cn } from "@/lib/utils";
-
-const NAV = [
-  { to: "/", label: "Beranda", end: true },
-  { to: "/anggota", label: "Anggota" },
-  { to: "/organisasi", label: "Organisasi" },
-  { to: "/jadwal", label: "Jadwal" },
-  { to: "/pengumuman", label: "Pengumuman" },
-  { to: "/agenda", label: "Agenda" },
-  { to: "/galeri", label: "Galeri" },
-];
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const { data: orgData } = useOrganization();
   const { kelas } = orgData;
   const { isAuthenticated, isAdmin } = useAuth();
+  const { t, locale, setLocale } = useTranslation();
+
+  const NAV = [
+    { to: "/", label: t.nav.home, end: true },
+    { to: "/anggota", label: t.nav.members },
+    { to: "/organisasi", label: t.nav.organization },
+    { to: "/jadwal", label: t.nav.schedule },
+    { to: "/pengumuman", label: t.nav.announcements },
+    { to: "/agenda", label: t.nav.agenda },
+    { to: "/galeri", label: t.nav.gallery },
+  ];
+
+  const toggleLanguage = () => {
+    void setLocale(locale === "id" ? "en" : "id");
+  };
 
   return (
     <header className="glass sticky top-0 z-40 border-x-0 border-t-0 border-b border-b-border/60">
@@ -74,6 +80,31 @@ export function SiteHeader() {
               </NavLink>
             ))}
 
+            {/* Language Quick Switcher */}
+            <button
+              type="button"
+              onClick={toggleLanguage}
+              title={`Ganti bahasa / Switch to ${locale === "id" ? "English" : "Bahasa Indonesia"}`}
+              className="inline-flex items-center gap-1 font-mono text-[11px] uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+            >
+              <Globe className="size-3.5" />
+              <span>{locale.toUpperCase()}</span>
+            </button>
+
+            {/* Settings Link */}
+            <NavLink
+              to="/settings"
+              title={t.nav.settings}
+              className={({ isActive }) =>
+                cn(
+                  "p-1.5 rounded text-muted-foreground hover:text-foreground transition-colors",
+                  isActive ? "text-primary bg-primary/10" : ""
+                )
+              }
+            >
+              <Settings className="size-4" />
+            </NavLink>
+
             {/* Link Admin / Dashboard */}
             {isAdmin ? (
               <NavLink
@@ -81,7 +112,7 @@ export function SiteHeader() {
                 className="inline-flex items-center gap-1.5 rounded border border-primary/40 bg-primary/10 px-2.5 py-1 font-mono text-[11px] uppercase tracking-wider text-primary hover:bg-primary hover:text-primary-foreground transition-colors"
               >
                 <Shield className="size-3.5" />
-                Panel Admin
+                {t.nav.adminPanel}
               </NavLink>
             ) : isAuthenticated ? (
               <NavLink
@@ -89,14 +120,14 @@ export function SiteHeader() {
                 className="inline-flex items-center gap-1.5 rounded border border-border bg-card/60 px-2.5 py-1 font-mono text-[11px] uppercase tracking-wider text-foreground hover:bg-card transition-colors"
               >
                 <LayoutDashboard className="size-3.5" />
-                Ruang Anggota
+                {t.nav.dashboard}
               </NavLink>
             ) : (
               <NavLink
                 to="/auth"
                 className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground hover:text-foreground"
               >
-                Masuk
+                {t.nav.signIn}
               </NavLink>
             )}
           </nav>
@@ -141,14 +172,33 @@ export function SiteHeader() {
               </NavLink>
             ))}
 
-            <div className="pt-4 pb-2">
+            <div className="pt-4 pb-2 space-y-2">
+              <div className="flex items-center justify-between px-1 py-1 border-b border-border/40">
+                <button
+                  type="button"
+                  onClick={toggleLanguage}
+                  className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-wider text-muted-foreground hover:text-foreground"
+                >
+                  <Globe className="size-3.5" />
+                  <span>Bahasa: {locale.toUpperCase()}</span>
+                </button>
+                <Link
+                  to="/settings"
+                  onClick={() => setOpen(false)}
+                  className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-wider text-muted-foreground hover:text-foreground"
+                >
+                  <Settings className="size-3.5" />
+                  <span>{t.nav.settings}</span>
+                </Link>
+              </div>
+
               {isAdmin ? (
                 <Link
                   to="/admin"
                   onClick={() => setOpen(false)}
                   className="flex items-center justify-center gap-2 w-full bg-primary py-2.5 font-mono text-[11px] uppercase tracking-wider text-primary-foreground"
                 >
-                  <Shield className="size-4" /> Buka Panel Admin
+                  <Shield className="size-4" /> {t.nav.adminPanel}
                 </Link>
               ) : isAuthenticated ? (
                 <Link
@@ -156,7 +206,7 @@ export function SiteHeader() {
                   onClick={() => setOpen(false)}
                   className="flex items-center justify-center gap-2 w-full border border-border bg-card py-2.5 font-mono text-[11px] uppercase tracking-wider text-foreground"
                 >
-                  <LayoutDashboard className="size-4" /> Ruang Anggota
+                  <LayoutDashboard className="size-4" /> {t.nav.dashboard}
                 </Link>
               ) : (
                 <Link
@@ -164,7 +214,7 @@ export function SiteHeader() {
                   onClick={() => setOpen(false)}
                   className="flex items-center justify-center gap-2 w-full bg-primary py-2.5 font-mono text-[11px] uppercase tracking-wider text-primary-foreground"
                 >
-                  Masuk ke Arsip
+                  {t.nav.signIn}
                 </Link>
               )}
             </div>

@@ -2,18 +2,22 @@ import { Link } from "react-router";
 import { Instagram, Mail } from "lucide-react";
 import { KelasMark } from "./KelasMark";
 import { kelas } from "@/data/kelas";
-
-const TAUTAN = [
-  { to: "/", label: "Beranda" },
-  { to: "/anggota", label: "Anggota kelas" },
-  { to: "/organisasi", label: "Struktur organisasi" },
-  { to: "/jadwal", label: "Jadwal pelajaran" },
-  { to: "/pengumuman", label: "Pengumuman" },
-  { to: "/agenda", label: "Agenda kelas" },
-  { to: "/galeri", label: "Galeri & dokumentasi" },
-];
+import { useTranslation } from "@/hooks/use-translation";
 
 export function SiteFooter() {
+  const { t } = useTranslation();
+
+  const TAUTAN = [
+    { to: "/", label: t.nav.home },
+    { to: "/anggota", label: t.nav.members },
+    { to: "/organisasi", label: t.nav.organization },
+    { to: "/jadwal", label: t.nav.schedule },
+    { to: "/pengumuman", label: t.nav.announcements },
+    { to: "/agenda", label: t.nav.agenda },
+    { to: "/galeri", label: t.nav.gallery },
+    { to: "/settings", label: t.nav.settings },
+  ];
+
   return (
     <footer className="mt-20 md:mt-28">
       <div className="rule-double" aria-hidden />
@@ -41,7 +45,7 @@ export function SiteFooter() {
           </div>
 
           <nav aria-label="Tautan footer" className="md:col-span-3">
-            <h2 className="kicker text-[10px]">Jelajahi</h2>
+            <h2 className="kicker text-[10px]">{t.footer.explore}</h2>
             <ul className="mt-4 space-y-2.5">
               {TAUTAN.map((t) => (
                 <li key={t.to}>
@@ -57,7 +61,7 @@ export function SiteFooter() {
           </nav>
 
           <div className="md:col-span-4">
-            <h2 className="kicker text-[10px]">Kontak & medsos</h2>
+            <h2 className="kicker text-[10px]">{t.footer.contactSocial}</h2>
             <ul className="mt-4 space-y-3">
               <li>
                 <a

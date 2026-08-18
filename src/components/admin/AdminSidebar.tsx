@@ -7,6 +7,7 @@ import {
   Users,
   Image as ImageIcon,
   Building2,
+  Palette,
   ShieldCheck,
   LogOut,
   ExternalLink,
@@ -36,6 +37,7 @@ export function AdminSidebar({ onItemClick }: AdminSidebarProps) {
     { to: "/admin/anggota", label: "Anggota Kelas", icon: Users },
     { to: "/admin/galeri", label: "Galeri Foto", icon: ImageIcon },
     { to: "/admin/organisasi", label: "Identitas & Org", icon: Building2 },
+    { to: "/admin/theme", label: "Tema & Tampilan", icon: Palette },
     ...(isOwner
       ? [{ to: "/admin/users", label: "Manajemen User", icon: ShieldCheck }]
       : []),
