@@ -2,7 +2,7 @@ import { useState } from "react";
 import { usePreferences } from "@/hooks/use-preferences";
 import { useTranslation } from "@/hooks/use-translation";
 import { AdminLayout } from "@/components/admin/AdminLayout";
-import { THEME_PRESETS, COLOR_SCHEMES, BUILTIN_FONTS } from "@/lib/theme-presets";
+import { THEME_PRESETS, COLOR_SCHEMES, BUILTIN_FONTS, BACKGROUND_PRESETS } from "@/lib/theme-presets";
 import { loadGoogleFont } from "@/lib/font-loader";
 import {
   Palette,
@@ -28,6 +28,7 @@ export default function AdminTheme() {
   const [colorScheme, setColorScheme] = useState<string>(globalDefaults.defaultColorScheme);
   const [font, setFont] = useState<string>(globalDefaults.defaultFont);
   const [homeLayout, setHomeLayout] = useState<HomeLayoutKey>(globalDefaults.defaultHomeLayout);
+  const [background, setBackground] = useState<string>(globalDefaults.defaultBackground);
   const [mode, setMode] = useState<"light" | "dark">(globalDefaults.defaultMode);
   const [isSaving, setIsSaving] = useState(false);
 
@@ -46,6 +47,7 @@ export default function AdminTheme() {
         defaultColorScheme: colorScheme,
         defaultFont: font,
         defaultHomeLayout: homeLayout,
+        defaultBackground: background,
         defaultMode: isCartoonActive ? "light" : mode,
       });
       toast.success(t.settings.saveSuccess || "Pengaturan tema global berhasil disimpan.");
@@ -160,6 +162,7 @@ export default function AdminTheme() {
                     setColorScheme(p.colorScheme);
                     setFont(p.fontFamily);
                     setHomeLayout(p.homeLayout);
+                    setBackground(p.defaultBackground);
                     if (presetKey === "cartoon") setMode("light");
                   }}
                   className={cn(
@@ -224,7 +227,51 @@ export default function AdminTheme() {
           )}
         </div>
 
-        {/* 3. Color Scheme Default */}
+        {/* 3. Background Default */}
+        <div className="space-y-3">
+          <div>
+            <h3 className="font-display text-lg font-medium">{t.admin.defaultBackground}</h3>
+            <p className="text-xs text-muted-foreground">{t.settings.backgroundSelect}</p>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+            {BACKGROUND_PRESETS.map((bg) => {
+              const isSelected = background === bg.id;
+              const activeVariant = mode === "dark" ? bg.dark : bg.light;
+              return (
+                <button
+                  key={bg.id}
+                  type="button"
+                  onClick={() => setBackground(bg.id)}
+                  className={cn(
+                    "glass glass-hover flex flex-col justify-between p-3 text-left transition-all cursor-pointer rounded-md overflow-hidden",
+                    isSelected
+                      ? "ring-2 ring-primary border-primary bg-card"
+                      : "border-border/80 hover:bg-card/70"
+                  )}
+                >
+                  <div
+                    className="w-full h-16 rounded border border-border/80 relative mb-2"
+                    style={{ background: activeVariant.thumbnail }}
+                  >
+                    {isSelected && (
+                      <div className="absolute top-1.5 right-1.5 flex size-4 items-center justify-center rounded-full bg-primary text-primary-foreground">
+                        <Check className="size-2.5" />
+                      </div>
+                    )}
+                  </div>
+                  <span className="font-display text-xs font-semibold block text-foreground truncate">
+                    {bg.name}
+                  </span>
+                  <span className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground">
+                    Tema {bg.theme}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* 4. Color Scheme Default */}
         <div className="space-y-3">
           <div>
             <h3 className="font-display text-lg font-medium">{t.admin.defaultColorScheme}</h3>
@@ -273,7 +320,7 @@ export default function AdminTheme() {
           </div>
         </div>
 
-        {/* 4. Home Layout Default */}
+        {/* 5. Home Layout Default */}
         <div className="space-y-3">
           <div>
             <h3 className="font-display text-lg font-medium">{t.admin.defaultLayout}</h3>
@@ -311,7 +358,7 @@ export default function AdminTheme() {
           </div>
         </div>
 
-        {/* 5. Google Fonts & Typography Library */}
+        {/* 6. Google Fonts & Typography Library */}
         <div className="space-y-4 border-t border-border/80 pt-8">
           <div>
             <h3 className="font-display text-xl font-medium tracking-tight">

@@ -12,4 +12,10 @@ export type {
   FontDefinition,
   CustomColorsMap,
   ColorPaletteTokens,
+  BackgroundPreset,
+} from "@/lib/theme-presets";
+export {
+  BACKGROUND_PRESETS,
+  getBackgroundsForTheme,
+  getBackgroundById,
 } from "@/lib/theme-presets";

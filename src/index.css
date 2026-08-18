@@ -35,6 +35,10 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-tertiary: var(--tertiary);
+  --color-tertiary-foreground: var(--on-tertiary);
+  --color-nav: var(--nav);
+  --color-nav-foreground: var(--on-nav);
   --color-destructive: var(--destructive);
   --color-border: var(--border);
   --color-input: var(--input);
@@ -77,6 +81,10 @@
   --muted-foreground: #6d6250;
   --accent: #a64f2b;
   --accent-foreground: #f7f1e2;
+  --tertiary: #7a5c2b;
+  --on-tertiary: #f7f1e2;
+  --nav: #ece2cb;
+  --on-nav: #29241d;
   --destructive: #8f3b24;
   --border: #d2c3a2;
   --input: #d2c3a2;
@@ -122,6 +130,10 @@
   --muted-foreground: #a99b7d;
   --accent: #c96a41;
   --accent-foreground: #1e1a12;
+  --tertiary: #b08d57;
+  --on-tertiary: #1e1a12;
+  --nav: #272216;
+  --on-nav: #e7dcc1;
   --destructive: #c25a35;
   --border: #3a3120;
   --input: #3a3120;
@@ -162,17 +174,7 @@
     font-family: var(--font-serif);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    /* vignette kertas yang sangat halus */
-    background-image: radial-gradient(
-        120% 60% at 50% -5%,
-        rgba(255, 255, 255, 0.5),
-        transparent 55%
-      ),
-      radial-gradient(
-        90% 45% at 50% 108%,
-        rgba(122, 92, 43, 0.07),
-        transparent 60%
-      );
+    background-image: var(--custom-bg-image);
     background-attachment: fixed;
   }
   ::selection {

@@ -29,7 +29,13 @@ export function SiteHeader() {
   };
 
   return (
-    <header className="glass sticky top-0 z-40 border-x-0 border-t-0 border-b border-b-border/60">
+    <header
+      className="glass sticky top-0 z-40 border-x-0 border-t-0 border-b border-b-border/60 transition-colors"
+      style={{
+        backgroundColor: "var(--nav)",
+        color: "var(--on-nav)",
+      }}
+    >
       <a
         href="#konten"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-50 focus:bg-primary focus:px-3 focus:py-1.5 focus:font-mono focus:text-[11px] focus:uppercase focus:tracking-widest focus:text-primary-foreground"

@@ -31,6 +31,8 @@ export interface TranslationSchema {
     customColors: string;
     fontSection: string;
     fontSelect: string;
+    backgroundSection: string;
+    backgroundSelect: string;
     homeLayoutSection: string;
     modeSection: string;
     lightMode: string;
@@ -66,12 +68,23 @@ export interface TranslationSchema {
     background: string;
     foreground: string;
     primary: string;
-    secondary: string;
+    onPrimary: string;
     accent: string;
+    onAccent: string;
     card: string;
+    onSurface: string;
+    nav: string;
+    onNav: string;
+    tertiary: string;
+    onTertiary: string;
     border: string;
     lightMode: string;
     darkMode: string;
+    mainGroup: string;
+    brandGroup: string;
+    surfaceGroup: string;
+    navGroup: string;
+    advancedGroup: string;
   };
   home: {
     heroTag: string;
@@ -109,6 +122,7 @@ export interface TranslationSchema {
     defaultMode: string;
     defaultColorScheme: string;
     defaultFont: string;
+    defaultBackground: string;
     defaultLayout: string;
     defaultLanguage: string;
     saveDefaults: string;

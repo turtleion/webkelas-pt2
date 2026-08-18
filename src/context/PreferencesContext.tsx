@@ -11,6 +11,9 @@ import {
   THEME_PRESETS,
   COLOR_SCHEMES,
   BUILTIN_FONTS,
+  BACKGROUND_PRESETS,
+  getBackgroundById,
+  resolveBackgroundCss,
   type ThemePresetKey,
   type HomeLayoutKey,
   type ModeKey,
@@ -34,6 +37,7 @@ export interface GlobalThemeDefaults {
   defaultColorScheme: string;
   defaultFont: string;
   defaultHomeLayout: HomeLayoutKey;
+  defaultBackground: string;
   defaultLanguage: Locale;
 }
 
@@ -43,6 +47,7 @@ export interface UserPreferences {
   colorScheme?: string;
   font?: string;
   homeLayout?: HomeLayoutKey;
+  background?: string;
   language?: Locale;
   customColors?: CustomColorsMap;
 }
@@ -53,6 +58,7 @@ export interface EffectiveSettings {
   colorScheme: string;
   font: string;
   homeLayout: HomeLayoutKey;
+  background: string;
   language: Locale;
   customColors?: CustomColorsMap;
   isCustom: boolean;
@@ -69,6 +75,7 @@ export interface PreferencesContextValue {
   setColorScheme: (schemeId: string) => Promise<void>;
   setFont: (fontId: string) => Promise<void>;
   setHomeLayout: (layout: HomeLayoutKey) => Promise<void>;
+  setBackground: (bgId: string) => Promise<void>;
   setLanguage: (lang: Locale) => Promise<void>;
   setCustomColors: (colors: CustomColorsMap) => Promise<void>;
   resetToDefaults: () => Promise<void>;
@@ -88,6 +95,7 @@ const DEFAULT_GLOBAL: GlobalThemeDefaults = {
   defaultColorScheme: "paper",
   defaultFont: "fraunces",
   defaultHomeLayout: "classic",
+  defaultBackground: "paper-classic",
   defaultLanguage: "id",
 };
 
@@ -111,7 +119,7 @@ function setLocalPreferences(prefs: UserPreferences) {
 }
 
 /**
- * Apply token and classes directly to DOM document.documentElement
+ * Apply token, background, and classes directly to DOM document.documentElement and body
  */
 function applyTokensToDOM(settings: EffectiveSettings, fontDef: FontDefinition) {
   const root = document.documentElement;
@@ -127,6 +135,7 @@ function applyTokensToDOM(settings: EffectiveSettings, fontDef: FontDefinition) 
   root.setAttribute("data-theme", settings.theme);
   root.setAttribute("data-color-scheme", settings.colorScheme);
   root.setAttribute("data-layout", settings.homeLayout);
+  root.setAttribute("data-background", settings.background);
 
   // 3. Fonts
   root.style.setProperty("--font-display", fontDef.fontDisplay);
@@ -134,7 +143,12 @@ function applyTokensToDOM(settings: EffectiveSettings, fontDef: FontDefinition) 
   root.style.setProperty("--font-sans", fontDef.fontSans);
   root.style.setProperty("--font-mono", fontDef.fontMono);
 
-  // 4. Color Palette Variables
+  // 4. Background preset applied as CSS custom property and directly to body background
+  const bgCss = resolveBackgroundCss(settings.background, settings.mode);
+  root.style.setProperty("--custom-bg-image", bgCss);
+  document.body.style.backgroundImage = bgCss;
+
+  // 5. Color Palette Variables
   let basePalette: ColorPaletteTokens | undefined;
   const scheme = COLOR_SCHEMES[settings.colorScheme] || COLOR_SCHEMES.paper;
   basePalette = settings.mode === "dark" && scheme.dark ? scheme.dark : scheme.light;
@@ -143,9 +157,16 @@ function applyTokensToDOM(settings: EffectiveSettings, fontDef: FontDefinition) 
   if (basePalette) {
     Object.entries(basePalette).forEach(([token, val]) => {
       if (val !== undefined) {
-        // Map camelCase to kebab-case
-        const cssVar = `--${token.replace(/([A-Z])/g, "-$1").toLowerCase()}`;
-        root.style.setProperty(cssVar, String(val));
+        // Special case semantic alias mappings
+        if (token === "onNav") {
+          root.style.setProperty("--on-nav", String(val));
+        } else if (token === "onTertiary") {
+          root.style.setProperty("--on-tertiary", String(val));
+        } else {
+          // Map camelCase to kebab-case
+          const cssVar = `--${token.replace(/([A-Z])/g, "-$1").toLowerCase()}`;
+          root.style.setProperty(cssVar, String(val));
+        }
       }
     });
   }
@@ -160,8 +181,14 @@ function applyTokensToDOM(settings: EffectiveSettings, fontDef: FontDefinition) 
     if (customModeOverrides) {
       Object.entries(customModeOverrides).forEach(([token, val]) => {
         if (val) {
-          const cssVar = `--${token.replace(/([A-Z])/g, "-$1").toLowerCase()}`;
-          root.style.setProperty(cssVar, String(val));
+          if (token === "onNav") {
+            root.style.setProperty("--on-nav", String(val));
+          } else if (token === "onTertiary") {
+            root.style.setProperty("--on-tertiary", String(val));
+          } else {
+            const cssVar = `--${token.replace(/([A-Z])/g, "-$1").toLowerCase()}`;
+            root.style.setProperty(cssVar, String(val));
+          }
         }
       });
     }
@@ -238,6 +265,7 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
     const rawScheme = userPrefs.colorScheme ?? (rawTheme !== "custom" ? rawTheme : globalDefaults.defaultColorScheme);
     const rawFont = userPrefs.font ?? globalDefaults.defaultFont;
     const rawLayout = userPrefs.homeLayout ?? globalDefaults.defaultHomeLayout;
+    const rawBackground = userPrefs.background ?? globalDefaults.defaultBackground;
     const rawLang = userPrefs.language ?? globalDefaults.defaultLanguage;
 
     // CARTOON DARK-MODE LOCK: Cartoon theme or color scheme NEVER supports dark mode
@@ -256,11 +284,12 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
         const schemeMismatch = rawScheme !== preset.colorScheme;
         const fontMismatch = rawFont !== preset.fontFamily;
         const layoutMismatch = rawLayout !== preset.homeLayout;
+        const backgroundMismatch = rawBackground !== preset.defaultBackground;
         const hasCustomColors =
           Boolean(userPrefs.customColors?.light && Object.keys(userPrefs.customColors.light).length > 0) ||
           Boolean(userPrefs.customColors?.dark && Object.keys(userPrefs.customColors.dark).length > 0);
 
-        if (schemeMismatch || fontMismatch || layoutMismatch || hasCustomColors) {
+        if (schemeMismatch || fontMismatch || layoutMismatch || backgroundMismatch || hasCustomColors) {
           effectiveTheme = "custom";
           isCustom = true;
         }
@@ -273,6 +302,7 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
       colorScheme: rawScheme,
       font: rawFont,
       homeLayout: rawLayout,
+      background: rawBackground,
       language: rawLang,
       customColors: userPrefs.customColors,
       isCustom,
@@ -314,7 +344,7 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
     const preset = THEME_PRESETS[presetKey];
     if (!preset) return;
 
-    // Reset settings to match chosen preset exactly
+    // Reset settings to match chosen preset exactly including default background
     await savePreferences({
       ...userPrefs,
       theme: presetKey,
@@ -322,6 +352,7 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
       colorScheme: preset.colorScheme,
       font: preset.fontFamily,
       homeLayout: preset.homeLayout,
+      background: preset.defaultBackground,
       customColors: undefined,
     });
   };
@@ -355,6 +386,13 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
     await savePreferences({
       ...userPrefs,
       homeLayout: layout,
+    });
+  };
+
+  const setBackground = async (backgroundId: string) => {
+    await savePreferences({
+      ...userPrefs,
+      background: backgroundId,
     });
   };
 
@@ -423,6 +461,7 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
     setColorScheme,
     setFont,
     setHomeLayout,
+    setBackground,
     setLanguage,
     setCustomColors,
     resetToDefaults,
