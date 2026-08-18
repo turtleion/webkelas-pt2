@@ -1,0 +1,266 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap");
+@import "tailwindcss";
+@import "tw-animate-css";
+@custom-variant dark (&:is(.dark *));
+
+/* ------------------------------------------------------------------
+   Type — 2 families only:
+   - Fraunces (display + body serif, editorial)
+   - IBM Plex Mono (metadata / labels, typewriter feel)
+------------------------------------------------------------------- */
+@theme {
+  --font-sans: "Fraunces", "Georgia", "Times New Roman", serif;
+  --font-serif: "Fraunces", "Georgia", "Times New Roman", serif;
+  --font-display: "Fraunces", "Georgia", "Times New Roman", serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas,
+    monospace;
+}
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+/* ------------------------------------------------------------------
+   Palet — tema vintage/arsip:
+   - Kertas krem (off-white sepia) sebagai background
+   - Tinta hangat (charcoal kecokelatan) sebagai teks
+   - Hijau pinus tua sebagai warna utama (kesan perpustakaan/arsip)
+   - Rust/merah bata sebagai aksen (cap/stempel), dipakai hemat
+------------------------------------------------------------------- */
+:root {
+  --radius: 0.25rem;
+  --background: #f4eddd;
+  --foreground: #29241d;
+  --card: #ece2cb;
+  --card-foreground: #29241d;
+  --popover: #f4eddd;
+  --popover-foreground: #29241d;
+  --primary: #2e4631;
+  --primary-foreground: #f2ead7;
+  --secondary: #e7dcc2;
+  --secondary-foreground: #29241d;
+  --muted: #ebe1c9;
+  --muted-foreground: #6d6250;
+  --accent: #a64f2b;
+  --accent-foreground: #f7f1e2;
+  --destructive: #8f3b24;
+  --border: #d2c3a2;
+  --input: #d2c3a2;
+  --ring: #2e4631;
+  --chart-1: #a64f2b;
+  --chart-2: #2e4631;
+  --chart-3: #8a7a5c;
+  --chart-4: #b08d57;
+  --chart-5: #6b5d43;
+  --sidebar: #ece2cb;
+  --sidebar-foreground: #29241d;
+  --sidebar-primary: #2e4631;
+  --sidebar-primary-foreground: #f2ead7;
+  --sidebar-accent: #e0d3b2;
+  --sidebar-accent-foreground: #29241d;
+  --sidebar-border: #d2c3a2;
+  --sidebar-ring: #2e4631;
+  /* kaca — bahan transparan hangat, dipakai selektif (header, panel masuk,
+     kartu workspace, catatan). Opaque paper tetap menjadi permukaan utama. */
+  --glass-bg: rgba(250, 247, 240, 0.6);
+  --glass-bg-strong: rgba(252, 249, 242, 0.88);
+  --glass-border: rgba(46, 70, 49, 0.18);
+  --glass-border-bright: rgba(46, 70, 49, 0.34);
+  --glass-highlight: rgba(255, 255, 255, 0.7);
+  --glass-shadow: 0 1px 1px rgba(41, 36, 29, 0.05),
+    0 10px 30px -18px rgba(41, 36, 29, 0.28);
+  --glass-shadow-hover: 0 2px 2px rgba(41, 36, 29, 0.05),
+    0 18px 44px -20px rgba(41, 36, 29, 0.38);
+}
+
+.dark {
+  --background: #1e1a12;
+  --foreground: #e7dcc1;
+  --card: #272216;
+  --card-foreground: #e7dcc1;
+  --popover: #1e1a12;
+  --popover-foreground: #e7dcc1;
+  --primary: #9db392;
+  --primary-foreground: #1e1a12;
+  --secondary: #322b1a;
+  --secondary-foreground: #e7dcc1;
+  --muted: #2a2416;
+  --muted-foreground: #a99b7d;
+  --accent: #c96a41;
+  --accent-foreground: #1e1a12;
+  --destructive: #c25a35;
+  --border: #3a3120;
+  --input: #3a3120;
+  --ring: #9db392;
+  --chart-1: #c96a41;
+  --chart-2: #9db392;
+  --chart-3: #a99b7d;
+  --chart-4: #b08d57;
+  --chart-5: #6b5d43;
+  --sidebar: #272216;
+  --sidebar-foreground: #e7dcc1;
+  --sidebar-primary: #9db392;
+  --sidebar-primary-foreground: #1e1a12;
+  --sidebar-accent: #322b1a;
+  --sidebar-accent-foreground: #e7dcc1;
+  --sidebar-border: #3a3120;
+  --sidebar-ring: #9db392;
+  --glass-bg: rgba(39, 34, 22, 0.58);
+  --glass-bg-strong: rgba(39, 34, 22, 0.88);
+  --glass-border: rgba(157, 179, 146, 0.16);
+  --glass-border-bright: rgba(157, 179, 146, 0.32);
+  --glass-highlight: rgba(231, 220, 193, 0.09);
+  --glass-shadow: 0 1px 1px rgba(0, 0, 0, 0.28),
+    0 12px 32px -18px rgba(0, 0, 0, 0.55);
+  --glass-shadow-hover: 0 2px 2px rgba(0, 0, 0, 0.28),
+    0 20px 48px -20px rgba(0, 0, 0, 0.65);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-serif);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    /* vignette kertas yang sangat halus */
+    background-image: radial-gradient(
+        120% 60% at 50% -5%,
+        rgba(255, 255, 255, 0.5),
+        transparent 55%
+      ),
+      radial-gradient(
+        90% 45% at 50% 108%,
+        rgba(122, 92, 43, 0.07),
+        transparent 60%
+      );
+    background-attachment: fixed;
+  }
+  ::selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+  /* fokus keyboard yang jelas untuk link & input */
+  a:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+/* Grain kertas di atas seluruh halaman — sangat tipis */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 140px 140px;
+}
+
+@layer components {
+  /* label kecil mono, huruf kapital, jarak huruf lebar */
+  .kicker {
+    @apply font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground;
+  }
+  /* tekstur grain yang bisa dipakai di dalam elemen (foto placeholder) */
+  .grain-overlay {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 140px 140px;
+  }
+  /* lembar foto placeholder — sepia muda */
+  .plate {
+    background-color: #e4d9bd;
+    background-image: linear-gradient(155deg, #ebe1c8 0%, #dccdab 48%, #cdba93 100%);
+  }
+  /* garis ganda khas arsip/ledger */
+  .rule-double {
+    border-top: 3px double var(--border);
+  }
+  /* ------------------------------------------------------------------
+     Kaca (glassmorphism) — bahan nyata, bukan blur asal-asalan.
+     Dipakai SELEKTIF: header, panel masuk, kartu workspace, catatan.
+     Permukaan kertas (opaque) tetap menjadi bahan utama halaman.
+     Variasi opacity/blur/border/depth lewat varian di bawah.
+  ------------------------------------------------------------------- */
+  .glass {
+    background-color: var(--glass-bg);
+    -webkit-backdrop-filter: blur(16px) saturate(1.2);
+    backdrop-filter: blur(16px) saturate(1.2);
+    border: 1px solid var(--glass-border);
+    box-shadow:
+      inset 0 1px 0 var(--glass-highlight),
+      var(--glass-shadow);
+  }
+  /* varian lebih pekat — untuk area yang sibuk / perlu keterbacaan */
+  .glass-strong {
+    background-color: var(--glass-bg-strong);
+  }
+  /* kaca yang merespons hover: elevasi halus + tepi menyala pelan */
+  .glass-hover {
+    transition:
+      transform 0.25s ease,
+      border-color 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+  .glass-hover:hover {
+    transform: translateY(-2px);
+    border-color: var(--glass-border-bright);
+    box-shadow:
+      inset 0 1px 0 var(--glass-highlight),
+      var(--glass-shadow-hover);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .glass-hover {
+      transition: none;
+    }
+    .glass-hover:hover {
+      transform: none;
+    }
+  }
+}
