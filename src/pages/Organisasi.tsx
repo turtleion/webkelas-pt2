@@ -1,9 +1,10 @@
-import { SiteHeader } from "@/components/site/SiteHeader";
-import { SiteFooter } from "@/components/site/SiteFooter";
 import { PageHeader } from "@/components/site/PageHeader";
 import { PlaceholderNote } from "@/components/site/PlaceholderNote";
-import { usePageTitle } from "@/hooks/use-page-title";
+import { SiteFooter } from "@/components/site/SiteFooter";
+import { SiteHeader } from "@/components/site/SiteHeader";
+import { useMembers } from "@/hooks/use-members";
 import { useOrganization } from "@/hooks/use-organization";
+import { usePageTitle } from "@/hooks/use-page-title";
 import { inisialNama, padNomor } from "@/lib/tanggal";
 import { Loader2 } from "lucide-react";
 
@@ -28,10 +29,12 @@ function Orang({
         {inisialNama(nama)}
       </span>
       <span className="min-w-0">
-        <span className="block truncate text-[14.5px] leading-tight">{nama}</span>
+        <span className="block truncate text-[14.5px] leading-tight">
+          {nama}
+        </span>
         {absenNo ? (
           <span className="kicker mt-0.5 block text-[9px] text-muted-foreground">
-            No. {padNomor(absenNo)}
+            Absen {padNomor(absenNo)}
           </span>
         ) : null}
       </span>
@@ -43,7 +46,7 @@ export default function Organisasi() {
   usePageTitle("Struktur Organisasi");
   const { data: orgData, isLoading } = useOrganization();
   const { kelas, pengurusInti, sie } = orgData;
-
+  const { data: anggota, isLoading: isLoading2 } = useMembers();
   return (
     <div className="min-h-screen">
       <SiteHeader />
@@ -55,15 +58,16 @@ export default function Organisasi() {
           nomor="03"
           label="Organisasi"
           title="Struktur organisasi kelas"
-          description={`Susunan pengurus ${kelas.nama}: pengurus inti dan sie bidang. Wali kelas membimbing, pengurus inti menjalankan, sie mengurus bidangnya masing-masing.`}
+          description={`Susunan pengurus ${kelas.nama}: pengurus inti. Wali kelas membimbing, pengurus inti menjalankan urusan kelas.`}
           meta={`${pengurusInti.length} inti + ${sie.length} sie`}
         />
 
         <PlaceholderNote className="mt-8">
-          Susunan kepengurusan kelas resmi dapat diubah sewaktu-waktu melalui panel pengurus.
+          Susunan kepengurusan kelas resmi dapat diubah sewaktu-waktu melalui
+          panel pengurus.
         </PlaceholderNote>
 
-        {isLoading ? (
+        {isLoading || isLoading2 ? (
           <div className="mt-16 flex justify-center py-12">
             <Loader2 className="size-6 animate-spin text-primary" />
           </div>
@@ -92,7 +96,7 @@ export default function Organisasi() {
                       {p.nomor.map((no) => (
                         <Orang
                           key={no}
-                          nama={`Pengurus Absen #${no}`}
+                          nama={`${anggota[no - 1].name}`}
                           absenNo={no}
                           besar={p.nomor.length === 1}
                         />
@@ -106,7 +110,13 @@ export default function Organisasi() {
             {/* sie */}
             <section className="mt-14">
               <FadeHeading kicker="Sie & Bagian" title="Sie-sie kelas" />
-              <ul className="mt-8 grid gap-px bg-border sm:grid-cols-2 lg:grid-cols-4">
+              <p className="mt-3 max-w-2xl text-[13.5px] leading-relaxed text-muted-foreground">
+                Kelas X TKJ 1 SMKN 1 Cerme belum menganut sistem kepengurusan
+                berbasis sie. Susunan kepengurusan kelas hanya terdiri dari
+                pengurus inti, dan setiap pengurus inti mengelola bidangnya
+                masing-masing.
+              </p>
+              {/* <ul className="mt-8 grid gap-px bg-border sm:grid-cols-2 lg:grid-cols-4">
                 {sie.map((s) => (
                   <li key={s.jabatan} className="bg-background px-5 py-6">
                     <p className="kicker text-[10px]">{s.jabatan}</p>
@@ -121,14 +131,15 @@ export default function Organisasi() {
                     </div>
                   </li>
                 ))}
-              </ul>
+              </ul> */}
             </section>
 
             <section className="mt-14 border-t border-border pt-8">
               <p className="max-w-2xl text-[13.5px] leading-relaxed text-muted-foreground">
-                Setiap sie bertanggung jawab kepada pengurus inti, dan pengurus inti
-                bertanggung jawab kepada wali kelas serta seluruh anggota kelas.
-                Perubahan susunan disahkan melalui rapat kelas dan dicatat di arsip digital.
+                Setiap sie bertanggung jawab kepada pengurus inti, dan pengurus
+                inti bertanggung jawab kepada wali kelas serta seluruh anggota
+                kelas. Perubahan susunan disahkan melalui rapat kelas dan
+                dicatat di arsip digital.
               </p>
             </section>
           </>
