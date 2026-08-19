@@ -5,6 +5,7 @@ import { ConfirmDialog } from "@/components/admin/ConfirmDialog";
 import { PhotoPlate } from "@/components/site/PhotoPlate";
 import { usePageTitle } from "@/hooks/use-page-title";
 import { useGallery } from "@/hooks/use-gallery";
+import { useTranslation } from "@/hooks/use-translation";
 import { uploadGalleryImage, validateImageFile } from "@/lib/storage";
 import { type GalleryPhotoRow } from "@/lib/db";
 import { pecahTanggal, padNomor } from "@/lib/tanggal";
@@ -22,7 +23,8 @@ import { Plus, Edit2, Trash2, Upload, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 export default function AdminGallery() {
-  usePageTitle("Kelola Galeri — Panel");
+  const { t } = useTranslation();
+  usePageTitle(`${t.admin.gallery} — Panel`);
   const { data, isLoading, error, refresh, create, update, remove } = useGallery();
 
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -125,7 +127,7 @@ export default function AdminGallery() {
           image_url: uploaded.imageUrl,
           storage_path: uploaded.storagePath,
         });
-        toast.success("Foto baru berhasil diunggah ke galeri Supabase.");
+        toast.success("Foto baru berhasil diunggah.");
       }
 
       setDialogOpen(false);
@@ -142,7 +144,7 @@ export default function AdminGallery() {
     setIsDeleting(true);
     try {
       await remove(deleteTarget.id, deleteTarget.storage_path);
-      toast.success("Foto telah dihapus dari galeri dan storage.");
+      toast.success("Foto telah dihapus.");
       setDeleteTarget(null);
       await refresh();
     } catch {
@@ -157,15 +159,15 @@ export default function AdminGallery() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <PageHeader
           nomor="05"
-          label="Modul"
-          title="Kelola Galeri Foto"
-          description="Unggah dokumentasi momen kelas langsung ke Supabase Storage dan atur judul serta keterangannya."
+          label={t.admin.manageModules}
+          title={t.admin.gallery}
+          description="Unggah dokumentasi momen kelas langsung ke Supabase Storage."
         />
         <Button
           onClick={openCreateModal}
           className="cursor-pointer gap-2 self-start bg-primary text-primary-foreground font-mono text-[11px] uppercase tracking-wider"
         >
-          <Plus className="size-4" /> Unggah Foto Baru
+          <Plus className="size-4" /> {t.common.add}
         </Button>
       </div>
 
@@ -174,7 +176,7 @@ export default function AdminGallery() {
           <div className="flex flex-col items-center gap-2">
             <Loader2 className="size-6 animate-spin text-primary" />
             <p className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
-              Memuat galeri foto...
+              {t.common.loading}
             </p>
           </div>
         </div>
@@ -185,13 +187,13 @@ export default function AdminGallery() {
       ) : data.length === 0 ? (
         <div className="mt-10 border border-dashed border-border p-12 text-center">
           <p className="font-display text-lg italic text-muted-foreground">
-            Belum ada dokumentasi tersimpan. Klik 'Unggah Foto Baru' untuk memulai.
+            {t.common.empty}
           </p>
         </div>
       ) : (
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {data.map((g, i) => {
-            const t = pecahTanggal(g.date);
+            const td = pecahTanggal(g.date);
             return (
               <div
                 key={g.id}
@@ -201,9 +203,9 @@ export default function AdminGallery() {
                   <PhotoPlate
                     aspect={g.aspect || "4 / 3"}
                     src={g.image_url || undefined}
-                    label={`Dok. ${padNomor(i + 1)} — ${g.category}`}
+                    label={`${t.gallery.docPrefix} ${padNomor(i + 1)} — ${g.category}`}
                     caption={g.title}
-                    date={t.teks}
+                    date={td.teks}
                   />
                   {g.description && (
                     <p className="mt-2 text-[12.5px] leading-relaxed text-muted-foreground">
@@ -341,12 +343,12 @@ export default function AdminGallery() {
 
             <div>
               <label className="kicker block text-[10px]">
-                Keterangan Foto (Opsional)
+                Keterangan Foto ({t.common.optional})
               </label>
               <Textarea
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                placeholder="Keterangan singkat tentang siapa saja dalam foto atau suasana acara..."
+                placeholder="Keterangan singkat tentang suasana acara..."
                 className="mt-1 h-20 bg-background/50 text-[13.5px]"
               />
             </div>
@@ -358,7 +360,7 @@ export default function AdminGallery() {
                 onClick={() => setDialogOpen(false)}
                 className="font-mono text-[11px] uppercase tracking-wider"
               >
-                Batal
+                {t.common.cancel}
               </Button>
               <Button
                 type="submit"
@@ -366,7 +368,7 @@ export default function AdminGallery() {
                 className="bg-primary text-primary-foreground font-mono text-[11px] uppercase tracking-wider"
               >
                 {isUploading && <Loader2 className="size-3.5 animate-spin mr-1.5" />}
-                {isUploading ? "Mengunggah..." : "Simpan Foto"}
+                {isUploading ? t.common.loading : t.common.save}
               </Button>
             </DialogFooter>
           </form>
@@ -377,8 +379,8 @@ export default function AdminGallery() {
       <ConfirmDialog
         open={Boolean(deleteTarget)}
         onOpenChange={(open) => !open && setDeleteTarget(null)}
-        title="Hapus Foto Dokumentasi?"
-        description={`Apakah Anda yakin ingin menghapus foto "${deleteTarget?.title}"? Foto ini juga akan dihapus dari Supabase Storage.`}
+        title={t.admin.deleteConfirmTitle}
+        description={t.admin.deleteConfirmDesc}
         isLoading={isDeleting}
         onConfirm={handleDelete}
       />

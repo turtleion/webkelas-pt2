@@ -5,13 +5,15 @@ import { DataTable } from "@/components/admin/DataTable";
 import { ConfirmDialog } from "@/components/admin/ConfirmDialog";
 import { usePageTitle } from "@/hooks/use-page-title";
 import { useAuth } from "@/hooks/use-auth";
+import { useTranslation } from "@/hooks/use-translation";
 import { getAllProfiles, updateProfileRole, type ProfileRow } from "@/lib/db";
 import { inisialNama, pecahTanggal } from "@/lib/tanggal";
 import { ShieldCheck, ShieldAlert, User as UserIcon } from "lucide-react";
 import { toast } from "sonner";
 
 export default function AdminUsers() {
-  usePageTitle("Manajemen User & Hak Akses — Owner");
+  const { t } = useTranslation();
+  usePageTitle(`${t.admin.usersManagement} — Panel`);
   const { user: currentUser } = useAuth();
 
   const [profiles, setProfiles] = useState<ProfileRow[]>([]);
@@ -66,7 +68,7 @@ export default function AdminUsers() {
     <AdminLayout>
       <PageHeader
         nomor="OWN"
-        label="Khusus Owner"
+        label={t.admin.usersManagement}
         title="Manajemen Pengguna & Peran"
         description="Kelola akun Google yang telah mendaftar ke arsip kelas. Tingkatkan hak akses siswa menjadi Admin atau Owner untuk memberi izin pengelolaan."
       />
@@ -76,7 +78,7 @@ export default function AdminUsers() {
           isLoading={isLoading}
           error={error}
           isEmpty={profiles.length === 0}
-          emptyMessage="Belum ada pengguna yang masuk melalui Google OAuth."
+          emptyMessage="Belum ada pengguna yang masuk."
         >
           <table className="w-full text-left text-sm">
             <thead className="kicker border-b border-border/80 bg-background/50 text-[10px]">
@@ -91,7 +93,7 @@ export default function AdminUsers() {
             <tbody className="divide-y divide-border/60">
               {profiles.map((p) => {
                 const isSelf = currentUser?.id === p.id;
-                const t = pecahTanggal(p.created_at.slice(0, 10));
+                const td = pecahTanggal(p.created_at.slice(0, 10));
 
                 return (
                   <tr key={p.id} className="hover:bg-card/60 transition-colors">
@@ -129,7 +131,7 @@ export default function AdminUsers() {
                     </td>
 
                     <td className="p-3 font-mono text-[11px] whitespace-nowrap text-muted-foreground">
-                      {t.hari} {t.bulanSingkat} {t.tahun}
+                      {td.hari} {td.bulanSingkat} {td.tahun}
                     </td>
 
                     <td className="p-3 whitespace-nowrap">

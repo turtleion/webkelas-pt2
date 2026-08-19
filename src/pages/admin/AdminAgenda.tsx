@@ -1,28 +1,31 @@
-import { useState } from "react";
 import { AdminLayout } from "@/components/admin/AdminLayout";
-import { PageHeader } from "@/components/site/PageHeader";
-import { DataTable } from "@/components/admin/DataTable";
 import { ConfirmDialog } from "@/components/admin/ConfirmDialog";
-import { usePageTitle } from "@/hooks/use-page-title";
-import { useAgenda } from "@/hooks/use-agenda";
-import { type AgendaRow } from "@/lib/db";
-import { pecahTanggal, hariNama } from "@/lib/tanggal";
+import { DataTable } from "@/components/admin/DataTable";
+import { PageHeader } from "@/components/site/PageHeader";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import {
   Dialog,
   DialogContent,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogFooter,
 } from "@/components/ui/dialog";
-import { Plus, Edit2, Trash2, Loader2 } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { useAgenda } from "@/hooks/use-agenda";
+import { usePageTitle } from "@/hooks/use-page-title";
+import { useTranslation } from "@/hooks/use-translation";
+import { type AgendaRow } from "@/lib/db";
+import { hariNama, pecahTanggal } from "@/lib/tanggal";
+import { Edit2, Loader2, Plus, Trash2 } from "lucide-react";
+import { useState } from "react";
 import { toast } from "sonner";
 
 export default function AdminAgenda() {
-  usePageTitle("Kelola Agenda — Panel");
-  const { data, isLoading, error, refresh, create, update, remove } = useAgenda();
+  const { t } = useTranslation();
+  usePageTitle(`${t.admin.agenda} — Panel`);
+  const { data, isLoading, error, refresh, create, update, remove } =
+    useAgenda();
 
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<AgendaRow | null>(null);
@@ -56,7 +59,7 @@ export default function AdminAgenda() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!title.trim() || !date) {
-      toast.error("Judul agenda dan tanggal wajib diisi.");
+      toast.error("Judul dan tanggal wajib diisi.");
       return;
     }
 
@@ -83,7 +86,7 @@ export default function AdminAgenda() {
       await refresh();
     } catch (err) {
       toast.error(
-        err instanceof Error ? err.message : "Gagal menyimpan agenda"
+        err instanceof Error ? err.message : "Gagal menyimpan agenda",
       );
     } finally {
       setIsSubmitting(false);
@@ -110,15 +113,15 @@ export default function AdminAgenda() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <PageHeader
           nomor="02"
-          label="Modul"
-          title="Kelola Agenda Kelas"
-          description="Catat jadwal ujian, batas pengumpulan tugas, dan acara kelas mendatang."
+          label={t.admin.manageModules}
+          title={t.admin.agenda}
+          description={t.admin.agendaDesc}
         />
         <Button
           onClick={openCreateModal}
           className="cursor-pointer gap-2 self-start bg-primary text-primary-foreground font-mono text-[11px] uppercase tracking-wider"
         >
-          <Plus className="size-4" /> Tambah Agenda
+          <Plus className="size-4" /> {t.common.add}
         </Button>
       </div>
 
@@ -127,25 +130,30 @@ export default function AdminAgenda() {
           isLoading={isLoading}
           error={error}
           isEmpty={data.length === 0}
-          emptyMessage="Belum ada agenda kelas. Tambahkan agenda agar siswa dapat memantau jadwal kegiatan."
+          emptyMessage="Belum ada agenda kelas."
         >
           <table className="w-full text-left text-sm">
             <thead className="kicker border-b border-border/80 bg-background/50 text-[10px]">
               <tr>
-                <th className="p-3 pl-4">Tanggal & Hari</th>
-                <th className="p-3">Kategori</th>
-                <th className="p-3">Kegiatan / Keterangan</th>
-                <th className="p-3 pr-4 text-right">Aksi</th>
+                <th className="p-3 pl-4">{t.admin.agendaTableDate}</th>
+                <th className="p-3">{t.admin.agendaTableCategory}</th>
+                <th className="p-3">{t.admin.agendaTableDesc}</th>
+                <th className="p-3 pr-4 text-right">
+                  {t.admin.agendaTableAction}
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border/60">
               {data.map((item) => {
-                const t = pecahTanggal(item.date);
+                const td = pecahTanggal(item.date);
                 return (
-                  <tr key={item.id} className="hover:bg-card/60 transition-colors">
+                  <tr
+                    key={item.id}
+                    className="hover:bg-card/60 transition-colors"
+                  >
                     <td className="p-3 pl-4 font-mono text-[11px] whitespace-nowrap text-muted-foreground">
                       <span className="font-semibold text-foreground">
-                        {t.hari} {t.bulanSingkat} {t.tahun}
+                        {td.hari} {td.bulanSingkat} {td.tahun}
                       </span>{" "}
                       ({hariNama(item.date)})
                     </td>
@@ -197,7 +205,7 @@ export default function AdminAgenda() {
         <DialogContent className="glass glass-strong max-w-lg border-border/80 text-foreground">
           <DialogHeader>
             <DialogTitle className="font-display text-2xl font-medium tracking-tight">
-              {editingItem ? "Ubah Agenda Kegiatan" : "Tambah Agenda Baru"}
+              {editingItem ? "Ubah Agenda" : "Tambah Agenda Baru"}
             </DialogTitle>
           </DialogHeader>
 
@@ -239,7 +247,7 @@ export default function AdminAgenda() {
 
             <div>
               <label className="kicker block text-[10px]">
-                Keterangan Tambahan (Opsional)
+                Keterangan Tambahan ({t.common.optional})
               </label>
               <Textarea
                 value={description}
@@ -256,15 +264,17 @@ export default function AdminAgenda() {
                 onClick={() => setDialogOpen(false)}
                 className="font-mono text-[11px] uppercase tracking-wider"
               >
-                Batal
+                {t.common.cancel}
               </Button>
               <Button
                 type="submit"
                 disabled={isSubmitting}
                 className="bg-primary text-primary-foreground font-mono text-[11px] uppercase tracking-wider"
               >
-                {isSubmitting && <Loader2 className="size-3.5 animate-spin mr-1.5" />}
-                Simpan
+                {isSubmitting && (
+                  <Loader2 className="size-3.5 animate-spin mr-1.5" />
+                )}
+                {t.common.save}
               </Button>
             </DialogFooter>
           </form>
@@ -275,8 +285,8 @@ export default function AdminAgenda() {
       <ConfirmDialog
         open={Boolean(deleteTarget)}
         onOpenChange={(open) => !open && setDeleteTarget(null)}
-        title="Hapus Agenda?"
-        description={`Apakah Anda yakin ingin menghapus agenda "${deleteTarget?.title}"?`}
+        title={t.admin.deleteConfirmTitle}
+        description={t.admin.deleteConfirmDesc}
         isLoading={isDeleting}
         onConfirm={handleDelete}
       />

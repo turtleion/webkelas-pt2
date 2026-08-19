@@ -6,11 +6,13 @@ import { PhotoPlate } from "@/components/site/PhotoPlate";
 import { usePageTitle } from "@/hooks/use-page-title";
 import { useGallery } from "@/hooks/use-gallery";
 import { useOrganization } from "@/hooks/use-organization";
+import { useTranslation } from "@/hooks/use-translation";
 import { padNomor, pecahTanggal } from "@/lib/tanggal";
 import { Loader2 } from "lucide-react";
 
 export default function Galeri() {
-  usePageTitle("Galeri");
+  const { t, interpolate } = useTranslation();
+  usePageTitle(t.gallery.pageTitle);
   const { data: orgData } = useOrganization();
   const { kelas } = orgData;
   const { data: galeri, isLoading } = useGallery();
@@ -24,14 +26,19 @@ export default function Galeri() {
       >
         <PageHeader
           nomor="07"
-          label="Galeri"
-          title="Dokumentasi kelas"
-          description={`Dokumentasi kegiatan ${kelas.nama} semester ${kelas.semester}. Foto diurutkan dari momen terbaru; rasio bingkai dibuat tidak seragam agar galeri terasa seperti album, bukan susunan kotak.`}
-          meta={`${galeri.length} dokumen`}
+          label={t.nav.gallery}
+          title={t.gallery.heading}
+          description={interpolate(t.gallery.description, {
+            kelas: kelas.nama || "",
+            semester: kelas.semester || "",
+          })}
+          meta={interpolate(t.gallery.documentsMeta, {
+            count: galeri.length,
+          })}
         />
 
         <PlaceholderNote className="mt-8">
-          Dokumentasi foto diunggah langsung oleh sie humas & dokumentasi melalui penyimpanan Supabase Storage.
+          {t.gallery.note}
         </PlaceholderNote>
 
         {isLoading ? (
@@ -40,7 +47,7 @@ export default function Galeri() {
           </div>
         ) : galeri.length === 0 ? (
           <p className="mt-14 font-display text-xl italic text-muted-foreground">
-            Belum ada dokumentasi foto yang diunggah saat ini.
+            {t.gallery.empty}
           </p>
         ) : (
           <ul className="mt-12 columns-2 gap-4 md:columns-3 md:gap-6 [&>li]:mb-4 md:[&>li]:mb-6">
@@ -49,7 +56,7 @@ export default function Galeri() {
                 <PhotoPlate
                   aspect={g.aspect || "4 / 3"}
                   src={g.image_url || undefined}
-                  label={`Dok. ${padNomor(i + 1)} — ${g.category}`}
+                  label={`${t.gallery.docPrefix} ${padNomor(i + 1)} — ${g.category}`}
                   caption={g.title}
                   date={g.date ? pecahTanggal(g.date).teks : undefined}
                 />

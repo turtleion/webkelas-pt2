@@ -2,6 +2,7 @@ import { useState, ReactNode } from "react";
 import { Menu, X } from "lucide-react";
 import { AdminSidebar } from "./AdminSidebar";
 import { KelasMark } from "@/components/site/KelasMark";
+import { useTranslation } from "@/hooks/use-translation";
 
 interface AdminLayoutProps {
   children: ReactNode;
@@ -9,6 +10,7 @@ interface AdminLayoutProps {
 
 export function AdminLayout({ children }: AdminLayoutProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <div className="flex min-h-screen bg-background text-foreground">
@@ -25,13 +27,13 @@ export function AdminLayout({ children }: AdminLayoutProps) {
           <div className="flex items-center gap-2.5">
             <KelasMark className="size-7 text-primary" />
             <span className="font-display text-sm font-semibold tracking-tight">
-              Panel Pengurus
+              {t.admin.sidebarHeader}
             </span>
           </div>
           <button
             type="button"
             onClick={() => setMobileOpen((v) => !v)}
-            aria-label={mobileOpen ? "Tutup menu" : "Buka menu"}
+            aria-label={mobileOpen ? t.nav.closeMenu : t.nav.openMenu}
             className="flex size-9 items-center justify-center border border-border text-foreground"
           >
             {mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}

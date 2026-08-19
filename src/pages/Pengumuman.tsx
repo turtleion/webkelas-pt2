@@ -5,11 +5,13 @@ import { PlaceholderNote } from "@/components/site/PlaceholderNote";
 import { usePageTitle } from "@/hooks/use-page-title";
 import { useAnnouncements } from "@/hooks/use-announcements";
 import { useOrganization } from "@/hooks/use-organization";
+import { useTranslation } from "@/hooks/use-translation";
 import { pecahTanggal } from "@/lib/tanggal";
 import { Loader2 } from "lucide-react";
 
 export default function Pengumuman() {
-  usePageTitle("Pengumuman");
+  const { t, interpolate } = useTranslation();
+  usePageTitle(t.announcements.pageTitle);
   const { data: orgData } = useOrganization();
   const { kelas } = orgData;
   const { data: pengumuman, isLoading } = useAnnouncements(true);
@@ -23,14 +25,18 @@ export default function Pengumuman() {
       >
         <PageHeader
           nomor="05"
-          label="Pengumuman"
-          title="Pengumuman"
-          description={`Informasi resmi ${kelas.nama}: pengumuman kelas, sekolah, tugas, dan akademik. Diurutkan dari yang terbaru.`}
-          meta={`${pengumuman.length} entri`}
+          label={t.nav.announcements}
+          title={t.announcements.heading}
+          description={interpolate(t.announcements.description, {
+            kelas: kelas.nama || "",
+          })}
+          meta={interpolate(t.announcements.entriesMeta, {
+            count: pengumuman.length,
+          })}
         />
 
         <PlaceholderNote className="mt-8">
-          Pengumuman resmi dikelola langsung oleh wali kelas dan pengurus kelas melalui panel arsip digital.
+          {t.announcements.note}
         </PlaceholderNote>
 
         {isLoading ? (
@@ -39,22 +45,22 @@ export default function Pengumuman() {
           </div>
         ) : pengumuman.length === 0 ? (
           <p className="mt-14 font-display text-xl italic text-muted-foreground">
-            Belum ada pengumuman yang diterbitkan saat ini.
+            {t.announcements.empty}
           </p>
         ) : (
           <ol className="mt-10">
             {pengumuman.map((p) => {
               const dateIso = (p.published_at || p.created_at).slice(0, 10);
-              const t = pecahTanggal(dateIso);
+              const td = pecahTanggal(dateIso);
               return (
                 <li key={p.id} className="border-b border-border last:border-b-0">
                   <article className="grid gap-4 py-8 md:grid-cols-[7rem_1fr] md:gap-10">
                     <div>
                       <p className="font-display text-4xl font-medium leading-none tracking-tight">
-                        {t.hari}
+                        {td.hari}
                       </p>
                       <p className="kicker mt-2 text-[10px]">
-                        {t.bulanSingkat} {t.tahun}
+                        {td.bulanSingkat} {td.tahun}
                       </p>
                     </div>
                     <div className="min-w-0">

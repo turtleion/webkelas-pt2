@@ -5,6 +5,7 @@ import { PlaceholderNote } from "@/components/site/PlaceholderNote";
 import { usePageTitle } from "@/hooks/use-page-title";
 import { useAgenda } from "@/hooks/use-agenda";
 import { useOrganization } from "@/hooks/use-organization";
+import { useTranslation } from "@/hooks/use-translation";
 import { hariNama, pecahTanggal } from "@/lib/tanggal";
 import { type AgendaRow } from "@/lib/db";
 import { Loader2 } from "lucide-react";
@@ -18,9 +19,9 @@ interface GrupBulan {
 function kelompokkanBulan(items: AgendaRow[]): GrupBulan[] {
   const peta = new Map<string, GrupBulan>();
   for (const item of items) {
-    const t = pecahTanggal(item.date);
-    const kunci = `${t.tahun}-${String(t.bulan).padStart(2, "0")}`;
-    const judul = `${t.bulanNama} ${t.tahun}`;
+    const td = pecahTanggal(item.date);
+    const kunci = `${td.tahun}-${String(td.bulan).padStart(2, "0")}`;
+    const judul = `${td.bulanNama} ${td.tahun}`;
     if (!peta.has(kunci)) peta.set(kunci, { kunci, judul, items: [] });
     peta.get(kunci)!.items.push(item);
   }
@@ -28,7 +29,8 @@ function kelompokkanBulan(items: AgendaRow[]): GrupBulan[] {
 }
 
 export default function Agenda() {
-  usePageTitle("Agenda");
+  const { t, interpolate, locale } = useTranslation();
+  usePageTitle(t.agenda.pageTitle);
   const { data: orgData } = useOrganization();
   const { kelas } = orgData;
   const { data: agenda, isLoading } = useAgenda();
@@ -48,14 +50,17 @@ export default function Agenda() {
       >
         <PageHeader
           nomor="06"
-          label="Agenda"
-          title="Agenda kelas"
-          description={`Kegiatan ${kelas.nama} semester ${kelas.semester}, disusun kronologis. Tanggal menjadi penanda utama — pantau halaman ini agar tidak ketinggalan.`}
-          meta="Kronologis"
+          label={t.nav.agenda}
+          title={t.agenda.heading}
+          description={interpolate(t.agenda.description, {
+            kelas: kelas.nama || "",
+            semester: kelas.semester || "",
+          })}
+          meta={t.agenda.chronologicalMeta}
         />
 
         <PlaceholderNote className="mt-8">
-          Agenda diperbarui secara berkala oleh pengurus kelas (tugas, ulangan, dan kegiatan sekolah).
+          {t.agenda.note}
         </PlaceholderNote>
 
         {isLoading ? (
@@ -64,7 +69,7 @@ export default function Agenda() {
           </div>
         ) : bulan.length === 0 ? (
           <p className="mt-14 font-display text-xl italic text-muted-foreground">
-            Belum ada agenda kelas tercatat saat ini.
+            {t.agenda.empty}
           </p>
         ) : (
           <ol className="mt-14 space-y-12">
@@ -76,7 +81,7 @@ export default function Agenda() {
                 </div>
                 <ul className="mt-2">
                   {g.items.map((item) => {
-                    const t = pecahTanggal(item.date);
+                    const td = pecahTanggal(item.date);
                     const terdekat =
                       agendaAkanDatang.length > 0 &&
                       item.date === agendaAkanDatang[0].date;
@@ -87,10 +92,10 @@ export default function Agenda() {
                       >
                         <div className="w-28 shrink-0 md:w-36">
                           <p className="font-display text-5xl font-medium leading-none tracking-tight">
-                            {t.hari}
+                            {td.hari}
                           </p>
                           <p className="kicker mt-2 text-[10px]">
-                            {hariNama(item.date)}, {t.bulanSingkat} {t.tahun}
+                            {hariNama(item.date)}, {td.bulanSingkat} {td.tahun}
                           </p>
                         </div>
                         <div className="min-w-0 flex-1 border-l border-border pl-6 md:pl-10">
@@ -98,7 +103,7 @@ export default function Agenda() {
                             <span className="kicker text-[9px]">{item.category}</span>
                             {terdekat && (
                               <span className="kicker text-[9px] text-accent">
-                                Terdekat
+                                {t.agenda.nearestTag}
                               </span>
                             )}
                           </div>
@@ -106,7 +111,7 @@ export default function Agenda() {
                             {item.title}
                           </h3>
                           {item.description && (
-                            <p className="mt-2 max-w-xl text-[13.5px] leading-relaxed text-muted-foreground">
+                            <p className="mt-1.5 max-w-xl text-[13.5px] leading-relaxed text-muted-foreground">
                               {item.description}
                             </p>
                           )}

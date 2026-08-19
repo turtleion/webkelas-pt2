@@ -5,6 +5,7 @@ import { DataTable } from "@/components/admin/DataTable";
 import { ConfirmDialog } from "@/components/admin/ConfirmDialog";
 import { usePageTitle } from "@/hooks/use-page-title";
 import { useMembers } from "@/hooks/use-members";
+import { useTranslation } from "@/hooks/use-translation";
 import { type MemberRow } from "@/lib/db";
 import { padNomor, inisialNama } from "@/lib/tanggal";
 import { Button } from "@/components/ui/button";
@@ -20,7 +21,8 @@ import { Plus, Edit2, Trash2, Loader2, Search } from "lucide-react";
 import { toast } from "sonner";
 
 export default function AdminMembers() {
-  usePageTitle("Kelola Anggota Kelas — Panel");
+  const { t } = useTranslation();
+  usePageTitle(`${t.admin.members} — Panel`);
   const { data, isLoading, error, refresh, create, update, remove } = useMembers();
 
   const [search, setSearch] = useState("");
@@ -62,7 +64,7 @@ export default function AdminMembers() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim() || !absenNo) {
-      toast.error("Nomor absen dan nama siswa wajib diisi.");
+      toast.error("Nomor absen dan nama wajib diisi.");
       return;
     }
 
@@ -81,7 +83,7 @@ export default function AdminMembers() {
           name,
           position: position || null,
         });
-        toast.success("Siswa baru berhasil ditambahkan ke daftar anggota.");
+        toast.success("Siswa baru berhasil ditambahkan.");
       }
       setDialogOpen(false);
       await refresh();
@@ -97,7 +99,7 @@ export default function AdminMembers() {
     setIsDeleting(true);
     try {
       await remove(deleteTarget.id);
-      toast.success("Anggota berhasil dihapus dari daftar.");
+      toast.success("Anggota berhasil dihapus.");
       setDeleteTarget(null);
       await refresh();
     } catch {
@@ -112,15 +114,15 @@ export default function AdminMembers() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <PageHeader
           nomor="04"
-          label="Modul"
-          title="Kelola Anggota Kelas"
-          description="Daftar induk presensi siswa X TKJ 1, nomor absen, serta penugasan jabatan kelas."
+          label={t.admin.manageModules}
+          title={t.admin.members}
+          description="Data anggota kelas dan penugasan jabatan."
         />
         <Button
           onClick={openCreateModal}
           className="cursor-pointer gap-2 self-start bg-primary text-primary-foreground font-mono text-[11px] uppercase tracking-wider"
         >
-          <Plus className="size-4" /> Tambah Siswa
+          <Plus className="size-4" /> {t.admin.addStudent}
         </Button>
       </div>
 
@@ -131,7 +133,7 @@ export default function AdminMembers() {
           type="search"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="Cari nama, absen, atau jabatan..."
+          placeholder={`${t.common.search}...`}
           className="w-full bg-transparent font-mono text-sm outline-none placeholder:text-muted-foreground/60"
         />
       </div>
@@ -144,17 +146,17 @@ export default function AdminMembers() {
           emptyMessage={
             search
               ? `Tidak ditemukan anggota dengan kata kunci "${search}".`
-              : "Belum ada anggota kelas tercatat. Klik 'Tambah Siswa' untuk memulai."
+              : "Belum ada anggota kelas tercatat."
           }
         >
           <table className="w-full text-left text-sm">
             <thead className="kicker border-b border-border/80 bg-background/50 text-[10px]">
               <tr>
-                <th className="p-3 pl-4">No. Absen</th>
+                <th className="p-3 pl-4">{t.admin.absenNo}</th>
                 <th className="p-3">Inisial</th>
-                <th className="p-3">Nama Lengkap</th>
-                <th className="p-3">Jabatan</th>
-                <th className="p-3 pr-4 text-right">Aksi</th>
+                <th className="p-3">{t.admin.studentName}</th>
+                <th className="p-3">{t.admin.positionLabel}</th>
+                <th className="p-3 pr-4 text-right">{t.admin.actions}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border/60">
@@ -212,14 +214,14 @@ export default function AdminMembers() {
         <DialogContent className="glass glass-strong max-w-md border-border/80 text-foreground">
           <DialogHeader>
             <DialogTitle className="font-display text-2xl font-medium tracking-tight">
-              {editingItem ? "Ubah Data Siswa" : "Tambah Siswa Baru"}
+              {editingItem ? t.admin.editStudent : t.admin.addStudent}
             </DialogTitle>
           </DialogHeader>
 
           <form onSubmit={handleSubmit} className="mt-4 space-y-4">
             <div className="grid grid-cols-3 gap-3">
               <div>
-                <label className="kicker block text-[10px]">No. Absen</label>
+                <label className="kicker block text-[10px]">{t.admin.absenNo}</label>
                 <Input
                   type="number"
                   min={1}
@@ -233,7 +235,7 @@ export default function AdminMembers() {
 
               <div className="col-span-2">
                 <label className="kicker block text-[10px]">
-                  Jabatan (Opsional)
+                  {t.admin.positionLabel}
                 </label>
                 <Input
                   value={position}
@@ -245,7 +247,7 @@ export default function AdminMembers() {
             </div>
 
             <div>
-              <label className="kicker block text-[10px]">Nama Lengkap Siswa</label>
+              <label className="kicker block text-[10px]">{t.admin.studentName}</label>
               <Input
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -262,7 +264,7 @@ export default function AdminMembers() {
                 onClick={() => setDialogOpen(false)}
                 className="font-mono text-[11px] uppercase tracking-wider"
               >
-                Batal
+                {t.common.cancel}
               </Button>
               <Button
                 type="submit"
@@ -270,7 +272,7 @@ export default function AdminMembers() {
                 className="bg-primary text-primary-foreground font-mono text-[11px] uppercase tracking-wider"
               >
                 {isSubmitting && <Loader2 className="size-3.5 animate-spin mr-1.5" />}
-                Simpan
+                {t.common.save}
               </Button>
             </DialogFooter>
           </form>
@@ -281,8 +283,8 @@ export default function AdminMembers() {
       <ConfirmDialog
         open={Boolean(deleteTarget)}
         onOpenChange={(open) => !open && setDeleteTarget(null)}
-        title="Hapus Siswa dari Anggota?"
-        description={`Apakah Anda yakin ingin menghapus "${deleteTarget?.name}" (Absen #${deleteTarget?.absen_no}) dari daftar anggota?`}
+        title={t.admin.deleteConfirmTitle}
+        description={t.admin.deleteConfirmDesc}
         isLoading={isDeleting}
         onConfirm={handleDelete}
       />

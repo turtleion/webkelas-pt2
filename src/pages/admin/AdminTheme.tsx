@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { usePreferences } from "@/hooks/use-preferences";
 import { useTranslation } from "@/hooks/use-translation";
+import { usePageTitle } from "@/hooks/use-page-title";
 import { AdminLayout } from "@/components/admin/AdminLayout";
 import { THEME_PRESETS, COLOR_SCHEMES, BUILTIN_FONTS, BACKGROUND_PRESETS } from "@/lib/theme-presets";
 import { loadGoogleFont } from "@/lib/font-loader";
@@ -22,6 +23,7 @@ export default function AdminTheme() {
   const { globalDefaults, availableFonts, updateGlobalDefaults, addCustomFont, removeCustomFont } =
     usePreferences();
   const { t } = useTranslation();
+  usePageTitle(`${t.admin.themeManagement} — Panel`);
 
   // Admin form state initialized from current global defaults
   const [theme, setTheme] = useState<ThemePresetKey>(globalDefaults.defaultTheme);

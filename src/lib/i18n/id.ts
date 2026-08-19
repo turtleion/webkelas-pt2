@@ -42,27 +42,35 @@ export const id: TranslationSchema = {
     selectLanguage: "Pilih bahasa",
     saveSuccess: "Pengaturan berhasil disimpan.",
     resetDefaults: "Kembalikan ke Default",
-    resetConfirm: "Apakah Anda yakin ingin mengembalikan semua pengaturan ke default?",
-    customThemeNote: "Pengaturan Anda berbeda dari tema bawaan — tema aktif menjadi Kustom.",
+    resetConfirm:
+      "Apakah Anda yakin ingin mengembalikan semua pengaturan ke default?",
+    customThemeNote:
+      "Pengaturan Anda berbeda dari tema bawaan — tema aktif menjadi Kustom.",
     previewLabel: "Pratinjau",
   },
   themes: {
     paper: "Paper",
-    paperDesc: "Gaya arsip vintage dengan nuansa kertas hangat dan tipografi klasik.",
+    paperDesc:
+      "Gaya arsip vintage dengan nuansa kertas hangat dan tipografi klasik.",
     glass: "Glass",
-    glassDesc: "Glassmorphism modern dengan efek blur, permukaan buram, dan nuansa segar.",
+    glassDesc:
+      "Glassmorphism modern dengan efek blur, permukaan buram, dan nuansa segar.",
     cartoon: "Cartoon",
     cartoonDesc: "Penuh warna, ceria, dan bergaya kartun. Hanya mode Terang.",
     custom: "Kustom",
-    customDesc: "Kombinasi pengaturan pribadi Anda yang berbeda dari tema bawaan.",
+    customDesc:
+      "Kombinasi pengaturan pribadi Anda yang berbeda dari tema bawaan.",
   },
   layouts: {
     classic: "Editorial Klasik",
-    classicDesc: "Tata letak arsip bergaya koran dengan bagian editorial berurutan.",
+    classicDesc:
+      "Tata letak arsip bergaya koran dengan bagian editorial berurutan.",
     bento: "Bento Grid Modern",
-    bentoDesc: "Grid interaktif bergaya bento dengan kartu kaca dan statistik cepat.",
+    bentoDesc:
+      "Grid interaktif bergaya bento dengan kartu kaca dan statistik cepat.",
     showcase: "Showcase Arsip",
-    showcaseDesc: "Visual-first showcase dengan galeri banner dan timeline horizontal.",
+    showcaseDesc:
+      "Visual-first showcase dengan galeri banner dan timeline horizontal.",
   },
   colors: {
     background: "Latar Belakang (Background)",
@@ -88,12 +96,15 @@ export const id: TranslationSchema = {
   },
   home: {
     heroTag: "Arsip Kelas Digital",
-    heroSubtitle: "Satu kelas, {count} orang, dan satu tahun pelajaran — dicatat di sini.",
-    heroDescription: "Ini ruang digital {kelas}: tempat pengumuman, jadwal, agenda, dan dokumentasi kelas berkumpul. Dibuat oleh siswa untuk siswa, supaya informasi kelas mudah ditemukan dan tidak tersebar di banyak tempat.",
+    heroSubtitle:
+      "Satu kelas, {count} orang, dan satu tahun pelajaran — dicatat di sini.",
+    heroDescription:
+      "Ini ruang digital {kelas}: tempat pengumuman, jadwal, agenda, dan dokumentasi kelas berkumpul. Dibuat oleh siswa untuk siswa, supaya informasi kelas mudah ditemukan dan tidak tersebar di banyak tempat.",
     readAnnouncements: "Baca pengumuman",
     viewMembers: "Lihat anggota kelas",
     classIdentity: "Identitas kelas",
-    classIdentityDesc: "Fakta dasar kelas {kelas} di tahun ajaran {tahunAjaran}. Data dapat diperbarui melalui panel pengurus.",
+    classIdentityDesc:
+      "Fakta dasar kelas {kelas} di tahun ajaran {tahunAjaran}. Data dapat diperbarui melalui panel pengurus.",
     latestAnnouncements: "Pengumuman terbaru",
     allAnnouncements: "Semua pengumuman",
     upcomingAgenda: "Kegiatan terdekat",
@@ -107,12 +118,135 @@ export const id: TranslationSchema = {
     contactRowDesc: "Sampaikan ke pengurus kelas — atau lewat sekretaris.",
     viewOrgChart: "Lihat pengurus kelas",
   },
+  members: {
+    pageTitle: "Anggota Kelas",
+    heading: "Anggota kelas",
+    description:
+      "Daftar {count} siswa {kelas} beserta nomor absen dan jabatan.",
+    searchLabel: "Cari anggota",
+    searchPlaceholder: "Nama, nomor absen, atau jabatan…",
+    searchCount: "{filtered} dari {total} anggota",
+    note: "Daftar anggota resmi dikelola oleh pengurus kelas dan tersinkron langsung dari database Supabase.",
+    emptySearch: "Tidak ada anggota yang cocok dengan “{query}”.",
+    emptyList: "Belum ada data anggota kelas yang tercatat.",
+    absenPrefix: "No.",
+  },
+  organization: {
+    pageTitle: "Struktur Organisasi",
+    heading: "Struktur organisasi kelas",
+    description:
+      "Susunan pengurus {kelas}: pengurus inti dan sie bidang. Wali kelas membimbing, pengurus inti menjalankan, sie mengurus bidangnya masing-masing.",
+    metaCount: "{inti} inti + {sie} sie",
+    note: "Susunan kepengurusan kelas resmi dapat diubah sewaktu-waktu melalui panel pengurus.",
+    empty: "Belum ada struktur organisasi kelas yang tercatat saat ini.",
+    homeroom: "Wali Kelas",
+    coreOfficers: "Pengurus Inti",
+    coreSubtitle: "Inti kelas",
+    divisions: "Sie & Bagian",
+    divisionsSubtitle: "Sie-sie kelas",
+    responsibility:
+      "Setiap sie bertanggung jawab kepada pengurus inti, dan pengurus inti bertanggung jawab kepada wali kelas serta seluruh anggota kelas. Perubahan susunan disahkan melalui rapat kelas dan dicatat di arsip digital.",
+  },
+  schedule: {
+    pageTitle: "Jadwal Pelajaran",
+    heading: "Jadwal pelajaran",
+    description:
+      "Jadwal pelajaran {kelas} semester {semester} tahun ajaran {tahunAjaran}. Jam istirahat ditandai miring; jam ke-1 dimulai pukul 07.00.",
+    semesterMeta: "Semester {semester}",
+    note: "Jadwal dapat berubah sewaktu-waktu sesuai ketentuan kurikulum sekolah dan diperbarui di panel admin.",
+    empty: "Belum ada jadwal pelajaran yang ditentukan untuk semester ini.",
+    breakLabel: "Istirahat",
+    timeColumn: "Waktu",
+    subjectColumn: "Mata Pelajaran",
+    roomColumn: "Ruang",
+  },
+  announcements: {
+    pageTitle: "Pengumuman",
+    heading: "Pengumuman",
+    description:
+      "Informasi resmi {kelas}: pengumuman kelas, sekolah, tugas, dan akademik. Diurutkan dari yang terbaru.",
+    entriesMeta: "{count} entri",
+    note: "Pengumuman resmi dikelola langsung oleh wali kelas dan pengurus kelas melalui panel arsip digital.",
+    empty: "Belum ada pengumuman yang diterbitkan saat ini.",
+  },
+  agenda: {
+    pageTitle: "Agenda",
+    heading: "Agenda kelas",
+    description:
+      "Kegiatan {kelas} semester {semester}, disusun kronologis. Tanggal menjadi penanda utama — pantau halaman ini agar tidak ketinggalan.",
+    chronologicalMeta: "Kronologis",
+    note: "Agenda diperbarui secara berkala oleh pengurus kelas (tugas, ulangan, dan kegiatan sekolah).",
+    empty: "Belum ada agenda kelas tercatat saat ini.",
+    nearestTag: "Terdekat",
+  },
+  gallery: {
+    pageTitle: "Galeri",
+    heading: "Dokumentasi kelas",
+    description:
+      "Dokumentasi kegiatan {kelas} semester {semester}. Foto diurutkan dari momen terbaru.",
+    documentsMeta: "{count} dokumen",
+    note: "Dokumentasi foto diunggah langsung oleh sie humas & dokumentasi melalui penyimpanan Supabase Storage.",
+    empty: "Belum ada dokumentasi foto yang diunggah saat ini.",
+    docPrefix: "Dok.",
+  },
+  auth: {
+    pageTitle: "Masuk",
+    badge: "Area anggota",
+    heading: "Masuk ke arsip kelas",
+    description:
+      "Masuk dengan Google untuk menyimpan identitasmu. Belum punya akun Google? Kamu tetap bisa masuk sebagai tamu dan kembali lagi nanti.",
+    googleBtn: "Masuk dengan Akun Google",
+    guestBtn: "Masuk sebagai Tamu",
+    orSeparator: "atau",
+    errorGoogle:
+      "Gagal memulai masuk dengan Google. Coba lagi, atau gunakan mode tamu.",
+    errorGuest: "Gagal masuk sebagai tamu. Coba lagi.",
+    backHome: "Kembali ke beranda",
+  },
+  dashboard: {
+    pageTitle: "Ruang Anggota",
+    badge: "Area anggota — {role}",
+    welcome: "Selamat datang, {name}",
+    guestName: "Tamu",
+    memberName: "Anggota",
+    roleGuest: "mode tamu",
+    roleOwner: "owner (pemilik)",
+    roleAdmin: "admin (pengurus)",
+    roleMember: "anggota",
+    adminAccessTitle: "Akses Panel Pengurus Tersedia",
+    adminAccessDesc:
+      "Anda memiliki wewenang untuk mengelola seluruh data arsip kelas.",
+    openAdminBtn: "Buka Panel",
+    workspaceTitle: "Ruang kerja anggota",
+    guestWorkspaceDesc:
+      "Sesi tamu berjalan. Masuk dengan Google kapan saja untuk menyimpan identitasmu dan membuka konten khusus anggota.",
+    memberWorkspaceDesc:
+      "Sesi aktif melalui Supabase Auth. Informasi kegiatan dan pengumuman kelas tersinkron otomatis.",
+    backHome: "← Kembali ke Beranda",
+    signOutBtn: "Keluar",
+  },
+  notFound: {
+    pageTitle: "Halaman Tidak Ditemukan",
+    heading: "Halaman ini tidak ditemukan.",
+    description:
+      "Mungkin halaman dipindah, dihapus, atau alamatnya salah ketik.",
+    backHome: "Kembali ke beranda",
+  },
   admin: {
+    sidebarHeader: "Panel Pengurus",
     overview: "Ringkasan",
     manageModules: "Menu Kelola",
     themeManagement: "Tema & Tampilan",
+    usersManagement: "Manajemen User",
+    announcements: "Pengumuman",
+    agenda: "Agenda Kelas",
+    schedule: "Jadwal Pelajaran",
+    members: "Anggota Kelas",
+    gallery: "Galeri Foto",
+    organization: "Identitas & Org",
     globalDefaultsTitle: "Pengaturan Tampilan Global",
-    globalDefaultsDesc: "Atur tema, font, tata letak, dan bahasa default untuk semua pengguna yang belum menyesuaikan preferensi pribadi.",
+    globalDefaultsDesc:
+      "Atur tema, font, tata letak, dan bahasa default untuk semua pengguna yang belum menyesuaikan preferensi pribadi.",
     fontsManagement: "Kelola Font",
     addFont: "Tambah Font",
     removeFont: "Hapus",
@@ -127,11 +261,63 @@ export const id: TranslationSchema = {
     defaultLanguage: "Bahasa Default",
     saveDefaults: "Simpan Pengaturan Global",
     sessionLabel: "Sesi Masuk",
+    signOutPanel: "Keluar dari Panel",
+    mainWebsiteLink: "Web Utama",
+    dashboardTitle: "Pusat Kendali Arsip",
+    dashboardDesc:
+      "Selamat datang di panel pengurus, {name}. Kelola pengumuman, agenda, jadwal pelajaran, data anggota, dan dokumentasi kelas langsung tersinkron ke Supabase.",
+    publishedCount: "{count} terbit",
+    recordedEvents: "kegiatan tercatat",
+    teachingHours: "jam pelajaran",
+    registeredStudents: "siswa terdaftar",
+    savedPhotos: "foto tersimpan",
+    addStudent: "Tambah Siswa",
+    editStudent: "Ubah Siswa",
+    studentName: "Nama Siswa",
+    absenNo: "Nomor Absen",
+    positionLabel: "Jabatan (Opsional)",
+    actions: "Aksi",
+    deleteConfirmTitle: "Konfirmasi Hapus",
+    deleteConfirmDesc:
+      "Apakah Anda yakin ingin menghapus data ini? Tindakan ini tidak dapat dibatalkan.",
+
+    // Pengumuman
+    announcementsDesc:
+      "Publikasikan warta penting, edaran wali kelas, dan informasi tugas sekolah.",
+    announcementsTableSearch: "Tanggal",
+    announcementsTableCategory: "Kategori",
+    announcementsTableTitle: "Judul dan Ringkasan",
+    announcementsTableStatus: "Status",
+    announcementsTableAction: "Aksi",
+    announcementsEmpty: "Tidak ada pengumuman yang tersedia.",
+
+    // agenda
+    // agenda
+    agendaDesc:
+      " Catat jadwal ujian, batas pengumpulan tugas, dan acara kelas mendatang.",
+    agendaTableDate: "tanggal dan hari",
+    agendaTableCategory: "kategori",
+    agendaTableDesc: "deskripsi",
+    agendaTableAction: "aksi",
+
+    // schedule
+    scheduleDesc:
+      "Kelola dan lihat jadwal kelas untuk setiap hari dalam seminggu.",
+    scheduleDayMonday: "Senin",
+    scheduleDayTuesday: "Selasa",
+    scheduleDayWednesday: "Rabu",
+    scheduleDayThursday: "Kamis",
+    scheduleDayFriday: "Jumat",
+    scheduleTableOrder: "Urutan",
+    scheduleTableTime: "Waktu",
+    scheduleTableSubject: "Mata Pelajaran",
+    scheduleTableTeacher: "Guru",
+    scheduleTableAction: "Aksi",
   },
   common: {
     save: "Simpan",
     cancel: "Batal",
-    loading: "Memuat...",
+    loading: "Memuat data...",
     error: "Terjadi kesalahan",
     empty: "Belum ada data",
     all: "Semua",
@@ -147,6 +333,7 @@ export const id: TranslationSchema = {
     optional: "Opsional",
     yes: "Ya",
     no: "Tidak",
+    noteLabel: "Catatan",
   },
   footer: {
     explore: "Jelajahi",
@@ -154,6 +341,7 @@ export const id: TranslationSchema = {
     copyright: "© 2026 X TKJ 1 · {sekolah}",
     sampleData: "Data contoh — hubungi pengurus kelas untuk pembaruan",
     academicYear: "Tahun ajaran {tahunAjaran} · Semester {semester}",
-    description: "Ruang digital kelas X TKJ 1 — {sekolah}. Pengumuman, jadwal, agenda, dan dokumentasi kelas dikumpulkan di satu tempat.",
+    description:
+      "Ruang digital kelas X TKJ 1 — {sekolah}. Pengumuman, jadwal, agenda, dan dokumentasi kelas dikumpulkan di satu tempat.",
   },
 };

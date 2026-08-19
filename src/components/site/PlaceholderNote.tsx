@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "@/hooks/use-translation";
 
-/** Catatan tipis bahwa data pada halaman ini masih contoh (placeholder). */
 export function PlaceholderNote({
   children,
   className,
@@ -9,6 +9,8 @@ export function PlaceholderNote({
   children?: ReactNode;
   className?: string;
 }) {
+  const { t } = useTranslation();
+
   return (
     <aside
       className={cn(
@@ -16,10 +18,9 @@ export function PlaceholderNote({
         className,
       )}
     >
-      <span className="kicker shrink-0 text-[9px] text-accent">Catatan</span>
+      <span className="kicker shrink-0 text-[9px] text-accent">{t.common.noteLabel}</span>
       <p className="text-[13px] leading-relaxed text-muted-foreground">
-        {children ??
-          "Data pada halaman ini masih contoh (placeholder) dan belum menggambarkan data asli kelas. Ganti dengan data sebenarnya sebelum dipublikasikan."}
+        {children ?? t.common.empty}
       </p>
     </aside>
   );

@@ -3,6 +3,7 @@ import { AdminLayout } from "@/components/admin/AdminLayout";
 import { PageHeader } from "@/components/site/PageHeader";
 import { usePageTitle } from "@/hooks/use-page-title";
 import { useOrganization, type OrganizationData } from "@/hooks/use-organization";
+import { useTranslation } from "@/hooks/use-translation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -10,7 +11,8 @@ import { Loader2, Save } from "lucide-react";
 import { toast } from "sonner";
 
 export default function AdminOrganization() {
-  usePageTitle("Identitas & Struktur Kelas — Panel");
+  const { t } = useTranslation();
+  usePageTitle(`${t.admin.organization} — Panel`);
   const { data, isLoading, save } = useOrganization();
 
   const [formData, setFormData] = useState<OrganizationData>(data);
@@ -63,7 +65,7 @@ export default function AdminOrganization() {
     setIsSaving(true);
     try {
       await save(formData);
-      toast.success("Identitas dan informasi kelas berhasil diperbarui.");
+      toast.success("Data berhasil diperbarui.");
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Gagal menyimpan data");
     } finally {
@@ -85,9 +87,9 @@ export default function AdminOrganization() {
     <AdminLayout>
       <PageHeader
         nomor="06"
-        label="Modul"
-        title="Identitas & Kontak Kelas"
-        description="Ubah profil utama kelas X TKJ 1, data wali kelas, tahun ajaran, dan tautan sosial media resmi."
+        label={t.admin.manageModules}
+        title={t.admin.organization}
+        description="Ubah profil utama kelas, data wali kelas, tahun ajaran, dan tautan sosial media resmi."
       />
 
       <form onSubmit={handleSubmit} className="mt-8 space-y-8 max-w-3xl">
@@ -273,7 +275,7 @@ export default function AdminOrganization() {
             ) : (
               <Save className="size-4" />
             )}
-            Simpan Perubahan
+            {t.common.save}
           </Button>
         </div>
       </form>

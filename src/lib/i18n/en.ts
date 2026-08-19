@@ -22,7 +22,8 @@ export const en: TranslationSchema = {
   },
   settings: {
     title: "Settings",
-    subtitle: "Customize appearance and language to match your personal preferences.",
+    subtitle:
+      "Customize appearance and language to match your personal preferences.",
     personalization: "Personalization",
     language: "Language",
     themeSection: "Theme",
@@ -42,15 +43,19 @@ export const en: TranslationSchema = {
     selectLanguage: "Select language",
     saveSuccess: "Settings saved successfully.",
     resetDefaults: "Reset to Defaults",
-    resetConfirm: "Are you sure you want to reset all settings to school defaults?",
-    customThemeNote: "Your custom preferences differ from preset themes — active theme is Custom.",
+    resetConfirm:
+      "Are you sure you want to reset all settings to school defaults?",
+    customThemeNote:
+      "Your custom preferences differ from preset themes — active theme is Custom.",
     previewLabel: "Preview",
   },
   themes: {
     paper: "Paper",
-    paperDesc: "Vintage archive style with warm paper tones and classic editorial typography.",
+    paperDesc:
+      "Vintage archive style with warm paper tones and classic editorial typography.",
     glass: "Glass",
-    glassDesc: "Modern glassmorphism with frosted blur surfaces and crisp styling.",
+    glassDesc:
+      "Modern glassmorphism with frosted blur surfaces and crisp styling.",
     cartoon: "Cartoon",
     cartoonDesc: "Vibrant, cheerful, and comic-inspired. Light mode only.",
     custom: "Custom",
@@ -58,11 +63,14 @@ export const en: TranslationSchema = {
   },
   layouts: {
     classic: "Editorial Classic",
-    classicDesc: "Newspaper-style archive layout with sequential editorial sections.",
+    classicDesc:
+      "Newspaper-style archive layout with sequential editorial sections.",
     bento: "Modern Bento Grid",
-    bentoDesc: "Interactive modular bento grid with glass cards and live quick-stats.",
+    bentoDesc:
+      "Interactive modular bento grid with glass cards and live quick-stats.",
     showcase: "Archive Showcase",
-    showcaseDesc: "Visual-first showcase with hero media banner and timeline view.",
+    showcaseDesc:
+      "Visual-first showcase with hero media banner and timeline view.",
   },
   colors: {
     background: "Background",
@@ -88,12 +96,15 @@ export const en: TranslationSchema = {
   },
   home: {
     heroTag: "Digital Class Archive",
-    heroSubtitle: "One classroom, {count} students, and one academic year — archived here.",
-    heroDescription: "This is the digital space for {kelas}: where class announcements, schedules, agenda, and documentation come together. Built by students for students.",
+    heroSubtitle:
+      "One classroom, {count} students, and one academic year — archived here.",
+    heroDescription:
+      "This is the digital space for {kelas}: where class announcements, schedules, agenda, and documentation come together. Built by students for students.",
     readAnnouncements: "Read announcements",
     viewMembers: "View class members",
     classIdentity: "Class Profile",
-    classIdentityDesc: "Basic facts for class {kelas} in academic year {tahunAjaran}. Data can be updated from the admin panel.",
+    classIdentityDesc:
+      "Basic facts for class {kelas} in academic year {tahunAjaran}. Data can be updated from the admin panel.",
     latestAnnouncements: "Latest announcements",
     allAnnouncements: "All announcements",
     upcomingAgenda: "Upcoming activities",
@@ -104,15 +115,138 @@ export const en: TranslationSchema = {
     galleryShowcase: "Class Photo Documentation",
     openGallery: "Open gallery",
     contactRow: "Have information for the class?",
-    contactRowDesc: "Reach out to class officers or contact through the secretary.",
+    contactRowDesc:
+      "Reach out to class officers or contact through the secretary.",
     viewOrgChart: "View class officers",
   },
+  members: {
+    pageTitle: "Class Members",
+    heading: "Class members",
+    description:
+      "Roster of {count} students of {kelas} with student attendance numbers and roles.",
+    searchLabel: "Search member",
+    searchPlaceholder: "Name, attendance number, or role…",
+    searchCount: "{filtered} of {total} members",
+    note: "Official class membership is managed by class administrators and synchronized live from Supabase database.",
+    emptySearch: "No members match “{query}”.",
+    emptyList: "No class members recorded yet.",
+    absenPrefix: "No.",
+  },
+  organization: {
+    pageTitle: "Organization Structure",
+    heading: "Class organization structure",
+    description:
+      "Officer structure of {kelas}: core committee and specialized divisions. The homeroom teacher guides, core officers execute, and divisions lead their areas.",
+    metaCount: "{inti} core + {sie} divisions",
+    note: "Official committee lineup can be updated anytime through the admin panel.",
+    empty: "No class organization structure recorded yet.",
+    homeroom: "Homeroom Teacher",
+    coreOfficers: "Core Officers",
+    coreSubtitle: "Core committee",
+    divisions: "Divisions & Roles",
+    divisionsSubtitle: "Class divisions",
+    responsibility:
+      "Each division reports to core officers, and core officers report to the homeroom teacher and the entire class. Lineup changes are confirmed via class meetings and logged in the digital archive.",
+  },
+  schedule: {
+    pageTitle: "Class Schedule",
+    heading: "Class schedule",
+    description:
+      "Timetable for {kelas} semester {semester}, academic year {tahunAjaran}. Breaks are italicized; period 1 begins at 07:00.",
+    semesterMeta: "Semester {semester}",
+    note: "Schedule is subject to curriculum updates by the school and is maintained in the admin panel.",
+    empty: "No class timetable configured for this semester yet.",
+    breakLabel: "Break",
+    timeColumn: "Time",
+    subjectColumn: "Subject",
+    roomColumn: "Room",
+  },
+  announcements: {
+    pageTitle: "Announcements",
+    heading: "Announcements",
+    description:
+      "Official notices for {kelas}: class, school, assignments, and academics. Sorted latest first.",
+    entriesMeta: "{count} entries",
+    note: "Official announcements are published directly by the homeroom teacher and class officers via the digital archive panel.",
+    empty: "No announcements published at this time.",
+  },
+  agenda: {
+    pageTitle: "Agenda",
+    heading: "Class agenda",
+    description:
+      "Upcoming events for {kelas} semester {semester}, arranged chronologically. Keep track of tasks and exam dates here.",
+    chronologicalMeta: "Chronological",
+    note: "Agenda is periodically updated by class officers (assignments, exams, and school activities).",
+    empty: "No agenda items recorded at this time.",
+    nearestTag: "Nearest",
+  },
+  gallery: {
+    pageTitle: "Gallery",
+    heading: "Class documentation",
+    description:
+      "Activity records for {kelas} semester {semester}. Photos are ordered from most recent moments.",
+    documentsMeta: "{count} documents",
+    note: "Photo documentation is uploaded by documentation officers directly through Supabase Storage.",
+    empty: "No photo documentation uploaded yet.",
+    docPrefix: "Doc.",
+  },
+  auth: {
+    pageTitle: "Sign In",
+    badge: "Member Area",
+    heading: "Sign in to digital archive",
+    description:
+      "Sign in with Google to save your profile identity. Don't have a Google account? You can also explore as a guest and return anytime.",
+    googleBtn: "Sign in with Google",
+    guestBtn: "Continue as Guest",
+    orSeparator: "or",
+    errorGoogle:
+      "Failed to initialize Google Sign In. Please try again or use Guest mode.",
+    errorGuest: "Failed to sign in as guest. Please try again.",
+    backHome: "Back to home",
+  },
+  dashboard: {
+    pageTitle: "Member Space",
+    badge: "Member area — {role}",
+    welcome: "Welcome, {name}",
+    guestName: "Guest",
+    memberName: "Member",
+    roleGuest: "guest mode",
+    roleOwner: "owner (creator)",
+    roleAdmin: "admin (officer)",
+    roleMember: "member",
+    adminAccessTitle: "Admin Panel Access Available",
+    adminAccessDesc:
+      "You have administrative authorization to manage all class archive records.",
+    openAdminBtn: "Open Panel",
+    workspaceTitle: "Member Workspace",
+    guestWorkspaceDesc:
+      "Guest session active. Sign in with Google anytime to save your identity and access member-only features.",
+    memberWorkspaceDesc:
+      "Active session authenticated via Supabase Auth. Activity info and announcements are automatically synchronized.",
+    backHome: "← Back to Home",
+    signOutBtn: "Sign Out",
+  },
+  notFound: {
+    pageTitle: "Page Not Found",
+    heading: "This page could not be found.",
+    description: "The page may have been moved, deleted, or mistyped.",
+    backHome: "Return to home",
+  },
   admin: {
+    sidebarHeader: "Admin Panel",
     overview: "Overview",
     manageModules: "Management Menu",
     themeManagement: "Theme & Appearance",
+    usersManagement: "User Management",
+    announcements: "Announcements",
+    agenda: "Class Agenda",
+    schedule: "Class Schedule",
+    members: "Class Members",
+    gallery: "Photo Gallery",
+    organization: "Identity & Org",
     globalDefaultsTitle: "Global Theme Defaults",
-    globalDefaultsDesc: "Configure school-wide default theme, fonts, layout, and language for all users who have not customized their personal preferences.",
+    globalDefaultsDesc:
+      "Configure school-wide default theme, fonts, layout, and language for all users who have not customized their personal preferences.",
     fontsManagement: "Font Registry",
     addFont: "Add Font",
     removeFont: "Delete",
@@ -127,11 +261,61 @@ export const en: TranslationSchema = {
     defaultLanguage: "Default Language",
     saveDefaults: "Save Global Defaults",
     sessionLabel: "Signed in as",
+    signOutPanel: "Sign Out of Panel",
+    mainWebsiteLink: "Main Website",
+    dashboardTitle: "Archive Command Center",
+    dashboardDesc:
+      "Welcome to the administrator panel, {name}. Manage announcements, agenda, schedules, members roster, and gallery synced live with Supabase.",
+    publishedCount: "{count} published",
+    recordedEvents: "recorded events",
+    teachingHours: "teaching periods",
+    registeredStudents: "registered students",
+    savedPhotos: "saved photos",
+    addStudent: "Add Student",
+    editStudent: "Edit Student",
+    studentName: "Student Name",
+    absenNo: "Attendance No",
+    positionLabel: "Role / Position (Optional)",
+    actions: "Actions",
+    deleteConfirmTitle: "Confirm Deletion",
+    deleteConfirmDesc:
+      "Are you sure you want to delete this record? This action cannot be undone.",
+    // Announcements,
+    announcementsDesc:
+      "Publish important announcements, homeroom teacher circulars, and school assignment information",
+    announcementsTableSearch: "date",
+    announcementsTableCategory: "category",
+    announcementsTableTitle: "title and summary",
+    announcementsTableStatus: "status",
+    announcementsTableAction: "action",
+    announcementsEmpty: "No announcements available.",
+
+    // agenda
+    agendaDesc:
+      "Publish/Note down test schedules, task submission deadlines, and upcoming class events.",
+    agendaTableDate: "date",
+    agendaTableCategory: "category",
+    agendaTableDesc: "description",
+    agendaTableAction: "action",
+
+    // schedule
+    scheduleDesc:
+      "Manage and view the class schedule for each day of the week.",
+    scheduleDayMonday: "Monday",
+    scheduleDayTuesday: "Tuesday",
+    scheduleDayWednesday: "Wednesday",
+    scheduleDayThursday: "Thursday",
+    scheduleDayFriday: "Friday",
+    scheduleTableOrder: "Order",
+    scheduleTableTime: "Time",
+    scheduleTableSubject: "Subject",
+    scheduleTableTeacher: "Teacher",
+    scheduleTableAction: "Action",
   },
   common: {
     save: "Save",
     cancel: "Cancel",
-    loading: "Loading...",
+    loading: "Loading data...",
     error: "An error occurred",
     empty: "No data available",
     all: "All",
@@ -147,6 +331,7 @@ export const en: TranslationSchema = {
     optional: "Optional",
     yes: "Yes",
     no: "No",
+    noteLabel: "Note",
   },
   footer: {
     explore: "Explore",
@@ -154,6 +339,7 @@ export const en: TranslationSchema = {
     copyright: "© 2026 X TKJ 1 · {sekolah}",
     sampleData: "Sample data — contact class administrators for updates",
     academicYear: "Academic Year {tahunAjaran} · Semester {semester}",
-    description: "Digital class archive for X TKJ 1 — {sekolah}. Announcements, schedules, agenda, and photo documentation in one unified place.",
+    description:
+      "Digital class archive for X TKJ 1 — {sekolah}. Announcements, schedules, agenda, and photo documentation in one unified place.",
   },
 };

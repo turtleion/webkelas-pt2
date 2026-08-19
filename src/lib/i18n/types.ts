@@ -107,10 +107,119 @@ export interface TranslationSchema {
     contactRowDesc: string;
     viewOrgChart: string;
   };
+  members: {
+    pageTitle: string;
+    heading: string;
+    description: string;
+    searchLabel: string;
+    searchPlaceholder: string;
+    searchCount: string;
+    note: string;
+    emptySearch: string;
+    emptyList: string;
+    absenPrefix: string;
+  };
+  organization: {
+    pageTitle: string;
+    heading: string;
+    description: string;
+    metaCount: string;
+    note: string;
+    empty: string;
+    homeroom: string;
+    coreOfficers: string;
+    coreSubtitle: string;
+    divisions: string;
+    divisionsSubtitle: string;
+    responsibility: string;
+  };
+  schedule: {
+    pageTitle: string;
+    heading: string;
+    description: string;
+    semesterMeta: string;
+    note: string;
+    empty: string;
+    breakLabel: string;
+    timeColumn: string;
+    subjectColumn: string;
+    roomColumn: string;
+  };
+  announcements: {
+    pageTitle: string;
+    heading: string;
+    description: string;
+    entriesMeta: string;
+    note: string;
+    empty: string;
+  };
+  agenda: {
+    pageTitle: string;
+    heading: string;
+    description: string;
+    chronologicalMeta: string;
+    note: string;
+    empty: string;
+    nearestTag: string;
+  };
+  gallery: {
+    pageTitle: string;
+    heading: string;
+    description: string;
+    documentsMeta: string;
+    note: string;
+    empty: string;
+    docPrefix: string;
+  };
+  auth: {
+    pageTitle: string;
+    badge: string;
+    heading: string;
+    description: string;
+    googleBtn: string;
+    guestBtn: string;
+    orSeparator: string;
+    errorGoogle: string;
+    errorGuest: string;
+    backHome: string;
+  };
+  dashboard: {
+    pageTitle: string;
+    badge: string;
+    welcome: string;
+    guestName: string;
+    memberName: string;
+    roleGuest: string;
+    roleOwner: string;
+    roleAdmin: string;
+    roleMember: string;
+    adminAccessTitle: string;
+    adminAccessDesc: string;
+    openAdminBtn: string;
+    workspaceTitle: string;
+    guestWorkspaceDesc: string;
+    memberWorkspaceDesc: string;
+    backHome: string;
+    signOutBtn: string;
+  };
+  notFound: {
+    pageTitle: string;
+    heading: string;
+    description: string;
+    backHome: string;
+  };
   admin: {
+    sidebarHeader: string;
     overview: string;
     manageModules: string;
     themeManagement: string;
+    usersManagement: string;
+    announcements: string;
+    agenda: string;
+    schedule: string;
+    members: string;
+    gallery: string;
+    organization: string;
     globalDefaultsTitle: string;
     globalDefaultsDesc: string;
     fontsManagement: string;
@@ -127,6 +236,52 @@ export interface TranslationSchema {
     defaultLanguage: string;
     saveDefaults: string;
     sessionLabel: string;
+    signOutPanel: string;
+    mainWebsiteLink: string;
+    dashboardTitle: string;
+    dashboardDesc: string;
+    publishedCount: string;
+    recordedEvents: string;
+    teachingHours: string;
+    registeredStudents: string;
+    savedPhotos: string;
+    addStudent: string;
+    editStudent: string;
+    studentName: string;
+    absenNo: string;
+    positionLabel: string;
+    actions: string;
+    deleteConfirmTitle: string;
+    deleteConfirmDesc: string;
+
+    // announcements
+    announcementsDesc: string;
+    announcementsTableSearch: string;
+    announcementsTableCategory: string;
+    announcementsTableTitle: string;
+    announcementsTableStatus: string;
+    announcementsTableAction: string;
+    announcementsEmpty: string;
+
+    // agenda
+    agendaDesc: string;
+    agendaTableDate: string;
+    agendaTableCategory: string;
+    agendaTableDesc: string;
+    agendaTableAction: string;
+
+    // schedule
+    scheduleDesc: string;
+    scheduleDayMonday: string;
+    scheduleDayTuesday: string;
+    scheduleDayWednesday: string;
+    scheduleDayThursday: string;
+    scheduleDayFriday: string;
+    scheduleTableOrder: string;
+    scheduleTableTime: string;
+    scheduleTableSubject: string;
+    scheduleTableTeacher: string;
+    scheduleTableAction: string;
   };
   common: {
     save: string;
@@ -147,6 +302,7 @@ export interface TranslationSchema {
     optional: string;
     yes: string;
     no: string;
+    noteLabel: string;
   };
   footer: {
     explore: string;

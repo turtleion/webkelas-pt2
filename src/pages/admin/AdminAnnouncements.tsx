@@ -1,33 +1,37 @@
-import { useState } from "react";
 import { AdminLayout } from "@/components/admin/AdminLayout";
-import { PageHeader } from "@/components/site/PageHeader";
-import { DataTable } from "@/components/admin/DataTable";
 import { ConfirmDialog } from "@/components/admin/ConfirmDialog";
-import { usePageTitle } from "@/hooks/use-page-title";
-import { useAnnouncements } from "@/hooks/use-announcements";
-import { type AnnouncementRow } from "@/lib/db";
-import { pecahTanggal } from "@/lib/tanggal";
+import { DataTable } from "@/components/admin/DataTable";
+import { PageHeader } from "@/components/site/PageHeader";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import {
   Dialog,
   DialogContent,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogFooter,
 } from "@/components/ui/dialog";
-import { Plus, Edit2, Trash2, Globe, EyeOff, Loader2 } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { useAnnouncements } from "@/hooks/use-announcements";
+import { usePageTitle } from "@/hooks/use-page-title";
+import { useTranslation } from "@/hooks/use-translation";
+import { type AnnouncementRow } from "@/lib/db";
+import { pecahTanggal } from "@/lib/tanggal";
+import { Edit2, EyeOff, Globe, Loader2, Plus, Trash2 } from "lucide-react";
+import { useState } from "react";
 import { toast } from "sonner";
 
 export default function AdminAnnouncements() {
-  usePageTitle("Kelola Pengumuman — Panel");
+  const { t } = useTranslation();
+  usePageTitle(`${t.admin.announcements} — Panel`);
   const { data, isLoading, error, refresh, create, update, remove } =
     useAnnouncements(false);
 
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<AnnouncementRow | null>(null);
-  const [deleteTarget, setDeleteTarget] = useState<AnnouncementRow | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<AnnouncementRow | null>(
+    null,
+  );
 
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
@@ -89,7 +93,7 @@ export default function AdminAnnouncements() {
       await refresh();
     } catch (err) {
       toast.error(
-        err instanceof Error ? err.message : "Gagal menyimpan pengumuman"
+        err instanceof Error ? err.message : "Gagal menyimpan pengumuman",
       );
     } finally {
       setIsSubmitting(false);
@@ -102,7 +106,7 @@ export default function AdminAnnouncements() {
       toast.success(
         item.published
           ? "Pengumuman ditarik dari publik."
-          : "Pengumuman berhasil dipublikasikan."
+          : "Pengumuman berhasil dipublikasikan.",
       );
       await refresh();
     } catch {
@@ -130,15 +134,15 @@ export default function AdminAnnouncements() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <PageHeader
           nomor="01"
-          label="Modul"
-          title="Kelola Pengumuman"
-          description="Publikasikan warta penting, edaran wali kelas, dan informasi tugas sekolah."
+          label={t.admin.manageModules}
+          title={t.admin.announcements}
+          description={t.admin.announcementsDesc}
         />
         <Button
           onClick={openCreateModal}
           className="cursor-pointer gap-2 self-start bg-primary text-primary-foreground font-mono text-[11px] uppercase tracking-wider"
         >
-          <Plus className="size-4" /> Buat Pengumuman
+          <Plus className="size-4" /> {t.common.add}
         </Button>
       </div>
 
@@ -147,26 +151,28 @@ export default function AdminAnnouncements() {
           isLoading={isLoading}
           error={error}
           isEmpty={data.length === 0}
-          emptyMessage="Belum ada pengumuman. Klik 'Buat Pengumuman' untuk menambahkan warta baru."
+          emptyMessage={t.admin.announcementsEmpty}
         >
           <table className="w-full text-left text-sm">
             <thead className="kicker border-b border-border/80 bg-background/50 text-[10px]">
               <tr>
-                <th className="p-3 pl-4">Tanggal</th>
-                <th className="p-3">Kategori</th>
-                <th className="p-3">Judul & Ringkasan</th>
-                <th className="p-3">Status</th>
-                <th className="p-3 pr-4 text-right">Aksi</th>
+                <th className="p-3 pl-4">{t.admin.announcementsTableSearch}</th>
+                <th className="p-3">{t.admin.announcementsTableCategory}</th>
+                <th className="p-3">{t.admin.announcementsTableTitle}</th>
+                <th className="p-3">{t.admin.announcementsTableStatus}</th>
+                <th className="p-3 pr-4 text-right">
+                  {t.admin.announcementsTableAction}
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border/60">
               {data.map((p) => {
                 const dateIso = p.published_at || p.created_at;
-                const t = pecahTanggal(dateIso.slice(0, 10));
+                const td = pecahTanggal(dateIso.slice(0, 10));
                 return (
                   <tr key={p.id} className="hover:bg-card/60 transition-colors">
                     <td className="p-3 pl-4 font-mono text-[11px] whitespace-nowrap text-muted-foreground">
-                      {t.hari} {t.bulanSingkat} {t.tahun}
+                      {td.hari} {td.bulanSingkat} {td.tahun}
                     </td>
                     <td className="p-3 whitespace-nowrap">
                       <span className="kicker text-[9px] text-accent">
@@ -252,7 +258,9 @@ export default function AdminAnnouncements() {
             </div>
 
             <div>
-              <label className="kicker block text-[10px]">Judul Pengumuman</label>
+              <label className="kicker block text-[10px]">
+                Judul Pengumuman
+              </label>
               <Input
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
@@ -263,7 +271,9 @@ export default function AdminAnnouncements() {
             </div>
 
             <div>
-              <label className="kicker block text-[10px]">Ringkasan Singkat</label>
+              <label className="kicker block text-[10px]">
+                Ringkasan Singkat
+              </label>
               <Textarea
                 value={summary}
                 onChange={(e) => setSummary(e.target.value)}
@@ -275,7 +285,7 @@ export default function AdminAnnouncements() {
 
             <div>
               <label className="kicker block text-[10px]">
-                Isi Lengkap (Opsional)
+                Isi Lengkap ({t.common.optional})
               </label>
               <Textarea
                 value={body}
@@ -308,15 +318,17 @@ export default function AdminAnnouncements() {
                 onClick={() => setDialogOpen(false)}
                 className="font-mono text-[11px] uppercase tracking-wider"
               >
-                Batal
+                {t.common.cancel}
               </Button>
               <Button
                 type="submit"
                 disabled={isSubmitting}
                 className="bg-primary text-primary-foreground font-mono text-[11px] uppercase tracking-wider"
               >
-                {isSubmitting && <Loader2 className="size-3.5 animate-spin mr-1.5" />}
-                Simpan
+                {isSubmitting && (
+                  <Loader2 className="size-3.5 animate-spin mr-1.5" />
+                )}
+                {t.common.save}
               </Button>
             </DialogFooter>
           </form>
@@ -327,8 +339,8 @@ export default function AdminAnnouncements() {
       <ConfirmDialog
         open={Boolean(deleteTarget)}
         onOpenChange={(open) => !open && setDeleteTarget(null)}
-        title="Hapus Pengumuman?"
-        description={`Apakah Anda yakin ingin menghapus warta "${deleteTarget?.title}"? Tindakan ini tidak dapat dibatalkan.`}
+        title={t.admin.deleteConfirmTitle}
+        description={t.admin.deleteConfirmDesc}
         isLoading={isDeleting}
         onConfirm={handleDelete}
       />

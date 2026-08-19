@@ -1,10 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/use-auth";
+import { useTranslation } from "@/hooks/use-translation";
 import { LayoutDashboard, LogOut, UserX, ShieldCheck, ArrowRight } from "lucide-react";
 import { Link, useNavigate } from "react-router";
 
 export default function Dashboard() {
   const { user, isAdmin, signOut } = useAuth();
+  const { t, interpolate } = useTranslation();
   const navigate = useNavigate();
 
   const handleSignOut = async () => {
@@ -12,15 +14,15 @@ export default function Dashboard() {
     navigate("/");
   };
 
-  const nama = user?.guest ? "Tamu" : user?.name ?? "Anggota";
+  const nama = user?.guest ? t.dashboard.guestName : user?.name ?? t.dashboard.memberName;
   const peran =
     user?.guest
-      ? "mode tamu"
+      ? t.dashboard.roleGuest
       : user?.role === "owner"
-      ? "owner (pemilik)"
+      ? t.dashboard.roleOwner
       : user?.role === "admin"
-      ? "admin (pengurus)"
-      : "anggota";
+      ? t.dashboard.roleAdmin
+      : t.dashboard.roleMember;
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center px-5 py-16">
@@ -35,9 +37,11 @@ export default function Dashboard() {
                   nama.charAt(0)
                 )}
               </div>
-              <p className="kicker text-[10px]">Area anggota — {peran}</p>
+              <p className="kicker text-[10px]">
+                {interpolate(t.dashboard.badge, { role: peran })}
+              </p>
               <h1 className="mt-3 font-display text-3xl font-medium tracking-tight md:text-4xl">
-                Selamat datang, {nama}
+                {interpolate(t.dashboard.welcome, { name: nama })}
               </h1>
             </div>
             <Button
@@ -47,7 +51,7 @@ export default function Dashboard() {
               onClick={handleSignOut}
             >
               <LogOut className="size-4" />
-              Keluar
+              {t.dashboard.signOutBtn}
             </Button>
           </div>
 
@@ -60,10 +64,10 @@ export default function Dashboard() {
                 <ShieldCheck className="size-5 text-primary" />
                 <div>
                   <p className="font-display font-medium text-primary">
-                    Akses Panel Pengurus Tersedia
+                    {t.dashboard.adminAccessTitle}
                   </p>
                   <p className="text-[12.5px] text-muted-foreground">
-                    Anda memiliki wewenang untuk mengelola seluruh data arsip kelas.
+                    {t.dashboard.adminAccessDesc}
                   </p>
                 </div>
               </div>
@@ -71,7 +75,7 @@ export default function Dashboard() {
                 to="/admin"
                 className="inline-flex shrink-0 items-center gap-1.5 bg-primary px-3 py-1.5 font-mono text-[11px] uppercase tracking-wider text-primary-foreground transition-colors hover:bg-primary/90"
               >
-                <span>Buka Panel</span>
+                <span>{t.dashboard.openAdminBtn}</span>
                 <ArrowRight className="size-3.5" />
               </Link>
             </div>
@@ -83,12 +87,12 @@ export default function Dashboard() {
             </div>
             <div>
               <h2 className="font-display text-xl font-medium tracking-tight">
-                Ruang kerja anggota
+                {t.dashboard.workspaceTitle}
               </h2>
               <p className="mt-2 text-[13.5px] leading-relaxed text-muted-foreground">
                 {user?.guest
-                  ? "Sesi tamu berjalan. Masuk dengan Google kapan saja untuk menyimpan identitasmu dan membuka konten khusus anggota."
-                  : "Sesi aktif melalui Supabase Auth. Informasi kegiatan dan pengumuman kelas tersinkron otomatis."}
+                  ? t.dashboard.guestWorkspaceDesc
+                  : t.dashboard.memberWorkspaceDesc}
               </p>
             </div>
           </div>
@@ -98,7 +102,7 @@ export default function Dashboard() {
               to="/"
               className="font-mono text-[11px] uppercase tracking-wider text-accent underline underline-offset-4 hover:text-accent/80"
             >
-              ← Kembali ke Beranda
+              {t.dashboard.backHome}
             </Link>
           </div>
         </div>

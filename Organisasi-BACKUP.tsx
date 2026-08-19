@@ -1,9 +1,8 @@
-import { PageHeader } from "@/components/site/PageHeader";
-import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
-import { useOrganization } from "@/hooks/use-organization";
+import { SiteFooter } from "@/components/site/SiteFooter";
+import { PageHeader } from "@/components/site/PageHeader";
 import { usePageTitle } from "@/hooks/use-page-title";
-import { useTranslation } from "@/hooks/use-translation";
+import { useOrganization } from "@/hooks/use-organization";
 import { inisialNama, padNomor } from "@/lib/tanggal";
 import { Loader2 } from "lucide-react";
 
@@ -40,8 +39,7 @@ function Orang({
 }
 
 export default function Organisasi() {
-  const { t, interpolate } = useTranslation();
-  usePageTitle(t.organization.pageTitle);
+  usePageTitle("Struktur Organisasi");
   const { data: orgData, isLoading } = useOrganization();
   const { kelas, pengurusInti, sie } = orgData;
 
@@ -59,15 +57,14 @@ export default function Organisasi() {
       >
         <PageHeader
           nomor="03"
-          label={t.nav.organization}
-          title={t.organization.heading}
-          description={interpolate(t.organization.description, {
-            kelas: kelas.nama || "",
-          })}
-          meta={interpolate(t.organization.metaCount, {
-            inti: pengurusInti.length,
-            sie: sie.length,
-          })}
+          label="Organisasi"
+          title="Struktur organisasi kelas"
+          description={
+            kelas.nama
+              ? `Susunan pengurus ${kelas.nama}: pengurus inti dan sie bidang. Wali kelas membimbing, pengurus inti menjalankan, sie mengurus bidangnya masing-masing.`
+              : "Susunan pengurus kelas: pengurus inti dan sie bidang."
+          }
+          meta={`${pengurusInti.length} inti + ${sie.length} sie`}
         />
 
         {isLoading ? (
@@ -76,14 +73,14 @@ export default function Organisasi() {
           </div>
         ) : isEmpty ? (
           <p className="mt-14 font-display text-xl italic text-muted-foreground">
-            {t.organization.empty}
+            Belum ada struktur organisasi kelas yang tercatat saat ini.
           </p>
         ) : (
           <>
             {/* wali kelas */}
             {hasWali && (
               <section className="mt-12 border-y-2 border-foreground/85 py-8 text-center md:mt-16">
-                <p className="kicker text-[10px]">{t.organization.homeroom}</p>
+                <p className="kicker text-[10px]">Wali Kelas</p>
                 <p className="mt-3 font-display text-3xl font-medium tracking-tight md:text-4xl">
                   {kelas.waliKelas.nama}
                   {kelas.waliKelas.gelar ? `, ${kelas.waliKelas.gelar}` : ""}
@@ -99,7 +96,7 @@ export default function Organisasi() {
             {/* pengurus inti */}
             {hasInti && (
               <section className="mt-14">
-                <FadeHeading kicker={t.organization.coreOfficers} title={t.organization.coreSubtitle} />
+                <FadeHeading kicker="Pengurus Inti" title="Inti kelas" />
                 <ul className="mt-8 grid gap-px bg-border sm:grid-cols-2 lg:grid-cols-4">
                   {pengurusInti.map((p) => (
                     <li key={p.jabatan} className="bg-background px-5 py-6">
@@ -108,7 +105,7 @@ export default function Organisasi() {
                         {p.nomor.map((no) => (
                           <Orang
                             key={no}
-                            nama={`Absen #${no}`}
+                            nama={`Pengurus Absen #${no}`}
                             absenNo={no}
                             besar={p.nomor.length === 1}
                           />
@@ -123,7 +120,7 @@ export default function Organisasi() {
             {/* sie */}
             {hasSie && (
               <section className="mt-14">
-                <FadeHeading kicker={t.organization.divisions} title={t.organization.divisionsSubtitle} />
+                <FadeHeading kicker="Sie & Bagian" title="Sie-sie kelas" />
                 <ul className="mt-8 grid gap-px bg-border sm:grid-cols-2 lg:grid-cols-4">
                   {sie.map((s) => (
                     <li key={s.jabatan} className="bg-background px-5 py-6">
@@ -132,7 +129,7 @@ export default function Organisasi() {
                         {s.nomor.map((no) => (
                           <Orang
                             key={no}
-                            nama={`Absen #${no}`}
+                            nama={`Sie Absen #${no}`}
                             absenNo={no}
                           />
                         ))}
@@ -145,7 +142,9 @@ export default function Organisasi() {
 
             <section className="mt-14 border-t border-border pt-8">
               <p className="max-w-2xl text-[13.5px] leading-relaxed text-muted-foreground">
-                {t.organization.responsibility}
+                Setiap sie bertanggung jawab kepada pengurus inti, dan pengurus inti
+                bertanggung jawab kepada wali kelas serta seluruh anggota kelas.
+                Perubahan susunan disahkan melalui rapat kelas dan dicatat di arsip digital.
               </p>
             </section>
           </>

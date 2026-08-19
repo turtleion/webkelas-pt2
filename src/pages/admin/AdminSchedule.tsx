@@ -1,21 +1,22 @@
-import { useState } from "react";
 import { AdminLayout } from "@/components/admin/AdminLayout";
-import { PageHeader } from "@/components/site/PageHeader";
-import { DataTable } from "@/components/admin/DataTable";
 import { ConfirmDialog } from "@/components/admin/ConfirmDialog";
-import { usePageTitle } from "@/hooks/use-page-title";
-import { useSchedule } from "@/hooks/use-schedule";
-import { type ScheduleRow } from "@/lib/db";
+import { DataTable } from "@/components/admin/DataTable";
+import { PageHeader } from "@/components/site/PageHeader";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import {
   Dialog,
   DialogContent,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogFooter,
 } from "@/components/ui/dialog";
-import { Plus, Edit2, Trash2, Loader2 } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { usePageTitle } from "@/hooks/use-page-title";
+import { useSchedule } from "@/hooks/use-schedule";
+import { useTranslation } from "@/hooks/use-translation";
+import { type ScheduleRow } from "@/lib/db";
+import { Edit2, Loader2, Plus, Trash2 } from "lucide-react";
+import { useState } from "react";
 import { toast } from "sonner";
 
 const DAYS: Array<ScheduleRow["day"]> = [
@@ -25,9 +26,17 @@ const DAYS: Array<ScheduleRow["day"]> = [
   "Kamis",
   "Jumat",
 ];
+const DAY_I18N_KEYS: Record<ScheduleRow["day"], string> = {
+  Senin: "admin.scheduleDayMonday",
+  Selasa: "admin.scheduleDayTuesday",
+  Rabu: "admin.scheduleDayWednesday",
+  Kamis: "admin.scheduleDayThursday",
+  Jumat: "admin.scheduleDayFriday",
+};
 
 export default function AdminSchedule() {
-  usePageTitle("Kelola Jadwal Pelajaran — Panel");
+  const { t } = useTranslation();
+  usePageTitle(`${t.admin.schedule} — Panel`);
   const { data, isLoading, error, refresh, create, update, remove } =
     useSchedule();
 
@@ -107,7 +116,9 @@ export default function AdminSchedule() {
       setDialogOpen(false);
       await refresh();
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Gagal menyimpan jadwal");
+      toast.error(
+        err instanceof Error ? err.message : "Gagal menyimpan jadwal",
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -133,15 +144,15 @@ export default function AdminSchedule() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <PageHeader
           nomor="03"
-          label="Modul"
-          title="Kelola Jadwal Pelajaran"
-          description="Atur susunan jam pelajaran harian, waktu istirahat, dan guru pengampu kelas."
+          label={t.admin.manageModules}
+          title={t.admin.schedule}
+          description={t.admin.scheduleDesc}
         />
         <Button
           onClick={openCreateModal}
           className="cursor-pointer gap-2 self-start bg-primary text-primary-foreground font-mono text-[11px] uppercase tracking-wider"
         >
-          <Plus className="size-4" /> Tambah Mata Pelajaran
+          <Plus className="size-4" /> {t.common.add}
         </Button>
       </div>
 
@@ -168,16 +179,18 @@ export default function AdminSchedule() {
           isLoading={isLoading}
           error={error}
           isEmpty={filteredData.length === 0}
-          emptyMessage={`Belum ada jadwal pelajaran untuk hari ${selectedDay}. Klik 'Tambah Mata Pelajaran' untuk menambahkan.`}
+          emptyMessage={`Belum ada jadwal pelajaran untuk hari ${selectedDay}.`}
         >
           <table className="w-full text-left text-sm">
             <thead className="kicker border-b border-border/80 bg-background/50 text-[10px]">
               <tr>
-                <th className="p-3 pl-4">Urutan</th>
-                <th className="p-3">Waktu</th>
-                <th className="p-3">Mata Pelajaran</th>
-                <th className="p-3">Guru Pengampu</th>
-                <th className="p-3 pr-4 text-right">Aksi</th>
+                <th className="p-3 pl-4">{t.admin.scheduleTableOrder}</th>
+                <th className="p-3">{t.admin.scheduleTableTime}</th>
+                <th className="p-3">{t.admin.scheduleTableSubject}</th>
+                <th className="p-3">{t.admin.scheduleTableTeacher}</th>
+                <th className="p-3 pr-4 text-right">
+                  {t.admin.scheduleTableAction}
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border/60">
@@ -185,14 +198,17 @@ export default function AdminSchedule() {
                 <tr
                   key={item.id}
                   className={`hover:bg-card/60 transition-colors ${
-                    item.is_break ? "bg-muted/30 italic text-muted-foreground" : ""
+                    item.is_break
+                      ? "bg-muted/30 italic text-muted-foreground"
+                      : ""
                   }`}
                 >
                   <td className="p-3 pl-4 font-mono text-[11px] text-muted-foreground">
                     #{item.sort_order + 1}
                   </td>
                   <td className="p-3 font-mono text-[11.5px] whitespace-nowrap">
-                    {item.time_start} {item.time_end ? `— ${item.time_end}` : ""}
+                    {item.time_start}{" "}
+                    {item.time_end ? `— ${item.time_end}` : ""}
                   </td>
                   <td className="p-3 font-display font-medium text-foreground">
                     {item.subject}
@@ -293,7 +309,7 @@ export default function AdminSchedule() {
 
             <div>
               <label className="kicker block text-[10px]">
-                Guru Pengampu (Opsional)
+                Guru Pengampu ({t.common.optional})
               </label>
               <Input
                 value={teacher}
@@ -338,15 +354,17 @@ export default function AdminSchedule() {
                 onClick={() => setDialogOpen(false)}
                 className="font-mono text-[11px] uppercase tracking-wider"
               >
-                Batal
+                {t.common.cancel}
               </Button>
               <Button
                 type="submit"
                 disabled={isSubmitting}
                 className="bg-primary text-primary-foreground font-mono text-[11px] uppercase tracking-wider"
               >
-                {isSubmitting && <Loader2 className="size-3.5 animate-spin mr-1.5" />}
-                Simpan
+                {isSubmitting && (
+                  <Loader2 className="size-3.5 animate-spin mr-1.5" />
+                )}
+                {t.common.save}
               </Button>
             </DialogFooter>
           </form>
@@ -357,8 +375,8 @@ export default function AdminSchedule() {
       <ConfirmDialog
         open={Boolean(deleteTarget)}
         onOpenChange={(open) => !open && setDeleteTarget(null)}
-        title="Hapus Jadwal?"
-        description={`Apakah Anda yakin ingin menghapus jadwal "${deleteTarget?.subject}" pada hari ${deleteTarget?.day}?`}
+        title={t.admin.deleteConfirmTitle}
+        description={t.admin.deleteConfirmDesc}
         isLoading={isDeleting}
         onConfirm={handleDelete}
       />

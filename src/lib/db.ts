@@ -80,7 +80,9 @@ export interface OrganizationSettingsRow<T = unknown> {
 // ---------------------------------------------------------------------------
 // Announcements API
 // ---------------------------------------------------------------------------
-export async function getAnnouncements(publishedOnly = true): Promise<AnnouncementRow[]> {
+export async function getAnnouncements(
+  publishedOnly = true,
+): Promise<AnnouncementRow[]> {
   let query = supabase
     .from("announcements")
     .select("*")
@@ -124,7 +126,7 @@ export async function createAnnouncement(payload: {
 
 export async function updateAnnouncement(
   id: string,
-  payload: Partial<Omit<AnnouncementRow, "id" | "created_at" | "updated_at">>
+  payload: Partial<Omit<AnnouncementRow, "id" | "created_at" | "updated_at">>,
 ): Promise<AnnouncementRow> {
   const patch: Record<string, unknown> = { ...payload };
   if (payload.published !== undefined && payload.published_at === undefined) {
@@ -185,7 +187,7 @@ export async function createAgendaItem(payload: {
 
 export async function updateAgendaItem(
   id: string,
-  payload: Partial<Omit<AgendaRow, "id" | "created_at" | "updated_at">>
+  payload: Partial<Omit<AgendaRow, "id" | "created_at" | "updated_at">>,
 ): Promise<AgendaRow> {
   const { data, error } = await supabase
     .from("agenda_items")
@@ -246,7 +248,7 @@ export async function createSchedule(payload: {
 
 export async function updateSchedule(
   id: string,
-  payload: Partial<Omit<ScheduleRow, "id" | "created_at" | "updated_at">>
+  payload: Partial<Omit<ScheduleRow, "id" | "created_at" | "updated_at">>,
 ): Promise<ScheduleRow> {
   const { data, error } = await supabase
     .from("schedules")
@@ -298,7 +300,7 @@ export async function createMember(payload: {
 
 export async function updateMember(
   id: string,
-  payload: Partial<Omit<MemberRow, "id" | "created_at" | "updated_at">>
+  payload: Partial<Omit<MemberRow, "id" | "created_at" | "updated_at">>,
 ): Promise<MemberRow> {
   const { data, error } = await supabase
     .from("members")
@@ -363,7 +365,7 @@ export async function createGalleryPhoto(payload: {
 
 export async function updateGalleryPhoto(
   id: string,
-  payload: Partial<Omit<GalleryPhotoRow, "id" | "created_at" | "updated_at">>
+  payload: Partial<Omit<GalleryPhotoRow, "id" | "created_at" | "updated_at">>,
 ): Promise<GalleryPhotoRow> {
   const { data, error } = await supabase
     .from("gallery_photos")
@@ -384,7 +386,9 @@ export async function deleteGalleryPhoto(id: string): Promise<void> {
 // ---------------------------------------------------------------------------
 // Organization Settings API
 // ---------------------------------------------------------------------------
-export async function getOrganizationSetting<T = unknown>(key: string): Promise<T | null> {
+export async function getOrganizationSetting<T = unknown>(
+  key: string,
+): Promise<T | null> {
   const { data, error } = await supabase
     .from("organization_settings")
     .select("value")
@@ -395,14 +399,18 @@ export async function getOrganizationSetting<T = unknown>(key: string): Promise<
   return (data?.value as T) ?? null;
 }
 
-export async function setOrganizationSetting<T = unknown>(key: string, value: T): Promise<void> {
-  const { error } = await supabase
-    .from("organization_settings")
-    .upsert({
+export async function setOrganizationSetting<T = unknown>(
+  key: string,
+  value: T,
+): Promise<void> {
+  const { error } = await supabase.from("organization_settings").upsert(
+    {
       key,
       value: value as unknown as Record<string, unknown>,
       updated_at: new Date().toISOString(),
-    }, { onConflict: "key" });
+    },
+    { onConflict: "key" },
+  );
 
   if (error) throw error;
 }
@@ -422,7 +430,7 @@ export async function getAllProfiles(): Promise<ProfileRow[]> {
 
 export async function updateProfileRole(
   userId: string,
-  role: "admin" | "member" | "owner"
+  role: "admin" | "member" | "owner",
 ): Promise<ProfileRow> {
   const { data, error } = await supabase
     .from("profiles")
@@ -439,7 +447,7 @@ export async function updateProfileRole(
 // User Preferences API (per-user settings JSONB in profiles.settings)
 // ---------------------------------------------------------------------------
 export async function getUserSettings<T = Record<string, unknown>>(
-  userId: string
+  userId: string,
 ): Promise<T | null> {
   const { data, error } = await supabase
     .from("profiles")
@@ -449,7 +457,11 @@ export async function getUserSettings<T = Record<string, unknown>>(
 
   if (error) throw error;
   const settings = data?.settings;
-  if (!settings || (typeof settings === "object" && Object.keys(settings as object).length === 0)) {
+  if (
+    !settings ||
+    (typeof settings === "object" &&
+      Object.keys(settings as object).length === 0)
+  ) {
     return null;
   }
   return settings as T;
@@ -457,7 +469,7 @@ export async function getUserSettings<T = Record<string, unknown>>(
 
 export async function updateUserSettings<T = Record<string, unknown>>(
   userId: string,
-  settings: T
+  settings: T,
 ): Promise<void> {
   const { error } = await supabase
     .from("profiles")

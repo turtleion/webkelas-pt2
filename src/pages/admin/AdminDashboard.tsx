@@ -7,6 +7,7 @@ import { useSchedule } from "@/hooks/use-schedule";
 import { useMembers } from "@/hooks/use-members";
 import { useGallery } from "@/hooks/use-gallery";
 import { useAuth } from "@/hooks/use-auth";
+import { useTranslation } from "@/hooks/use-translation";
 import { Link } from "react-router";
 import {
   Megaphone,
@@ -18,7 +19,8 @@ import {
 } from "lucide-react";
 
 export default function AdminDashboard() {
-  usePageTitle("Ringkasan Panel");
+  const { t, interpolate } = useTranslation();
+  usePageTitle(t.admin.overview);
   const { user } = useAuth();
 
   const { data: pengumuman } = useAnnouncements(false);
@@ -29,37 +31,39 @@ export default function AdminDashboard() {
 
   const stats = [
     {
-      title: "Pengumuman",
+      title: t.admin.announcements,
       count: pengumuman.length,
-      desc: `${pengumuman.filter((p) => p.published).length} terbit`,
+      desc: interpolate(t.admin.publishedCount, {
+        count: pengumuman.filter((p) => p.published).length,
+      }),
       link: "/admin/pengumuman",
       icon: Megaphone,
     },
     {
-      title: "Agenda Kelas",
+      title: t.admin.agenda,
       count: agenda.length,
-      desc: "kegiatan tercatat",
+      desc: t.admin.recordedEvents,
       link: "/admin/agenda",
       icon: CalendarDays,
     },
     {
-      title: "Jadwal Pelajaran",
+      title: t.admin.schedule,
       count: jadwal.length,
-      desc: "jam pelajaran",
+      desc: t.admin.teachingHours,
       link: "/admin/jadwal",
       icon: CalendarCheck2,
     },
     {
-      title: "Anggota Kelas",
+      title: t.admin.members,
       count: anggota.length,
-      desc: "siswa terdaftar",
+      desc: t.admin.registeredStudents,
       link: "/admin/anggota",
       icon: Users,
     },
     {
-      title: "Galeri Dokumentasi",
+      title: t.admin.gallery,
       count: galeri.length,
-      desc: "foto tersimpan",
+      desc: t.admin.savedPhotos,
       link: "/admin/galeri",
       icon: ImageIcon,
     },
@@ -69,9 +73,11 @@ export default function AdminDashboard() {
     <AdminLayout>
       <PageHeader
         nomor="ADM"
-        label="Ringkasan"
-        title="Pusat Kendali Arsip"
-        description={`Selamat datang di panel pengurus, ${user?.name || "Rekan"}. Kelola pengumuman, agenda, jadwal pelajaran, data anggota, dan dokumentasi kelas langsung tersinkron ke Supabase.`}
+        label={t.admin.overview}
+        title={t.admin.dashboardTitle}
+        description={interpolate(t.admin.dashboardDesc, {
+          name: user?.name || "—",
+        })}
       />
 
       <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -99,7 +105,7 @@ export default function AdminDashboard() {
               </div>
 
               <div className="mt-6 flex items-center gap-1 border-t border-border/60 pt-3 font-mono text-[10px] uppercase tracking-wider text-accent group-hover:underline">
-                <span>Kelola modul</span>
+                <span>{t.admin.manageModules}</span>
                 <ArrowRight className="size-3 transition-transform group-hover:translate-x-0.5" />
               </div>
             </Link>

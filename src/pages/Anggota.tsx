@@ -6,11 +6,13 @@ import { PlaceholderNote } from "@/components/site/PlaceholderNote";
 import { usePageTitle } from "@/hooks/use-page-title";
 import { useMembers } from "@/hooks/use-members";
 import { useOrganization } from "@/hooks/use-organization";
+import { useTranslation } from "@/hooks/use-translation";
 import { inisialNama, padNomor } from "@/lib/tanggal";
 import { Loader2 } from "lucide-react";
 
 export default function Anggota() {
-  usePageTitle("Anggota");
+  const { t, interpolate } = useTranslation();
+  usePageTitle(t.members.pageTitle);
   const { data: orgData } = useOrganization();
   const { kelas } = orgData;
   const { data: anggota, isLoading } = useMembers();
@@ -34,30 +36,36 @@ export default function Anggota() {
       >
         <PageHeader
           nomor="02"
-          label="Anggota"
-          title="Anggota kelas"
-          description={`Daftar ${anggota.length} siswa ${kelas.nama} beserta nomor absen dan jabatan. Dipindai cepat: nomor absen di kiri, nama, dan peran bila ada.`}
-          meta={`${anggota.length} siswa`}
+          label={t.nav.members}
+          title={t.members.heading}
+          description={interpolate(t.members.description, {
+            count: anggota.length,
+            kelas: kelas.nama || "",
+          })}
+          meta={`${anggota.length} ${t.members.pageTitle.toLowerCase()}`}
         />
 
         <PlaceholderNote className="mt-8">
-          Daftar anggota resmi dikelola oleh pengurus kelas dan tersinkron langsung dari database Supabase.
+          {t.members.note}
         </PlaceholderNote>
 
         <div className="mt-10 flex flex-wrap items-end justify-between gap-4 border-b border-border pb-4">
           <label className="block max-w-md flex-1">
-            <span className="kicker text-[10px]">Cari anggota</span>
+            <span className="kicker text-[10px]">{t.members.searchLabel}</span>
             <input
               type="search"
               value={cari}
               onChange={(e) => setCari(e.target.value)}
-              placeholder="Nama, nomor absen, atau jabatan…"
-              aria-label="Cari anggota kelas"
+              placeholder={t.members.searchPlaceholder}
+              aria-label={t.members.searchLabel}
               className="mt-2 w-full border-b border-border bg-transparent pb-2 font-mono text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground/60 focus:border-foreground"
             />
           </label>
           <p className="kicker text-[10px]">
-            {hasil.length} dari {anggota.length} anggota
+            {interpolate(t.members.searchCount, {
+              filtered: hasil.length,
+              total: anggota.length,
+            })}
           </p>
         </div>
 
@@ -93,7 +101,9 @@ export default function Anggota() {
 
         {!isLoading && hasil.length === 0 && (
           <p className="mt-10 font-display text-xl italic text-muted-foreground">
-            Tidak ada anggota yang cocok dengan “{cari}”.
+            {cari
+              ? interpolate(t.members.emptySearch, { query: cari })
+              : t.members.emptyList}
           </p>
         )}
       </main>
