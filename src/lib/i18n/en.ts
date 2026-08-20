@@ -204,6 +204,28 @@ export const en: TranslationSchema = {
     errorGuest: "Failed to sign in as guest. Please try again.",
     backHome: "Back to home",
   },
+  register: {
+    pageTitle: "Member Registration",
+    badge: "Registration",
+    heading: "Complete registration",
+    description:
+      "Your Google account is authenticated. Enter the invitation code provided by an officer to activate membership and unlock member pages.",
+    googleBtn: "Sign in with Google",
+    codeLabel: "Invitation Code",
+    codePlaceholder: "XXXX-XXXX-XXXX-XXXX",
+    submitBtn: "Activate Membership",
+    submitting: "Checking...",
+    successTitle: "Registration successful",
+    successDesc: "Redirecting to your destination...",
+    errorGeneric: "Invalid or expired invitation code.",
+    errorNetwork: "A network error occurred. Please try again.",
+    alreadyVerifiedRedirect: "Your account is already registered. Redirecting...",
+    signOutLink: "Sign out / use another account",
+    backHome: "Back to home",
+    googlePromptTitle: "Sign in to register",
+    googlePromptDesc:
+      "Registering with an invitation code requires a signed-in Google account.",
+  },
   dashboard: {
     pageTitle: "Member Space",
     badge: "Member area — {role}",
@@ -311,6 +333,31 @@ export const en: TranslationSchema = {
     scheduleTableSubject: "Subject",
     scheduleTableTeacher: "Teacher",
     scheduleTableAction: "Action",
+
+    // invitation codes (Owner)
+    invitations: "Invitation Codes",
+    invitationsDesc:
+      "Create and manage single-use invitation codes. New codes are valid for 7 days and can be used only once.",
+    invitationsCreateBtn: "Create Invitation Code",
+    invitationsCreatedToast: "New invitation code created successfully.",
+    invitationsCreatedToastFail: "Failed to create invitation code.",
+    invitationsCopyBtn: "Copy",
+    invitationsCopied: "Code copied",
+    invitationsCode: "Code",
+    invitationsCreated: "Created",
+    invitationsExpires: "Expires",
+    invitationsStatus: "Status",
+    invitationsUsedBy: "Used By",
+    invitationsUsedAt: "Used At",
+    invitationsStatusActive: "Active",
+    invitationsStatusUsed: "Used",
+    invitationsStatusExpired: "Expired",
+    invitationsEmpty: "No invitation codes yet.",
+    invitationsOnceNote:
+      "The code is shown only once. Copy it now — it cannot be viewed again after leaving this page.",
+    invitationsActive: "View code",
+    invitationsGenerateError:
+      "Failed to generate code. Browser does not support required cryptography.",
   },
   common: {
     save: "Save",

@@ -22,6 +22,7 @@ export type AuthUser = {
   image?: string | null;
   role: Role;
   guest: boolean;
+  verified: boolean;
 };
 
 export interface AuthState {
@@ -76,7 +77,7 @@ async function mapUser(user: User | null): Promise<AuthUser | null> {
   if (!user) return null;
   const { data, error } = await supabase
     .from("profiles")
-    .select("id, name, image, email, role")
+    .select("id, name, image, email, role, verified")
     .eq("id", user.id)
     .maybeSingle();
 
@@ -86,7 +87,14 @@ async function mapUser(user: User | null): Promise<AuthUser | null> {
   }
 
   const row = data as
-    | { id: string; name: string | null; image: string | null; email: string | null; role: string | null }
+    | {
+        id: string;
+        name: string | null;
+        image: string | null;
+        email: string | null;
+        role: string | null;
+        verified: boolean | null;
+      }
     | null;
 
   let role: Role = "member";
@@ -103,13 +111,18 @@ async function mapUser(user: User | null): Promise<AuthUser | null> {
     image: row?.image ?? user.user_metadata?.["avatar_url"] ?? null,
     role,
     guest: false,
+    verified: row?.verified === true,
   };
 }
 
 export async function getAuthState(): Promise<AuthState> {
   const guest = isGuestStored();
   if (guest) {
-    return { isLoading: false, isAuthenticated: true, user: { id: GUEST_ID, role: "member", guest: true } };
+    return {
+      isLoading: false,
+      isAuthenticated: true,
+      user: { id: GUEST_ID, role: "member", guest: true, verified: false },
+    };
   }
   const { data } = await supabase.auth.getSession();
   if (!data.session) return { isLoading: false, isAuthenticated: false, user: null };
@@ -118,7 +131,8 @@ export async function getAuthState(): Promise<AuthState> {
 }
 
 export async function getUser(): Promise<AuthUser | null> {
-  if (isGuestStored()) return { id: GUEST_ID, role: "member", guest: true };
+  if (isGuestStored())
+    return { id: GUEST_ID, role: "member", guest: true, verified: false };
   const { data } = await supabase.auth.getSession();
   if (!data.session) return null;
   return mapUser(data.session.user);

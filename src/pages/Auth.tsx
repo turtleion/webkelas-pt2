@@ -4,6 +4,7 @@ import { usePageTitle } from "@/hooks/use-page-title";
 import { useAuth } from "@/hooks/use-auth";
 import { useTranslation } from "@/hooks/use-translation";
 import { useOrganization } from "@/hooks/use-organization";
+import { resolveInternalRedirect } from "@/lib/redirect";
 import { Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router";
@@ -12,36 +13,39 @@ interface AuthProps {
   redirectAfterAuth?: string;
 }
 
-function resolveRedirectAfterAuth(
-  returnTo: string | null,
-  fallback = "/dashboard",
-) {
-  if (returnTo?.startsWith("/") && !returnTo.startsWith("//")) {
-    return returnTo;
-  }
-  return fallback;
-}
-
 export default function Auth({ redirectAfterAuth }: AuthProps = {}) {
   const { t } = useTranslation();
   usePageTitle(t.auth.pageTitle);
-  const { isLoading, isAuthenticated, signIn, signInAsGuest } = useAuth();
+  const { isLoading, isAuthenticated, isVerified, signIn, signInAsGuest } =
+    useAuth();
   const { data: orgData } = useOrganization();
   const { kelas } = orgData;
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const redirect = resolveRedirectAfterAuth(
-    searchParams.get("returnTo"),
-    redirectAfterAuth,
+  const returnToRaw = searchParams.get("returnTo");
+  const redirect = resolveInternalRedirect(
+    returnToRaw,
+    redirectAfterAuth ?? "/dashboard",
   );
   const [isLoadingAction, setIsLoadingAction] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Setelah login, jika tujuan adalah route protected dan user belum
+  // verified, arahkan ke /register dengan returnTo sama. Jika verified,
+  // langsung ke tujuan. Tanpa returnTo, fallback default.
   useEffect(() => {
-    if (!isLoading && isAuthenticated) {
+    if (isLoading || !isAuthenticated) return;
+    const PROTECTED = ["/pengumuman", "/jadwal", "/agenda"];
+    const isProtectedDest = PROTECTED.some((p) =>
+      redirect === p || redirect.startsWith(p + "/"),
+    );
+    if (isProtectedDest && !isVerified) {
+      const reg = `/register?returnTo=${encodeURIComponent(redirect)}`;
+      navigate(reg, { replace: true });
+    } else {
       navigate(redirect, { replace: true });
     }
-  }, [isLoading, isAuthenticated, navigate, redirect]);
+  }, [isLoading, isAuthenticated, isVerified, navigate, redirect]);
 
   const handleGoogle = async () => {
     setError(null);

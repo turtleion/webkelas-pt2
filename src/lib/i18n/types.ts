@@ -183,6 +183,26 @@ export interface TranslationSchema {
     errorGuest: string;
     backHome: string;
   };
+  register: {
+    pageTitle: string;
+    badge: string;
+    heading: string;
+    description: string;
+    googleBtn: string;
+    codeLabel: string;
+    codePlaceholder: string;
+    submitBtn: string;
+    submitting: string;
+    successTitle: string;
+    successDesc: string;
+    errorGeneric: string;
+    errorNetwork: string;
+    alreadyVerifiedRedirect: string;
+    signOutLink: string;
+    backHome: string;
+    googlePromptTitle: string;
+    googlePromptDesc: string;
+  };
   dashboard: {
     pageTitle: string;
     badge: string;
@@ -282,6 +302,28 @@ export interface TranslationSchema {
     scheduleTableSubject: string;
     scheduleTableTeacher: string;
     scheduleTableAction: string;
+
+    // invitation codes (Owner-only)
+    invitations: string;
+    invitationsDesc: string;
+    invitationsCreateBtn: string;
+    invitationsCreatedToast: string;
+    invitationsCreatedToastFail: string;
+    invitationsCopyBtn: string;
+    invitationsCopied: string;
+    invitationsCode: string;
+    invitationsCreated: string;
+    invitationsExpires: string;
+    invitationsStatus: string;
+    invitationsUsedBy: string;
+    invitationsUsedAt: string;
+    invitationsStatusActive: string;
+    invitationsStatusUsed: string;
+    invitationsStatusExpired: string;
+    invitationsEmpty: string;
+    invitationsOnceNote: string;
+    invitationsActive: string;
+    invitationsGenerateError: string;
   };
   common: {
     save: string;

@@ -1,6 +1,7 @@
 import '@vly-ai/integrations';
 import { Toaster } from "@/components/ui/sonner";
 import { RequireAuth } from "@/components/RequireAuth";
+import { RequireVerified } from "@/components/RequireVerified";
 import { RequireAdmin } from "@/components/admin/RequireAdmin";
 import { RequireOwner } from "@/components/admin/RequireOwner";
 import { PreferencesProvider } from "@/context/PreferencesContext";
@@ -19,6 +20,7 @@ const Pengumuman = lazy(() => import("./pages/Pengumuman.tsx"));
 const Agenda = lazy(() => import("./pages/Agenda.tsx"));
 const Galeri = lazy(() => import("./pages/Galeri.tsx"));
 const AuthPage = lazy(() => import("./pages/Auth.tsx"));
+const Register = lazy(() => import("./pages/Register.tsx"));
 const Settings = lazy(() => import("./pages/Settings.tsx"));
 const Dashboard = lazy(() => import("./pages/Dashboard.tsx"));
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
@@ -33,6 +35,7 @@ const AdminGallery = lazy(() => import("./pages/admin/AdminGallery.tsx"));
 const AdminOrganization = lazy(() => import("./pages/admin/AdminOrganization.tsx"));
 const AdminTheme = lazy(() => import("./pages/admin/AdminTheme.tsx"));
 const AdminUsers = lazy(() => import("./pages/admin/AdminUsers.tsx"));
+const AdminInvitationCodes = lazy(() => import("./pages/admin/AdminInvitationCodes.tsx"));
 
 // Simple loading fallback for route transitions
 function RouteLoading() {
@@ -150,15 +153,37 @@ createRoot(document.getElementById("root")!).render(
               <Route path="/" element={<Home />} />
               <Route path="/anggota" element={<Anggota />} />
               <Route path="/organisasi" element={<Organisasi />} />
-              <Route path="/jadwal" element={<Jadwal />} />
-              <Route path="/pengumuman" element={<Pengumuman />} />
-              <Route path="/agenda" element={<Agenda />} />
+              <Route
+                path="/jadwal"
+                element={
+                  <RequireVerified>
+                    <Jadwal />
+                  </RequireVerified>
+                }
+              />
+              <Route
+                path="/pengumuman"
+                element={
+                  <RequireVerified>
+                    <Pengumuman />
+                  </RequireVerified>
+                }
+              />
+              <Route
+                path="/agenda"
+                element={
+                  <RequireVerified>
+                    <Agenda />
+                  </RequireVerified>
+                }
+              />
               <Route path="/galeri" element={<Galeri />} />
               <Route path="/settings" element={<Settings />} />
               <Route
                 path="/auth"
                 element={<AuthPage redirectAfterAuth="/dashboard" />}
               />
+              <Route path="/register" element={<Register />} />
               <Route
                 path="/dashboard"
                 element={
@@ -240,6 +265,14 @@ createRoot(document.getElementById("root")!).render(
                 element={
                   <RequireOwner>
                     <AdminUsers />
+                  </RequireOwner>
+                }
+              />
+              <Route
+                path="/admin/invitation-codes"
+                element={
+                  <RequireOwner>
+                    <AdminInvitationCodes />
                   </RequireOwner>
                 }
               />

@@ -11,6 +11,7 @@ import {
   ShieldCheck,
   LogOut,
   ExternalLink,
+  Ticket,
 } from "lucide-react";
 import { KelasMark } from "@/components/site/KelasMark";
 import { useAuth } from "@/hooks/use-auth";
@@ -44,7 +45,10 @@ export function AdminSidebar({ onItemClick }: AdminSidebarProps) {
     { to: "/admin/organisasi", label: t.admin.organization, icon: Building2 },
     { to: "/admin/theme", label: t.admin.themeManagement, icon: Palette },
     ...(isOwner
-      ? [{ to: "/admin/users", label: t.admin.usersManagement, icon: ShieldCheck }]
+      ? [
+          { to: "/admin/users", label: t.admin.usersManagement, icon: ShieldCheck },
+          { to: "/admin/invitation-codes", label: t.admin.invitations, icon: Ticket },
+        ]
       : []),
   ];
 

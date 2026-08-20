@@ -1,776 +1,394 @@
-# Implementation Plan — Personalization, Themes, Layouts & Localization
+# Implementation Plan — Invitation-Based Registration & Verified Access
 
-**Date:** 2026-08-18  
-**Scope:** Per-user `/settings` page, Theme presets (Paper, Glass, Cartoon [Light only]), Custom theme transitions, Custom color schemes, Dynamic font engine, 3 Home page layout variants, Full-stack Indonesian/English i18n localization, Global Admin Defaults (`/admin/theme`), and Backward-Compatible Supabase persistence.  
-**Constraint:** Zero destructive schema changes. Reuse existing Supabase tables (`organization_settings` and `profiles`) with maximal database stability.
-
----
-
-## 1. Current Architecture
-
-### 1.1 Tech Stack
-- **Framework & Runtime:** Vite + React 19 + TypeScript + React Router v7 (`react-router`)
-- **Styling:** Tailwind CSS v4 (`@tailwindcss/vite`), `tw-animate-css`, Radix UI primitives / shadcn/ui (New York style), Lucide React
-- **Animations:** Framer Motion, `react-intersection-observer`
-- **Backend & Persistence:** Supabase JS SDK (`@supabase/supabase-js`) with anon key only, Google OAuth authentication, PostgreSQL database with Row Level Security (RLS) and Postgres functions (`is_admin_or_owner`, `is_owner`), Supabase Storage (`gallery` bucket)
-- **State & Data Management:** Centralized Supabase data access layer (`src/lib/db.ts`) with custom React hooks (`useAnnouncements`, `useAgenda`, `useSchedule`, `useMembers`, `useGallery`, `useOrganization`, `useAuth`) containing offline fallback mock states.
-
-### 1.2 Current Routing Architecture
-```
-Public Routes:
-  /               → Home (src/pages/Home.tsx)
-  /anggota        → Anggota (src/pages/Anggota.tsx)
-  /organisasi     → Organisasi (src/pages/Organisasi.tsx)
-  /jadwal         → Jadwal (src/pages/Jadwal.tsx)
-  /pengumuman     → Pengumuman (src/pages/Pengumuman.tsx)
-  /agenda         → Agenda (src/pages/Agenda.tsx)
-  /galeri         → Galeri (src/pages/Galeri.tsx)
-  /auth           → AuthPage (src/pages/Auth.tsx)
-  *               → NotFound (src/pages/NotFound.tsx)
-
-Protected Member Routes (RequireAuth):
-  /dashboard      → Dashboard (src/pages/Dashboard.tsx)
-
-Protected Admin Routes (RequireAdmin):
-  /admin              → AdminDashboard (src/pages/admin/AdminDashboard.tsx)
-  /admin/pengumuman   → AdminAnnouncements (src/pages/admin/AdminAnnouncements.tsx)
-  /admin/agenda       → AdminAgenda (src/pages/admin/AdminAgenda.tsx)
-  /admin/jadwal       → AdminSchedule (src/pages/admin/AdminSchedule.tsx)
-  /admin/anggota      → AdminMembers (src/pages/admin/AdminMembers.tsx)
-  /admin/galeri       → AdminGallery (src/pages/admin/AdminGallery.tsx)
-  /admin/organisasi   → AdminOrganization (src/pages/admin/AdminOrganization.tsx)
-
-Protected Owner-Only Routes (RequireOwner):
-  /admin/users        → AdminUsers (src/pages/admin/AdminUsers.tsx)
-```
+Status: PLAN ONLY — nothing implemented yet.
+Scope: add `verified` registration state on top of existing Google auth, gate `/pengumuman` `/jadwal` `/agenda` behind it, add `/register` + Owner-only invitation management. Existing Supabase architecture preserved; smallest possible schema change.
 
 ---
 
-## 2. Existing Theme/Design System
+## 1. Current Architecture Analysis
 
-### 2.1 CSS Tokens (`src/index.css`)
-- **Typography:** Fraunces (`--font-display`, `--font-serif`, `--font-sans`) and IBM Plex Mono (`--font-mono`).
-- **Default Palette (Paper Light):**
-  - Background: `#f4eddd` (Warm cream / sepia off-white)
-  - Foreground: `#29241d` (Warm charcoal)
-  - Primary: `#2e4631` (Deep pine / forest green)
-  - Secondary: `#e7dcc2`
-  - Accent: `#a64f2b` (Rust / stamp red)
-  - Card: `#ece2cb`
-  - Border: `#d2c3a2`
-- **Dark Mode (`.dark` class on root):**
-  - Background: `#1e1a12`
-  - Foreground: `#e7dcc1`
-  - Primary: `#9db392`
-  - Accent: `#c96a41`
-  - Card: `#272216`
-- **Materiality & Glass Utilities:**
-  - `.glass` token: `backdrop-filter: blur(16px) saturate(1.2)`, background `var(--glass-bg)`, border `var(--glass-border)`, shadow `var(--glass-shadow)`
-  - `.glass-strong` token: `background-color: var(--glass-bg-strong)`
-  - `.glass-hover` token: animated translation and glow on interaction.
-  - Background paper grain: `body::after` fractal noise overlay with `opacity: 0.045`.
+### Auth layer (`src/lib/auth.ts`)
+- **Google OAuth is the only real login** (`signInWithGoogle` → `supabase.auth.signInWithOAuth({ provider: "google" })`). Email OTP was removed previously.
+- **Guest mode is frontend-only**: boolean flag in `localStorage("arsip_guest")`. No Supabase session, no DB row. `getAuthState()` returns `{ id: "guest", role: "member", guest: true }` for guests.
+- `mapUser()` reads `profiles` row (`id, name, image, email, role`) for the session user. Role defaults to `"member"`; `"owner"`/`"admin"` mapped from DB.
+- `onAuthChange()` wraps `supabase.auth.onAuthStateChange` with debounce; emits full `AuthState`.
+- `AuthUser = { id, email, name, image, role, guest }` — **no verified concept today**.
 
----
+### Database (migrations in `supabase/migrations/`, applied manually via Supabase SQL Editor — stated in each file header)
+- `public.profiles` (0001): `id uuid PK → auth.users(id) cascade`, `name`, `image`, `email`, `role text check in ('admin','member','owner') default 'member'`, `settings jsonb default '{}'` (added 0003), timestamps.
+- Trigger `on_auth_user_created` → `handle_new_user()` (security definer): **every new Google signup automatically gets a profiles row**. So "profile exists" ≠ "registered"; today they are indistinguishable.
+- Content tables (0002): `announcements`, `agenda_items`, `schedules`, `members`, `gallery_photos`, `organization_settings` (jsonb key-value).
+- RLS helpers (security definer, stable): `public.is_owner()`, `public.is_admin_or_owner()`.
+- Profiles RLS: public read (`using (true)` from 0004), update own (`auth.uid() = id`), owner updates any row (role management).
+- **No `verified` column, no invitation concept anywhere** (grep confirmed).
+- **Critical existing hole relevant to this feature**: the "update own profile" policy is row-level only — any authenticated user can currently UPDATE *any* column of their own row, including `role` and (once added) `verified`. See §11 for the column-grant fix; without it the whole feature is decorative.
 
-## 3. Existing Supabase/User Architecture
+### Routing / guards
+- `src/main.tsx`: `PreferencesProvider > BrowserRouter > Suspense > Routes`.
+- Guards exist and are reusable patterns:
+  - `src/components/RequireAuth.tsx` — spinner while loading; anonymous → `/auth?returnTo=<path>`.
+  - `src/components/admin/RequireAdmin.tsx` — non-admin → `/dashboard`.
+  - `src/components/admin/RequireOwner.tsx` — non-owner → `/admin`.
+- **Currently public (unguarded)**: `/`, `/anggota`, `/organisasi`, `/jadwal`, `/pengumuman`, `/agenda`, `/galeri`, `/settings`, `/auth`.
+- Guarded: `/dashboard` (RequireAuth), `/admin/*` (RequireAdmin), `/admin/users` (RequireOwner).
+- `/auth` page (`src/pages/Auth.tsx`) already implements safe internal redirect: `resolveRedirectAfterAuth()` accepts only strings starting with `/` and not `//`.
 
-### 3.1 PostgreSQL Tables & Structures
-1. **`public.profiles`**:
-   - `id`: `uuid primary key references auth.users(id) on delete cascade`
-   - `name`: `text`
-   - `image`: `text`
-   - `email`: `text`
-   - `role`: `text not null default 'member' check (role in ('admin', 'member', 'owner'))`
-   - `created_at`: `timestamptz not null default now()`
-   - `updated_at`: `timestamptz not null default now()`
-2. **`public.organization_settings`**:
-   - `key`: `text primary key`
-   - `value`: `jsonb not null`
-   - `updated_at`: `timestamptz not null default now()`
-3. **Content Tables**: `announcements`, `agenda_items`, `schedules`, `members`, `gallery_photos` (all secured with RLS).
+### State propagation caveat
+`useAuth()` holds **local component state**, not context. Two components calling `useAuth()` each fetch independently; there is no shared store. After redeeming a code, other mounted components will not see `verified=true` until their own re-fetch or a full page load. Plan accounts for this (§9, §10).
 
-### 3.2 Authentication & Guest Mode (`src/lib/auth.ts` + `src/hooks/use-auth.ts`)
-- **OAuth User:** Authenticated via Supabase Google OAuth (`signInWithGoogle()`). The `handle_new_user()` trigger inserts a row in `profiles`.
-- **Guest Mode:** Managed locally via `localStorage.getItem("arsip_guest")`. Guest user ID is `"guest"`, role is `"member"`, `guest: true`.
+### Admin panel
+- `AdminSidebar.tsx` already has an owner-conditional nav pattern: `...(isOwner ? [{ to: "/admin/users", ... }] : [])`. Extend it.
+- Page scaffolding to reuse: `AdminLayout`, `PageHeader`, `DataTable`, `ConfirmDialog`, `Button`, `Dialog`, `Input`; data-fetch style copied from `AdminUsers.tsx` (local `useState` + `fetchProfiles` callback pattern).
+- i18n: all admin UI translated via `useTranslation()`; keys live in `src/lib/i18n/{types,id,en}.ts`. New pages must add keys to all three files.
 
 ---
 
-## 4. Existing Admin Architecture
-- **Navigation:** `AdminSidebar.tsx` contains links to `/admin`, `/admin/pengumuman`, `/admin/agenda`, `/admin/jadwal`, `/admin/anggota`, `/admin/galeri`, `/admin/organisasi`, and conditionally `/admin/users` for `isOwner`.
-- **Route Guards:**
-  - `RequireAdmin`: checks `isAuthenticated && (isAdmin || isOwner)`.
-  - `RequireOwner`: checks `isAuthenticated && isOwner`.
+## 2. Proposed Authentication State Model
 
----
-
-## 5. Current Gaps
-
-| Area | Current State | Required State |
+| State | Determined by | Can access |
 |---|---|---|
-| **User Settings** | No `/settings` route; no user personalization interface | Dedicated `/settings` page with Personalization and Language tabs |
-| **Theme Presets** | Only static CSS tokens for Paper (Light/Dark) | Dynamic runtime switcher supporting Paper (L/D), Glass (L/D), and Cartoon (Light only) |
-| **Custom Theme Detection** | None | Automatic switch to "Custom" theme whenever any individual preset value is modified |
-| **Custom Color Schemes** | Hardcoded CSS variables | Per-user configurable Light and Dark mode tokens (Background, Primary, Secondary, Accent, Text, Card, Border) |
-| **Font Engine** | Hardcoded Google Fonts `@import` for Fraunces & IBM Plex Mono | System supporting 3 default fonts + dynamic runtime loader + Admin font registry |
-| **Home Page Layouts** | Single static layout in `Home.tsx` | 3 distinct home layouts (Editorial Classic, Modern Bento/Grid, Archive Showcase) selectable per user / global default |
-| **Localization (i18n)** | Indonesian only, hardcoded in TSX strings | Dual language dictionary system (Indonesian `id` & English `en`) spanning all navigation, pages, and admin UI |
-| **Global Admin Defaults** | Only `organization_settings` for class metadata | Admin page `/admin/theme` to configure organization-wide default theme, color scheme, font, layout, and font registry |
-| **Persistence Cascade** | No preference storage | `Global Admin Default` → `User Database Override` → `Local Fallback / Guest Storage` |
+| **Anonymous** | No Supabase session, no guest flag | `/`, homepage overviews, `/auth`, `/anggota`, `/organisasi`, `/galeri`, `/settings` |
+| **Guest** | `arsip_guest=1`, no Supabase session | Same as anonymous (treated as anonymous for gating; keeps existing `/dashboard` guest workspace behavior untouched) |
+| **Authenticated, unverified** | Supabase session + `profiles.verified = false` | Everything above + `/register` only among new gates |
+| **Authenticated, verified** | Supabase session + `profiles.verified = true` | Everything, incl. `/pengumuman`, `/jadwal`, `/agenda`, plus role-based `/admin/*` |
+
+Key decisions:
+1. **Google-authenticated ≠ registered.** Profile row existence is NOT registration (auto-created by trigger). `profiles.verified` is the registration flag.
+2. **Guests are treated as anonymous** by the new gate. They have no DB identity, so they cannot be verified. Their existing `/dashboard` access stays as-is (not part of this change).
+3. Roles unchanged: invitation never grants `admin`/`owner`; new registrants stay `member` (the DB default).
 
 ---
 
-## 6. Proposed Personalization Architecture
+## 3. Route Protection Changes
+
+Exact edits in `src/main.tsx`:
+
+| Route | Today | After |
+|---|---|---|
+| `/` | public | public (unchanged — overviews stay visible) |
+| `/anggota`, `/organisasi`, `/galeri`, `/settings` | public | public (unchanged) |
+| `/auth` | public | public |
+| `/jadwal` | **public** | `<RequireVerified>` |
+| `/pengumuman` | **public** | `<RequireVerified>` |
+| `/agenda` | **public** | `<RequireVerified>` |
+| `/register` | — | new, public route (page self-guards, see §9) |
+| `/dashboard` | RequireAuth | RequireAuth (unchanged) |
+| `/admin/*` | RequireAdmin | RequireAdmin (unchanged) |
+| `/admin/users` | RequireOwner | RequireOwner (unchanged) |
+| `/admin/invitation-codes` | — | new, `<RequireOwner>` |
+
+New guard `src/components/RequireVerified.tsx` (modeled on `RequireAuth.tsx`):
 
 ```
-                                  ┌─────────────────────────────┐
-                                  │ Supabase DB (Global)        │
-                                  │ organization_settings       │
-                                  │ key: 'theme_defaults'       │
-                                  └──────────────┬──────────────┘
-                                                 │
-                                                 ▼
-┌─────────────────────────────┐   ┌─────────────────────────────┐
-│ Supabase DB (Per-User)      │   │ Default Fallback Model      │
-│ profiles.settings (JSONB)   │   │ Built-in Constants          │
-└──────────────┬──────────────┘   └──────────────┬──────────────┘
-               │                                 │
-               ▼                                 ▼
-┌───────────────────────────────────────────────────────────────┐
-│ Preferences Context & Provider (PreferencesContext.tsx)       │
-│                                                               │
-│ Effective Settings Cascade:                                   │
-│ 1. User DB preference (if authenticated & not null)           │
-│ 2. LocalStorage preference (if guest / offline)               │
-│ 3. Global Admin Default (from organization_settings)          │
-│ 4. Built-in Preset Fallback                                   │
-└──────────────────────────────┬────────────────────────────────┘
-                               │
-            ┌──────────────────┴──────────────────┐
-            ▼                                     ▼
-┌───────────────────────┐             ┌───────────────────────┐
-│ DOM / CSS Engine      │             │ i18n Translation Hook │
-│ - Token injection     │             │ - useTranslation()    │
-│ - HTML classes/attrs  │             │ - Active lang dict    │
-│ - Dynamic font load   │             │                       │
-└───────────────────────┘             └───────────────────────┘
+isLoading            → spinner (same markup as RequireAuth)
+guest                → Navigate /auth?returnTo=<path+search>
+!isAuthenticated     → Navigate /auth?returnTo=<path+search>
+authenticated,
+  verified unknown   → spinner (brief; verified arrives with mapUser)
+  !verified          → Navigate /register?returnTo=<path+search>
+  verified           → children
 ```
 
----
-
-## 7. Theme System
-
-### 7.1 Built-in Theme Presets
-
-```typescript
-export type ThemePresetKey = "paper" | "glass" | "cartoon" | "custom";
-
-export interface ThemeConfig {
-  name: string;
-  presetKey: ThemePresetKey;
-  supportedModes: Array<"light" | "dark">;
-  defaultMode: "light" | "dark";
-  colorScheme: string; // "paper" | "glass" | "cartoon" | "custom"
-  fontFamily: string;  // "fraunces" | "plus-jakarta" | "space-grotesk" | custom
-  homeLayout: "classic" | "bento" | "showcase";
-  borderRadius: string; // e.g. "0.25rem", "0.75rem", "1rem"
-  glassBlur: boolean;
-  paperGrain: boolean;
-  borderStyle: "solid" | "double" | "bold-cartoon";
-}
-```
-
-#### Theme 1: Paper (Default)
-- **Modes:** Light & Dark
-- **Visual Feel:** Vintage academic ledger, physical archive, warm sepia, subtle paper grain overlay.
-- **Default Font:** Fraunces (Display/Serif) + IBM Plex Mono (Kicker/Labels).
-- **Default Layout:** `classic` (Editorial archive layout).
-- **Border & Radius:** `0.25rem`, double rules (`.rule-double`), subtle borders.
-
-#### Theme 2: Glass
-- **Modes:** Light & Dark
-- **Visual Feel:** Modern translucent glassmorphism, high blur (`backdrop-filter: blur(20px)`), frosted borders, crisp modern typography, refined soft shadows.
-- **Default Font:** Plus Jakarta Sans / Inter.
-- **Default Layout:** `bento` (Modern grid/bento box layout).
-- **Border & Radius:** `0.75rem`, continuous semi-transparent white/sage glass borders (`--glass-border`).
-
-#### Theme 3: Cartoon
-- **Modes:** **Light mode ONLY**.
-- **Dark Mode Restriction:** When `Cartoon` is active, the theme engine strictly disables and ignores Dark mode requests. `effectiveMode` is pinned to `"light"`. The UI mode switch in `/settings` is disabled with a helper note: *"Tema Cartoon hanya tersedia dalam mode Terang."*
-- **Visual Feel:** Fresh, cheerful, bold playful outlines (2px solid ink borders), pop-art vibrant accents, high contrast, flat cards with hard drop shadows (`box-shadow: 4px 4px 0px #000000`).
-- **Default Font:** Space Grotesk / Comic-clean display font.
-- **Default Layout:** `showcase` (Playful card showcase).
-- **Border & Radius:** `1rem`, bold 2px borders (`border-2 border-foreground`).
+Homepage exception preserved: `Home.tsx` sections and their "view all" links are untouched; only the destination routes gain guards, so clicking through from `/` triggers login → register → return flow naturally.
 
 ---
 
-## 8. Color Scheme System
-
-### 8.1 Color Scheme Definitions
-
-```typescript
-export interface ColorPaletteTokens {
-  background: string;
-  foreground: string;
-  card: string;
-  cardForeground: string;
-  popover: string;
-  popoverForeground: string;
-  primary: string;
-  primaryForeground: string;
-  secondary: string;
-  secondaryForeground: string;
-  muted: string;
-  mutedForeground: string;
-  accent: string;
-  accentForeground: string;
-  border: string;
-  ring: string;
-  glassBg?: string;
-  glassBorder?: string;
-}
-
-export interface PresetColorScheme {
-  id: string;
-  name: string;
-  light: ColorPaletteTokens;
-  dark?: ColorPaletteTokens; // Cartoon omits dark
-}
-```
-
-#### 1. Paper Scheme
-- **Light:**
-  - `background`: `#f4eddd`
-  - `foreground`: `#29241d`
-  - `card`: `#ece2cb`
-  - `primary`: `#2e4631` (Forest Green)
-  - `primaryForeground`: `#f2ead7`
-  - `accent`: `#a64f2b` (Rust / Terracotta)
-  - `border`: `#d2c3a2`
-- **Dark:**
-  - `background`: `#1e1a12`
-  - `foreground`: `#e7dcc1`
-  - `card`: `#272216`
-  - `primary`: `#9db392` (Sage)
-  - `accent`: `#c96a41`
-  - `border`: `#3a3120`
-
-#### 2. Glass Scheme
-- **Light:**
-  - `background`: `#f0f4f8` (Crisp ice-blue white)
-  - `foreground`: `#0f172a` (Slate deep blue)
-  - `card`: `rgba(255, 255, 255, 0.75)`
-  - `primary`: `#0284c7` (Sky blue 600)
-  - `primaryForeground`: `#ffffff`
-  - `accent`: `#38bdf8` (Light sky blue)
-  - `border`: `rgba(2, 132, 199, 0.18)`
-  - `glassBg`: `rgba(255, 255, 255, 0.65)`
-  - `glassBorder`: `rgba(2, 132, 199, 0.22)`
-- **Dark:**
-  - `background`: `#0b1320`
-  - `foreground`: `#f1f5f9`
-  - `card`: `rgba(15, 23, 42, 0.75)`
-  - `primary`: `#38bdf8`
-  - `primaryForeground`: `#0b1320`
-  - `accent`: `#7dd3fc`
-  - `border`: `rgba(56, 189, 248, 0.2)`
-  - `glassBg`: `rgba(15, 23, 42, 0.65)`
-  - `glassBorder`: `rgba(56, 189, 248, 0.25)`
-
-#### 3. Cartoon Scheme (Light Only)
-- **Light:**
-  - `background`: `#fef9c3` (Vibrant pastel lemon yellow)
-  - `foreground`: `#18181b` (Solid ink black)
-  - `card`: `#ffffff`
-  - `primary`: `#fbbf24` (Sunburst Amber)
-  - `primaryForeground`: `#18181b`
-  - `secondary`: `#fdba74` (Peach orange)
-  - `accent`: `#f43f5e` (Punch Pink / Cherry)
-  - `accentForeground`: `#ffffff`
-  - `border`: `#18181b` (Bold cartoon ink outline)
-  - `ring`: `#fbbf24`
-
-### 8.2 Custom Color Scheme (User-Created)
-Users can fine-tune specific semantic colors for Light and Dark modes in `/settings`:
-- Primary Color (Brand / Buttons / Key accents)
-- Background Color (Canvas surface)
-- Accent Color (Badges, highlights, kicker highlights)
-- Card / Container Background
-- Text / Foreground Color
-
-When a user modifies any color token:
-1. `colorScheme` becomes `"custom"`.
-2. `activeTheme` automatically flags to `"custom"`.
-3. The custom palette is serialized to `userPreferences.customColors`.
-
----
-
-## 9. Font System
-
-### 9.1 Built-in User Fonts
-1. **Fraunces & IBM Plex Mono (Default / Serif / Archive):**
-   - Headings: Fraunces Serif
-   - Body: Fraunces / Serif
-   - Metadata: IBM Plex Mono
-2. **Plus Jakarta Sans (Modern / Sans / Clean):**
-   - Headings & Body: Plus Jakarta Sans
-   - Metadata: JetBrains Mono / IBM Plex Mono
-3. **Space Grotesk (Playful / Tech / Geometric):**
-   - Headings: Space Grotesk
-   - Body: Plus Jakarta Sans / Inter
-   - Metadata: Space Mono
-
-### 9.2 Dynamic Font Loading Engine (`src/lib/font-loader.ts`)
-- Rather than bloating `index.html` with dozens of heavy font stylesheets, fonts are loaded on-demand via the Web Font Loading API (`document.fonts` & `<link rel="stylesheet">` injection).
-- When a font is selected, `loadFont(fontDefinition)` ensures the corresponding Google Font / Web Font CSS is fetched before assigning `--font-display` and `--font-sans` CSS custom properties on `:root`.
-
-### 9.3 Admin Font Management
-- Stored globally in `organization_settings` under key `'custom_fonts'`.
-- Admins can register a new Google Font / Web Font by providing:
-  - Font Name (e.g., `"Cinzel"`, `"Outfit"`, `"Lora"`)
-  - Font Category: `serif` | `sans-serif` | `display` | `monospace`
-  - Google Font Family query / stylesheet URL.
-- Once registered, the new font automatically appears in the `/settings` Font Selector dropdown for all users.
-
----
-
-## 10. Home Layout System
-
-Users can select one of **3 built-in Home page layouts**. All layouts consume identical data from hooks (`useAnnouncements`, `useAgenda`, `useMembers`, `useGallery`, `useOrganization`), eliminating data fragmentation.
-
-### Layout 1: Editorial Classic (`HomeClassic.tsx`)
-- **Structure:** The existing vintage newspaper / archive ledger design.
-- **Hero:** Large display title, editorial description, stamp badge, and prominent MPLS photo plate on the right.
-- **Sections:** Vertical list sections with double rules (`.rule-double`), 3-column stats list, sequential agenda list with dates on left gutter.
-
-### Layout 2: Modern Bento Grid (`HomeBento.tsx`)
-- **Structure:** Interactive, modular Bento Grid (CSS grid with glass cards).
-- **Hero & Highlights:** Combined into high-impact grid cards with live quick-stats (Total Students, Active Agenda, Next Class Schedule countdown).
-- **Components:** Grid tiles with `.glass` backdrop blur, hover tilt interactions, and integrated photo carousels.
-
-### Layout 3: Archive Showcase (`HomeShowcase.tsx`)
-- **Structure:** Visual-first showcase featuring media plates and timeline cards.
-- **Hero:** Full-width dynamic gallery banner with overlaid class badges.
-- **Sections:** Two-column split featuring an interactive horizontal agenda timeline and class member avatar carousel.
-
----
-
-## 11. Language/i18n System
-
-### 11.1 Dictionary Architecture
-- Light, zero-dependency, type-safe i18n dictionary system in `src/lib/i18n/`.
-- Supported Locales: `id` (Indonesian - Default) and `en` (English).
-
-```typescript
-// src/lib/i18n/types.ts
-export type Locale = "id" | "en";
-
-export interface TranslationSchema {
-  nav: {
-    home: string;
-    members: string;
-    organization: string;
-    schedule: string;
-    announcements: string;
-    agenda: string;
-    gallery: string;
-    dashboard: string;
-    adminPanel: string;
-    settings: string;
-    signIn: string;
-    signOut: string;
-  };
-  settings: {
-    title: string;
-    subtitle: string;
-    personalizationTab: string;
-    languageTab: string;
-    themeSection: string;
-    themeSelect: string;
-    colorSchemeSection: string;
-    customColors: string;
-    fontSection: string;
-    homeLayoutSection: string;
-    modeSection: string;
-    lightMode: string;
-    darkMode: string;
-    cartoonModeWarning: string;
-    languageSection: string;
-    selectLanguage: string;
-    saveSuccess: string;
-    resetDefaults: string;
-  };
-  home: {
-    heroTag: string;
-    readAnnouncements: string;
-    viewMembers: string;
-    classIdentity: string;
-    latestAnnouncements: string;
-    upcomingAgenda: string;
-    classMembers: string;
-    galleryShowcase: string;
-  };
-  admin: {
-    themeManagement: string;
-    globalDefaultsTitle: string;
-    globalDefaultsDesc: string;
-    fontsManagement: string;
-    addFont: string;
-  };
-  common: {
-    save: string;
-    cancel: string;
-    loading: string;
-    error: string;
-    empty: string;
-    all: string;
-    close: string;
-  };
-}
-```
-
-### 11.2 Translation Hook (`useTranslation()`)
-- `useTranslation()` reads active locale from `PreferencesContext`.
-- Returns `{ t, locale, setLocale }` where `t` is the strongly-typed translation tree for the active language.
-
----
-
-## 12. Global Admin Defaults vs User Preferences
+## 4. Registration Flow
 
 ```
-                     ┌──────────────────────────────────────────────┐
-                     │           Global Defaults (Admin)            │
-                     │  Stored in: organization_settings            │
-                     │  Key: 'theme_defaults'                       │
-                     │                                              │
-                     │  • defaultTheme: "paper"                     │
-                     │  • defaultMode: "light"                      │
-                     │  • defaultColorScheme: "paper"               │
-                     │  • defaultFont: "fraunces"                   │
-                     │  • defaultLayout: "classic"                  │
-                     │  • defaultLanguage: "id"                     │
-                     └──────────────────────┬───────────────────────┘
-                                            │
-               Inherited when user has not saved personal preferences
-                                            │
-                                            ▼
-                     ┌──────────────────────────────────────────────┐
-                     │          User Preferences (User)             │
-                     │  Stored in: profiles.settings (JSONB)        │
-                     │  Fallback: localStorage['arsip_prefs']       │
-                     │                                              │
-                     │  • theme?: "paper"|"glass"|"cartoon"|"custom"│
-                     │  • mode?: "light" | "dark"                   │
-                     │  • colorScheme?: string                      │
-                     │  • customColors?: { light: {...}, dark: {...}│
-                     │  • font?: string                             │
-                     │  • homeLayout?: "classic"|"bento"|"showcase" │
-                     │  • language?: "id" | "en"                    │
-                     └──────────────────────┬───────────────────────┘
-                                            │
-                                            ▼
-                     ┌──────────────────────────────────────────────┐
-                     │               Effective Result               │
-                     │  Applied to DOM, CSS Vars & React App        │
-                     └──────────────────────────────────────────────┘
+Anonymous ──▶ /pengumuman
+                 │ RequireVerified
+                 ▼
+             /auth?returnTo=/pengumuman        (Google button only path matters here)
+                 │ signInWithGoogle (redirectTo: origin)
+                 ▼
+             back on site → RequireVerified re-evaluates
+                 │
+       ┌─────────┴──────────┐
+   verified=true        verified=false
+       │                    │
+       ▼                    ▼
+  /pengumuman         /register?returnTo=/pengumuman
+                            │ enter code
+                            ▼
+                     RPC redeem_invitation_code  (atomic, §6)
+                            │ ok
+                            ▼
+                     full reload → /pengumuman
 ```
 
----
+Direct visits:
 
-## 13. Settings Page (`/settings`)
+```
+/register while anonymous/guest → page renders Google sign-in prompt (no auto-redirect loop;
+                                  after OAuth return, RequireVerified-style logic inside page shows form)
+/register while verified        → Navigate to returnTo || "/"
+/register while unverified      → invitation form
+```
 
-### 13.1 Route & Layout
-- Route: `/settings` (available to all users; guests persist locally, authenticated members persist to Supabase).
-- UI Aesthetic: Matches the site design language (`PageHeader`, `.glass` containers, Fraunces titles, mono kickers).
-
-### 13.2 Sections
-1. **Personalization Tab:**
-   - **Theme Selector:** Cards for `Paper`, `Glass`, `Cartoon`, and `Custom` with visual thumbnail previews.
-   - **Appearance Mode:** Switch for `Light` vs `Dark` (auto-disabled with tooltip when `Cartoon` is active).
-   - **Color Scheme & Custom Palette:** Palette cards + collapsible color picker for primary/accent/background tokens.
-   - **Typography / Font Selector:** Radio/Select list with live font preview rendered in each candidate font.
-   - **Home Layout Selector:** Interactive 3-card picker for `Editorial Classic`, `Modern Bento`, and `Archive Showcase`.
-   - **Reset Button:** *"Kembalikan ke Default Sekolah / Admin"*.
-2. **Language Tab:**
-   - Visual radio cards for **Bahasa Indonesia (ID)** and **English (EN)** with country flags and descriptive labels.
+Redirect safety: reuse `resolveRedirectAfterAuth` semantics — accept only values starting with `/` and not starting with `//`; fallback `/`. Extract into a tiny shared helper (`src/lib/redirect.ts`) so `/auth` and `/register` share one implementation. No query-string external URLs, no open redirects.
 
 ---
 
-## 14. Admin Global Theme Page (`/admin/theme`)
+## 5. Invitation Code Database Design
 
-### 14.1 Route & Access
-- Route: `/admin/theme`
-- Guard: `RequireAdmin` (Admin & Owner access).
-- Added to `AdminSidebar.tsx` navigation list with icon `Palette`.
-
-### 14.2 Functional Capabilities
-1. **Global Default Presets:** Admin sets the school-wide default theme, mode, font, layout, and language.
-2. **Built-in Color Scheme Adjuster:** Admin can adjust global baseline values for Paper, Glass, and Cartoon.
-3. **Font Registry Manager:** Admin can add new Google Fonts by entering font family names and CSS URLs.
-4. **Publish Defaults:** Saves to Supabase table `organization_settings` key `'theme_defaults'`.
-
----
-
-## 15. Database Strategy (Stability & Backward Compatibility)
-
-### 15.1 Zero-Destructive Database Guarantee
-- **No new tables required** for themes, fonts, layouts, or language.
-- **Global Settings:** Reuses existing `public.organization_settings` table (`key text primary key, value jsonb not null`).
-  - Key `'theme_defaults'`: holds global theme, layout, font, and language defaults.
-  - Key `'custom_fonts'`: holds list of admin-registered external fonts.
-- **User Settings:**
-  - Authenticated Users: Add a single optional JSONB column `settings` to `public.profiles` if missing (`alter table public.profiles add column if not exists settings jsonb default '{}'::jsonb;`).
-  - Guest Users: Persisted in `localStorage.getItem("arsip_user_prefs")`.
-
-### 15.2 Schema Migration SQL (`supabase/migrations/202608180001_personalization.sql`)
+One new table + one column. Follows existing conventions (uuid PK, timestamptz, `created_at default now()`, FKs to `profiles(id)`).
 
 ```sql
--- 1) Tambah kolom settings jsonb pada profiles jika belum ada (non-destructive)
 alter table public.profiles
-  add column if not exists settings jsonb default '{}'::jsonb;
+  add column if not exists verified boolean not null default false;
 
--- 2) Seed default global theme settings pada organization_settings jika belum ada
-insert into public.organization_settings (key, value)
-values (
-  'theme_defaults',
-  '{
-    "defaultTheme": "paper",
-    "defaultMode": "light",
-    "defaultColorScheme": "paper",
-    "defaultFont": "fraunces",
-    "defaultHomeLayout": "classic",
-    "defaultLanguage": "id"
-  }'::jsonb
-)
-on conflict (key) do nothing;
+create table if not exists public.invitation_codes (
+  id          uuid primary key default gen_random_uuid(),
+  code_hash   text not null unique,        -- sha256 hex of the code; plaintext never stored
+  code_prefix text not null,               -- first 4 chars, Owner UI identification only
+  created_by  uuid not null references public.profiles(id) on delete cascade,
+  created_at  timestamptz not null default now(),
+  expires_at  timestamptz not null,        -- created_at + interval '7 days', set by RPC
+  used_at     timestamptz,
+  used_by     uuid references public.profiles(id) on delete set null,
+  constraint invitation_codes_not_used_by_creator_check ... -- see note
+);
 
--- 3) Seed default font registry
-insert into public.organization_settings (key, value)
-values (
-  'custom_fonts',
-  '[
-    {"id": "fraunces", "name": "Fraunces & IBM Plex Mono", "fontDisplay": "Fraunces", "fontSans": "Fraunces", "fontMono": "IBM Plex Mono", "isBuiltIn": true},
-    {"id": "plus-jakarta", "name": "Plus Jakarta Sans", "fontDisplay": "Plus Jakarta Sans", "fontSans": "Plus Jakarta Sans", "fontMono": "IBM Plex Mono", "googleFont": "Plus+Jakarta+Sans:wght@400;500;600;700", "isBuiltIn": true},
-    {"id": "space-grotesk", "name": "Space Grotesk", "fontDisplay": "Space Grotesk", "fontSans": "Plus Jakarta Sans", "fontMono": "Space Mono", "googleFont": "Space+Grotesk:wght@400;500;600;700&family=Space+Mono", "isBuiltIn": true}
-  ]'::jsonb
-)
-on conflict (key) do nothing;
+create index if not exists idx_invitation_codes_created
+  on public.invitation_codes (created_at desc);
 ```
 
----
-
-## 16. Authentication & RLS
-
-### 16.1 RLS Matrix for Personalization
-- `public.organization_settings`:
-  - `SELECT`: Public (all users, guests, and unauthenticated visitors can read global defaults).
-  - `INSERT / UPDATE / DELETE`: Restricted to `is_admin_or_owner()` via existing policy `org_settings_admin_all`.
-- `public.profiles`:
-  - `SELECT`: Owner of row (`auth.uid() = id`) or Admin/Owner (`is_admin_or_owner()`).
-  - `UPDATE`: Owner of row (`auth.uid() = id`) can update their own `settings` JSONB column.
+Notes:
+- **No `status` column** — derivable: `used_at is not null` → Used; `used_at is null and now() >= expires_at` → Expired; else Active. Matches instruction to avoid redundant status.
+- `code_hash unique` doubles as the uniqueness constraint and lookup key.
+- Expiration always server-side: comparisons use `now()` inside Postgres, never client clock.
+- The creator-check constraint idea is dropped — an Owner redeeming their own code is harmless and not worth a rule.
 
 ---
 
-## 17. Runtime Settings Resolution & Custom Transition Engine
+## 6. Invitation Code Security
 
-### 17.1 Determination Algorithm
+### Single-use guarantee (race condition)
+Consumption is **one atomic SQL statement inside a security-definer RPC** — no read-then-write window:
 
-```typescript
-function resolveEffectiveSettings(
-  globalDefaults: GlobalThemeDefaults,
-  userPrefs: Partial<UserPreferences> | null,
-  activeFonts: FontDefinition[]
-): EffectiveSettings {
-  // 1. Resolve raw selections
-  const selectedTheme = userPrefs?.theme ?? globalDefaults.defaultTheme ?? "paper";
-  let selectedMode = userPrefs?.mode ?? globalDefaults.defaultMode ?? "light";
-  const selectedColorScheme = userPrefs?.colorScheme ?? globalDefaults.defaultColorScheme ?? selectedTheme;
-  const selectedFont = userPrefs?.font ?? globalDefaults.defaultFont ?? "fraunces";
-  const selectedLayout = userPrefs?.homeLayout ?? globalDefaults.defaultHomeLayout ?? "classic";
-  const selectedLang = userPrefs?.language ?? globalDefaults.defaultLanguage ?? "id";
+```sql
+create or replace function public.redeem_invitation_code(p_code_hash text)
+returns text                       -- 'ok' | 'invalid' | 'expired' | 'used' | 'already_verified'
+language plpgsql security definer set search_path = public as $$
+declare v_id uuid;
+begin
+  if auth.uid() is null then return 'invalid'; end if;
 
-  // 2. Cartoon Dark Mode Normalization Rule:
-  // Cartoon does not support Dark mode under any circumstances.
-  if (selectedTheme === "cartoon" || selectedColorScheme === "cartoon") {
-    selectedMode = "light";
-  }
+  -- reject double-registration
+  if exists (select 1 from profiles where id = auth.uid() and verified) then
+    return 'already_verified';
+  end if;
 
-  // 3. Custom Theme Transition Detection:
-  // If active theme was set to a preset (e.g. 'paper'), but user modified individual settings
-  // away from preset defaults, mark effective theme as 'custom'.
-  let effectiveTheme: ThemePresetKey = selectedTheme;
-  if (selectedTheme !== "custom") {
-    const preset = THEME_PRESETS[selectedTheme];
-    if (preset) {
-      const isMismatch =
-        (selectedColorScheme !== preset.colorScheme && selectedColorScheme !== selectedTheme) ||
-        (selectedFont !== preset.fontFamily) ||
-        (selectedLayout !== preset.homeLayout) ||
-        (userPrefs?.customColors && Object.keys(userPrefs.customColors).length > 0);
-      
-      if (isMismatch) {
-        effectiveTheme = "custom";
-      }
-    }
-  }
+  -- atomic claim: only succeeds if row still unused and unexpired (server time)
+  update invitation_codes
+     set used_at = now(), used_by = auth.uid()
+   where code_hash = p_code_hash
+     and used_at is null
+     and expires_at > now()
+   returning id into v_id;
 
-  return {
-    theme: effectiveTheme,
-    mode: selectedMode,
-    colorScheme: selectedColorScheme,
-    customColors: userPrefs?.customColors,
-    font: selectedFont,
-    homeLayout: selectedLayout,
-    language: selectedLang,
-  };
-}
+  if v_id is null then
+    return coalesce(
+      (select case when used_at is not null then 'used' else 'expired' end
+         from invitation_codes where code_hash = p_code_hash),
+      'invalid');
+  end if;
+
+  update profiles set verified = true where id = auth.uid();
+  return 'ok';
+end $$;
 ```
 
-### 17.2 DOM & Token Injection (`applyThemeToDOM()`)
-1. **Mode Class:** Add/remove `.dark` on `document.documentElement`.
-2. **Data Attributes:** Set `data-theme={effectiveTheme}`, `data-color-scheme={colorScheme}`, `data-layout={homeLayout}` on `document.documentElement`.
-3. **CSS Custom Properties:** Inject semantic variables into `:root` (or `.dark`):
-   - `--background`, `--foreground`, `--primary`, `--accent`, `--card`, `--border`, `--radius`, `--font-display`, `--font-serif`, `--font-sans`.
+Two simultaneous submissions: Postgres serializes the UPDATE row lock; exactly one gets `v_id`, the other sees `used_at is not null` → `'used'`. Case H satisfied.
 
----
+### Hashing vs plaintext — decision: **hashed**
+Codes are credentials. Store `sha256(code)` only:
+- Client generates code with `crypto.getRandomValues`, computes `crypto.subtle.digest('SHA-256', …)` (Web Crypto, already available; no new dependency), sends hash + prefix to creation RPC.
+- Unsalted SHA-256 is appropriate because codes are ~128-bit uniform random — preimage/brute-force infeasible; salt would add nothing.
+- DB leak exposes no usable codes.
+- Owner UX unaffected: plaintext shown once at creation with copy button; table shows `code_prefix`, dates, status, used-by email (join via RPC view below).
 
-## 18. File-Level Changes
+### Creation RPC (Owner-only)
 
-### 18.1 Files to Create
-
-| File | Purpose |
-|---|---|
-| `supabase/migrations/202608180001_personalization.sql` | Non-destructive migration for `profiles.settings` and `organization_settings` seed |
-| `src/lib/i18n/types.ts` | TypeScript schema for translation dictionary |
-| `src/lib/i18n/id.ts` | Indonesian language dictionary |
-| `src/lib/i18n/en.ts` | English language dictionary |
-| `src/lib/i18n/index.ts` | i18n exports and dictionary registry |
-| `src/lib/theme-presets.ts` | Built-in presets (Paper, Glass, Cartoon), color palettes, and token mappings |
-| `src/lib/font-loader.ts` | Dynamic WebFont loader and Google Fonts stylesheet injector |
-| `src/context/PreferencesContext.tsx` | Global React context managing user preferences, global defaults, effective settings resolution, and persistence |
-| `src/hooks/use-preferences.ts` | Hook exposing preferences, effective tokens, update handlers, and preset reset |
-| `src/hooks/use-translation.ts` | Hook exposing active dictionary `t` and language switch function |
-| `src/components/home/HomeClassic.tsx` | Layout Variant 1: Editorial Classic archive homepage |
-| `src/components/home/HomeBento.tsx` | Layout Variant 2: Modern Bento Grid homepage |
-| `src/components/home/HomeShowcase.tsx` | Layout Variant 3: Archive Media Showcase homepage |
-| `src/components/settings/ThemeSelector.tsx` | Theme preset picker cards with thumbnail previews |
-| `src/components/settings/ColorSchemePicker.tsx` | Color scheme and custom palette fine-tuning controls |
-| `src/components/settings/FontSelector.tsx` | Interactive typography picker with live rendering |
-| `src/components/settings/LayoutSelector.tsx` | Home page layout selector cards |
-| `src/components/settings/LanguageSelector.tsx` | Language switcher with flags and locale metadata |
-| `src/pages/Settings.tsx` | User preferences page (`/settings`) |
-| `src/pages/admin/AdminTheme.tsx` | Admin panel global theme and default settings manager (`/admin/theme`) |
-
-### 18.2 Files to Modify
-
-| File | Modifications |
-|---|---|
-| `src/main.tsx` | Wrap App in `<PreferencesProvider>`, register `/settings` and `/admin/theme` routes |
-| `src/lib/db.ts` | Add query functions `getUserPreferences`, `updateUserPreferences`, `getGlobalThemeDefaults`, `setGlobalThemeDefaults`, `getCustomFonts`, `addCustomFont` |
-| `src/pages/Home.tsx` | Dynamically render `HomeClassic`, `HomeBento`, or `HomeShowcase` based on `effectiveSettings.homeLayout` |
-| `src/components/site/SiteHeader.tsx` | Add `/settings` link, language toggle, and localize navigation labels with `useTranslation()` |
-| `src/components/site/SiteFooter.tsx` | Localize footer labels and links |
-| `src/components/admin/AdminSidebar.tsx` | Add `/admin/theme` navigation link ("Tema & Tampilan") with `Palette` icon; localize menus |
-| `src/index.css` | Add Cartoon and Glass theme token rules, CSS custom property fallbacks, and animation styles |
-
----
-
-## 19. Implementation Order
-
-```
-Phase 1: Database & Persistence Layer
-  ├─ 1.1 Run non-destructive SQL migration (supabase/migrations/202608180001_personalization.sql)
-  └─ 1.2 Implement Supabase helpers in src/lib/db.ts for preferences and global theme settings
-
-Phase 2: i18n Localization Foundation
-  ├─ 2.1 Create src/lib/i18n/types.ts, src/lib/i18n/id.ts, and src/lib/i18n/en.ts
-  └─ 2.2 Create use-translation.ts hook and translation helper
-
-Phase 3: Theme, Palette & Font Engine
-  ├─ 3.1 Define theme presets and color schemes in src/lib/theme-presets.ts
-  ├─ 3.2 Implement dynamic font loader in src/lib/font-loader.ts
-  ├─ 3.3 Create PreferencesContext.tsx with resolution cascade, auto-custom transition, and DOM injector
-  └─ 3.4 Create use-preferences.ts hook
-
-Phase 4: Home Layout Variants
-  ├─ 4.1 Refactor classic home into src/components/home/HomeClassic.tsx
-  ├─ 4.2 Build Bento Grid home layout in src/components/home/HomeBento.tsx
-  ├─ 4.3 Build Showcase home layout in src/components/home/HomeShowcase.tsx
-  └─ 4.4 Update src/pages/Home.tsx to switch layouts dynamically
-
-Phase 5: User Settings Page (/settings)
-  ├─ 5.1 Create settings components (ThemeSelector, ColorSchemePicker, FontSelector, LayoutSelector, LanguageSelector)
-  ├─ 5.2 Create src/pages/Settings.tsx with Personalization and Language tabs
-  └─ 5.3 Connect to SiteHeader navigation and route in src/main.tsx
-
-Phase 6: Admin Global Theme Management (/admin/theme)
-  ├─ 6.1 Create src/pages/admin/AdminTheme.tsx for global defaults and font management
-  ├─ 6.2 Add route in src/main.tsx with RequireAdmin guard
-  └─ 6.3 Update AdminSidebar.tsx with navigation link
-
-Phase 7: End-to-End Localization & Polishing
-  ├─ 7.1 Localize remaining public pages (Anggota, Organisasi, Jadwal, Pengumuman, Agenda, Galeri)
-  ├─ 7.2 Localize Admin layout and modals
-  └─ 7.3 Verify build, theme transitions, Cartoon mode restrictions, and performance
+```sql
+create or replace function public.create_invitation_code(p_code_hash text, p_prefix text)
+returns invitation_codes
+language plpgsql security definer set search_path = public as $$
+begin
+  if not public.is_owner() then raise insufficient_privilege; end if;
+  insert into invitation_codes (code_hash, code_prefix, created_by, expires_at)
+  values (p_code_hash, p_prefix, auth.uid(), now() + interval '7 days')
+  returning * into ...;
+end $$;
 ```
 
----
+Expiration fixed server-side at 7 days; Owner never enters a date.
 
-## 20. Testing Strategy
+### Listing (Owner-only)
+Owner table needs used-by name/email, but `used_by` is a uuid and RLS hides nothing here if we just allow owner select. Simplest correct setup:
+- RLS: `enable row level security`; one policy: `for select to authenticated using (public.is_owner())`. **No insert/update/delete policies** — the table is writable only through the two security-definer RPCs, so even the Owner cannot hand-edit `expires_at`/`used_at` via PostgREST.
+- Used-by display: second RPC `list_invitation_codes()` (security definer, `is_owner()` check) returning rows joined with `profiles` for `used_by` name/email. Avoids giving owners-row joins complexity to the client.
 
-### 20.1 Theme & Mode Switching
-- [ ] Switching between `Paper`, `Glass`, and `Cartoon` instantly applies tokens without full page reload.
-- [ ] When `Cartoon` is active, Dark Mode toggle is disabled, and active mode is forced to `light`.
-- [ ] Attempting to activate Dark mode while in `Cartoon` is rejected/prevented.
-- [ ] Switching to `Paper` or `Glass` enables Dark mode toggle.
+### What normal users cannot do (all enforced in DB, not UI)
+- Create codes → no insert grant/policy; RPC checks `is_owner()`.
+- List codes → RLS select policy owner-only.
+- Mark self/others verified → **column-grant fix (§11)** removes direct UPDATE path; only RPC sets `verified`.
+- Mark codes used / edit expiry → no update path exists at all.
 
-### 20.2 Custom Theme Detection
-- [ ] User selects `Paper` preset → changes font → theme automatically shifts to `Custom`.
-- [ ] User selects `Glass` preset → modifies primary color in color picker → theme shifts to `Custom`.
-- [ ] User clicks *"Kembalikan ke Default"* → returns to preset values and preset theme title.
+### Error-message policy (§14 of request)
+Client maps RPC results to **two generic messages**: `'ok'` → success; everything else → "Kode invitasi tidak valid atau sudah kedaluwarsa." Specific reasons (`used`/`expired`) are returned by the RPC for potential future debugging but are NOT surfaced distinctly, preventing code-enumeration oracle. Recommendation accepted: generic message.
 
-### 20.3 Color Customization
-- [ ] User customizes Light mode background and primary colors → immediate CSS variable injection.
-- [ ] User customizes Dark mode colors → verify changes persist when toggling dark mode.
-
-### 20.4 Dynamic Font Loading
-- [ ] Selecting `Plus Jakarta Sans` or `Space Grotesk` loads font stylesheet on demand and updates body/headings.
-- [ ] Admin adds new font via `/admin/theme` → font becomes selectable in `/settings` for all users.
-
-### 20.5 Home Layouts
-- [ ] User selects `Editorial Classic` → verifies classic layout renders correctly with all real data.
-- [ ] User selects `Modern Bento` → verifies interactive grid cards render with live data.
-- [ ] User selects `Archive Showcase` → verifies media banner and timeline render with live data.
-
-### 20.6 Localization (i18n)
-- [ ] Switching language to English (`en`) immediately translates Header, Footer, Home, and Settings.
-- [ ] Switching back to Indonesian (`id`) restores Indonesian text immediately.
-- [ ] Locale selection persists across page refreshes and browser restarts.
-
-### 20.7 Persistence & Role Separation
-- [ ] Guest user preferences save to `localStorage` and persist on reload.
-- [ ] Authenticated user preferences save to Supabase `profiles.settings` and sync across devices.
-- [ ] Admin modifying global defaults in `/admin/theme` updates defaults for users who have not set overrides.
-- [ ] Admin's personal settings in `/settings` do NOT alter global website defaults.
+### Code format
+Generated client-side: 16 chars from alphabet `ABCDEFGHJKMNPQRSTUVWXYZ23456789` (excludes I, L, O, 0, 1), grouped `XXXX-XXXX-XXXX-XXXX`. ~80 bits of entropy — far beyond brute-force reach within a 7-day window, still typeable and shareable via chat. Dashes stripped before hashing. Not sequential, not predictable.
 
 ---
 
-## 21. Migration & Backward Compatibility
+## 7. Existing User Migration
 
-1. **Non-Destructive Database Guarantee:**
-   - Existing profiles and content tables are untouched.
-   - `settings` column added to `profiles` with `default '{}'::jsonb`.
-   - Existing records without custom settings automatically inherit global defaults from `organization_settings`.
-2. **Offline & Unauthenticated Resilience:**
-   - If Supabase is unreachable, the application falls back seamlessly to local constants and `localStorage`.
-   - Guest mode users enjoy full personalization features stored in browser storage.
+Current population: small class site; every existing profiles row belongs to a real class member/officer who already uses the app (including the Owner and Admins).
+
+Migration (same SQL file, run once):
+
+```sql
+update public.profiles set verified = true where verified = false;
+```
+
+- Explicitly **does not** leave existing users locked out.
+- All future Google signups get `verified = false` from the column default via `handle_new_user()` (trigger needs no change — default applies).
+- Edge cases: B (existing user logs in → verified → straight in), C (post-migration new signup → unverified → `/register`).
 
 ---
 
-## 22. Risks & Decisions Required
+## 8. Owner Invitation Management
 
-| Topic | Status | Resolution in Plan |
-|---|---|---|
-| **Dark mode in Cartoon theme** | Resolved | Strictly disabled. `effectiveMode` forced to `"light"` whenever Cartoon theme or color scheme is active. |
-| **Theme Mismatch Logic** | Resolved | Deterministic comparison against active preset's `colorScheme`, `fontFamily`, `homeLayout`, and `customColors`. Any deviation flags theme as `"custom"`. |
-| **Admin vs User Scope** | Resolved | `/admin/theme` writes to `organization_settings` (affects all new/unset users); `/settings` writes to `profiles.settings` (affects only active user). |
-| **Font Performance** | Resolved | Asynchronous on-demand font loader (`font-loader.ts`) avoids loading unused Google Font assets. |
+New page `src/pages/admin/AdminInvitationCodes.tsx`, route `/admin/invitation-codes`, wrapped in existing `<RequireOwner>`. Sidebar entry appended to the existing `isOwner` spread in `AdminSidebar.tsx` (icon: `Ticket` from lucide).
+
+UI (reuses `AdminLayout`, `PageHeader`, `DataTable`):
+- Header + primary button "Buat Kode Invitasi" (one click, no form dialog — expiration automatic).
+- On create: generate code client-side (§6 format), call `create_invitation_code`, then show a one-time reveal card: full code in mono font + **Copy** button (navigator.clipboard) + note "Kode hanya ditampilkan sekali."
+- Table columns: Kode (`XXXX` prefix…), Dibuat, Kedaluwarsa, Status, Digunakan Oleh, Digunakan Pada.
+- Status derivation client-side from `used_at`/`expires_at` compared against server-provided current time (RPC returns `now()` as `server_now` to avoid clock skew): Used (consumed) / Expired (unused, past expiry) / Active. Used and Expired are visually distinct badges; a used code is never labeled merely "expired".
+
+i18n keys added under `admin.invitations.*` in `types.ts` / `id.ts` / `en.ts`.
+
+---
+
+## 9. `/register` UI
+
+New `src/pages/Register.tsx`, styled like `Auth.tsx` (glass card, KelasMark header).
+
+States:
+1. **Loading** — auth state resolving → spinner.
+2. **Not signed in / guest** — explanation + Google sign-in button (calls `signInWithGoogle`; OAuth round-trip returns to `/register`). Guest sees same prompt (guests cannot register).
+3. **Already verified** — immediate `<Navigate to={returnTo || "/"} replace />`.
+4. **Form** — copy: account authenticated, invitation code required to complete registration. Single input (auto-uppercase, dash-tolerant), Continue button, "Keluar / gunakan akun lain" link (signOut → `/auth`).
+5. **Submitting** — disabled button + spinner.
+6. **Error** — generic invalid/expired message (§6). Distinct non-enumerating handling of network errors ("Terjadi kesalahan, coba lagi.").
+7. **Success** — brief confirmation, then `window.location.assign(internalReturnTo)`.
+
+Why full reload instead of SPA navigate: `useAuth` is per-component local state (§1); a reload guarantees the header, guards, and target page all observe `verified=true` with zero stale-state bugs. Cost: one page load, once per account lifetime. Session itself persists (Supabase stores the session in local storage) — **no second Google login** (§16 requirement met).
+
+---
+
+## 10. Routing / Redirect Logic
+
+- `returnTo` captured by `RequireVerified` from `location.pathname + location.search`, passed as `?returnTo=` to `/auth` and onward to `/register`.
+- `/auth` already forwards `returnTo` post-login; extend its post-login effect: if the resolved destination is a verified-only route and user is unverified, go to `/register?returnTo=…` instead. (Simplest: point the Google-button flow's redirect resolution through one helper that knows the three gated prefixes.)
+- Shared validation helper (extracted from `Auth.tsx`): accepts `/…`, rejects `//`, `http`, etc. Used by `/auth`, `/register`, `RequireVerified`.
+- Verified users are never blindly sent to `/`: original destination wins; fallback `/`.
+- Open-redirect: impossible by construction (single validator, internal-prefix only).
+
+Edge cases A–H disposition:
+- A new account → trigger creates profile (`verified=false`) → `/register`. ✔
+- B existing verified → straight to destination. ✔
+- C unverified → `/register`. ✔
+- D verified visits `/register` → redirected out. ✔
+- E anonymous `/pengumuman` → chain returns them there. ✔
+- F expired → rejected (server time). ✔
+- G used → rejected. ✔
+- H concurrent same code → atomic UPDATE, one winner. ✔
+
+---
+
+## 11. Supabase / RLS Changes
+
+Single migration file: `supabase/migrations/202608210001_invitation_registration.sql` (follows repo naming convention; applied manually via Supabase SQL Editor like all prior migrations).
+
+Contents:
+1. `alter table public.profiles add column if not exists verified boolean not null default false;`
+2. **Column-grant lockdown (closes the pre-existing self-update hole for the new column):**
+   ```sql
+   revoke update on public.profiles from authenticated;
+   grant update (name, image, email, settings) on public.profiles to authenticated;
+   ```
+   Effect: users keep updating their own editable fields (existing settings/personalization flow unaffected — it writes only `settings`), but `verified` and `role` are no longer writable through PostgREST by the row owner. Owner role-management continues to work because `updateProfileRole` runs as the owner… **conflict noted**: the owner also loses direct UPDATE via this grant. Resolution: convert role changes to a tiny security-definer RPC `set_user_role(p_user uuid, p_role text)` with `is_owner()` check (mirrors existing helper), and update `db.updateProfileRole` to call it. This is the one unavoidable touching of existing code beyond additions; documented rather than hidden.
+3. `create table invitation_codes …` + index (§5).
+4. RLS on `invitation_codes`: enable; owner-only select policy; deliberately no write policies.
+5. RPCs: `redeem_invitation_code`, `create_invitation_code`, `list_invitation_codes` (§6), all `security definer` with explicit `set search_path = public` (matches existing helper convention).
+6. Backfill: `update profiles set verified = true;` (§7).
+7. `grant execute` on the three RPCs to `authenticated` (redeem/create/list as appropriate; create/list additionally guarded internally by `is_owner()`).
+
+No changes to: content tables, storage buckets, auth triggers (default column value suffices), existing helper functions.
+
+---
+
+## 12. Files Modify / Create
+
+Create:
+- `supabase/migrations/202608210001_invitation_registration.sql`
+- `src/components/RequireVerified.tsx`
+- `src/pages/Register.tsx`
+- `src/pages/admin/AdminInvitationCodes.tsx`
+- `src/lib/redirect.ts` (shared internal-redirect validator, extracted from `Auth.tsx`)
+- `src/lib/invitation-codes.ts` (client generator: alphabet, grouping, sha256 via Web Crypto)
+
+Modify:
+- `src/lib/auth.ts` — `AuthUser` gains `verified: boolean`; `mapUser` selects `verified`; guest user gets `verified: false`.
+- `src/hooks/use-auth.ts` — expose `isVerified` (computed, guest-aware).
+- `src/main.tsx` — `/register` route; wrap `/jadwal`, `/pengumuman`, `/agenda` in `RequireVerified`; `/admin/invitation-codes` in `RequireOwner`.
+- `src/lib/db.ts` — `createInvitationCode`, `listInvitationCodes`, `redeemInvitationCode` wrappers (RPC calls); switch `updateProfileRole` to `set_user_role` RPC.
+- `src/components/admin/AdminSidebar.tsx` — owner nav entry.
+- `src/pages/Auth.tsx` — use shared redirect helper; forward `returnTo` into `/register` when user unverified.
+- `src/lib/i18n/types.ts`, `src/lib/i18n/id.ts`, `src/lib/i18n/en.ts` — `register.*` and `admin.invitations.*` key groups (both languages complete).
+
+Untouched (explicitly): `Home.tsx` and all homepage overview sections, preferences/theme system, content hooks/pages, storage, `RequireAuth`/`RequireAdmin`/`RequireOwner` internals.
+
+---
+
+## 13. Implementation Order
+
+1. Migration SQL written (not executed).
+2. `src/lib/redirect.ts` extraction + `Auth.tsx` refactor (behavior-neutral, buildable alone).
+3. `auth.ts`/`use-auth.ts`: add `verified` (reads fine before column exists? No — select of missing column errors; therefore steps 3+ require migration applied first. Order: apply migration manually, then continue.)
+   → Revised: **Step 3 = user applies migration (Manual Action #1). Steps 4+ depend on it.**
+4. `auth.ts` + `use-auth.ts` verified plumbing.
+5. `RequireVerified.tsx` + route wrapping in `main.tsx` (gates active; unverified users land on `/register` which doesn't exist yet → create Register stub in same step).
+6. `lib/invitation-codes.ts` + `db.ts` RPC wrappers.
+7. `Register.tsx` full implementation + i18n keys.
+8. `set_user_role` RPC switch in `db.ts` (paired with migration from step 1 — included there).
+9. `AdminInvitationCodes.tsx` + sidebar entry + i18n keys.
+10. Validation pass (§14 tests), `npm run build`.
+
+---
+
+## 14. Manual Actions (cannot be done by Claude Code)
+
+1. **Run migration** `202608210001_invitation_registration.sql` in Supabase Dashboard → SQL Editor (repo convention; includes backfill + grants + RPCs).
+2. Verify Google OAuth redirect URLs unchanged (no config change expected — flow reuses existing provider setup).
+3. Tests requiring multiple real accounts/browser profiles:
+   - Race test: two browsers submit same valid code simultaneously → exactly one success, other sees generic error, code shows Used.
+   - Expired-code test: temporarily `update invitation_codes set expires_at = now() - interval '1 hour'` → rejected; revert.
+   - RLS tests (as plain member, e.g. via Supabase JS in console): `insert`/`update`/`delete` on `invitation_codes` → permission error; `select` → 0 rows; direct `update profiles set verified = true` → column permission error; `update profiles set role = 'owner'` → error.
+   - Owner role-change regression: Owner can still change roles via `/admin/users` after grant lockdown.
+   - Existing-user migration test: pre-existing account logs in → lands in app, not `/register`.
+   - Redirect tests: E-chain end-to-end; crafted `?returnTo=https://evil.com` and `//evil.com` → falls back to `/`.
+   - Settings regression: personalization save still works after column-grant change.
+
+---
+
+## Architectural Conflicts Found (documented per instructions)
+
+1. **Self-update RLS hole** — "Users can update own profile settings" policy would let any user set their own `verified` (and already lets them attempt `role`). Fixed via column grants + `set_user_role` RPC (§11.2). Smallest safe fix; alternative (separate `verifications` table) rejected as more restructuring than requested.
+2. **Per-component `useAuth` state** — no global store, so post-redeem UI freshness requires full reload (§9). Accepted; cheaper than introducing a context/store refactor this feature doesn't need.
+3. **Guest mode ambiguity** — guests report `isAuthenticated: true` today. For gating purposes they are treated as anonymous (no DB identity to verify). Existing guest `/dashboard` behavior intentionally left alone.

@@ -203,6 +203,28 @@ export const id: TranslationSchema = {
     errorGuest: "Gagal masuk sebagai tamu. Coba lagi.",
     backHome: "Kembali ke beranda",
   },
+  register: {
+    pageTitle: "Daftar Anggota",
+    badge: "Pendaftaran",
+    heading: "Selesaikan pendaftaran",
+    description:
+      "Akun Google kamu sudah terverifikasi. Masukkan kode undangan yang diberikan pengurus untuk mengaktifkan keanggotaan dan membuka halaman anggota.",
+    googleBtn: "Masuk dengan Akun Google",
+    codeLabel: "Kode Undangan",
+    codePlaceholder: "XXXX-XXXX-XXXX-XXXX",
+    submitBtn: "Aktifkan Keanggotaan",
+    submitting: "Memeriksa...",
+    successTitle: "Pendaftaran berhasil",
+    successDesc: "Mengalihkan ke halaman tujuan...",
+    errorGeneric: "Kode undangan tidak valid atau sudah kedaluwarsa.",
+    errorNetwork: "Terjadi kesalahan jaringan. Coba lagi.",
+    alreadyVerifiedRedirect: "Akun kamu sudah terdaftar. Mengalihkan...",
+    signOutLink: "Keluar / gunakan akun lain",
+    backHome: "Kembali ke beranda",
+    googlePromptTitle: "Masuk untuk mendaftar",
+    googlePromptDesc:
+      "Pendaftaran menggunakan kode undangan memerlukan akun Google yang sudah masuk.",
+  },
   dashboard: {
     pageTitle: "Ruang Anggota",
     badge: "Area anggota — {role}",
@@ -313,6 +335,31 @@ export const id: TranslationSchema = {
     scheduleTableSubject: "Mata Pelajaran",
     scheduleTableTeacher: "Guru",
     scheduleTableAction: "Aksi",
+
+    // Kode invitasi (Owner)
+    invitations: "Kode Invitasi",
+    invitationsDesc:
+      "Buat dan kelola kode undangan sekali pakai. Kode baru aktif 7 hari dan hanya bisa dipakai satu kali.",
+    invitationsCreateBtn: "Buat Kode Invitasi",
+    invitationsCreatedToast: "Kode invitasi baru berhasil dibuat.",
+    invitationsCreatedToastFail: "Gagal membuat kode undangan.",
+    invitationsCopyBtn: "Salin",
+    invitationsCopied: "Kode disalin",
+    invitationsCode: "Kode",
+    invitationsCreated: "Dibuat",
+    invitationsExpires: "Kedaluwarsa",
+    invitationsStatus: "Status",
+    invitationsUsedBy: "Digunakan Oleh",
+    invitationsUsedAt: "Dipakai Pada",
+    invitationsStatusActive: "Aktif",
+    invitationsStatusUsed: "Terpakai",
+    invitationsStatusExpired: "Kedaluwarsa",
+    invitationsEmpty: "Belum ada kode undangan.",
+    invitationsOnceNote:
+      "Kode hanya ditampilkan sekali. Salin sekarang — kode tidak bisa dilihat lagi setelah halaman ini ditinggalkan.",
+    invitationsActive: "Lihat kode",
+    invitationsGenerateError:
+      "Gagal membuat kode. Browser tidak mendukung kriptografi yang dibutuhkan.",
   },
   common: {
     save: "Simpan",

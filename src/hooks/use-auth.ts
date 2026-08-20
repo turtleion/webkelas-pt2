@@ -11,6 +11,7 @@ import {
 export type UseAuthReturn = AuthState & {
   isAdmin: boolean;
   isOwner: boolean;
+  isVerified: boolean;
   signIn: typeof signInWithGoogle;
   signInAsGuest: typeof signInAsGuest;
   signOut: typeof signOut;
@@ -40,11 +41,13 @@ export function useAuth(): UseAuthReturn {
   const role = state.user?.role;
   const isOwner = !state.user?.guest && role === "owner";
   const isAdmin = !state.user?.guest && (role === "admin" || role === "owner");
+  const isVerified = !state.user?.guest && state.user?.verified === true;
 
   return {
     ...state,
     isAdmin,
     isOwner,
+    isVerified,
     signIn: signInWithGoogle,
     signInAsGuest,
     signOut,

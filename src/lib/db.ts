@@ -67,6 +67,7 @@ export interface ProfileRow {
   image: string | null;
   email: string | null;
   role: "admin" | "member" | "owner";
+  verified: boolean;
   created_at: string;
   updated_at: string;
 }
@@ -421,26 +422,80 @@ export async function setOrganizationSetting<T = unknown>(
 export async function getAllProfiles(): Promise<ProfileRow[]> {
   const { data, error } = await supabase
     .from("profiles")
-    .select("*")
+    .select("id, name, image, email, role, verified, created_at, updated_at")
     .order("created_at", { ascending: false });
 
   if (error) throw error;
-  return data ?? [];
+  return (data ?? []) as ProfileRow[];
 }
 
 export async function updateProfileRole(
   userId: string,
   role: "admin" | "member" | "owner",
 ): Promise<ProfileRow> {
-  const { data, error } = await supabase
-    .from("profiles")
-    .update({ role, updated_at: new Date().toISOString() })
-    .eq("id", userId)
-    .select()
-    .single();
-
+  // Lewati RPC karena column grant tidak lagi mengizinkan update role
+  // lewat PostgREST. RPC set_user_role memeriksa is_owner() di server.
+  const { data, error } = await supabase.rpc("set_user_role", {
+    p_user: userId,
+    p_role: role,
+  });
   if (error) throw error;
-  return data;
+  return data as ProfileRow;
+}
+
+// ---------------------------------------------------------------------------
+// Invitation Codes API
+// ---------------------------------------------------------------------------
+
+export interface InvitationCodeRow {
+  id: string;
+  code_prefix: string;
+  created_by: string;
+  created_at: string;
+  expires_at: string;
+  used_at: string | null;
+  used_by: string | null;
+  used_by_name: string | null;
+  used_by_email: string | null;
+  server_now: string;
+}
+
+export type RedeemResult =
+  | "ok"
+  | "invalid"
+  | "expired"
+  | "used"
+  | "already_verified";
+
+/** Buat kode undangan — Owner-only (diperiksa server). */
+export async function createInvitationCode(
+  codeHash: string,
+  prefix: string,
+): Promise<InvitationCodeRow> {
+  const { data, error } = await supabase.rpc("create_invitation_code", {
+    p_code_hash: codeHash,
+    p_prefix: prefix,
+  });
+  if (error) throw error;
+  return data as InvitationCodeRow;
+}
+
+/** Daftar semua kode undangan — Owner-only. */
+export async function listInvitationCodes(): Promise<InvitationCodeRow[]> {
+  const { data, error } = await supabase.rpc("list_invitation_codes");
+  if (error) throw error;
+  return (data ?? []) as InvitationCodeRow[];
+}
+
+/** Konsumsi kode undangan (atomic di server). Untuk user yang sedang login. */
+export async function redeemInvitationCode(
+  codeHash: string,
+): Promise<RedeemResult> {
+  const { data, error } = await supabase.rpc("redeem_invitation_code", {
+    p_code_hash: codeHash,
+  });
+  if (error) throw error;
+  return (data as RedeemResult) ?? "invalid";
 }
 
 // ---------------------------------------------------------------------------
