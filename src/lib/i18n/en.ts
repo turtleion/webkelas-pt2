@@ -71,6 +71,15 @@ export const en: TranslationSchema = {
     showcase: "Archive Showcase",
     showcaseDesc:
       "Visual-first showcase with hero media banner and timeline view.",
+    modern: "Modern",
+    modernDesc:
+      "Contemporary 2026 design: strong hierarchy, elegant cards, refined micro-interactions.",
+    experimental: "Experimental",
+    experimentalDesc:
+      "Unique composition: oversized type, layered diagonals, unexpected placement.",
+    nature: "Nature",
+    natureDesc:
+      "Botanical feel: organic curves, leaf accents, calm and fresh.",
   },
   colors: {
     background: "Background",

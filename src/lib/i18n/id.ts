@@ -71,6 +71,15 @@ export const id: TranslationSchema = {
     showcase: "Showcase Arsip",
     showcaseDesc:
       "Visual-first showcase dengan galeri banner dan timeline horizontal.",
+    modern: "Modern",
+    modernDesc:
+      "Desain kontemporer 2026: hierarki tegas, kartu elegan, interaksi halus.",
+    experimental: "Eksperimental",
+    experimentalDesc:
+      "Komposisi unik: tipografi besar, lapisan miring, susunan tak terduga.",
+    nature: "Alami",
+    natureDesc:
+      "Nuansa botani: lengkungan organik, aksen dedaunan, tenang dan segar.",
   },
   colors: {
     background: "Latar Belakang (Background)",

@@ -63,6 +63,12 @@ export interface TranslationSchema {
     bentoDesc: string;
     showcase: string;
     showcaseDesc: string;
+    modern: string;
+    modernDesc: string;
+    experimental: string;
+    experimentalDesc: string;
+    nature: string;
+    natureDesc: string;
   };
   colors: {
     background: string;

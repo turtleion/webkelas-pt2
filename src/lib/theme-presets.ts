@@ -1,5 +1,5 @@
 export type ThemePresetKey = "paper" | "glass" | "cartoon" | "custom";
-export type HomeLayoutKey = "classic" | "bento" | "showcase";
+export type HomeLayoutKey = "classic" | "bento" | "showcase" | "modern" | "experimental" | "nature";
 export type ModeKey = "light" | "dark";
 
 export interface ColorPaletteTokens {

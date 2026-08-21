@@ -1,5 +1,8 @@
 import { HomeBento } from "@/components/home/HomeBento";
 import { HomeClassic } from "@/components/home/HomeClassic";
+import { HomeExperimental } from "@/components/home/HomeExperimental";
+import { HomeModern } from "@/components/home/HomeModern";
+import { HomeNature } from "@/components/home/HomeNature";
 import { HomeShowcase } from "@/components/home/HomeShowcase";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
@@ -59,6 +62,12 @@ export default function Home() {
           <HomeBento {...layoutProps} />
         ) : preferences.homeLayout === "showcase" ? (
           <HomeShowcase {...layoutProps} />
+        ) : preferences.homeLayout === "modern" ? (
+          <HomeModern {...layoutProps} />
+        ) : preferences.homeLayout === "experimental" ? (
+          <HomeExperimental {...layoutProps} />
+        ) : preferences.homeLayout === "nature" ? (
+          <HomeNature {...layoutProps} />
         ) : (
           <HomeClassic {...layoutProps} />
         )}
