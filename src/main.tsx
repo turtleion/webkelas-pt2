@@ -1,14 +1,15 @@
-import '@vly-ai/integrations';
-import { Toaster } from "@/components/ui/sonner";
-import { RequireAuth } from "@/components/RequireAuth";
-import { RequireVerified } from "@/components/RequireVerified";
 import { RequireAdmin } from "@/components/admin/RequireAdmin";
 import { RequireOwner } from "@/components/admin/RequireOwner";
+import { AuthStateRedirector } from "@/components/AuthStateRedirector";
+import { RequireAuth } from "@/components/RequireAuth";
+import { Toaster } from "@/components/ui/sonner";
 import { PreferencesProvider } from "@/context/PreferencesContext";
-import { VlyToolbar } from "../vly-toolbar-readonly.tsx";
-import React, { StrictMode, useEffect, lazy, Suspense } from "react";
+import "@vly-ai/integrations";
+import React, { lazy, StrictMode, Suspense, useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router";
+import { VlyToolbar } from "../vly-toolbar-readonly.tsx";
+import { RequireVerified } from "./components/RequireVerified";
 import "./index.css";
 
 // Lazy load public route components
@@ -27,15 +28,21 @@ const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 
 // Lazy load admin route components
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard.tsx"));
-const AdminAnnouncements = lazy(() => import("./pages/admin/AdminAnnouncements.tsx"));
+const AdminAnnouncements = lazy(
+  () => import("./pages/admin/AdminAnnouncements.tsx"),
+);
 const AdminAgenda = lazy(() => import("./pages/admin/AdminAgenda.tsx"));
 const AdminSchedule = lazy(() => import("./pages/admin/AdminSchedule.tsx"));
 const AdminMembers = lazy(() => import("./pages/admin/AdminMembers.tsx"));
 const AdminGallery = lazy(() => import("./pages/admin/AdminGallery.tsx"));
-const AdminOrganization = lazy(() => import("./pages/admin/AdminOrganization.tsx"));
+const AdminOrganization = lazy(
+  () => import("./pages/admin/AdminOrganization.tsx"),
+);
 const AdminTheme = lazy(() => import("./pages/admin/AdminTheme.tsx"));
 const AdminUsers = lazy(() => import("./pages/admin/AdminUsers.tsx"));
-const AdminInvitationCodes = lazy(() => import("./pages/admin/AdminInvitationCodes.tsx"));
+const AdminInvitationCodes = lazy(
+  () => import("./pages/admin/AdminInvitationCodes.tsx"),
+);
 
 // Simple loading fallback for route transitions
 function RouteLoading() {
@@ -147,6 +154,7 @@ createRoot(document.getElementById("root")!).render(
         <BrowserRouter>
           <RouteSyncer />
           <ScrollToTop />
+          <AuthStateRedirector />
           <Suspense fallback={<RouteLoading />}>
             <Routes>
               {/* Public Routes */}
@@ -179,10 +187,7 @@ createRoot(document.getElementById("root")!).render(
               />
               <Route path="/galeri" element={<Galeri />} />
               <Route path="/settings" element={<Settings />} />
-              <Route
-                path="/auth"
-                element={<AuthPage redirectAfterAuth="/dashboard" />}
-              />
+              <Route path="/auth" element={<AuthPage />} />
               <Route path="/register" element={<Register />} />
               <Route
                 path="/dashboard"

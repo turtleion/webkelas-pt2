@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, NavLink } from "react-router";
 import { Menu, X, Shield, LayoutDashboard, Settings, Globe } from "lucide-react";
 import { KelasMark } from "./KelasMark";
+import { VerificationWarningBar } from "@/components/VerificationWarningBar";
 import { useOrganization } from "@/hooks/use-organization";
 import { useAuth } from "@/hooks/use-auth";
 import { useTranslation } from "@/hooks/use-translation";
@@ -29,12 +30,14 @@ export function SiteHeader() {
   };
 
   return (
-    <header
-      className="glass sticky top-0 z-40 border-x-0 border-t-0 border-b border-b-border/60 transition-colors"
-      style={{
-        backgroundColor: "var(--nav)",
-        color: "var(--on-nav)",
-      }}
+    <>
+      <VerificationWarningBar />
+      <header
+        className="glass sticky top-0 z-40 border-x-0 border-t-0 border-b border-b-border/60 transition-colors"
+        style={{
+          backgroundColor: "var(--nav)",
+          color: "var(--on-nav)",
+        }}
     >
       <a
         href="#konten"
@@ -228,5 +231,6 @@ export function SiteHeader() {
         </div>
       )}
     </header>
+    </>
   );
 }

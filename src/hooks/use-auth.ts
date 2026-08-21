@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import {
   getAuthState,
+  GUEST_ID,
+  isGuestStored,
   onAuthChange,
   signInAsGuest,
   signInWithGoogle,
@@ -18,10 +20,33 @@ export type UseAuthReturn = AuthState & {
 };
 
 export function useAuth(): UseAuthReturn {
-  const [state, setState] = useState<AuthState>({
-    isLoading: true,
-    isAuthenticated: false,
-    user: null,
+  // Initial state sinkron. Guest flag hanya dipakai kalau TIDAK ada sesi
+  // Supabase yang valid — Supabase session selalu menang. Cek sesi dari
+  // cache lokal Supabase (sinkron) untuk membedakan.
+  const [state, setState] = useState<AuthState>(() => {
+    // Pakai synchronous Supabase session lookup kalau memungkinkan.
+    // supabase.auth.getSession() sebenarnya async, jadi di initial state
+    // kita pakai guest flag sebagai fallback cepat — useEffect akan
+    // merefresh state begitu Supabase resolve. Untuk kebanyakan kasus
+    // (Google user sudah signed in), session tersedia di cache Supabase
+    // JS dan getSession() akan resolve cepat.
+    if (isGuestStored()) {
+      return {
+        isLoading: false,
+        isAuthenticated: true,
+        user: {
+          id: GUEST_ID,
+          role: "member",
+          guest: true,
+          verified: false,
+        },
+      };
+    }
+    return {
+      isLoading: true,
+      isAuthenticated: false,
+      user: null,
+    };
   });
 
   useEffect(() => {

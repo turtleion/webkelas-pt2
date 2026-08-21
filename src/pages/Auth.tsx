@@ -1,56 +1,38 @@
-import { Button } from "@/components/ui/button";
 import { KelasMark } from "@/components/site/KelasMark";
-import { usePageTitle } from "@/hooks/use-page-title";
+import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/use-auth";
-import { useTranslation } from "@/hooks/use-translation";
 import { useOrganization } from "@/hooks/use-organization";
+import { usePageTitle } from "@/hooks/use-page-title";
+import { useTranslation } from "@/hooks/use-translation";
 import { resolveInternalRedirect } from "@/lib/redirect";
 import { Loader2 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router";
 
-interface AuthProps {
-  redirectAfterAuth?: string;
-}
-
-export default function Auth({ redirectAfterAuth }: AuthProps = {}) {
+export default function Auth() {
   const { t } = useTranslation();
   usePageTitle(t.auth.pageTitle);
-  const { isLoading, isAuthenticated, isVerified, signIn, signInAsGuest } =
-    useAuth();
+  const { signIn, signInAsGuest } = useAuth();
   const { data: orgData } = useOrganization();
   const { kelas } = orgData;
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const returnToRaw = searchParams.get("returnTo");
-  const redirect = resolveInternalRedirect(
-    returnToRaw,
-    redirectAfterAuth ?? "/dashboard",
+  const returnTo = resolveInternalRedirect(searchParams.get("returnTo"), "/");
+  // Guest tidak boleh mengakses route-route ini — sembunyikan tombol
+  // Guest kalau tujuan login adalah salah satunya. Untuk tujuan publik,
+  // tombol tetap ditampilkan.
+  const GUEST_BLOCKED = ["/jadwal", "/pengumuman", "/agenda", "/admin"];
+  const hideGuestButton = GUEST_BLOCKED.some(
+    (p) => returnTo === p || returnTo.startsWith(p + "/"),
   );
   const [isLoadingAction, setIsLoadingAction] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  // Setelah login, jika tujuan adalah route protected dan user belum
-  // verified, arahkan ke /register dengan returnTo sama. Jika verified,
-  // langsung ke tujuan. Tanpa returnTo, fallback default.
-  useEffect(() => {
-    if (isLoading || !isAuthenticated) return;
-    const PROTECTED = ["/pengumuman", "/jadwal", "/agenda"];
-    const isProtectedDest = PROTECTED.some((p) =>
-      redirect === p || redirect.startsWith(p + "/"),
-    );
-    if (isProtectedDest && !isVerified) {
-      const reg = `/register?returnTo=${encodeURIComponent(redirect)}`;
-      navigate(reg, { replace: true });
-    } else {
-      navigate(redirect, { replace: true });
-    }
-  }, [isLoading, isAuthenticated, isVerified, navigate, redirect]);
 
   const handleGoogle = async () => {
     setError(null);
     try {
       await signIn();
+      // AuthStateRedirector akan menangani routing pasca-Google-login.
     } catch (e) {
       console.error("Google sign-in error:", e);
       setError(t.auth.errorGoogle);
@@ -62,7 +44,10 @@ export default function Auth({ redirectAfterAuth }: AuthProps = {}) {
     setIsLoadingAction(true);
     try {
       await signInAsGuest();
-      navigate(redirect, { replace: true });
+      // Arahkan ke tujuan login (returnTo) setelah guest flag terset.
+      // Guest akan tertahan oleh RequireSignedIn bila tujuannya butuh
+      // real user; untuk tujuan publik, user tiba di sana.
+      navigate(returnTo, { replace: true });
     } catch (e) {
       console.error("Guest login error:", e);
       setError(t.auth.errorGuest);
@@ -132,29 +117,33 @@ export default function Auth({ redirectAfterAuth }: AuthProps = {}) {
               {t.auth.googleBtn}
             </Button>
 
-            <div className="relative my-1">
-              <span className="absolute inset-0 flex items-center">
-                <span className="w-full border-t border-border/70" />
-              </span>
-              <span className="relative flex justify-center text-[11px] uppercase">
-                <span className="bg-card px-2 text-muted-foreground">
-                  {t.auth.orSeparator}
-                </span>
-              </span>
-            </div>
+            {!hideGuestButton && (
+              <>
+                <div className="relative my-1">
+                  <span className="absolute inset-0 flex items-center">
+                    <span className="w-full border-t border-border/70" />
+                  </span>
+                  <span className="relative flex justify-center text-[11px] uppercase">
+                    <span className="bg-card px-2 text-muted-foreground">
+                      {t.auth.orSeparator}
+                    </span>
+                  </span>
+                </div>
 
-            <Button
-              type="button"
-              variant="outline"
-              className="h-11 w-full cursor-pointer border-border/80 bg-background/40 font-mono text-[12px] uppercase tracking-[0.14em]"
-              onClick={() => void handleGuest()}
-              disabled={isLoadingAction}
-            >
-              {isLoadingAction ? (
-                <Loader2 className="size-4 animate-spin" />
-              ) : null}
-              {t.auth.guestBtn}
-            </Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="h-11 w-full cursor-pointer border-border/80 bg-background/40 font-mono text-[12px] uppercase tracking-[0.14em]"
+                  onClick={() => void handleGuest()}
+                  disabled={isLoadingAction}
+                >
+                  {isLoadingAction ? (
+                    <Loader2 className="size-4 animate-spin" />
+                  ) : null}
+                  {t.auth.guestBtn}
+                </Button>
+              </>
+            )}
           </div>
 
           {error && (

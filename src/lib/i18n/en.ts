@@ -225,6 +225,16 @@ export const en: TranslationSchema = {
     googlePromptTitle: "Sign in to register",
     googlePromptDesc:
       "Registering with an invitation code requires a signed-in Google account.",
+    guestBlockTitle: "Guest account cannot be activated",
+    guestBlockDesc:
+      "You are currently signed in as a Guest. Guest accounts have no identity in the database, so they cannot redeem invitation codes. Sign in with your Google account first to continue registration.",
+    guestBlockCta: "Exit Guest and Sign in with Google",
+  },
+  verificationBar: {
+    title: "Your account is not yet activated or verified!",
+    description:
+      "Complete registration with an invitation code to unlock all member pages.",
+    cta: "Click here to verify",
   },
   dashboard: {
     pageTitle: "Member Space",

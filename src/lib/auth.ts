@@ -55,6 +55,9 @@ function setGuestStored(value: boolean) {
 }
 
 export async function signInWithGoogle() {
+  // Bersihkan guest flag sebelum OAuth redirect. Setelah OAuth kembali,
+  // Supabase session ada dan guest flag harus tidak berlaku lagi.
+  setGuestStored(false);
   const { error } = await supabase.auth.signInWithOAuth({
     provider: "google",
     options: { redirectTo: window.location.origin },
@@ -65,12 +68,14 @@ export async function signInWithGoogle() {
 export async function signInAsGuest() {
   // hanya membalik bendera lokal; tidak ada akun anonim Supabase
   setGuestStored(true);
+  notifyAuthChangeListeners();
 }
 
 export async function signOut() {
   setGuestStored(false);
   const { error } = await supabase.auth.signOut();
   if (error) throw error;
+  notifyAuthChangeListeners();
 }
 
 async function mapUser(user: User | null): Promise<AuthUser | null> {
@@ -116,30 +121,50 @@ async function mapUser(user: User | null): Promise<AuthUser | null> {
 }
 
 export async function getAuthState(): Promise<AuthState> {
-  const guest = isGuestStored();
-  if (guest) {
+  // Cek sesi Supabase DULU. Kalau ada sesi, itu yang dipakai — bukan guest
+  // flag. Guest flag hanya relevan kalau Supabase tidak punya sesi aktif.
+  const { data } = await supabase.auth.getSession();
+  if (data.session) {
+    const user = await mapUser(data.session.user);
+    // Bersihkan guest flag kalau masih nyangkut — user sekarang real.
+    if (isGuestStored()) setGuestStored(false);
+    return { isLoading: false, isAuthenticated: user !== null, user };
+  }
+  if (isGuestStored()) {
     return {
       isLoading: false,
       isAuthenticated: true,
       user: { id: GUEST_ID, role: "member", guest: true, verified: false },
     };
   }
-  const { data } = await supabase.auth.getSession();
-  if (!data.session) return { isLoading: false, isAuthenticated: false, user: null };
-  const user = await mapUser(data.session.user);
-  return { isLoading: false, isAuthenticated: user !== null, user };
+  return { isLoading: false, isAuthenticated: false, user: null };
 }
 
 export async function getUser(): Promise<AuthUser | null> {
+  const { data } = await supabase.auth.getSession();
+  if (data.session) return mapUser(data.session.user);
   if (isGuestStored())
     return { id: GUEST_ID, role: "member", guest: true, verified: false };
-  const { data } = await supabase.auth.getSession();
-  if (!data.session) return null;
-  return mapUser(data.session.user);
+  return null;
 }
 
 export type AuthChangeHandler = (state: AuthState) => void;
 export type Unsubscribe = () => void;
+
+// Listener tambahan untuk perubahan yang tidak lewat Supabase (guest
+// toggle, signOut lokal). Supabase onAuthStateChange TIDAK dipanggil saat
+// kita mengubah localStorage arsip_guest, jadi useAuth tidak akan tahu.
+const localListeners = new Set<() => void>();
+
+export function notifyAuthChangeListeners() {
+  for (const l of localListeners) {
+    try {
+      l();
+    } catch {
+      /* abaikan listener yang gagal */
+    }
+  }
+}
 
 export function onAuthChange(handler: AuthChangeHandler): Unsubscribe {
   let sent = false;
@@ -149,18 +174,23 @@ export function onAuthChange(handler: AuthChangeHandler): Unsubscribe {
     const state = await getAuthState();
     if (!disposed) handler(state);
   };
-  const { data } = supabase.auth.onAuthStateChange(() => {
-    // Debounce berantai agar isi ulang sesi tidak memicu dua kali.
+  const trigger = () => {
     if (sent) return;
     sent = true;
     setTimeout(() => {
       sent = false;
       void emit();
     }, 50);
+  };
+  const { data } = supabase.auth.onAuthStateChange(() => {
+    // Debounce berantai agar isi ulang sesi tidak memicu dua kali.
+    trigger();
   });
+  localListeners.add(trigger);
   void emit();
   return () => {
     disposed = true;
+    localListeners.delete(trigger);
     data.subscription.unsubscribe();
   };
 }

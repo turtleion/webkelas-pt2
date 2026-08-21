@@ -202,6 +202,14 @@ export interface TranslationSchema {
     backHome: string;
     googlePromptTitle: string;
     googlePromptDesc: string;
+    guestBlockTitle: string;
+    guestBlockDesc: string;
+    guestBlockCta: string;
+  };
+  verificationBar: {
+    title: string;
+    description: string;
+    cta: string;
   };
   dashboard: {
     pageTitle: string;

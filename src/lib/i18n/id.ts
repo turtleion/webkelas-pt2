@@ -224,6 +224,16 @@ export const id: TranslationSchema = {
     googlePromptTitle: "Masuk untuk mendaftar",
     googlePromptDesc:
       "Pendaftaran menggunakan kode undangan memerlukan akun Google yang sudah masuk.",
+    guestBlockTitle: "Akun Tamu tidak bisa diaktivasi",
+    guestBlockDesc:
+      "Anda sedang masuk sebagai Tamu. Akun tamu tidak memiliki identitas di database sehingga tidak bisa menerima kode undangan. Masuk dengan akun Google terlebih dahulu untuk melanjutkan pendaftaran.",
+    guestBlockCta: "Keluar dari Tamu, lalu Masuk Google",
+  },
+  verificationBar: {
+    title: "Akun Anda belum diaktivasi atau diverifikasi!",
+    description:
+      "Selesaikan pendaftaran dengan kode undangan untuk membuka seluruh halaman anggota.",
+    cta: "Klik di sini untuk verifikasi",
   },
   dashboard: {
     pageTitle: "Ruang Anggota",
