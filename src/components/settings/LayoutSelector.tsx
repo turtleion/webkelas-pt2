@@ -1,6 +1,6 @@
 import { usePreferences, type HomeLayoutKey } from "@/hooks/use-preferences";
 import { useTranslation } from "@/hooks/use-translation";
-import { Check, Newspaper, LayoutGrid, LayoutTemplate } from "lucide-react";
+import { Check, Newspaper, LayoutGrid, LayoutTemplate, Sparkles, Shapes, Leaf } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function LayoutSelector() {
@@ -31,6 +31,24 @@ export function LayoutSelector() {
       description: t.layouts.showcaseDesc,
       icon: LayoutTemplate,
     },
+    {
+      key: "modern",
+      title: t.layouts.modern,
+      description: t.layouts.modernDesc,
+      icon: Sparkles,
+    },
+    {
+      key: "experimental",
+      title: t.layouts.experimental,
+      description: t.layouts.experimentalDesc,
+      icon: Shapes,
+    },
+    {
+      key: "nature",
+      title: t.layouts.nature,
+      description: t.layouts.natureDesc,
+      icon: Leaf,
+    },
   ];
 
   return (
@@ -40,11 +58,11 @@ export function LayoutSelector() {
           {t.settings.homeLayoutSection}
         </h3>
         <p className="text-[13px] text-muted-foreground">
-          Pilih salah satu dari 3 varian susunan antarmuka Beranda.
+          Pilih varian susunan antarmuka Beranda.
         </p>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {layouts.map((l) => {
           const isSelected = preferences.homeLayout === l.key;
           const Icon = l.icon;

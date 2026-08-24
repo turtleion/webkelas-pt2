@@ -28,7 +28,7 @@ export function HomeExperimental({
   ).slice(0, 3);
 
   return (
-    <div className="relative bg-background">
+    <div className="relative">
       {/* ============ HERO — massive rotated type ============ */}
       <section className="relative overflow-hidden border-b border-border/60">
         {/* background layer — angled strip */}

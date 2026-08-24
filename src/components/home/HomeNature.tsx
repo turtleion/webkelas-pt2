@@ -29,7 +29,7 @@ export function HomeNature({
   ).slice(0, 4);
 
   return (
-    <div className="bg-background">
+    <div className="relative">
       {/* soft leaf shapes */}
       <div
         aria-hidden

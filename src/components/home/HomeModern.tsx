@@ -36,7 +36,7 @@ export function HomeModern({
   ];
 
   return (
-    <div className="bg-background">
+    <div>
       {/* ============ HERO — bold asymmetric ============ */}
       <section className="relative overflow-hidden border-b border-border/60">
         <div className="mx-auto grid max-w-6xl gap-10 px-6 py-16 md:grid-cols-12 md:py-24">
