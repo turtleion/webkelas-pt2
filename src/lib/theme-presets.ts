@@ -319,7 +319,7 @@ export const BACKGROUND_PRESETS: BackgroundPreset[] = [
       css: `
         radial-gradient(120% 60% at 50% -5%, rgba(255,255,255,0.55), transparent 55%),
         radial-gradient(90% 45% at 50% 108%, rgba(122,92,43,0.08), transparent 60%),
-        #f4eddd
+        linear-gradient(#f4eddd, #f4eddd)
       `,
       thumbnail: "linear-gradient(170deg, #f4eddd 0%, #e8dcc4 100%)",
     },
@@ -327,7 +327,7 @@ export const BACKGROUND_PRESETS: BackgroundPreset[] = [
       css: `
         radial-gradient(120% 60% at 50% -5%, rgba(255,255,255,0.04), transparent 55%),
         radial-gradient(90% 45% at 50% 108%, rgba(0,0,0,0.5), transparent 60%),
-        #1b1710
+        linear-gradient(#1b1710, #1b1710)
       `,
       thumbnail: "linear-gradient(170deg, #241f17 0%, #15120d 100%)",
     },
@@ -340,7 +340,7 @@ export const BACKGROUND_PRESETS: BackgroundPreset[] = [
       css: `
         repeating-linear-gradient(0deg, transparent, transparent 24px, rgba(210,195,162,0.18) 24px, rgba(210,195,162,0.18) 25px),
         radial-gradient(ellipse at 30% 20%, rgba(196,168,120,0.15), transparent 60%),
-        #f0e7d2
+        linear-gradient(#f0e7d2, #f0e7d2)
       `,
       thumbnail: "linear-gradient(180deg, #f0e7d2 0%, #e5d9bf 50%, #f0e7d2 100%)",
     },
@@ -348,7 +348,7 @@ export const BACKGROUND_PRESETS: BackgroundPreset[] = [
       css: `
         repeating-linear-gradient(0deg, transparent, transparent 24px, rgba(255,255,255,0.03) 24px, rgba(255,255,255,0.03) 25px),
         radial-gradient(ellipse at 30% 20%, rgba(157,179,146,0.06), transparent 60%),
-        #16130e
+        linear-gradient(#16130e, #16130e)
       `,
       thumbnail: "linear-gradient(180deg, #211c14 0%, #17140e 50%, #12100b 100%)",
     },
@@ -382,7 +382,7 @@ export const BACKGROUND_PRESETS: BackgroundPreset[] = [
       css: `
         radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(120,88,44,0.1) 100%),
         radial-gradient(circle at 50% 0%, rgba(255,255,255,0.45), transparent 60%),
-        #f5edd8
+        linear-gradient(#f5edd8, #f5edd8)
       `,
       thumbnail: "radial-gradient(ellipse at 50% 50%, #f5edd8 40%, #e2d5b8 100%)",
     },
@@ -390,7 +390,7 @@ export const BACKGROUND_PRESETS: BackgroundPreset[] = [
       css: `
         radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(0,0,0,0.6) 100%),
         radial-gradient(circle at 50% 0%, rgba(201,106,65,0.05), transparent 60%),
-        #19150f
+        linear-gradient(#19150f, #19150f)
       `,
       thumbnail: "radial-gradient(ellipse at 50% 50%, #241d14 40%, #0d0a07 100%)",
     },
@@ -626,7 +626,7 @@ export const BACKGROUND_PRESETS: BackgroundPreset[] = [
         radial-gradient(circle at 85% 15%, rgba(245,158,11,0.2), transparent 40%),
         repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(24,24,27,0.03) 28px, rgba(24,24,27,0.03) 29px),
         repeating-linear-gradient(90deg, transparent, transparent 28px, rgba(24,24,27,0.03) 28px, rgba(24,24,27,0.03) 29px),
-        #fffdf5
+        linear-gradient(#fffdf5, #fffdf5)
       `,
       thumbnail: "linear-gradient(135deg, #fffdf5 0%, #fef3c7 100%)",
     },
@@ -635,7 +635,7 @@ export const BACKGROUND_PRESETS: BackgroundPreset[] = [
         radial-gradient(circle at 85% 15%, rgba(245,158,11,0.12), transparent 40%),
         repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(255,255,255,0.03) 28px, rgba(255,255,255,0.03) 29px),
         repeating-linear-gradient(90deg, transparent, transparent 28px, rgba(255,255,255,0.03) 28px, rgba(255,255,255,0.03) 29px),
-        #171613
+        linear-gradient(#171613, #171613)
       `,
       thumbnail: "linear-gradient(135deg, #24211a 0%, #12110e 100%)",
     },
