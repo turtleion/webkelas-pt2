@@ -106,9 +106,9 @@ export const id: TranslationSchema = {
   home: {
     heroTag: "Arsip Kelas Digital",
     heroSubtitle:
-      "Satu kelas, {count} orang, dan satu tahun pelajaran — dicatat di sini.",
+      "Dari sekadar kenal nama, sampe hafal drama satu sama lainnya.",
     heroDescription:
-      "Ini ruang digital {kelas}: tempat pengumuman, jadwal, agenda, dan dokumentasi kelas berkumpul. Dibuat oleh siswa untuk siswa, supaya informasi kelas mudah ditemukan dan tidak tersebar di banyak tempat.",
+      "Platform digital resmi {kelas}, berisi pengumuman, jadwal pelajaran, agenda kegiatan, dan dokumentasi kelas dalam satu tempat. Dibangun oleh siswa, untuk kebutuhan siswa.",
     readAnnouncements: "Baca pengumuman",
     viewMembers: "Lihat anggota kelas",
     classIdentity: "Identitas kelas",
@@ -126,6 +126,12 @@ export const id: TranslationSchema = {
     contactRow: "Punya informasi untuk kelas?",
     contactRowDesc: "Sampaikan ke pengurus kelas — atau lewat sekretaris.",
     viewOrgChart: "Lihat pengurus kelas",
+    classLabel: "Kelas",
+    majorLabel: "Jurusan",
+    schoolLabel: "Sekolah",
+    homeroomLabel: "Wali Kelas",
+    chairmanLabel: "Ketua Kelas",
+    studentCountLabel: "Jumlah Siswa",
   },
   members: {
     pageTitle: "Anggota Kelas",
@@ -379,6 +385,171 @@ export const id: TranslationSchema = {
     invitationsActive: "Lihat kode",
     invitationsGenerateError:
       "Gagal membuat kode. Browser tidak mendukung kriptografi yang dibutuhkan.",
+
+    // Toast messages — agenda
+    toastAgendaRequired: "Judul dan tanggal wajib diisi.",
+    toastAgendaUpdated: "Agenda berhasil diperbarui.",
+    toastAgendaCreated: "Agenda baru berhasil dicatat.",
+    toastAgendaSaveError: "Gagal menyimpan agenda",
+    toastAgendaDeleted: "Agenda berhasil dihapus.",
+    toastAgendaDeleteError: "Gagal menghapus agenda",
+
+    // Toast messages — gallery
+    toastPhotoTitleRequired: "Judul foto wajib diisi.",
+    toastPhotoFileRequired: "Silakan pilih file gambar untuk diunggah.",
+    toastPhotoUpdated: "Dokumentasi foto berhasil diperbarui.",
+    toastPhotoCreated: "Foto baru berhasil diunggah.",
+    toastPhotoUploadError: "Gagal mengunggah foto",
+    toastPhotoDeleted: "Foto telah dihapus.",
+    toastPhotoDeleteError: "Gagal menghapus foto",
+
+    // Toast messages — members
+    toastMemberRequired: "Nomor absen dan nama wajib diisi.",
+    toastMemberUpdated: "Data anggota berhasil diperbarui.",
+    toastMemberCreated: "Siswa baru berhasil ditambahkan.",
+    toastMemberSaveError: "Gagal menyimpan anggota",
+    toastMemberDeleted: "Anggota berhasil dihapus.",
+    toastMemberDeleteError: "Gagal menghapus anggota",
+
+    // Toast messages — organization
+    toastOrgUpdated: "Data berhasil diperbarui.",
+    toastOrgSaveError: "Gagal menyimpan data",
+
+    // Toast messages — schedule
+    toastScheduleRequired: "Mata pelajaran dan jam mulai wajib diisi.",
+    toastScheduleUpdated: "Jadwal pelajaran berhasil diperbarui.",
+    toastScheduleCreated: "Mata pelajaran baru berhasil ditambahkan.",
+    toastScheduleSaveError: "Gagal menyimpan jadwal",
+    toastScheduleDeleted: "Jadwal pelajaran berhasil dihapus.",
+    toastScheduleDeleteError: "Gagal menghapus jadwal",
+
+    // Toast messages — announcements
+    toastAnnouncementRequired: "Judul dan ringkasan wajib diisi.",
+    toastAnnouncementUpdated: "Pengumuman berhasil diperbarui.",
+    toastAnnouncementCreated: "Pengumuman baru berhasil diterbitkan.",
+    toastAnnouncementPublishError: "Gagal mengubah status publikasi",
+    toastAnnouncementDeleted: "Pengumuman telah dihapus.",
+    toastAnnouncementPublishSuccess: "Pengumuman berhasil dipublikasikan.",
+    toastAnnouncementUnpublishSuccess: "Pengumuman ditarik dari publik.",
+    toastAnnouncementSaveError: "Gagal menyimpan pengumuman",
+    toastAnnouncementDeleteError: "Gagal menghapus pengumuman",
+
+    // Toast messages — theme
+    toastThemeSaved: "Pengaturan tema global berhasil disimpan.",
+    toastThemeSaveError: "Gagal menyimpan pengaturan tema global.",
+    toastFontAdded: 'Font "{name}" berhasil ditambahkan ke pustaka font!',
+    toastFontNotFound: 'Font "{name}" tidak ditemukan di Google Fonts.',
+    toastFontRemoved: 'Font "{name}" berhasil dihapus.',
+    toastFontRemoveConfirm: 'Hapus font kustom "{name}"?',
+
+    // Toast messages — invitation
+    toastCodeCopyError: "Gagal menyalin",
+    toastCodeLoadError: "Gagal memuat kode",
+
+    // Agenda
+    agendaFormTitle: "Ubah Agenda",
+    agendaFormCreateTitle: "Tambah Agenda Baru",
+    agendaEmpty: "Belum ada agenda kelas.",
+    agendaPlaceholderCategory: "misal: Ulangan, Tugas, MPLS",
+    agendaPlaceholderTitle: "Nama kegiatan atau mata pelajaran",
+    agendaPlaceholderDesc:
+      "Rincian tugas, perlengkapan yang harus dibawa, dsb...",
+
+    // Gallery
+    galleryDesc: "Unggah dokumentasi momen kelas langsung ke Supabase Storage.",
+    galleryFormTitle: "Ubah Informasi Foto",
+    galleryFormCreateTitle: "Unggah Foto Dokumentasi",
+    galleryPlaceholderTitle: "misal: Praktik Jaringan LAN di Lab 2",
+    galleryPlaceholderCategory: "Kegiatan, MPLS",
+    galleryPlaceholderDesc: "Keterangan singkat tentang suasana acara...",
+    galleryPreviewLabel: "Pratinjau",
+
+    // Members
+    membersDesc: "Data anggota kelas dan penugasan jabatan.",
+    membersEmpty: "Belum ada anggota kelas tercatat.",
+    membersPlaceholderPosition: "Ketua, Sekretaris I, Sie Humas...",
+    membersPlaceholderName: "misal: Aditya Pramana Putra",
+
+    // Organization
+    organizationDesc:
+      "Ubah profil utama kelas, data wali kelas, tahun ajaran, dan tautan sosial media resmi.",
+    organizationPlaceholderGelar: "misal: S.Kom.",
+    organizationPlaceholderInstagram: "@x.tkj1.smkn1cerme",
+    organizationPlaceholderUrl: "https://instagram.com/...",
+    organizationPlaceholderPhone: "+62 812-...",
+
+    // Schedule
+    scheduleEmpty: "Belum ada jadwal pelajaran untuk hari ini.",
+    schedulePlaceholderSubject: "misal: Pemrograman Web, Matematika, Istirahat",
+    schedulePlaceholderTeacher: "misal: Rina Wijayanti, S.Kom.",
+    scheduleFormTitle: "Ubah Mata Pelajaran",
+    scheduleFormCreateTitle: "Tambah Mata Pelajaran",
+    scheduleLabelDay: "Hari",
+    scheduleLabelStart: "Mulai",
+    scheduleLabelEnd: "Selesai",
+    scheduleLabelSubject: "Mata Pelajaran",
+    scheduleLabelTeacher: "Guru Pengampu",
+    scheduleLabelBreak: "Ini sesi istirahat",
+    scheduleLabelBreakDesc: "Sesi istirahat",
+    scheduleLabelOrder: "Urutan:",
+
+    // Announcements
+    announcementsPlaceholderCategory: "misal: Akademik, Kelas, Kegiatan",
+    announcementsPlaceholderTitle: "Judul ringkas dan jelas",
+    announcementsPlaceholderSummary:
+      "1-2 kalimat pengantar yang tampil di halaman depan...",
+    announcementsPlaceholderBody:
+      "Rincian lengkap pengumuman jika diperlukan...",
+    announcementsFormTitle: "Ubah Pengumuman",
+    announcementsFormCreateTitle: "Tambah Pengumuman Baru",
+
+    // Users management
+    usersTitle: "Manajemen Pengguna & Peran",
+    usersDescription:
+      "Kelola akun Google yang telah mendaftar ke arsip kelas. Tingkatkan hak akses siswa menjadi Admin atau Owner untuk memberi izin pengelolaan.",
+    usersEmpty: "Belum ada pengguna yang masuk.",
+    usersNameFallback: "User",
+    usersNoName: "Tanpa Nama",
+    toastUsersLoadError: "Gagal memuat daftar pengguna",
+    toastUsersRoleUpdateError: "Gagal memperbarui peran pengguna",
+    toastThemeFontSelect: "Pilih",
+    toastThemeFontSelected: "Dipilih",
+    usersRoleConfirmTitle: "Konfirmasi Perubahan Hak Akses",
+    usersRoleConfirmLabel: "Ubah Peran",
+    usersRoleConfirmDesc:
+      'Apakah Anda yakin ingin mengubah peran "{name}" menjadi "{role}"?',
+    usersRoleToastSuccess: "Peran {name} diubah menjadi {role}.",
+    usersColUser: "Pengguna",
+    usersColEmail: "Email",
+    usersColRegistered: "Terdaftar",
+    usersColCurrentRole: "Peran Saat Ini",
+    usersColChangeRole: "Ubah Peran",
+    usersSelfTag: "Anda",
+    usersSelfLocked: "Terkunci (Akun Anda)",
+    usersRoleMember: "member (Anggota)",
+    usersRoleAdmin: "admin (Pengurus)",
+    usersRoleOwner: "owner (Pemilik)",
+
+    // Organization form
+    orgSectionIdentity: "1. Identitas Kelas",
+    orgLabelClassName: "Nama Kelas",
+    orgLabelSchoolName: "Nama Sekolah",
+    orgLabelMajorFull: "Jurusan Lengkap",
+    orgLabelMajorAbbr: "Singkatan Jurusan",
+    orgLabelAcademicYear: "Tahun Ajaran",
+    orgLabelSemester: "Semester",
+    orgLabelRoom: "Ruang Kelas / Lab",
+    orgLabelStudentCount: "Jumlah Siswa",
+    orgLabelAddress: "Alamat Sekolah",
+    orgSectionHomeroom: "2. Wali Kelas",
+    orgLabelHomeroomName: "Nama Wali Kelas",
+    orgLabelDegree: "Gelar Akademik",
+    orgLabelRoleDesc: "Peran / Keterangan",
+    orgSectionContact: "3. Kontak & Media Sosial",
+    orgLabelInstagramUser: "Username Instagram",
+    orgLabelInstagramLink: "Tautan Instagram",
+    orgLabelEmail: "Email Kelas",
+    orgLabelWhatsApp: "Nomor WhatsApp",
   },
   common: {
     save: "Simpan",
@@ -405,9 +576,9 @@ export const id: TranslationSchema = {
     explore: "Jelajahi",
     contactSocial: "Kontak & medsos",
     copyright: "© 2026 X TKJ 1 · {sekolah}",
-    sampleData: "Data contoh — hubungi pengurus kelas untuk pembaruan",
+    sampleData: "Dibuat oleh TS.",
     academicYear: "Tahun ajaran {tahunAjaran} · Semester {semester}",
     description:
-      "Ruang digital kelas X TKJ 1 — {sekolah}. Pengumuman, jadwal, agenda, dan dokumentasi kelas dikumpulkan di satu tempat.",
+      "Ruang digital kelas X TKJ 1, {sekolah}. Pengumuman, jadwal, agenda, dan dokumentasi kelas dikumpulkan di satu tempat.",
   },
 };

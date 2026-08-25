@@ -64,7 +64,7 @@ export default function AdminAnnouncements() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!title.trim() || !summary.trim()) {
-      toast.error("Judul dan ringkasan wajib diisi.");
+      toast.error(t.admin.toastAnnouncementRequired);
       return;
     }
 
@@ -78,7 +78,7 @@ export default function AdminAnnouncements() {
           category,
           published,
         });
-        toast.success("Pengumuman berhasil diperbarui.");
+        toast.success(t.admin.toastAnnouncementUpdated);
       } else {
         await create({
           title,
@@ -87,13 +87,13 @@ export default function AdminAnnouncements() {
           category,
           published,
         });
-        toast.success("Pengumuman baru berhasil diterbitkan.");
+        toast.success(t.admin.toastAnnouncementCreated);
       }
       setDialogOpen(false);
       await refresh();
     } catch (err) {
       toast.error(
-        err instanceof Error ? err.message : "Gagal menyimpan pengumuman",
+        err instanceof Error ? err.message : t.admin.toastAnnouncementSaveError,
       );
     } finally {
       setIsSubmitting(false);
@@ -105,12 +105,12 @@ export default function AdminAnnouncements() {
       await update(item.id, { published: !item.published });
       toast.success(
         item.published
-          ? "Pengumuman ditarik dari publik."
-          : "Pengumuman berhasil dipublikasikan.",
+          ? t.admin.toastAnnouncementUnpublishSuccess
+          : t.admin.toastAnnouncementPublishSuccess,
       );
       await refresh();
     } catch {
-      toast.error("Gagal mengubah status publikasi");
+      toast.error(t.admin.toastAnnouncementPublishError);
     }
   };
 
@@ -119,11 +119,11 @@ export default function AdminAnnouncements() {
     setIsDeleting(true);
     try {
       await remove(deleteTarget.id);
-      toast.success("Pengumuman telah dihapus.");
+      toast.success(t.admin.toastAnnouncementDeleted);
       setDeleteTarget(null);
       await refresh();
     } catch {
-      toast.error("Gagal menghapus pengumuman");
+      toast.error(t.admin.toastAnnouncementDeleteError);
     } finally {
       setIsDeleting(false);
     }
@@ -241,7 +241,7 @@ export default function AdminAnnouncements() {
         <DialogContent className="glass glass-strong max-w-lg border-border/80 text-foreground">
           <DialogHeader>
             <DialogTitle className="font-display text-2xl font-medium tracking-tight">
-              {editingItem ? "Ubah Pengumuman" : "Buat Pengumuman Baru"}
+              {editingItem ? t.admin.announcementsFormTitle : t.admin.announcementsFormCreateTitle}
             </DialogTitle>
           </DialogHeader>
 
@@ -251,7 +251,7 @@ export default function AdminAnnouncements() {
               <Input
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                placeholder="misal: Akademik, Kelas, Kegiatan"
+                placeholder={t.admin.announcementsPlaceholderCategory}
                 className="mt-1 bg-background/50 text-sm"
                 required
               />
@@ -264,7 +264,7 @@ export default function AdminAnnouncements() {
               <Input
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="Judul ringkas dan jelas"
+                placeholder={t.admin.announcementsPlaceholderTitle}
                 className="mt-1 bg-background/50 font-display text-base"
                 required
               />
@@ -277,7 +277,7 @@ export default function AdminAnnouncements() {
               <Textarea
                 value={summary}
                 onChange={(e) => setSummary(e.target.value)}
-                placeholder="1-2 kalimat pengantar yang tampil di halaman depan..."
+                placeholder={t.admin.announcementsPlaceholderSummary}
                 className="mt-1 h-20 bg-background/50 text-[13.5px]"
                 required
               />
@@ -290,7 +290,7 @@ export default function AdminAnnouncements() {
               <Textarea
                 value={body}
                 onChange={(e) => setBody(e.target.value)}
-                placeholder="Rincian lengkap pengumuman jika diperlukan..."
+                placeholder={t.admin.announcementsPlaceholderBody}
                 className="mt-1 h-28 bg-background/50 text-[13.5px]"
               />
             </div>

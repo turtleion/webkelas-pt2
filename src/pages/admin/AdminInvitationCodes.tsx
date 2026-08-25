@@ -51,7 +51,7 @@ export default function AdminInvitationCodes() {
       const rows = await listInvitationCodes();
       setCodes(rows);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Gagal memuat kode");
+      setError(err instanceof Error ? err.message : t.admin.toastCodeLoadError);
     } finally {
       setIsLoading(false);
     }
@@ -87,7 +87,7 @@ export default function AdminInvitationCodes() {
       await navigator.clipboard.writeText(value);
       toast.success(t.admin.invitationsCopied);
     } catch {
-      toast.error("Gagal menyalin");
+      toast.error(t.admin.toastCodeCopyError);
     }
   };
 

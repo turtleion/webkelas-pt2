@@ -28,21 +28,21 @@ export default function Home() {
   const { data: galeri } = useGallery();
 
   const faktaIdentitas: Array<[string, string]> = [
-    ["Kelas", kelas.nama],
-    ["Jurusan", kelas.jurusan],
-    ["Sekolah", kelas.sekolah],
+    [t.home.classLabel, kelas.nama],
+    [t.home.majorLabel, kelas.jurusan],
+    [t.home.schoolLabel, kelas.sekolah],
     [
-      "Wali Kelas",
+      t.home.homeroomLabel,
       `${kelas.waliKelas.nama}${kelas.waliKelas.gelar ? `, ${kelas.waliKelas.gelar}` : ""}`,
     ],
     [
-      "Ketua Kelas",
+      t.home.chairmanLabel,
       anggota.find((a) => a.position?.toLowerCase().includes("ketua kelas"))
         ?.name ||
         anggota[0]?.name ||
         "—",
     ],
-    ["Jumlah Siswa", `${kelas.jumlahSiswa || anggota.length} siswa`],
+    [t.home.studentCountLabel, `${kelas.jumlahSiswa || anggota.length} siswa`],
   ];
 
   const layoutProps = {

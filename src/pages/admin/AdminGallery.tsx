@@ -85,12 +85,12 @@ export default function AdminGallery() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!title.trim()) {
-      toast.error("Judul foto wajib diisi.");
+      toast.error(t.admin.toastPhotoTitleRequired);
       return;
     }
 
     if (!editingItem && !selectedFile) {
-      toast.error("Silakan pilih file gambar untuk diunggah.");
+      toast.error(t.admin.toastPhotoFileRequired);
       return;
     }
 
@@ -115,7 +115,7 @@ export default function AdminGallery() {
           image_url: imageUrl,
           storage_path: storagePath,
         });
-        toast.success("Dokumentasi foto berhasil diperbarui.");
+        toast.success(t.admin.toastPhotoUpdated);
       } else if (selectedFile) {
         const uploaded = await uploadGalleryImage(selectedFile);
         await create({
@@ -127,13 +127,13 @@ export default function AdminGallery() {
           image_url: uploaded.imageUrl,
           storage_path: uploaded.storagePath,
         });
-        toast.success("Foto baru berhasil diunggah.");
+        toast.success(t.admin.toastPhotoCreated);
       }
 
       setDialogOpen(false);
       await refresh();
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Gagal mengunggah foto");
+      toast.error(err instanceof Error ? err.message : t.admin.toastPhotoUploadError);
     } finally {
       setIsUploading(false);
     }
@@ -144,11 +144,11 @@ export default function AdminGallery() {
     setIsDeleting(true);
     try {
       await remove(deleteTarget.id, deleteTarget.storage_path);
-      toast.success("Foto telah dihapus.");
+      toast.success(t.admin.toastPhotoDeleted);
       setDeleteTarget(null);
       await refresh();
     } catch {
-      toast.error("Gagal menghapus foto");
+      toast.error(t.admin.toastPhotoDeleteError);
     } finally {
       setIsDeleting(false);
     }
@@ -161,7 +161,7 @@ export default function AdminGallery() {
           nomor="05"
           label={t.admin.manageModules}
           title={t.admin.gallery}
-          description="Unggah dokumentasi momen kelas langsung ke Supabase Storage."
+          description={t.admin.galleryDesc}
         />
         <Button
           onClick={openCreateModal}
@@ -248,7 +248,7 @@ export default function AdminGallery() {
         <DialogContent className="glass glass-strong max-w-lg border-border/80 text-foreground">
           <DialogHeader>
             <DialogTitle className="font-display text-2xl font-medium tracking-tight">
-              {editingItem ? "Ubah Informasi Foto" : "Unggah Foto Dokumentasi"}
+              {editingItem ? t.admin.galleryFormTitle : t.admin.galleryFormCreateTitle}
             </DialogTitle>
           </DialogHeader>
 
@@ -271,7 +271,7 @@ export default function AdminGallery() {
                   <div className="flex flex-col items-center gap-2">
                     <img
                       src={previewUrl}
-                      alt="Preview"
+                      alt={t.admin.galleryPreviewLabel}
                       className="max-h-36 rounded object-cover shadow-xs"
                     />
                     <span className="font-mono text-[10px] text-accent uppercase tracking-wider">
@@ -297,7 +297,7 @@ export default function AdminGallery() {
               <Input
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="misal: Praktik Jaringan LAN di Lab 2"
+                placeholder={t.admin.galleryPlaceholderTitle}
                 className="mt-1 bg-background/50 font-display text-base"
                 required
               />
@@ -320,7 +320,7 @@ export default function AdminGallery() {
                 <Input
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
-                  placeholder="Kegiatan, MPLS"
+                  placeholder={t.admin.galleryPlaceholderCategory}
                   className="mt-1 bg-background/50 text-sm"
                   required
                 />
@@ -348,7 +348,7 @@ export default function AdminGallery() {
               <Textarea
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                placeholder="Keterangan singkat tentang suasana acara..."
+                placeholder={t.admin.galleryPlaceholderDesc}
                 className="mt-1 h-20 bg-background/50 text-[13.5px]"
               />
             </div>

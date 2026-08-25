@@ -55,7 +55,7 @@ export default function AdminTheme() {
       toast.success(t.settings.saveSuccess || "Pengaturan tema global berhasil disimpan.");
     } catch (err) {
       console.error("Failed to save global defaults:", err);
-      toast.error("Gagal menyimpan pengaturan tema global.");
+      toast.error(t.admin.toastThemeSaveError);
     } finally {
       setIsSaving(false);
     }
@@ -85,22 +85,22 @@ export default function AdminTheme() {
       });
 
       setNewFontName("");
-      toast.success(`Font "${cleanName}" berhasil ditambahkan ke pustaka font!`);
+      toast.success(t.admin.toastFontAdded.replace("{name}", cleanName));
     } catch (err) {
       console.error("Failed to load Google Font:", err);
-      toast.error(`Font "${cleanName}" tidak ditemukan di Google Fonts.`);
+      toast.error(t.admin.toastFontNotFound.replace("{name}", cleanName));
     } finally {
       setIsAddingFont(false);
     }
   };
 
   const handleRemoveFont = async (fontId: string, fontName: string) => {
-    if (window.confirm(`Hapus font kustom "${fontName}"?`)) {
+    if (window.confirm(t.admin.toastFontRemoveConfirm.replace("{name}", fontName))) {
       await removeCustomFont(fontId);
       if (font === fontId) {
         setFont("fraunces");
       }
-      toast.success(`Font "${fontName}" berhasil dihapus.`);
+      toast.success(t.admin.toastFontRemoved.replace("{name}", fontName));
     }
   };
 
@@ -335,6 +335,9 @@ export default function AdminTheme() {
               { id: "classic", name: t.layouts.classic, desc: t.layouts.classicDesc },
               { id: "bento", name: t.layouts.bento, desc: t.layouts.bentoDesc },
               { id: "showcase", name: t.layouts.showcase, desc: t.layouts.showcaseDesc },
+              { id: "modern", name: t.layouts.modern, desc: t.layouts.modernDesc },
+              { id: "experimental", name: t.layouts.experimental, desc: t.layouts.experimentalDesc },
+              { id: "nature", name: t.layouts.nature, desc: t.layouts.natureDesc },
             ].map((l) => {
               const isSelected = homeLayout === l.id;
               return (
@@ -382,7 +385,7 @@ export default function AdminTheme() {
                 type="text"
                 value={newFontName}
                 onChange={(e) => setNewFontName(e.target.value)}
-                placeholder="Contoh: Inter, Poppins, Outfit, Plus Jakarta Sans..."
+                placeholder={t.admin.fontName + "..."}
                 className="rounded border border-border bg-background/50 px-3 py-2 text-xs flex-1 text-foreground"
               />
               <button
@@ -444,7 +447,7 @@ export default function AdminTheme() {
                             : "bg-background/80 hover:bg-background text-muted-foreground"
                         )}
                       >
-                        {isSelected ? "Dipilih" : "Pilih"}
+                        {isSelected ? t.admin.toastThemeFontSelected : t.admin.toastThemeFontSelect}
                       </button>
 
                       {!isBuiltin && (

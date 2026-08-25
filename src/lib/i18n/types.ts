@@ -112,6 +112,12 @@ export interface TranslationSchema {
     contactRow: string;
     contactRowDesc: string;
     viewOrgChart: string;
+    classLabel: string;
+    majorLabel: string;
+    schoolLabel: string;
+    homeroomLabel: string;
+    chairmanLabel: string;
+    studentCountLabel: string;
   };
   members: {
     pageTitle: string;
@@ -287,6 +293,167 @@ export interface TranslationSchema {
     actions: string;
     deleteConfirmTitle: string;
     deleteConfirmDesc: string;
+
+    // Toast messages — agenda
+    toastAgendaRequired: string;
+    toastAgendaUpdated: string;
+    toastAgendaCreated: string;
+    toastAgendaSaveError: string;
+    toastAgendaDeleted: string;
+    toastAgendaDeleteError: string;
+
+    // Toast messages — gallery
+    toastPhotoTitleRequired: string;
+    toastPhotoFileRequired: string;
+    toastPhotoUpdated: string;
+    toastPhotoCreated: string;
+    toastPhotoUploadError: string;
+    toastPhotoDeleted: string;
+    toastPhotoDeleteError: string;
+
+    // Toast messages — members
+    toastMemberRequired: string;
+    toastMemberUpdated: string;
+    toastMemberCreated: string;
+    toastMemberSaveError: string;
+    toastMemberDeleted: string;
+    toastMemberDeleteError: string;
+
+    // Toast messages — organization
+    toastOrgUpdated: string;
+    toastOrgSaveError: string;
+
+    // Toast messages — schedule
+    toastScheduleRequired: string;
+    toastScheduleUpdated: string;
+    toastScheduleCreated: string;
+    toastScheduleSaveError: string;
+    toastScheduleDeleted: string;
+    toastScheduleDeleteError: string;
+
+    // Toast messages — announcements
+    toastAnnouncementRequired: string;
+    toastAnnouncementUpdated: string;
+    toastAnnouncementCreated: string;
+    toastAnnouncementPublishError: string;
+    toastAnnouncementDeleted: string;
+    toastAnnouncementDeleteError: string;
+
+    // Toast messages — announcements (extra)
+    toastAnnouncementPublishSuccess: string;
+    toastAnnouncementUnpublishSuccess: string;
+    toastAnnouncementSaveError: string;
+
+    // Toast messages — theme
+    toastThemeSaved: string;
+    toastThemeSaveError: string;
+    toastFontAdded: string;
+    toastFontNotFound: string;
+    toastFontRemoved: string;
+    toastFontRemoveConfirm: string;
+
+    // Toast messages — invitation
+    toastCodeCopyError: string;
+    toastCodeLoadError: string;
+
+    // Agenda
+    agendaFormTitle: string;
+    agendaFormCreateTitle: string;
+    agendaEmpty: string;
+    agendaPlaceholderCategory: string;
+    agendaPlaceholderTitle: string;
+    agendaPlaceholderDesc: string;
+
+    // Gallery
+    galleryDesc: string;
+    galleryFormTitle: string;
+    galleryFormCreateTitle: string;
+    galleryPlaceholderTitle: string;
+    galleryPlaceholderCategory: string;
+    galleryPlaceholderDesc: string;
+    galleryPreviewLabel: string;
+
+    // Members
+    membersDesc: string;
+    membersEmpty: string;
+    membersPlaceholderPosition: string;
+    membersPlaceholderName: string;
+
+    // Organization
+    organizationDesc: string;
+    organizationPlaceholderGelar: string;
+    organizationPlaceholderInstagram: string;
+    organizationPlaceholderUrl: string;
+    organizationPlaceholderPhone: string;
+
+    // Schedule
+    scheduleEmpty: string;
+    schedulePlaceholderSubject: string;
+    schedulePlaceholderTeacher: string;
+    scheduleFormTitle: string;
+    scheduleFormCreateTitle: string;
+    scheduleLabelDay: string;
+    scheduleLabelStart: string;
+    scheduleLabelEnd: string;
+    scheduleLabelSubject: string;
+    scheduleLabelTeacher: string;
+    scheduleLabelBreak: string;
+    scheduleLabelBreakDesc: string;
+    scheduleLabelOrder: string;
+
+    // Announcements
+    announcementsPlaceholderCategory: string;
+    announcementsPlaceholderTitle: string;
+    announcementsPlaceholderSummary: string;
+    announcementsPlaceholderBody: string;
+    announcementsFormTitle: string;
+    announcementsFormCreateTitle: string;
+
+    // Users management
+    usersTitle: string;
+    usersDescription: string;
+    usersEmpty: string;
+    usersNameFallback: string;
+    usersNoName: string;
+    toastUsersLoadError: string;
+    toastUsersRoleUpdateError: string;
+    toastThemeFontSelect: string;
+    toastThemeFontSelected: string;
+    usersRoleConfirmTitle: string;
+    usersRoleConfirmLabel: string;
+    usersRoleConfirmDesc: string;
+    usersRoleToastSuccess: string;
+    usersColUser: string;
+    usersColEmail: string;
+    usersColRegistered: string;
+    usersColCurrentRole: string;
+    usersColChangeRole: string;
+    usersSelfTag: string;
+    usersSelfLocked: string;
+    usersRoleMember: string;
+    usersRoleAdmin: string;
+    usersRoleOwner: string;
+
+    // Organization form
+    orgSectionIdentity: string;
+    orgLabelClassName: string;
+    orgLabelSchoolName: string;
+    orgLabelMajorFull: string;
+    orgLabelMajorAbbr: string;
+    orgLabelAcademicYear: string;
+    orgLabelSemester: string;
+    orgLabelRoom: string;
+    orgLabelStudentCount: string;
+    orgLabelAddress: string;
+    orgSectionHomeroom: string;
+    orgLabelHomeroomName: string;
+    orgLabelDegree: string;
+    orgLabelRoleDesc: string;
+    orgSectionContact: string;
+    orgLabelInstagramUser: string;
+    orgLabelInstagramLink: string;
+    orgLabelEmail: string;
+    orgLabelWhatsApp: string;
 
     // announcements
     announcementsDesc: string;

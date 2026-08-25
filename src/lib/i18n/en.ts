@@ -78,8 +78,7 @@ export const en: TranslationSchema = {
     experimentalDesc:
       "Unique composition: oversized type, layered diagonals, unexpected placement.",
     nature: "Nature",
-    natureDesc:
-      "Botanical feel: organic curves, leaf accents, calm and fresh.",
+    natureDesc: "Botanical feel: organic curves, leaf accents, calm and fresh.",
   },
   colors: {
     background: "Background",
@@ -106,9 +105,9 @@ export const en: TranslationSchema = {
   home: {
     heroTag: "Digital Class Archive",
     heroSubtitle:
-      "One classroom, {count} students, and one academic year — archived here.",
+      "From just knowing names, to knowing everyone's drama by heart.",
     heroDescription:
-      "This is the digital space for {kelas}: where class announcements, schedules, agenda, and documentation come together. Built by students for students.",
+      "The official digital platform for X TKJ 1, home to announcements, class schedules, activity agendas, and class documentation. Built by students, for students.",
     readAnnouncements: "Read announcements",
     viewMembers: "View class members",
     classIdentity: "Class Profile",
@@ -127,6 +126,12 @@ export const en: TranslationSchema = {
     contactRowDesc:
       "Reach out to class officers or contact through the secretary.",
     viewOrgChart: "View class officers",
+    classLabel: "Class",
+    majorLabel: "Major",
+    schoolLabel: "School",
+    homeroomLabel: "Homeroom Teacher",
+    chairmanLabel: "Class Chairperson",
+    studentCountLabel: "Student Count",
   },
   members: {
     pageTitle: "Class Members",
@@ -228,7 +233,8 @@ export const en: TranslationSchema = {
     successDesc: "Redirecting to your destination...",
     errorGeneric: "Invalid or expired invitation code.",
     errorNetwork: "A network error occurred. Please try again.",
-    alreadyVerifiedRedirect: "Your account is already registered. Redirecting...",
+    alreadyVerifiedRedirect:
+      "Your account is already registered. Redirecting...",
     signOutLink: "Sign out / use another account",
     backHome: "Back to home",
     googlePromptTitle: "Sign in to register",
@@ -377,6 +383,169 @@ export const en: TranslationSchema = {
     invitationsActive: "View code",
     invitationsGenerateError:
       "Failed to generate code. Browser does not support required cryptography.",
+
+    // Toast messages — agenda
+    toastAgendaRequired: "Title and date are required.",
+    toastAgendaUpdated: "Agenda updated successfully.",
+    toastAgendaCreated: "New agenda recorded successfully.",
+    toastAgendaSaveError: "Failed to save agenda",
+    toastAgendaDeleted: "Agenda deleted successfully.",
+    toastAgendaDeleteError: "Failed to delete agenda",
+
+    // Toast messages — gallery
+    toastPhotoTitleRequired: "Photo title is required.",
+    toastPhotoFileRequired: "Please select an image file to upload.",
+    toastPhotoUpdated: "Photo documentation updated successfully.",
+    toastPhotoCreated: "New photo uploaded successfully.",
+    toastPhotoUploadError: "Failed to upload photo",
+    toastPhotoDeleted: "Photo deleted successfully.",
+    toastPhotoDeleteError: "Failed to delete photo",
+
+    // Toast messages — members
+    toastMemberRequired: "Attendance number and name are required.",
+    toastMemberUpdated: "Member data updated successfully.",
+    toastMemberCreated: "New student added successfully.",
+    toastMemberSaveError: "Failed to save member",
+    toastMemberDeleted: "Member deleted successfully.",
+    toastMemberDeleteError: "Failed to delete member",
+
+    // Toast messages — organization
+    toastOrgUpdated: "Data updated successfully.",
+    toastOrgSaveError: "Failed to save data",
+
+    // Toast messages — schedule
+    toastScheduleRequired: "Subject and start time are required.",
+    toastScheduleUpdated: "Schedule updated successfully.",
+    toastScheduleCreated: "New subject added successfully.",
+    toastScheduleSaveError: "Failed to save schedule",
+    toastScheduleDeleted: "Schedule deleted successfully.",
+    toastScheduleDeleteError: "Failed to delete schedule",
+
+    // Toast messages — announcements
+    toastAnnouncementRequired: "Title and summary are required.",
+    toastAnnouncementUpdated: "Announcement updated successfully.",
+    toastAnnouncementCreated: "New announcement published successfully.",
+    toastAnnouncementPublishError: "Failed to change publish status",
+    toastAnnouncementDeleted: "Announcement deleted successfully.",
+    toastAnnouncementPublishSuccess: "Announcement published successfully.",
+    toastAnnouncementUnpublishSuccess: "Announcement unpublished successfully.",
+    toastAnnouncementSaveError: "Failed to save announcement",
+    toastAnnouncementDeleteError: "Failed to delete announcement",
+
+    // Toast messages — theme
+    toastThemeSaved: "Global theme settings saved successfully.",
+    toastThemeSaveError: "Failed to save global theme settings.",
+    toastFontAdded: 'Font "{name}" added to font library!',
+    toastFontNotFound: 'Font "{name}" not found in Google Fonts.',
+    toastFontRemoved: 'Font "{name}" removed successfully.',
+    toastFontRemoveConfirm: 'Remove custom font "{name}"?',
+
+    // Toast messages — invitation
+    toastCodeCopyError: "Failed to copy",
+    toastCodeLoadError: "Failed to load codes",
+
+    // Agenda
+    agendaFormTitle: "Edit Agenda",
+    agendaFormCreateTitle: "New Agenda",
+    agendaEmpty: "No class agenda yet.",
+    agendaPlaceholderCategory: "e.g. Exam, Assignment, Event",
+    agendaPlaceholderTitle: "Activity name or subject",
+    agendaPlaceholderDesc: "Task details, items to bring, etc...",
+
+    // Gallery
+    galleryDesc:
+      "Upload class moment documentation directly to Supabase Storage.",
+    galleryFormTitle: "Edit Photo Info",
+    galleryFormCreateTitle: "Upload Documentation Photo",
+    galleryPlaceholderTitle: "e.g. LAN Network Practice in Lab 2",
+    galleryPlaceholderCategory: "Activity, Event",
+    galleryPlaceholderDesc: "Brief description of the moment...",
+    galleryPreviewLabel: "Preview",
+
+    // Members
+    membersDesc: "Class member data and role assignments.",
+    membersEmpty: "No class members recorded yet.",
+    membersPlaceholderPosition: "Chairperson, Secretary, PR Officer...",
+    membersPlaceholderName: "e.g. John Smith",
+
+    // Organization
+    organizationDesc:
+      "Edit main class profile, homeroom teacher, academic year, and official social media links.",
+    organizationPlaceholderGelar: "e.g. M.Cs.",
+    organizationPlaceholderInstagram: "@school.class",
+    organizationPlaceholderUrl: "https://instagram.com/...",
+    organizationPlaceholderPhone: "+1 555-...",
+
+    // Schedule
+    scheduleEmpty: "No class timetable configured for this day yet.",
+    schedulePlaceholderSubject: "e.g. Web Programming, Mathematics, Break",
+    schedulePlaceholderTeacher: "e.g. Jane Smith, M.Ed.",
+    scheduleFormTitle: "Edit Subject",
+    scheduleFormCreateTitle: "New Subject",
+    scheduleLabelDay: "Day",
+    scheduleLabelStart: "Start",
+    scheduleLabelEnd: "End",
+    scheduleLabelSubject: "Subject",
+    scheduleLabelTeacher: "Teacher",
+    scheduleLabelBreak: "This is a break session",
+    scheduleLabelBreakDesc: "Break",
+    scheduleLabelOrder: "Order:",
+
+    // Announcements
+    announcementsPlaceholderCategory: "e.g. Academic, Class, Activity",
+    announcementsPlaceholderTitle: "Concise and clear title",
+    announcementsPlaceholderSummary: "1-2 sentence intro for the front page...",
+    announcementsPlaceholderBody: "Full announcement details if needed...",
+    announcementsFormTitle: "Edit Announcement",
+    announcementsFormCreateTitle: "New Announcement",
+
+    // Users management
+    usersTitle: "User & Role Management",
+    usersDescription:
+      "Manage Google accounts registered to the class archive. Promote student access to Admin or Owner to grant management permissions.",
+    usersEmpty: "No users signed in yet.",
+    usersNameFallback: "User",
+    usersNoName: "No Name",
+    toastUsersLoadError: "Failed to load user list",
+    toastUsersRoleUpdateError: "Failed to update user role",
+    toastThemeFontSelect: "Select",
+    toastThemeFontSelected: "Selected",
+    usersRoleConfirmTitle: "Confirm Role Change",
+    usersRoleConfirmLabel: "Change Role",
+    usersRoleConfirmDesc:
+      'Are you sure you want to change the role of "{name}" to "{role}"?',
+    usersRoleToastSuccess: "Role of {name} changed to {role}.",
+    usersColUser: "User",
+    usersColEmail: "Email",
+    usersColRegistered: "Registered",
+    usersColCurrentRole: "Current Role",
+    usersColChangeRole: "Change Role",
+    usersSelfTag: "You",
+    usersSelfLocked: "Locked (Your Account)",
+    usersRoleMember: "member (Member)",
+    usersRoleAdmin: "admin (Officer)",
+    usersRoleOwner: "owner (Owner)",
+
+    // Organization form
+    orgSectionIdentity: "1. Class Identity",
+    orgLabelClassName: "Class Name",
+    orgLabelSchoolName: "School Name",
+    orgLabelMajorFull: "Full Major",
+    orgLabelMajorAbbr: "Major Abbreviation",
+    orgLabelAcademicYear: "Academic Year",
+    orgLabelSemester: "Semester",
+    orgLabelRoom: "Classroom / Lab",
+    orgLabelStudentCount: "Student Count",
+    orgLabelAddress: "School Address",
+    orgSectionHomeroom: "2. Homeroom Teacher",
+    orgLabelHomeroomName: "Homeroom Teacher Name",
+    orgLabelDegree: "Academic Degree",
+    orgLabelRoleDesc: "Role / Description",
+    orgSectionContact: "3. Contact & Social Media",
+    orgLabelInstagramUser: "Instagram Username",
+    orgLabelInstagramLink: "Instagram Link",
+    orgLabelEmail: "Class Email",
+    orgLabelWhatsApp: "WhatsApp Number",
   },
   common: {
     save: "Save",
@@ -403,9 +572,9 @@ export const en: TranslationSchema = {
     explore: "Explore",
     contactSocial: "Contact & Social",
     copyright: "© 2026 X TKJ 1 · {sekolah}",
-    sampleData: "Sample data — contact class administrators for updates",
+    sampleData: "Created by TS.",
     academicYear: "Academic Year {tahunAjaran} · Semester {semester}",
     description:
-      "Digital class archive for X TKJ 1 — {sekolah}. Announcements, schedules, agenda, and photo documentation in one unified place.",
+      "X TKJ 1's digital class space, SMK Negeri 1 Cerme. Announcements, schedules, agendas, and class documentation, all gathered in one place.",
   },
 };

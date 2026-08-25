@@ -59,7 +59,7 @@ export default function AdminAgenda() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!title.trim() || !date) {
-      toast.error("Judul dan tanggal wajib diisi.");
+      toast.error(t.admin.toastAgendaRequired);
       return;
     }
 
@@ -72,7 +72,7 @@ export default function AdminAgenda() {
           description: description || null,
           category,
         });
-        toast.success("Agenda berhasil diperbarui.");
+        toast.success(t.admin.toastAgendaUpdated);
       } else {
         await create({
           date,
@@ -80,13 +80,13 @@ export default function AdminAgenda() {
           description: description || null,
           category,
         });
-        toast.success("Agenda baru berhasil dicatat.");
+        toast.success(t.admin.toastAgendaCreated);
       }
       setDialogOpen(false);
       await refresh();
     } catch (err) {
       toast.error(
-        err instanceof Error ? err.message : "Gagal menyimpan agenda",
+        err instanceof Error ? err.message : t.admin.toastAgendaSaveError,
       );
     } finally {
       setIsSubmitting(false);
@@ -98,11 +98,11 @@ export default function AdminAgenda() {
     setIsDeleting(true);
     try {
       await remove(deleteTarget.id);
-      toast.success("Agenda berhasil dihapus.");
+      toast.success(t.admin.toastAgendaDeleted);
       setDeleteTarget(null);
       await refresh();
     } catch {
-      toast.error("Gagal menghapus agenda");
+      toast.error(t.admin.toastAgendaDeleteError);
     } finally {
       setIsDeleting(false);
     }
@@ -130,7 +130,7 @@ export default function AdminAgenda() {
           isLoading={isLoading}
           error={error}
           isEmpty={data.length === 0}
-          emptyMessage="Belum ada agenda kelas."
+          emptyMessage={t.admin.agendaEmpty}
         >
           <table className="w-full text-left text-sm">
             <thead className="kicker border-b border-border/80 bg-background/50 text-[10px]">
@@ -205,7 +205,7 @@ export default function AdminAgenda() {
         <DialogContent className="glass glass-strong max-w-lg border-border/80 text-foreground">
           <DialogHeader>
             <DialogTitle className="font-display text-2xl font-medium tracking-tight">
-              {editingItem ? "Ubah Agenda" : "Tambah Agenda Baru"}
+              {editingItem ? t.admin.agendaFormTitle : t.admin.agendaFormCreateTitle}
             </DialogTitle>
           </DialogHeader>
 
@@ -227,7 +227,7 @@ export default function AdminAgenda() {
                 <Input
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
-                  placeholder="misal: Ulangan, Tugas, MPLS"
+                  placeholder={t.admin.agendaPlaceholderCategory}
                   className="mt-1 bg-background/50 text-sm"
                   required
                 />
@@ -239,7 +239,7 @@ export default function AdminAgenda() {
               <Input
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="Nama kegiatan atau mata pelajaran"
+                placeholder={t.admin.agendaPlaceholderTitle}
                 className="mt-1 bg-background/50 font-display text-base"
                 required
               />
@@ -252,7 +252,7 @@ export default function AdminAgenda() {
               <Textarea
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                placeholder="Rincian tugas, perlengkapan yang harus dibawa, dsb..."
+                placeholder={t.admin.agendaPlaceholderDesc}
                 className="mt-1 h-24 bg-background/50 text-[13.5px]"
               />
             </div>

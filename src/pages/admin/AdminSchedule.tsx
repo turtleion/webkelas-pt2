@@ -84,7 +84,7 @@ export default function AdminSchedule() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!subject.trim() || !timeStart.trim()) {
-      toast.error("Mata pelajaran dan jam mulai wajib diisi.");
+      toast.error(t.admin.toastScheduleRequired);
       return;
     }
 
@@ -100,7 +100,7 @@ export default function AdminSchedule() {
           is_break: isBreak,
           sort_order: sortOrder,
         });
-        toast.success("Jadwal pelajaran berhasil diperbarui.");
+        toast.success(t.admin.toastScheduleUpdated);
       } else {
         await create({
           day,
@@ -111,13 +111,13 @@ export default function AdminSchedule() {
           is_break: isBreak,
           sort_order: sortOrder,
         });
-        toast.success("Mata pelajaran baru berhasil ditambahkan.");
+        toast.success(t.admin.toastScheduleCreated);
       }
       setDialogOpen(false);
       await refresh();
     } catch (err) {
       toast.error(
-        err instanceof Error ? err.message : "Gagal menyimpan jadwal",
+        err instanceof Error ? err.message : t.admin.toastScheduleSaveError,
       );
     } finally {
       setIsSubmitting(false);
@@ -129,11 +129,11 @@ export default function AdminSchedule() {
     setIsDeleting(true);
     try {
       await remove(deleteTarget.id);
-      toast.success("Jadwal pelajaran berhasil dihapus.");
+      toast.success(t.admin.toastScheduleDeleted);
       setDeleteTarget(null);
       await refresh();
     } catch {
-      toast.error("Gagal menghapus jadwal");
+      toast.error(t.admin.toastScheduleDeleteError);
     } finally {
       setIsDeleting(false);
     }
@@ -179,7 +179,7 @@ export default function AdminSchedule() {
           isLoading={isLoading}
           error={error}
           isEmpty={filteredData.length === 0}
-          emptyMessage={`Belum ada jadwal pelajaran untuk hari ${selectedDay}.`}
+          emptyMessage={t.admin.scheduleEmpty}
         >
           <table className="w-full text-left text-sm">
             <thead className="kicker border-b border-border/80 bg-background/50 text-[10px]">
@@ -253,14 +253,14 @@ export default function AdminSchedule() {
         <DialogContent className="glass glass-strong max-w-lg border-border/80 text-foreground">
           <DialogHeader>
             <DialogTitle className="font-display text-2xl font-medium tracking-tight">
-              {editingItem ? "Ubah Mata Pelajaran" : "Tambah Mata Pelajaran"}
+              {editingItem ? t.admin.scheduleFormTitle : t.admin.scheduleFormCreateTitle}
             </DialogTitle>
           </DialogHeader>
 
           <form onSubmit={handleSubmit} className="mt-4 space-y-4">
             <div className="grid grid-cols-3 gap-3">
               <div>
-                <label className="kicker block text-[10px]">Hari</label>
+                <label className="kicker block text-[10px]">{t.admin.scheduleLabelDay}</label>
                 <select
                   value={day}
                   onChange={(e) => setDay(e.target.value as ScheduleRow["day"])}
@@ -275,7 +275,7 @@ export default function AdminSchedule() {
               </div>
 
               <div>
-                <label className="kicker block text-[10px]">Mulai</label>
+                <label className="kicker block text-[10px]">{t.admin.scheduleLabelStart}</label>
                 <Input
                   value={timeStart}
                   onChange={(e) => setTimeStart(e.target.value)}
@@ -286,7 +286,7 @@ export default function AdminSchedule() {
               </div>
 
               <div>
-                <label className="kicker block text-[10px]">Selesai</label>
+                <label className="kicker block text-[10px]">{t.admin.scheduleLabelEnd}</label>
                 <Input
                   value={timeEnd}
                   onChange={(e) => setTimeEnd(e.target.value)}
@@ -297,7 +297,7 @@ export default function AdminSchedule() {
             </div>
 
             <div>
-              <label className="kicker block text-[10px]">Mata Pelajaran</label>
+              <label className="kicker block text-[10px]">{t.admin.scheduleLabelSubject}</label>
               <Input
                 value={subject}
                 onChange={(e) => setSubject(e.target.value)}
@@ -332,12 +332,12 @@ export default function AdminSchedule() {
                   htmlFor="isBreak"
                   className="text-[13px] cursor-pointer text-foreground"
                 >
-                  Ini sesi istirahat
+                  {t.admin.scheduleLabelBreak}
                 </label>
               </div>
 
               <div className="flex items-center gap-2">
-                <label className="kicker text-[9px]">Urutan:</label>
+                <label className="kicker text-[9px]">{t.admin.scheduleLabelOrder}</label>
                 <input
                   type="number"
                   value={sortOrder}

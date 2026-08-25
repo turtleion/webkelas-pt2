@@ -1,6 +1,7 @@
 import { PageHeader } from "@/components/site/PageHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
+import { useMembers } from "@/hooks/use-members";
 import { useOrganization } from "@/hooks/use-organization";
 import { usePageTitle } from "@/hooks/use-page-title";
 import { useTranslation } from "@/hooks/use-translation";
@@ -44,6 +45,11 @@ export default function Organisasi() {
   usePageTitle(t.organization.pageTitle);
   const { data: orgData, isLoading } = useOrganization();
   const { kelas, pengurusInti, sie } = orgData;
+  const { data: anggota } = useMembers();
+
+  // Build absen_no → name lookup from member data
+  const memberByNo = new Map(anggota.map((m) => [m.absen_no, m.name]));
+  const getName = (no: number) => memberByNo.get(no) || `Absen #${no}`;
 
   const hasWali = Boolean(kelas.waliKelas?.nama);
   const hasInti = pengurusInti.length > 0;
@@ -108,7 +114,7 @@ export default function Organisasi() {
                         {p.nomor.map((no) => (
                           <Orang
                             key={no}
-                            nama={`Absen #${no}`}
+                            nama={getName(no)}
                             absenNo={no}
                             besar={p.nomor.length === 1}
                           />
@@ -132,7 +138,7 @@ export default function Organisasi() {
                         {s.nomor.map((no) => (
                           <Orang
                             key={no}
-                            nama={`Absen #${no}`}
+                            nama={getName(no)}
                             absenNo={no}
                           />
                         ))}

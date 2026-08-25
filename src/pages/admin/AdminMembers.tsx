@@ -64,7 +64,7 @@ export default function AdminMembers() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim() || !absenNo) {
-      toast.error("Nomor absen dan nama wajib diisi.");
+      toast.error(t.admin.toastMemberRequired);
       return;
     }
 
@@ -76,19 +76,19 @@ export default function AdminMembers() {
           name,
           position: position || null,
         });
-        toast.success("Data anggota berhasil diperbarui.");
+        toast.success(t.admin.toastMemberUpdated);
       } else {
         await create({
           absen_no: absenNo,
           name,
           position: position || null,
         });
-        toast.success("Siswa baru berhasil ditambahkan.");
+        toast.success(t.admin.toastMemberCreated);
       }
       setDialogOpen(false);
       await refresh();
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Gagal menyimpan anggota");
+      toast.error(err instanceof Error ? err.message : t.admin.toastMemberSaveError);
     } finally {
       setIsSubmitting(false);
     }
@@ -99,11 +99,11 @@ export default function AdminMembers() {
     setIsDeleting(true);
     try {
       await remove(deleteTarget.id);
-      toast.success("Anggota berhasil dihapus.");
+      toast.success(t.admin.toastMemberDeleted);
       setDeleteTarget(null);
       await refresh();
     } catch {
-      toast.error("Gagal menghapus anggota");
+      toast.error(t.admin.toastMemberDeleteError);
     } finally {
       setIsDeleting(false);
     }
@@ -116,7 +116,7 @@ export default function AdminMembers() {
           nomor="04"
           label={t.admin.manageModules}
           title={t.admin.members}
-          description="Data anggota kelas dan penugasan jabatan."
+          description={t.admin.membersDesc}
         />
         <Button
           onClick={openCreateModal}
@@ -146,7 +146,7 @@ export default function AdminMembers() {
           emptyMessage={
             search
               ? `Tidak ditemukan anggota dengan kata kunci "${search}".`
-              : "Belum ada anggota kelas tercatat."
+              : t.admin.membersEmpty
           }
         >
           <table className="w-full text-left text-sm">
@@ -240,7 +240,7 @@ export default function AdminMembers() {
                 <Input
                   value={position}
                   onChange={(e) => setPosition(e.target.value)}
-                  placeholder="Ketua, Sekretaris I, Sie Humas..."
+                  placeholder={t.admin.membersPlaceholderPosition}
                   className="mt-1 bg-background/50 text-sm"
                 />
               </div>
@@ -251,7 +251,7 @@ export default function AdminMembers() {
               <Input
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="misal: Aditya Pramana Putra"
+                placeholder={t.admin.membersPlaceholderName}
                 className="mt-1 bg-background/50 font-display text-base"
                 required
               />

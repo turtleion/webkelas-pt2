@@ -34,7 +34,7 @@ export default function AdminUsers() {
       setProfiles(rows);
     } catch (err) {
       setError(
-        err instanceof Error ? err.message : "Gagal memuat daftar pengguna"
+        err instanceof Error ? err.message : t.admin.toastUsersLoadError
       );
     } finally {
       setIsLoading(false);
@@ -51,13 +51,15 @@ export default function AdminUsers() {
     try {
       await updateProfileRole(roleChangeTarget.profile.id, roleChangeTarget.newRole);
       toast.success(
-        `Peran ${roleChangeTarget.profile.name || roleChangeTarget.profile.email} diubah menjadi ${roleChangeTarget.newRole}.`
+        t.admin.usersRoleToastSuccess
+          .replace("{name}", roleChangeTarget.profile.name || roleChangeTarget.profile.email || "")
+          .replace("{role}", roleChangeTarget.newRole)
       );
       setRoleChangeTarget(null);
       await fetchProfiles();
     } catch (err) {
       toast.error(
-        err instanceof Error ? err.message : "Gagal memperbarui peran pengguna"
+        err instanceof Error ? err.message : t.admin.toastUsersRoleUpdateError
       );
     } finally {
       setIsUpdating(false);
@@ -69,8 +71,8 @@ export default function AdminUsers() {
       <PageHeader
         nomor="OWN"
         label={t.admin.usersManagement}
-        title="Manajemen Pengguna & Peran"
-        description="Kelola akun Google yang telah mendaftar ke arsip kelas. Tingkatkan hak akses siswa menjadi Admin atau Owner untuk memberi izin pengelolaan."
+        title={t.admin.usersTitle}
+        description={t.admin.usersDescription}
       />
 
       <div className="mt-8">
@@ -78,16 +80,16 @@ export default function AdminUsers() {
           isLoading={isLoading}
           error={error}
           isEmpty={profiles.length === 0}
-          emptyMessage="Belum ada pengguna yang masuk."
+          emptyMessage={t.admin.usersEmpty}
         >
           <table className="w-full text-left text-sm">
             <thead className="kicker border-b border-border/80 bg-background/50 text-[10px]">
               <tr>
-                <th className="p-3 pl-4">Pengguna</th>
-                <th className="p-3">Email</th>
-                <th className="p-3">Terdaftar</th>
-                <th className="p-3">Peran Saat Ini</th>
-                <th className="p-3 pr-4 text-right">Ubah Peran</th>
+                <th className="p-3 pl-4">{t.admin.usersColUser}</th>
+                <th className="p-3">{t.admin.usersColEmail}</th>
+                <th className="p-3">{t.admin.usersColRegistered}</th>
+                <th className="p-3">{t.admin.usersColCurrentRole}</th>
+                <th className="p-3 pr-4 text-right">{t.admin.usersColChangeRole}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border/60">
@@ -107,15 +109,15 @@ export default function AdminUsers() {
                           />
                         ) : (
                           <span className="flex size-8 items-center justify-center rounded-full border border-border bg-card font-display text-xs italic">
-                            {inisialNama(p.name || p.email || "User")}
+                            {inisialNama(p.name || p.email || t.admin.usersNameFallback)}
                           </span>
                         )}
                         <div>
                           <p className="font-display font-medium text-foreground">
-                            {p.name || "Tanpa Nama"}
+                            {p.name || t.admin.usersNoName}
                             {isSelf && (
                               <span className="ml-2 font-mono text-[9px] text-accent">
-                                (Anda)
+                                ({t.admin.usersSelfTag})
                               </span>
                             )}
                           </p>
@@ -158,7 +160,7 @@ export default function AdminUsers() {
                     <td className="p-3 pr-4 text-right whitespace-nowrap">
                       {isSelf ? (
                         <span className="font-mono text-[10px] text-muted-foreground italic">
-                          Terkunci (Akun Anda)
+                          {t.admin.usersSelfLocked}
                         </span>
                       ) : (
                         <div className="flex items-center justify-end gap-1.5">
@@ -172,9 +174,9 @@ export default function AdminUsers() {
                             }
                             className="cursor-pointer rounded border border-border bg-background/50 px-2 py-1 font-mono text-xs text-foreground outline-none"
                           >
-                            <option value="member">member (Anggota)</option>
-                            <option value="admin">admin (Pengurus)</option>
-                            <option value="owner">owner (Pemilik)</option>
+                            <option value="member">{t.admin.usersRoleMember}</option>
+                            <option value="admin">{t.admin.usersRoleAdmin}</option>
+                            <option value="owner">{t.admin.usersRoleOwner}</option>
                           </select>
                         </div>
                       )}
@@ -191,11 +193,13 @@ export default function AdminUsers() {
       <ConfirmDialog
         open={Boolean(roleChangeTarget)}
         onOpenChange={(open) => !open && setRoleChangeTarget(null)}
-        title="Konfirmasi Perubahan Hak Akses"
-        description={`Apakah Anda yakin ingin mengubah peran "${
-          roleChangeTarget?.profile.name || roleChangeTarget?.profile.email
-        }" menjadi "${roleChangeTarget?.newRole.toUpperCase()}"?`}
-        confirmLabel="Ubah Peran"
+        title={t.admin.usersRoleConfirmTitle}
+        description={
+          t.admin.usersRoleConfirmDesc
+            .replace("{name}", roleChangeTarget?.profile.name || roleChangeTarget?.profile.email || "")
+            .replace("{role}", roleChangeTarget?.newRole?.toUpperCase() || "")
+        }
+        confirmLabel={t.admin.usersRoleConfirmLabel}
         destructive={false}
         isLoading={isUpdating}
         onConfirm={handleConfirmRoleChange}
