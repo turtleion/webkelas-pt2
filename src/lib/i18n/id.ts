@@ -121,6 +121,7 @@ export const id: TranslationSchema = {
     nearest: "Terdekat",
     classMembers: "Wajah kelas",
     allMembers: "Semua {count} anggota",
+    allMembersLink: "Semua anggota",
     galleryShowcase: "Foto & dokumentasi kelas",
     openGallery: "Buka galeri",
     contactRow: "Punya informasi untuk kelas?",

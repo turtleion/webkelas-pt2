@@ -230,7 +230,6 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
 
   // Load user preferences from Supabase (or localStorage fallback)
   const loadUserData = useCallback(async () => {
-    setIsLoading(true);
     try {
       if (user && !user.guest) {
         const dbSettings = await getUserSettings<UserPreferences>(user.id);
@@ -245,18 +244,21 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
       }
     } catch {
       setUserPrefs(getLocalPreferences());
-    } finally {
-      setIsLoading(false);
     }
   }, [user]);
 
-  useEffect(() => {
-    void loadGlobalData();
-  }, [loadGlobalData]);
+  // Combined loader: fetch global + user data, then signal ready.
+  // isLoading must only flip to false AFTER globalDefaults is updated,
+  // otherwise the Home renders with the hardcoded DEFAULT_GLOBAL layout.
+  const loadAllData = useCallback(async () => {
+    setIsLoading(true);
+    await Promise.all([loadGlobalData(), loadUserData()]);
+    setIsLoading(false);
+  }, [loadGlobalData, loadUserData]);
 
   useEffect(() => {
-    void loadUserData();
-  }, [loadUserData]);
+    void loadAllData();
+  }, [loadAllData]);
 
   // Resolve Effective Settings & Custom Transitions
   const effectiveSettings = useMemo<EffectiveSettings>(() => {

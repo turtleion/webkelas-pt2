@@ -243,6 +243,33 @@ export function HomeNature({
             </div>
             ))}
         </div>
+
+          <div className="mt-8 flex items-center justify-center" aria-hidden>
+            <div className="flex items-center gap-1.5">
+              <span className="inline-block size-1 rounded-full bg-accent/20" />
+              <span className="inline-block size-1.5 -translate-y-0.5 rounded-full bg-accent/30" />
+              <span className="inline-block size-1 rounded-full bg-primary/20" />
+            </div>
+            <div className="mx-1.5 flex items-center gap-1">
+              <span className="inline-block size-1.5 translate-y-0.5 rounded-full bg-primary/25" />
+              <span className="inline-block size-2 rounded-full bg-accent/20" />
+              <span className="inline-block size-1 -translate-y-0.5 rounded-full bg-accent/30" />
+            </div>
+            <div className="flex items-center gap-1.5">
+              <span className="inline-block size-1 rounded-full bg-accent/25" />
+              <span className="inline-block size-1.5 translate-y-0.5 rounded-full bg-primary/20" />
+              <span className="inline-block size-1 rounded-full bg-accent/25" />
+            </div>
+          </div>
+
+          <div className="mt-4 text-center">
+            <Link
+              to="/anggota"
+              className="inline-flex items-center gap-1 text-sm text-primary hover:underline"
+            >
+              {t.home.allMembersLink} →
+            </Link>
+          </div>
         </div>
       </section>
 

@@ -107,6 +107,7 @@ export interface TranslationSchema {
     nearest: string;
     classMembers: string;
     allMembers: string;
+    allMembersLink: string;
     galleryShowcase: string;
     openGallery: string;
     contactRow: string;

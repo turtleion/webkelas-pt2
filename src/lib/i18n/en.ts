@@ -120,6 +120,7 @@ export const en: TranslationSchema = {
     nearest: "Next Up",
     classMembers: "Class Roster",
     allMembers: "All {count} members",
+    allMembersLink: "All members",
     galleryShowcase: "Class Photo Documentation",
     openGallery: "Open gallery",
     contactRow: "Have information for the class?",
