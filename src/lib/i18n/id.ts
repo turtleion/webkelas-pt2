@@ -59,6 +59,11 @@ export const id: TranslationSchema = {
       "Glassmorphism modern dengan efek blur, permukaan buram, dan nuansa segar.",
     cartoon: "Cartoon",
     cartoonDesc: "Penuh warna, ceria, dan bergaya kartun. Hanya mode Terang.",
+    dreamy: "Dreamy",
+    dreamyDesc:
+      "Pastel lembut, kabut kepulauan, dan blur tebal ala awan yang menenangkan.",
+    minimalistic: "Minimalis",
+    minimalisticDesc: "Hitam-putih monokrom yang bersih, modern, dan profesional.",
     custom: "Kustom",
     customDesc:
       "Kombinasi pengaturan pribadi Anda yang berbeda dari tema bawaan.",

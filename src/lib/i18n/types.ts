@@ -55,6 +55,10 @@ export interface TranslationSchema {
     glassDesc: string;
     cartoon: string;
     cartoonDesc: string;
+    dreamy: string;
+    dreamyDesc: string;
+    minimalistic: string;
+    minimalisticDesc: string;
     custom: string;
     customDesc: string;
   };

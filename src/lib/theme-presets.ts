@@ -1,4 +1,10 @@
-export type ThemePresetKey = "paper" | "glass" | "cartoon" | "custom";
+export type ThemePresetKey =
+  | "paper"
+  | "glass"
+  | "cartoon"
+  | "dreamy"
+  | "minimalistic"
+  | "custom";
 export type HomeLayoutKey = "classic" | "bento" | "showcase" | "modern" | "experimental" | "nature";
 export type ModeKey = "light" | "dark";
 
@@ -111,6 +117,15 @@ export const BUILTIN_FONTS: FontDefinition[] = [
     fontSans: '"Space Grotesk", ui-sans-serif, system-ui, sans-serif',
     fontMono: '"Space Mono", ui-monospace, monospace',
     googleFont: "Space+Grotesk:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700",
+    isBuiltIn: true,
+  },
+  {
+    id: "quicksand",
+    name: "Quicksand",
+    fontDisplay: '"Quicksand", ui-sans-serif, system-ui, sans-serif',
+    fontSans: '"Quicksand", ui-sans-serif, system-ui, sans-serif',
+    fontMono: '"IBM Plex Mono", ui-monospace, monospace',
+    googleFont: "Quicksand:wght@400;500;600;700",
     isBuiltIn: true,
   },
 ];
@@ -289,6 +304,142 @@ export const COLOR_SCHEMES: Record<string, PresetColorScheme> = {
       glassHighlight: "rgba(255, 255, 255, 1)",
       glassShadow: "4px 4px 0px #18181b",
       glassShadowHover: "6px 6px 0px #18181b",
+    },
+  },
+  dreamy: {
+    id: "dreamy",
+    name: "Dreamy",
+    light: {
+      radius: "1rem",
+      background: "#f3f1fb",
+      foreground: "#3e3a5c",
+      primary: "#8f86d9",
+      primaryForeground: "#ffffff",
+      accent: "#c9a5d6",
+      accentForeground: "#3e2a52",
+      card: "#ffffff",
+      cardForeground: "#3e3a5c",
+      popover: "#ffffff",
+      popoverForeground: "#3e3a5c",
+      nav: "#ebe8f9",
+      onNav: "#3e3a5c",
+      tertiary: "#a7c7e7",
+      onTertiary: "#22324a",
+      secondary: "#e3ddf6",
+      secondaryForeground: "#3e3a5c",
+      muted: "#ece9f8",
+      mutedForeground: "#8a86ac",
+      destructive: "#d98aa8",
+      border: "#e0dbf3",
+      input: "#e0dbf3",
+      ring: "#8f86d9",
+      glassBg: "rgba(255, 255, 255, 0.42)",
+      glassBgStrong: "rgba(255, 255, 255, 0.62)",
+      glassBorder: "rgba(143, 134, 217, 0.24)",
+      glassBorderBright: "rgba(201, 165, 214, 0.4)",
+      glassHighlight: "rgba(255, 255, 255, 0.7)",
+      glassShadow: "0 8px 40px -12px rgba(120, 110, 200, 0.25)",
+      glassShadowHover: "0 14px 52px -16px rgba(120, 110, 200, 0.35)",
+    },
+    dark: {
+      radius: "1rem",
+      background: "#17142e",
+      foreground: "#dcd8f2",
+      primary: "#a79ef0",
+      primaryForeground: "#17142e",
+      accent: "#c9a5d6",
+      accentForeground: "#f4edfb",
+      card: "#221c40",
+      cardForeground: "#dcd8f2",
+      popover: "#1c1834",
+      popoverForeground: "#dcd8f2",
+      nav: "#1e1940",
+      onNav: "#dcd8f2",
+      tertiary: "#7f9fd3",
+      onTertiary: "#0f1222",
+      secondary: "#2c2652",
+      secondaryForeground: "#dcd8f2",
+      muted: "#241f47",
+      mutedForeground: "#9b95c4",
+      destructive: "#c97ca0",
+      border: "#342d63",
+      input: "#342d63",
+      ring: "#a79ef0",
+      glassBg: "rgba(40, 34, 84, 0.45)",
+      glassBgStrong: "rgba(40, 34, 84, 0.66)",
+      glassBorder: "rgba(167, 158, 240, 0.22)",
+      glassBorderBright: "rgba(201, 165, 214, 0.35)",
+      glassHighlight: "rgba(220, 216, 242, 0.08)",
+      glassShadow: "0 8px 40px -12px rgba(0, 0, 0, 0.4)",
+      glassShadowHover: "0 14px 52px -16px rgba(0, 0, 0, 0.55)",
+    },
+  },
+  minimalistic: {
+    id: "minimalistic",
+    name: "Minimalistic",
+    light: {
+      radius: "0.375rem",
+      background: "#ffffff",
+      foreground: "#111827",
+      primary: "#111827",
+      primaryForeground: "#ffffff",
+      accent: "#6b7280",
+      accentForeground: "#ffffff",
+      card: "#ffffff",
+      cardForeground: "#111827",
+      popover: "#ffffff",
+      popoverForeground: "#111827",
+      nav: "#f9fafb",
+      onNav: "#111827",
+      tertiary: "#9ca3af",
+      onTertiary: "#111827",
+      secondary: "#f3f4f6",
+      secondaryForeground: "#111827",
+      muted: "#f3f4f6",
+      mutedForeground: "#6b7280",
+      destructive: "#b91c1c",
+      border: "#e5e7eb",
+      input: "#d1d5db",
+      ring: "#111827",
+      glassBg: "rgba(255, 255, 255, 0.6)",
+      glassBgStrong: "rgba(255, 255, 255, 0.92)",
+      glassBorder: "rgba(17, 24, 39, 0.08)",
+      glassBorderBright: "rgba(17, 24, 39, 0.16)",
+      glassHighlight: "rgba(255, 255, 255, 0.8)",
+      glassShadow: "0 1px 3px rgba(0, 0, 0, 0.04)",
+      glassShadowHover: "0 4px 12px -2px rgba(0, 0, 0, 0.08)",
+    },
+    dark: {
+      radius: "0.375rem",
+      background: "#0b0b0d",
+      foreground: "#e5e7eb",
+      primary: "#e5e7eb",
+      primaryForeground: "#0b0b0d",
+      accent: "#9ca3af",
+      accentForeground: "#0b0b0d",
+      card: "#151517",
+      cardForeground: "#e5e7eb",
+      popover: "#111113",
+      popoverForeground: "#e5e7eb",
+      nav: "#101012",
+      onNav: "#e5e7eb",
+      tertiary: "#6b7280",
+      onTertiary: "#f9fafb",
+      secondary: "#1c1c1f",
+      secondaryForeground: "#e5e7eb",
+      muted: "#1a1a1d",
+      mutedForeground: "#9ca3af",
+      destructive: "#ef4444",
+      border: "#26262b",
+      input: "#33333a",
+      ring: "#e5e7eb",
+      glassBg: "rgba(21, 21, 23, 0.6)",
+      glassBgStrong: "rgba(21, 21, 23, 0.92)",
+      glassBorder: "rgba(229, 231, 235, 0.08)",
+      glassBorderBright: "rgba(229, 231, 235, 0.16)",
+      glassHighlight: "rgba(255, 255, 255, 0.05)",
+      glassShadow: "0 1px 3px rgba(0, 0, 0, 0.3)",
+      glassShadowHover: "0 4px 12px -2px rgba(0, 0, 0, 0.5)",
     },
   },
 };
@@ -640,6 +791,218 @@ export const BACKGROUND_PRESETS: BackgroundPreset[] = [
       thumbnail: "linear-gradient(135deg, #24211a 0%, #12110e 100%)",
     },
   },
+
+  {
+    id: "dreamy-cloud-sky",
+    name: "Dreamy Cloud Sky",
+    theme: "dreamy",
+    light: {
+      css: `
+        radial-gradient(120% 60% at 20% -5%, rgba(255,255,255,0.85), transparent 55%),
+        radial-gradient(80% 50% at 85% 110%, rgba(168,150,232,0.35), transparent 60%),
+        radial-gradient(60% 40% at 50% 30%, rgba(255,255,255,0.9), transparent 70%),
+        linear-gradient(175deg, #e8e4fb 0%, #f3f1fb 45%, #dbe7fb 100%)
+      `,
+      thumbnail: "linear-gradient(175deg, #e6e1fa 0%, #dbe7fb 100%)",
+    },
+    dark: {
+      css: `
+        radial-gradient(120% 60% at 20% -5%, rgba(120,110,200,0.12), transparent 55%),
+        radial-gradient(80% 50% at 85% 110%, rgba(160,140,220,0.16), transparent 60%),
+        radial-gradient(120% 120% at 50% 130%, rgba(60,50,120,0.35), transparent 70%),
+        linear-gradient(175deg, #17142e 0%, #1c1834 50%, #0f0f22 100%)
+      `,
+      thumbnail: "linear-gradient(175deg, #1b1732 0%, #0f0f20 100%)",
+    },
+  },
+  {
+    id: "dreamy-pastel-cloud",
+    name: "Pastel Cloud",
+    theme: "dreamy",
+    light: {
+      css: `
+        radial-gradient(circle at 25% 25%, rgba(255,214,236,0.6), transparent 45%),
+        radial-gradient(circle at 75% 30%, rgba(203,218,255,0.6), transparent 45%),
+        radial-gradient(circle at 50% 85%, rgba(255,214,236,0.4), transparent 50%),
+        linear-gradient(180deg, #fdf6fd 0%, #eef2ff 60%, #e0e9ff 100%)
+      `,
+      thumbnail: "linear-gradient(180deg, #fdf2fd 0%, #e0e9ff 100%)",
+    },
+    dark: {
+      css: `
+        radial-gradient(circle at 25% 25%, rgba(120,90,170,0.2), transparent 45%),
+        radial-gradient(circle at 75% 30%, rgba(80,110,180,0.2), transparent 45%),
+        radial-gradient(circle at 50% 85%, rgba(120,90,170,0.18), transparent 50%),
+        linear-gradient(180deg, #1a1730 0%, #15152b 60%, #101024 100%)
+      `,
+      thumbnail: "linear-gradient(180deg, #1d1934 0%, #101023 100%)",
+    },
+  },
+  {
+    id: "dreamy-lavender-mist",
+    name: "Lavender Mist",
+    theme: "dreamy",
+    light: {
+      css: `
+        radial-gradient(100% 60% at 30% 0%, rgba(201,165,214,0.4), transparent 55%),
+        radial-gradient(90% 60% at 80% 100%, rgba(143,134,217,0.35), transparent 55%),
+        radial-gradient(70% 50% at 50% 55%, rgba(255,255,255,0.7), transparent 60%),
+        linear-gradient(165deg, #f4eefb 0%, #eae4f9 50%, #e0d8f6 100%)
+      `,
+      thumbnail: "linear-gradient(165deg, #f4eefb 0%, #dfd5f5 100%)",
+    },
+    dark: {
+      css: `
+        radial-gradient(100% 60% at 30% 0%, rgba(201,165,214,0.16), transparent 55%),
+        radial-gradient(90% 60% at 80% 100%, rgba(143,134,217,0.18), transparent 55%),
+        radial-gradient(70% 50% at 50% 55%, rgba(0,0,0,0.25), transparent 60%),
+        linear-gradient(165deg, #211c40 0%, #1a1734 50%, #161330 100%)
+      `,
+      thumbnail: "linear-gradient(165deg, #241e44 0%, #151228 100%)",
+    },
+  },
+  {
+    id: "dreamy-moonlight",
+    name: "Moonlit Cloud",
+    theme: "dreamy",
+    light: {
+      css: `
+        radial-gradient(80% 70% at 75% 15%, rgba(255,240,214,0.7), transparent 55%),
+        radial-gradient(90% 55% at 20% 80%, rgba(143,134,217,0.35), transparent 60%),
+        linear-gradient(180deg, #fdf4e9 0%, #ece8fb 55%, #dce7fb 100%)
+      `,
+      thumbnail: "linear-gradient(180deg, #fef6ec 0%, #dbe7fb 100%)",
+    },
+    dark: {
+      css: `
+        radial-gradient(80% 70% at 75% 15%, rgba(230,215,180,0.12), transparent 55%),
+        radial-gradient(90% 55% at 20% 80%, rgba(143,134,217,0.2), transparent 60%),
+        radial-gradient(120% 90% at 50% 20%, rgba(255,255,255,0.05), transparent 60%),
+        linear-gradient(180deg, #1a1832 0%, #14142c 55%, #0f1022 100%)
+      `,
+      thumbnail: "linear-gradient(180deg, #1e1b38 0%, #0e0f20 100%)",
+    },
+  },
+  {
+    id: "dreamy-starlight",
+    name: "Starlight Dream",
+    theme: "dreamy",
+    light: {
+      css: `
+        radial-gradient(circle at 20% 20%, rgba(167,158,240,0.35), transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(201,165,214,0.3), transparent 45%),
+        linear-gradient(175deg, #f2eefc 0%, #e7e2f8 60%, #dae6fb 100%)
+      `,
+      thumbnail: "linear-gradient(175deg, #f1edfc 0%, #d9e5fb 100%)",
+    },
+    dark: {
+      css: `
+        radial-gradient(circle at 20% 20%, rgba(167,158,240,0.16), transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(201,165,214,0.16), transparent 45%),
+        radial-gradient(1px 1px at 30% 30%, rgba(255,255,255,0.6), transparent 40%),
+        radial-gradient(1px 1px at 70% 60%, rgba(255,255,255,0.5), transparent 40%),
+        radial-gradient(1px 1px at 55% 15%, rgba(255,255,255,0.5), transparent 40%),
+        linear-gradient(175deg, #1b1734 0%, #14122c 60%, #0e0e1e 100%)
+      `,
+      thumbnail: "linear-gradient(175deg, #1e1a38 0%, #0d0c1c 100%)",
+    },
+  },
+  {
+    id: "minimal-light-slate",
+    name: "Minimal Slate",
+    theme: "minimalistic",
+    light: {
+      css: `
+        radial-gradient(120% 80% at 50% 0%, rgba(255,255,255,0.9), transparent 55%),
+        linear-gradient(180deg, #ffffff 0%, #f9fafb 55%, #f3f4f6 100%)
+      `,
+      thumbnail: "linear-gradient(180deg, #ffffff 0%, #f3f4f6 100%)",
+    },
+    dark: {
+      css: `linear-gradient(180deg, #0b0b0d 0%, #121214 60%, #16161a 100%)`,
+      thumbnail: "linear-gradient(180deg, #0b0b0d 0%, #17171b 100%)",
+    },
+  },
+  {
+    id: "minimal-line-grid",
+    name: "Minimal Line Grid",
+    theme: "minimalistic",
+    light: {
+      css: `
+        repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(17,24,39,0.03) 40px, rgba(17,24,39,0.03) 41px),
+        repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(17,24,39,0.03) 40px, rgba(17,24,39,0.03) 41px),
+        linear-gradient(#ffffff, #ffffff)
+      `,
+      thumbnail: "linear-gradient(135deg, #ffffff 0%, #f1f1f1 100%)",
+    },
+    dark: {
+      css: `
+        repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,0.03) 40px, rgba(255,255,255,0.03) 41px),
+        repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,0.03) 40px, rgba(255,255,255,0.03) 41px),
+        linear-gradient(#0b0b0d, #0b0b0d)
+      `,
+      thumbnail: "linear-gradient(135deg, #0b0b0d 0%, #141416 100%)",
+    },
+  },
+  {
+    id: "minimal-concrete",
+    name: "Minimal Concrete",
+    theme: "minimalistic",
+    light: {
+      css: `
+        radial-gradient(80% 50% at 30% 20%, rgba(17,24,39,0.04), transparent 60%),
+        radial-gradient(80% 50% at 75% 85%, rgba(17,24,39,0.04), transparent 60%),
+        linear-gradient(160deg, #fbfbfb 0%, #f3f4f6 100%)
+      `,
+      thumbnail: "linear-gradient(160deg, #fbfbfb 0%, #e8e8ea 100%)",
+    },
+    dark: {
+      css: `
+        radial-gradient(80% 50% at 30% 20%, rgba(255,255,255,0.04), transparent 60%),
+        radial-gradient(80% 50% at 75% 85%, rgba(255,255,255,0.04), transparent 60%),
+        linear-gradient(160deg, #0e0e10 0%, #161618 100%)
+      `,
+      thumbnail: "linear-gradient(160deg, #0e0e10 0%, #1a1a1d 100%)",
+    },
+  },
+  {
+    id: "minimal-arch-groove",
+    name: "Minimal Groove",
+    theme: "minimalistic",
+    light: {
+      css: `
+        repeating-linear-gradient(0deg, transparent, transparent 32px, rgba(17,24,39,0.02) 32px, rgba(17,24,39,0.02) 33px),
+        linear-gradient(#ffffff, #fafafa)
+      `,
+      thumbnail: "linear-gradient(180deg, #ffffff 0%, #efefef 100%)",
+    },
+    dark: {
+      css: `
+        repeating-linear-gradient(0deg, transparent, transparent 32px, rgba(255,255,255,0.02) 32px, rgba(255,255,255,0.02) 33px),
+        linear-gradient(#0b0b0d, #121214)
+      `,
+      thumbnail: "linear-gradient(180deg, #0b0b0d 0%, #151517 100%)",
+    },
+  },
+  {
+    id: "minimal-charcoal",
+    name: "Minimal Charcoal",
+    theme: "minimalistic",
+    light: {
+      css: `
+        radial-gradient(90% 60% at 50% 0%, rgba(17,24,39,0.05), transparent 55%),
+        linear-gradient(180deg, #fdfdfd 0%, #f0f0f0 100%)
+      `,
+      thumbnail: "linear-gradient(180deg, #fdfdfd 0%, #e8e8e8 100%)",
+    },
+    dark: {
+      css: `
+        radial-gradient(90% 60% at 50% 0%, rgba(255,255,255,0.04), transparent 55%),
+        linear-gradient(180deg, #0b0b0d 0%, #1a1a1e 100%)
+      `,
+      thumbnail: "linear-gradient(180deg, #0a0a0c 0%, #1e1e22 100%)",
+    },
+  },
 ];
 
 /** Get background presets for a given theme */
@@ -704,6 +1067,34 @@ export const THEME_PRESETS: Record<ThemePresetKey, ThemeConfig> = {
     glassBlur: false,
     paperGrain: false,
     borderStyle: "bold-cartoon",
+  },
+  dreamy: {
+    name: "Dreamy",
+    presetKey: "dreamy",
+    supportedModes: ["light", "dark"],
+    defaultMode: "light",
+    colorScheme: "dreamy",
+    fontFamily: "quicksand",
+    homeLayout: "nature",
+    defaultBackground: "dreamy-cloud-sky",
+    borderRadius: "1rem",
+    glassBlur: true,
+    paperGrain: false,
+    borderStyle: "solid",
+  },
+  minimalistic: {
+    name: "Minimalistic",
+    presetKey: "minimalistic",
+    supportedModes: ["light", "dark"],
+    defaultMode: "light",
+    colorScheme: "minimalistic",
+    fontFamily: "plus-jakarta",
+    homeLayout: "modern",
+    defaultBackground: "minimal-light-slate",
+    borderRadius: "0.375rem",
+    glassBlur: false,
+    paperGrain: false,
+    borderStyle: "solid",
   },
   custom: {
     name: "Custom",

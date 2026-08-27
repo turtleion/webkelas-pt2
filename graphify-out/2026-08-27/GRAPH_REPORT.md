@@ -1,7 +1,7 @@
 # Graph Report - arsip-kelas-digital-main  (2026-08-27)
 
 ## Corpus Check
-- 183 files · ~84,276 words
+- 183 files · ~84,250 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary

@@ -1,4 +1,4 @@
-import { Check, Sparkles, BookOpen, Layers, Palette } from "lucide-react";
+import { Check, Sparkles, BookOpen, Layers, Palette, Cloud, Minus } from "lucide-react";
 import { usePreferences, type ThemePresetKey } from "@/hooks/use-preferences";
 import { useTranslation } from "@/hooks/use-translation";
 import { cn } from "@/lib/utils";
@@ -38,6 +38,20 @@ export function ThemeSelector() {
       icon: Sparkles,
       previewColors: ["#fffbeb", "#f59e0b", "#f43f5e"],
       badge: "Light Only",
+    },
+    {
+      key: "dreamy",
+      title: t.themes.dreamy,
+      description: t.themes.dreamyDesc,
+      icon: Cloud,
+      previewColors: ["#f3f1fb", "#8f86d9", "#c9a5d6"],
+    },
+    {
+      key: "minimalistic",
+      title: t.themes.minimalistic,
+      description: t.themes.minimalisticDesc,
+      icon: Minus,
+      previewColors: ["#ffffff", "#6b7280", "#111827"],
     },
   ];
 

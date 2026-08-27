@@ -60,6 +60,11 @@ export const en: TranslationSchema = {
       "Modern glassmorphism with frosted blur surfaces and crisp styling.",
     cartoon: "Cartoon",
     cartoonDesc: "Vibrant, cheerful, and comic-inspired. Light mode only.",
+    dreamy: "Dreamy",
+    dreamyDesc:
+      "Soft pastels, dreamy haze, and thick frosted-cloud blur that feels calm and ethereal.",
+    minimalistic: "Minimalist",
+    minimalisticDesc: "Clean, modern, professional monochrome in black, white, and gray.",
     custom: "Custom",
     customDesc: "Your unique custom combination of colors, fonts, and layout.",
   },
