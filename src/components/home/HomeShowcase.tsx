@@ -1,16 +1,16 @@
 import { Link } from "react-router";
-import { ArrowRight, Sparkles, Calendar, Megaphone, Users } from "lucide-react";
+import { ArrowRight, Sparkles, Calendar, FileText, Users } from "lucide-react";
 import { FadeIn } from "@/components/site/FadeIn";
 import { PhotoPlate } from "@/components/site/PhotoPlate";
 import { Stamp } from "@/components/site/Stamp";
 import { inisialNama, padNomor, pecahTanggal } from "@/lib/tanggal";
 import { useTranslation } from "@/hooks/use-translation";
-import type { AnnouncementRow, AgendaRow, MemberRow, GalleryPhotoRow } from "@/lib/db";
+import type { ArticleRow, AgendaRow, MemberRow, GalleryPhotoRow } from "@/lib/db";
 import type { KelasInfo } from "@/data/kelas";
 
 interface HomeLayoutProps {
   kelas: KelasInfo;
-  pengumuman: AnnouncementRow[];
+  articles: ArticleRow[];
   agenda: AgendaRow[];
   anggota: MemberRow[];
   galeri: GalleryPhotoRow[];
@@ -19,7 +19,7 @@ interface HomeLayoutProps {
 
 export function HomeShowcase({
   kelas,
-  pengumuman,
+  articles,
   agenda,
   anggota,
   galeri,
@@ -137,32 +137,33 @@ export function HomeShowcase({
               </div>
             </div>
 
-            {/* Right: Announcements Stream (5 Cols) */}
+            {/* Right: Recent Articles Stream (5 Cols) */}
             <div className="lg:col-span-5">
               <div className="flex items-center justify-between border-b border-border/80 pb-3">
                 <h2 className="font-display text-2xl font-medium tracking-tight flex items-center gap-2">
-                  <Megaphone className="size-5 text-accent" />
-                  {t.home.latestAnnouncements}
+                  <FileText className="size-5 text-accent" />
+                  {t.home.latestArticles}
                 </h2>
                 <Link
-                  to="/pengumuman"
+                  to="/artikel"
                   className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground hover:text-foreground"
                 >
-                  {t.home.allAnnouncements} →
+                  {t.home.allArticles} →
                 </Link>
               </div>
               <div className="mt-6 space-y-4">
-                {pengumuman.slice(0, 3).map((p) => {
-                  const dateIso = (p.published_at || p.created_at).slice(0, 10);
+                {articles.slice(0, 3).map((p) => {
+                  const dateIso = p.created_at.slice(0, 10);
                   const tDate = pecahTanggal(dateIso);
                   return (
-                    <article
+                    <Link
                       key={p.id}
-                      className="glass glass-hover p-4.5 transition-colors"
+                      to={`/artikel/${p.slug}`}
+                      className="glass glass-hover block p-4.5 transition-colors"
                     >
                       <div className="flex items-center justify-between">
                         <span className="font-mono text-[9px] uppercase text-accent font-semibold">
-                          {p.category}
+                          {p.is_pinned ? t.articles.pinned : t.articles.heading}
                         </span>
                         <span className="font-mono text-[10px] text-muted-foreground">
                           {tDate.teks}
@@ -172,9 +173,9 @@ export function HomeShowcase({
                         {p.title}
                       </h3>
                       <p className="mt-1 text-[13px] leading-relaxed text-muted-foreground line-clamp-3">
-                        {p.summary}
+                        {p.description}
                       </p>
-                    </article>
+                    </Link>
                   );
                 })}
               </div>

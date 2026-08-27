@@ -5,9 +5,12 @@ import { PageHeader } from "@/components/site/PageHeader";
 import { PlaceholderNote } from "@/components/site/PlaceholderNote";
 import { usePageTitle } from "@/hooks/use-page-title";
 import { useSchedule } from "@/hooks/use-schedule";
+import { useMbgSchedule } from "@/hooks/use-mbg";
+import { useDutySchedule } from "@/hooks/use-duty";
 import { useOrganization } from "@/hooks/use-organization";
 import { useTranslation } from "@/hooks/use-translation";
 import { type ScheduleRow } from "@/lib/db";
+import { pecahTanggal } from "@/lib/tanggal";
 import { Loader2 } from "lucide-react";
 
 const DAYS: Array<ScheduleRow["day"]> = [
@@ -24,6 +27,8 @@ export default function Jadwal() {
   const { data: orgData } = useOrganization();
   const { kelas } = orgData;
   const { data: schedules, isLoading } = useSchedule();
+  const { data: mbgData, isLoading: mbgLoading } = useMbgSchedule();
+  const { data: dutyData, isLoading: dutyLoading } = useDutySchedule();
 
   const dayTranslations: Record<string, string> = {
     Senin: locale === "en" ? "Monday" : "Senin",
@@ -125,6 +130,106 @@ export default function Jadwal() {
             ))}
           </div>
         )}
+
+        {/* ── MBG Schedule ── */}
+        <section className="mt-16">
+          <div className="flex items-center gap-4">
+            <h2 className="font-display text-2xl font-medium tracking-tight md:text-3xl">
+              {t.mbg.heading}
+            </h2>
+            <span className="h-px flex-1 bg-border" aria-hidden />
+          </div>
+
+          {mbgLoading ? (
+            <div className="mt-8 flex justify-center py-8">
+              <Loader2 className="size-5 animate-spin text-primary" />
+            </div>
+          ) : mbgData.length === 0 ? (
+            <p className="mt-8 text-sm italic text-muted-foreground">{t.mbg.empty}</p>
+          ) : (
+            <div className="mt-6 overflow-x-auto">
+              <table className="w-full text-left text-[14px]">
+                <thead className="kicker border-b border-border text-[10px]">
+                  <tr>
+                    <th className="py-2.5 pr-4 font-normal">{t.schedule.timeColumn}</th>
+                    <th className="py-2.5 px-4 font-normal">{t.mbg.menu}</th>
+                    <th className="py-2.5 pl-4 font-normal">{t.mbg.notes}</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-border/60">
+                  {mbgData.map((item) => {
+                    const td = pecahTanggal(item.date);
+                    return (
+                      <tr key={item.id} className="text-foreground">
+                        <td className="py-3 pr-4 font-mono text-[12px] whitespace-nowrap">
+                          {td.hari} {td.bulanSingkat}
+                        </td>
+                        <td className="py-3 px-4 font-display text-[15px]">
+                          {item.menu}
+                        </td>
+                        <td className="py-3 pl-4 text-[13px] text-muted-foreground">
+                          {item.notes || "—"}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </section>
+
+        {/* ── Piket Schedule ── */}
+        <section className="mt-16">
+          <div className="flex items-center gap-4">
+            <h2 className="font-display text-2xl font-medium tracking-tight md:text-3xl">
+              {t.duty.heading}
+            </h2>
+            <span className="h-px flex-1 bg-border" aria-hidden />
+          </div>
+
+          {dutyLoading ? (
+            <div className="mt-8 flex justify-center py-8">
+              <Loader2 className="size-5 animate-spin text-primary" />
+            </div>
+          ) : dutyData.length === 0 ? (
+            <p className="mt-8 text-sm italic text-muted-foreground">{t.duty.empty}</p>
+          ) : (
+            <div className="mt-6 overflow-x-auto">
+              <table className="w-full text-left text-[14px]">
+                <thead className="kicker border-b border-border text-[10px]">
+                  <tr>
+                    <th className="py-2.5 pr-4 font-normal">{t.schedule.timeColumn}</th>
+                    <th className="py-2.5 px-4 font-normal">{t.duty.group}</th>
+                    <th className="py-2.5 px-4 font-normal">{t.duty.members}</th>
+                    <th className="py-2.5 pl-4 font-normal">{t.duty.area}</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-border/60">
+                  {dutyData.map((item) => {
+                    const td = pecahTanggal(item.date);
+                    return (
+                      <tr key={item.id} className="text-foreground">
+                        <td className="py-3 pr-4 font-mono text-[12px] whitespace-nowrap">
+                          {td.hari} {td.bulanSingkat}
+                        </td>
+                        <td className="py-3 px-4 font-display text-[15px]">
+                          {item.group_name}
+                        </td>
+                        <td className="py-3 px-4 text-[13px]">
+                          {item.members.join(", ")}
+                        </td>
+                        <td className="py-3 pl-4 text-[13px] text-muted-foreground">
+                          {item.area || "—"}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </section>
       </main>
       <SiteFooter />
     </div>

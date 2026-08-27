@@ -1,4 +1,4 @@
-import type { AnnouncementRow, AgendaRow, MemberRow, GalleryPhotoRow } from "@/lib/db";
+import type { ArticleRow, AgendaRow, MemberRow, GalleryPhotoRow } from "@/lib/db";
 import type { KelasInfo } from "@/data/kelas";
 import { useTranslation } from "@/hooks/use-translation";
 import { Link } from "react-router";
@@ -6,7 +6,7 @@ import { ArrowUpRight } from "lucide-react";
 
 interface HomeLayoutProps {
   kelas: KelasInfo;
-  pengumuman: AnnouncementRow[];
+  articles: ArticleRow[];
   agenda: AgendaRow[];
   anggota: MemberRow[];
   galeri: GalleryPhotoRow[];
@@ -15,7 +15,7 @@ interface HomeLayoutProps {
 
 export function HomeModern({
   kelas,
-  pengumuman,
+  articles,
   agenda,
   anggota,
   galeri,
@@ -54,10 +54,10 @@ export function HomeModern({
            </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link
-                to="/pengumuman"
+                to="/artikel"
                 className="inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
               >
-                {t.home.readAnnouncements}
+                {t.home.readArticles}
                 <ArrowUpRight className="size-4" />
              </Link>
               <Link
@@ -106,30 +106,30 @@ export function HomeModern({
        </div>
      </section>
 
-      {/* ============ ANNOUNCEMENTS — editorial pull ============ */}
+      {/* ============ ARTIKEL — editorial pull ============ */}
       <section className="border-b border-border/60">
         <div className="mx-auto grid max-w-6xl gap-10 px-6 py-16 md:grid-cols-12">
           <div className="md:col-span-4">
             <p className="kicker text-[10px] tracking-[0.25em] text-primary">
-              01 — {t.home.latestAnnouncements}
+              01 — {t.home.latestArticles}
            </p>
             <h2 className="mt-3 font-display text-3xl font-medium leading-tight tracking-tight md:text-4xl">
-              {t.home.latestAnnouncements}
+              {t.home.latestArticles}
            </h2>
             <Link
-              to="/pengumuman"
+              to="/artikel"
               className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
             >
-              {t.home.allAnnouncements} <ArrowUpRight className="size-3.5" />
+              {t.home.allArticles} <ArrowUpRight className="size-3.5" />
            </Link>
          </div>
 
           <div className="md:col-span-8">
             <div className="space-y-px overflow-hidden rounded-lg border border-border/60 bg-border/40">
-              {pengumuman.slice(0, 4).map((p, i) => (
+              {articles.slice(0, 4).map((p, i) => (
                 <Link
                   key={p.id}
-                  to="/pengumuman"
+                  to={`/artikel/${p.slug}`}
                   className="group flex items-start gap-6 bg-background px-6 py-5 transition-colors hover:bg-card/60"
                 >
                   <span className="font-mono text-[10px] text-muted-foreground">
@@ -137,7 +137,7 @@ export function HomeModern({
                  </span>
                   <div className="flex-1">
                     <p className="text-[10px] uppercase tracking-wider text-accent">
-                      {p.category}
+                      {p.is_pinned ? t.articles.pinned : t.articles.heading}
                    </p>
                     <p className="mt-1 font-display text-lg font-medium leading-snug transition-colors group-hover:text-primary">
                       {p.title}

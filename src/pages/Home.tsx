@@ -7,7 +7,7 @@ import { HomeShowcase } from "@/components/home/HomeShowcase";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { useAgenda } from "@/hooks/use-agenda";
-import { useAnnouncements } from "@/hooks/use-announcements";
+import { useArticles } from "@/hooks/use-articles";
 import { useGallery } from "@/hooks/use-gallery";
 import { useMembers } from "@/hooks/use-members";
 import { useOrganization } from "@/hooks/use-organization";
@@ -22,7 +22,7 @@ export default function Home() {
   const { preferences } = usePreferences();
   const { data: orgData } = useOrganization();
   const { kelas } = orgData;
-  const { data: pengumuman } = useAnnouncements(true);
+  const { data: articles } = useArticles();
   const { data: agenda } = useAgenda();
   const { data: anggota } = useMembers();
   const { data: galeri } = useGallery();
@@ -47,7 +47,7 @@ export default function Home() {
 
   const layoutProps = {
     kelas,
-    pengumuman,
+    articles,
     agenda,
     anggota,
     galeri,

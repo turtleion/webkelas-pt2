@@ -2,7 +2,7 @@ import { Link } from "react-router";
 import {
   ArrowRight,
   Calendar,
-  Megaphone,
+  FileText,
   Users,
   Image as ImageIcon,
   Clock,
@@ -12,12 +12,12 @@ import { FadeIn } from "@/components/site/FadeIn";
 import { PhotoPlate } from "@/components/site/PhotoPlate";
 import { inisialNama, padNomor, pecahTanggal } from "@/lib/tanggal";
 import { useTranslation } from "@/hooks/use-translation";
-import type { AnnouncementRow, AgendaRow, MemberRow, GalleryPhotoRow } from "@/lib/db";
+import type { ArticleRow, AgendaRow, MemberRow, GalleryPhotoRow } from "@/lib/db";
 import type { KelasInfo } from "@/data/kelas";
 
 interface HomeLayoutProps {
   kelas: KelasInfo;
-  pengumuman: AnnouncementRow[];
+  articles: ArticleRow[];
   agenda: AgendaRow[];
   anggota: MemberRow[];
   galeri: GalleryPhotoRow[];
@@ -26,7 +26,7 @@ interface HomeLayoutProps {
 
 export function HomeBento({
   kelas,
-  pengumuman,
+  articles,
   agenda,
   anggota,
   galeri,
@@ -35,7 +35,7 @@ export function HomeBento({
   const { t, interpolate } = useTranslation();
   const tanggalHariIni = new Date().toISOString().slice(0, 10);
   const nextAgenda = agenda.find((a) => a.date >= tanggalHariIni) || agenda[0];
-  const latestAnnouncement = pengumuman[0];
+  const latestArticle = articles[0];
 
   return (
     <div className="mx-auto max-w-6xl px-5 py-10 md:px-8 md:py-16">
@@ -60,10 +60,10 @@ export function HomeBento({
           </div>
           <div className="flex gap-3">
             <Link
-              to="/pengumuman"
+              to="/artikel"
               className="inline-flex items-center gap-2 bg-primary px-4 py-2 font-mono text-[11px] uppercase tracking-wider text-primary-foreground transition-colors hover:bg-primary/90"
             >
-              {t.home.readAnnouncements}
+              {t.home.readArticles}
               <ArrowRight className="size-3.5" />
             </Link>
           </div>
@@ -170,33 +170,33 @@ export function HomeBento({
           </div>
         </div>
 
-        {/* Card 3: Latest Announcement (Col 6) */}
+        {/* Card 3: Latest Article (Col 6) */}
         <div className="glass glass-hover col-span-1 lg:col-span-6 flex flex-col justify-between p-6 md:p-8">
           <div>
             <div className="flex items-center justify-between">
               <span className="kicker flex items-center gap-1.5 text-[10px] text-accent">
-                <Megaphone className="size-3.5" />
-                {t.home.latestAnnouncements}
+                <FileText className="size-3.5" />
+                {t.home.latestArticles}
               </span>
               <Link
-                to="/pengumuman"
+                to="/artikel"
                 className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground hover:text-foreground"
               >
-                {t.home.allAnnouncements} →
+                {t.home.allArticles} →
               </Link>
             </div>
-            {latestAnnouncement ? (
-              <div className="mt-4">
+            {latestArticle ? (
+              <Link to={`/artikel/${latestArticle.slug}`} className="group mt-4 block">
                 <p className="font-mono text-[10px] text-muted-foreground">
-                  {pecahTanggal((latestAnnouncement.published_at || latestAnnouncement.created_at).slice(0, 10)).teks}
+                  {pecahTanggal(latestArticle.created_at.slice(0, 10)).teks}
                 </p>
-                <h3 className="mt-1 font-display text-2xl font-medium tracking-tight">
-                  {latestAnnouncement.title}
+                <h3 className="mt-1 font-display text-2xl font-medium tracking-tight group-hover:text-primary">
+                  {latestArticle.title}
                 </h3>
                 <p className="mt-2 text-[13.5px] leading-relaxed text-muted-foreground">
-                  {latestAnnouncement.summary}
+                  {latestArticle.description}
                 </p>
-              </div>
+              </Link>
             ) : (
               <p className="mt-4 text-sm text-muted-foreground italic">
                 {t.common.empty}
@@ -204,14 +204,14 @@ export function HomeBento({
             )}
           </div>
           <div className="mt-6 flex items-center justify-between border-t border-border/70 pt-3">
-            <span className="font-mono text-[10px] text-accent uppercase">
-              {latestAnnouncement?.category || "Umum"}
+            <span className="font-mono text-[10px] uppercase tracking-wider text-accent">
+              {latestArticle?.is_pinned ? t.articles.pinned : t.articles.heading}
             </span>
             <Link
-              to="/pengumuman"
+              to={latestArticle ? `/artikel/${latestArticle.slug}` : "/artikel"}
               className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground hover:text-foreground"
             >
-              Baca Lengkap →
+              {t.articles.readMore} →
             </Link>
           </div>
         </div>

@@ -1,13 +1,13 @@
 import { supabase } from "./supabase";
 
-export interface AnnouncementRow {
+export interface TaskRow {
   id: string;
+  date: string;
   title: string;
-  summary: string;
-  body: string | null;
+  description: string | null;
   category: string;
-  published: boolean;
-  published_at: string | null;
+  subject: string;
+  completed: boolean;
   created_at: string;
   updated_at: string;
   created_by: string | null;
@@ -33,6 +33,42 @@ export interface ScheduleRow {
   teacher: string | null;
   is_break: boolean;
   sort_order: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ArticleRow {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  content: string;
+  cover_url: string;
+  is_pinned: boolean;
+  published: boolean;
+  published_at: string | null;
+  created_at: string;
+  updated_at: string;
+  created_by: string | null;
+}
+
+export interface MbgScheduleRow {
+  id: string;
+  day: string;
+  date: string;
+  menu: string;
+  notes: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface DutyScheduleRow {
+  id: string;
+  day: string;
+  date: string;
+  group_name: string;
+  members: string[];
+  area: string;
   created_at: string;
   updated_at: string;
 }
@@ -78,44 +114,38 @@ export interface OrganizationSettingsRow<T = unknown> {
   updated_at: string;
 }
 
+
 // ---------------------------------------------------------------------------
-// Announcements API
+// Task API (`tugas` table, used by /tugas)
 // ---------------------------------------------------------------------------
-export async function getAnnouncements(
-  publishedOnly = true,
-): Promise<AnnouncementRow[]> {
-  let query = supabase
-    .from("announcements")
+export async function getTasks(): Promise<TaskRow[]> {
+  const { data, error } = await supabase
+    .from("tugas")
     .select("*")
-    .order("published_at", { ascending: false, nullsFirst: false })
-    .order("created_at", { ascending: false });
+    .order("date", { ascending: true });
 
-  if (publishedOnly) {
-    query = query.eq("published", true);
-  }
-
-  const { data, error } = await query;
   if (error) throw error;
-  return data ?? [];
+  return (data as TaskRow[]) ?? [];
 }
 
-export async function createAnnouncement(payload: {
+export async function createTask(payload: {
+  date: string;
   title: string;
-  summary: string;
-  body?: string | null;
+  description?: string | null;
   category?: string;
-  published?: boolean;
-}): Promise<AnnouncementRow> {
+  subject?: string;
+  completed?: boolean;
+}): Promise<TaskRow> {
   const { data: user } = await supabase.auth.getUser();
   const { data, error } = await supabase
-    .from("announcements")
+    .from("tugas")
     .insert({
+      date: payload.date,
       title: payload.title,
-      summary: payload.summary,
-      body: payload.body ?? null,
-      category: payload.category ?? "Umum",
-      published: payload.published ?? false,
-      published_at: payload.published ? new Date().toISOString() : null,
+      description: payload.description ?? null,
+      category: payload.category ?? "Kegiatan",
+      subject: payload.subject ?? "Umum",
+      completed: payload.completed ?? false,
       created_by: user.user?.id ?? null,
     })
     .select()
@@ -125,18 +155,13 @@ export async function createAnnouncement(payload: {
   return data;
 }
 
-export async function updateAnnouncement(
+export async function updateTask(
   id: string,
-  payload: Partial<Omit<AnnouncementRow, "id" | "created_at" | "updated_at">>,
-): Promise<AnnouncementRow> {
-  const patch: Record<string, unknown> = { ...payload };
-  if (payload.published !== undefined && payload.published_at === undefined) {
-    patch.published_at = payload.published ? new Date().toISOString() : null;
-  }
-
+  payload: Partial<Omit<TaskRow, "id" | "created_at" | "updated_at">>,
+): Promise<TaskRow> {
   const { data, error } = await supabase
-    .from("announcements")
-    .update(patch)
+    .from("tugas")
+    .update(payload)
     .eq("id", id)
     .select()
     .single();
@@ -145,22 +170,22 @@ export async function updateAnnouncement(
   return data;
 }
 
-export async function deleteAnnouncement(id: string): Promise<void> {
-  const { error } = await supabase.from("announcements").delete().eq("id", id);
+export async function deleteTask(id: string): Promise<void> {
+  const { error } = await supabase.from("tugas").delete().eq("id", id);
   if (error) throw error;
 }
 
 // ---------------------------------------------------------------------------
-// Agenda API
+// Agenda API (dedicated `agenda` table, used by /agenda)
 // ---------------------------------------------------------------------------
 export async function getAgendaItems(): Promise<AgendaRow[]> {
   const { data, error } = await supabase
-    .from("agenda_items")
+    .from("agenda")
     .select("*")
     .order("date", { ascending: true });
 
   if (error) throw error;
-  return data ?? [];
+  return (data as AgendaRow[]) ?? [];
 }
 
 export async function createAgendaItem(payload: {
@@ -171,7 +196,7 @@ export async function createAgendaItem(payload: {
 }): Promise<AgendaRow> {
   const { data: user } = await supabase.auth.getUser();
   const { data, error } = await supabase
-    .from("agenda_items")
+    .from("agenda")
     .insert({
       date: payload.date,
       title: payload.title,
@@ -191,7 +216,7 @@ export async function updateAgendaItem(
   payload: Partial<Omit<AgendaRow, "id" | "created_at" | "updated_at">>,
 ): Promise<AgendaRow> {
   const { data, error } = await supabase
-    .from("agenda_items")
+    .from("agenda")
     .update(payload)
     .eq("id", id)
     .select()
@@ -202,7 +227,7 @@ export async function updateAgendaItem(
 }
 
 export async function deleteAgendaItem(id: string): Promise<void> {
-  const { error } = await supabase.from("agenda_items").delete().eq("id", id);
+  const { error } = await supabase.from("agenda").delete().eq("id", id);
   if (error) throw error;
 }
 
@@ -381,6 +406,188 @@ export async function updateGalleryPhoto(
 
 export async function deleteGalleryPhoto(id: string): Promise<void> {
   const { error } = await supabase.from("gallery_photos").delete().eq("id", id);
+  if (error) throw error;
+}
+
+// ---------------------------------------------------------------------------
+// Articles API
+// ---------------------------------------------------------------------------
+export async function getArticles(publishedOnly = true): Promise<ArticleRow[]> {
+  let query = supabase
+    .from("articles")
+    .select("*")
+    .order("is_pinned", { ascending: false })
+    .order("published_at", { ascending: false, nullsFirst: false })
+    .order("created_at", { ascending: false });
+
+  if (publishedOnly) {
+    query = query.eq("published", true);
+  }
+
+  const { data, error } = await query;
+  if (error) throw error;
+  return data ?? [];
+}
+
+export async function getArticleBySlug(slug: string): Promise<ArticleRow | null> {
+  const { data, error } = await supabase
+    .from("articles")
+    .select("*")
+    .eq("slug", slug)
+    .eq("published", true)
+    .maybeSingle();
+  if (error) throw error;
+  return data;
+}
+
+export async function createArticle(payload: {
+  slug: string;
+  title: string;
+  description: string;
+  content: string;
+  cover_url?: string;
+  is_pinned?: boolean;
+  published?: boolean;
+}): Promise<ArticleRow> {
+  const { data: user } = await supabase.auth.getUser();
+  const { data, error } = await supabase
+    .from("articles")
+    .insert({
+      slug: payload.slug,
+      title: payload.title,
+      description: payload.description,
+      content: payload.content,
+      cover_url: payload.cover_url ?? "",
+      is_pinned: payload.is_pinned ?? false,
+      published: payload.published ?? false,
+      published_at: payload.published ? new Date().toISOString() : null,
+      created_by: user.user?.id ?? null,
+    })
+    .select()
+    .single();
+  if (error) throw error;
+  return data;
+}
+
+export async function updateArticle(
+  id: string,
+  payload: Partial<Omit<ArticleRow, "id" | "created_at" | "updated_at">>,
+): Promise<ArticleRow> {
+  const patch: Record<string, unknown> = { ...payload };
+  if (payload.published !== undefined && payload.published_at === undefined) {
+    patch.published_at = payload.published ? new Date().toISOString() : null;
+  }
+  const { data, error } = await supabase
+    .from("articles")
+    .update(patch)
+    .eq("id", id)
+    .select()
+    .single();
+  if (error) throw error;
+  return data;
+}
+
+export async function deleteArticle(id: string): Promise<void> {
+  const { error } = await supabase.from("articles").delete().eq("id", id);
+  if (error) throw error;
+}
+
+// ---------------------------------------------------------------------------
+// MBG Schedule API
+// ---------------------------------------------------------------------------
+export async function getMbgSchedule(): Promise<MbgScheduleRow[]> {
+  const { data, error } = await supabase
+    .from("mbg_schedule")
+    .select("*")
+    .order("date", { ascending: false });
+  if (error) throw error;
+  return data ?? [];
+}
+
+export async function createMbgSchedule(payload: {
+  day: string;
+  date: string;
+  menu: string;
+  notes?: string | null;
+}): Promise<MbgScheduleRow> {
+  const { data, error } = await supabase
+    .from("mbg_schedule")
+    .insert({ day: payload.day, date: payload.date, menu: payload.menu, notes: payload.notes ?? null })
+    .select()
+    .single();
+  if (error) throw error;
+  return data;
+}
+
+export async function updateMbgSchedule(
+  id: string,
+  payload: Partial<Omit<MbgScheduleRow, "id" | "created_at" | "updated_at">>,
+): Promise<MbgScheduleRow> {
+  const { data, error } = await supabase
+    .from("mbg_schedule")
+    .update(payload)
+    .eq("id", id)
+    .select()
+    .single();
+  if (error) throw error;
+  return data;
+}
+
+export async function deleteMbgSchedule(id: string): Promise<void> {
+  const { error } = await supabase.from("mbg_schedule").delete().eq("id", id);
+  if (error) throw error;
+}
+
+// ---------------------------------------------------------------------------
+// Duty/Piket Schedule API
+// ---------------------------------------------------------------------------
+export async function getDutySchedule(): Promise<DutyScheduleRow[]> {
+  const { data, error } = await supabase
+    .from("duty_schedule")
+    .select("*")
+    .order("date", { ascending: false });
+  if (error) throw error;
+  return data ?? [];
+}
+
+export async function createDutySchedule(payload: {
+  day: string;
+  date: string;
+  group_name: string;
+  members?: string[];
+  area?: string;
+}): Promise<DutyScheduleRow> {
+  const { data, error } = await supabase
+    .from("duty_schedule")
+    .insert({
+      day: payload.day,
+      date: payload.date,
+      group_name: payload.group_name,
+      members: payload.members ?? [],
+      area: payload.area ?? "",
+    })
+    .select()
+    .single();
+  if (error) throw error;
+  return data;
+}
+
+export async function updateDutySchedule(
+  id: string,
+  payload: Partial<Omit<DutyScheduleRow, "id" | "created_at" | "updated_at">>,
+): Promise<DutyScheduleRow> {
+  const { data, error } = await supabase
+    .from("duty_schedule")
+    .update(payload)
+    .eq("id", id)
+    .select()
+    .single();
+  if (error) throw error;
+  return data;
+}
+
+export async function deleteDutySchedule(id: string): Promise<void> {
+  const { error } = await supabase.from("duty_schedule").delete().eq("id", id);
   if (error) throw error;
 }
 

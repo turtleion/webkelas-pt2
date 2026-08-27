@@ -7,6 +7,8 @@ export interface TranslationSchema {
     organization: string;
     schedule: string;
     announcements: string;
+    articles: string;
+    tasks: string;
     agenda: string;
     gallery: string;
     dashboard: string;
@@ -97,11 +99,14 @@ export interface TranslationSchema {
     heroSubtitle: string;
     heroDescription: string;
     readAnnouncements: string;
+    readArticles: string;
     viewMembers: string;
     classIdentity: string;
     classIdentityDesc: string;
     latestAnnouncements: string;
     allAnnouncements: string;
+    latestArticles: string;
+    allArticles: string;
     upcomingAgenda: string;
     fullAgenda: string;
     nearest: string;
@@ -527,6 +532,48 @@ export interface TranslationSchema {
     yes: string;
     no: string;
     noteLabel: string;
+  };
+  articles: {
+    pageTitle: string;
+    heading: string;
+    description: string;
+    readMore: string;
+    backToList: string;
+    empty: string;
+    pinned: string;
+    published: string;
+    byDate: string;
+    contentPlaceholder: string;
+  };
+  tasks: {
+    pageTitle: string;
+    heading: string;
+    description: string;
+    empty: string;
+    completed: string;
+    pending: string;
+    allTasks: string;
+    clickTaskHint: string;
+    clickDayHint: string;
+  };
+  mbg: {
+    pageTitle: string;
+    heading: string;
+    description: string;
+    empty: string;
+    menu: string;
+    notes: string;
+    todayMenu: string;
+  };
+  duty: {
+    pageTitle: string;
+    heading: string;
+    description: string;
+    empty: string;
+    group: string;
+    members: string;
+    area: string;
+    todayDuty: string;
   };
   footer: {
     explore: string;

@@ -1,7 +1,6 @@
 import { Link, NavLink, useNavigate } from "react-router";
 import {
   LayoutDashboard,
-  Megaphone,
   CalendarDays,
   CalendarCheck2,
   Users,
@@ -12,6 +11,9 @@ import {
   LogOut,
   ExternalLink,
   Ticket,
+  FileText,
+  Utensils,
+  ClipboardList,
 } from "lucide-react";
 import { KelasMark } from "@/components/site/KelasMark";
 import { useAuth } from "@/hooks/use-auth";
@@ -37,8 +39,10 @@ export function AdminSidebar({ onItemClick }: AdminSidebarProps) {
 
   const navItems = [
     { to: "/admin", label: t.admin.overview, icon: LayoutDashboard, end: true },
-    { to: "/admin/pengumuman", label: t.admin.announcements, icon: Megaphone },
+    { to: "/admin/artikel", label: t.articles.heading, icon: FileText },
     { to: "/admin/agenda", label: t.admin.agenda, icon: CalendarDays },
+    { to: "/admin/mbg", label: t.mbg.heading, icon: Utensils },
+    { to: "/admin/piket", label: t.duty.heading, icon: ClipboardList },
     { to: "/admin/jadwal", label: t.admin.schedule, icon: CalendarCheck2 },
     { to: "/admin/anggota", label: t.admin.members, icon: Users },
     { to: "/admin/galeri", label: t.admin.gallery, icon: ImageIcon },

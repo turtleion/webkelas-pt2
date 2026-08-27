@@ -1,11 +1,11 @@
-import type { AnnouncementRow, AgendaRow, MemberRow, GalleryPhotoRow } from "@/lib/db";
+import type { ArticleRow, AgendaRow, MemberRow, GalleryPhotoRow } from "@/lib/db";
 import type { KelasInfo } from "@/data/kelas";
 import { useTranslation } from "@/hooks/use-translation";
 import { Link } from "react-router";
 
 interface HomeLayoutProps {
   kelas: KelasInfo;
-  pengumuman: AnnouncementRow[];
+  articles: ArticleRow[];
   agenda: AgendaRow[];
   anggota: MemberRow[];
   galeri: GalleryPhotoRow[];
@@ -14,7 +14,7 @@ interface HomeLayoutProps {
 
 export function HomeExperimental({
   kelas,
-  pengumuman,
+  articles,
   agenda,
   anggota,
   galeri,
@@ -86,10 +86,10 @@ export function HomeExperimental({
 
           <div className="mt-10 flex flex-wrap items-center gap-4">
             <Link
-              to="/pengumuman"
+              to="/artikel"
               className="group inline-flex items-center gap-3 border-b border-foreground pb-1 text-lg italic text-foreground transition-colors hover:border-primary hover:text-primary"
             >
-              {t.home.readAnnouncements}
+              {t.home.readArticles}
               <span className="transition-transform group-hover:translate-x-1">→</span>
            </Link>
             <Link
@@ -102,7 +102,7 @@ export function HomeExperimental({
        </div>
      </section>
 
-      {/* ============ ANNOUNCEMENTS — magazine split ============ */}
+      {/* ============ ARTIKEL — magazine split ============ */}
       <section className="relative border-b border-border/60 bg-foreground/[0.02] py-20">
         <div className="mx-auto grid max-w-7xl gap-8 px-6 md:grid-cols-12 md:px-10">
           <div className="md:col-span-5 md:sticky md:top-12 md:self-start">
@@ -110,24 +110,24 @@ export function HomeExperimental({
               [01]
            </p>
             <h2 className="mt-3 font-display text-5xl font-medium leading-[0.95] tracking-tight md:text-6xl">
-              {t.home.latestAnnouncements}
+              {t.home.latestArticles}
            </h2>
             <p className="mt-6 font-display text-base italic text-muted-foreground">
               {interpolate(t.home.heroDescription, { kelas: kelas.nama })}
            </p>
             <Link
-              to="/pengumuman"
+              to="/artikel"
               className="mt-8 inline-block border-b border-foreground pb-1 text-sm italic hover:border-primary hover:text-primary"
             >
-              {t.home.allAnnouncements} →
+              {t.home.allArticles} →
            </Link>
          </div>
 
           <div className="space-y-6 md:col-span-7">
-            {pengumuman.slice(0, 3).map((p, i) => (
+            {articles.slice(0, 3).map((p, i) => (
               <Link
                 key={p.id}
-                to="/pengumuman"
+                to={`/artikel/${p.slug}`}
                 className="group block border-t border-border/60 pt-6 transition-colors first:border-t-0 first:pt-0"
               >
                 <div className="flex items-baseline gap-4">
@@ -136,14 +136,14 @@ export function HomeExperimental({
                  </span>
                   <div className="flex-1">
                     <p className="font-mono text-[10px] uppercase tracking-widest text-accent">
-                      {p.category} — {p.published_at?.slice(0, 10)}
+                      {p.is_pinned ? t.articles.pinned : t.articles.heading} — {p.created_at.slice(0, 10)}
                    </p>
                     <p className="mt-2 font-display text-3xl font-medium leading-tight tracking-tight transition-colors group-hover:text-primary md:text-4xl">
                       {p.title}
                    </p>
-                    {p.summary && (
+                    {p.description && (
                       <p className="mt-3 line-clamp-2 text-sm text-muted-foreground">
-                        {p.summary}
+                        {p.description}
                      </p>
                     )}
                  </div>

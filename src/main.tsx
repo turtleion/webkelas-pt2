@@ -17,7 +17,10 @@ const Home = lazy(() => import("./pages/Home.tsx"));
 const Anggota = lazy(() => import("./pages/Anggota.tsx"));
 const Organisasi = lazy(() => import("./pages/Organisasi.tsx"));
 const Jadwal = lazy(() => import("./pages/Jadwal.tsx"));
-const Pengumuman = lazy(() => import("./pages/Pengumuman.tsx"));
+const Artikel = lazy(() => import("./pages/Artikel.tsx"));
+const ArtikelDetail = lazy(() => import("./pages/ArtikelDetail.tsx"));
+const Tugas = lazy(() => import("./pages/Tugas.tsx"));
+const TugasDetail = lazy(() => import("./pages/TugasDetail.tsx"));
 const Agenda = lazy(() => import("./pages/Agenda.tsx"));
 const Galeri = lazy(() => import("./pages/Galeri.tsx"));
 const AuthPage = lazy(() => import("./pages/Auth.tsx"));
@@ -28,9 +31,6 @@ const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 
 // Lazy load admin route components
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard.tsx"));
-const AdminAnnouncements = lazy(
-  () => import("./pages/admin/AdminAnnouncements.tsx"),
-);
 const AdminAgenda = lazy(() => import("./pages/admin/AdminAgenda.tsx"));
 const AdminSchedule = lazy(() => import("./pages/admin/AdminSchedule.tsx"));
 const AdminMembers = lazy(() => import("./pages/admin/AdminMembers.tsx"));
@@ -42,6 +42,15 @@ const AdminTheme = lazy(() => import("./pages/admin/AdminTheme.tsx"));
 const AdminUsers = lazy(() => import("./pages/admin/AdminUsers.tsx"));
 const AdminInvitationCodes = lazy(
   () => import("./pages/admin/AdminInvitationCodes.tsx"),
+);
+const AdminArticles = lazy(
+  () => import("./pages/admin/AdminArticles.tsx"),
+);
+const AdminMbg = lazy(
+  () => import("./pages/admin/AdminMbg.tsx"),
+);
+const AdminDuty = lazy(
+  () => import("./pages/admin/AdminDuty.tsx"),
 );
 
 // Simple loading fallback for route transitions
@@ -170,18 +179,42 @@ createRoot(document.getElementById("root")!).render(
                 }
               />
               <Route
-                path="/pengumuman"
-                element={
-                  <RequireVerified>
-                    <Pengumuman />
-                  </RequireVerified>
-                }
-              />
-              <Route
                 path="/agenda"
                 element={
                   <RequireVerified>
                     <Agenda />
+                  </RequireVerified>
+                }
+              />
+              <Route
+                path="/tugas"
+                element={
+                  <RequireVerified>
+                    <Tugas />
+                  </RequireVerified>
+                }
+              />
+              <Route
+                path="/tugas/:slug"
+                element={
+                  <RequireVerified>
+                    <TugasDetail />
+                  </RequireVerified>
+                }
+              />
+              <Route
+                path="/artikel"
+                element={
+                  <RequireVerified>
+                    <Artikel />
+                  </RequireVerified>
+                }
+              />
+              <Route
+                path="/artikel/:slug"
+                element={
+                  <RequireVerified>
+                    <ArtikelDetail />
                   </RequireVerified>
                 }
               />
@@ -208,10 +241,26 @@ createRoot(document.getElementById("root")!).render(
                 }
               />
               <Route
-                path="/admin/pengumuman"
+                path="/admin/artikel"
                 element={
                   <RequireAdmin>
-                    <AdminAnnouncements />
+                    <AdminArticles />
+                  </RequireAdmin>
+                }
+              />
+              <Route
+                path="/admin/mbg"
+                element={
+                  <RequireAdmin>
+                    <AdminMbg />
+                  </RequireAdmin>
+                }
+              />
+              <Route
+                path="/admin/piket"
+                element={
+                  <RequireAdmin>
+                    <AdminDuty />
                   </RequireAdmin>
                 }
               />

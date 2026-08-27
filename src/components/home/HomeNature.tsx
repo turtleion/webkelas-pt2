@@ -1,4 +1,4 @@
-import type { AnnouncementRow, AgendaRow, MemberRow, GalleryPhotoRow } from "@/lib/db";
+import type { ArticleRow, AgendaRow, MemberRow, GalleryPhotoRow } from "@/lib/db";
 import type { KelasInfo } from "@/data/kelas";
 import { useTranslation } from "@/hooks/use-translation";
 import { Link } from "react-router";
@@ -6,7 +6,7 @@ import { Leaf } from "lucide-react";
 
 interface HomeLayoutProps {
   kelas: KelasInfo;
-  pengumuman: AnnouncementRow[];
+  articles: ArticleRow[];
   agenda: AgendaRow[];
   anggota: MemberRow[];
   galeri: GalleryPhotoRow[];
@@ -15,7 +15,7 @@ interface HomeLayoutProps {
 
 export function HomeNature({
   kelas,
-  pengumuman,
+  articles,
   agenda,
   anggota,
   galeri,
@@ -85,10 +85,10 @@ export function HomeNature({
 
           <div className="mt-10 flex flex-wrap gap-3">
             <Link
-              to="/pengumuman"
+              to="/artikel"
               className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-all hover:scale-[1.02]"
             >
-              {t.home.readAnnouncements}
+              {t.home.readArticles}
               <Leaf className="size-4" />
           </Link>
             <Link
@@ -101,21 +101,21 @@ export function HomeNature({
       </div>
     </section>
 
-      {/* ============ ANNOUNCEMENTS — leaf-card list ============ */}
+      {/* ============ ARTIKEL — leaf-card list ============ */}
       <section className="relative border-b border-border/40">
         <div className="relative mx-auto max-w-6xl px-6 py-20 md:px-10">
           <div className="flex items-center gap-3">
             <Leaf className="size-5 text-accent" />
             <h2 className="font-display text-3xl font-medium tracking-tight md:text-4xl">
-              {t.home.latestAnnouncements}
+              {t.home.latestArticles}
           </h2>
         </div>
 
           <div className="mt-10 space-y-4">
-            {pengumuman.slice(0, 4).map((p, i) => (
+            {articles.slice(0, 4).map((p, i) => (
               <Link
                 key={p.id}
-                to="/pengumuman"
+                to={`/artikel/${p.slug}`}
                 className="group flex items-start gap-5 rounded-2xl border border-border/60 bg-card/30 p-5 backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:border-accent/40 hover:bg-card/60 md:p-6"
                 style={{
                   borderRadius:
@@ -129,14 +129,14 @@ export function HomeNature({
               </div>
                 <div className="flex-1">
                   <p className="font-mono text-[10px] uppercase tracking-widest text-accent">
-                    {p.category}
+                    {p.is_pinned ? t.articles.pinned : t.articles.heading}
                 </p>
                   <p className="mt-1 font-display text-lg font-medium leading-snug transition-colors group-hover:text-primary md:text-xl">
                     {p.title}
                 </p>
-                  {p.summary && (
+                  {p.description && (
                     <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
-                      {p.summary}
+                      {p.description}
                   </p>
                   )}
               </div>
@@ -146,10 +146,10 @@ export function HomeNature({
 
           <div className="mt-8 text-center">
             <Link
-              to="/pengumuman"
+              to="/artikel"
               className="inline-flex items-center gap-1 text-sm text-primary hover:underline"
             >
-              {t.home.allAnnouncements} →
+              {t.home.allArticles} →
           </Link>
         </div>
       </div>

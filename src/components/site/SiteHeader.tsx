@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router";
-import { Menu, X, Shield, LayoutDashboard, Settings, Globe } from "lucide-react";
+import { Menu, X, LayoutDashboard, Settings, Globe } from "lucide-react";
 import { KelasMark } from "./KelasMark";
 import { VerificationWarningBar } from "@/components/VerificationWarningBar";
 import { useOrganization } from "@/hooks/use-organization";
@@ -20,7 +20,8 @@ export function SiteHeader() {
     { to: "/anggota", label: t.nav.members },
     { to: "/organisasi", label: t.nav.organization },
     { to: "/jadwal", label: t.nav.schedule },
-    { to: "/pengumuman", label: t.nav.announcements },
+    { to: "/artikel", label: t.nav.articles },
+    { to: "/tugas", label: t.nav.tasks },
     { to: "/agenda", label: t.nav.agenda },
     { to: "/galeri", label: t.nav.gallery },
   ];
@@ -120,7 +121,6 @@ export function SiteHeader() {
                 to="/admin"
                 className="inline-flex items-center gap-1.5 rounded border border-primary/40 bg-primary/10 px-2.5 py-1 font-mono text-[11px] uppercase tracking-wider text-primary hover:bg-primary hover:text-primary-foreground transition-colors"
               >
-                <Shield className="size-3.5" />
                 {t.nav.adminPanel}
               </NavLink>
             ) : isAuthenticated ? (
@@ -207,7 +207,7 @@ export function SiteHeader() {
                   onClick={() => setOpen(false)}
                   className="flex items-center justify-center gap-2 w-full bg-primary py-2.5 font-mono text-[11px] uppercase tracking-wider text-primary-foreground"
                 >
-                  <Shield className="size-4" /> {t.nav.adminPanel}
+                  {t.nav.adminPanel}
                 </Link>
               ) : isAuthenticated ? (
                 <Link

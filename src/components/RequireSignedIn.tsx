@@ -13,8 +13,8 @@ import { Navigate, useLocation } from "react-router";
  * Bedanya dengan RequireVerified: komponen ini TIDAK meminta status
  * verifikasi. User yang sudah Google-login tapi belum aktivasi kode
  * undangan tetap boleh masuk (mereka akan melihat VerificationWarningBar
- * di layout). Pemblokiran "/jadwal, /pengumuman, /agenda" terhadap
- * unverified Google user adalah bug, bukan fitur.
+ * di layout). Pemblokiran route terhadap unverified Google user adalah bug,
+ * bukan fitur.
  */
 export function RequireSignedIn({ children }: { children: ReactNode }) {
   const { isLoading, isAuthenticated, user } = useAuth();

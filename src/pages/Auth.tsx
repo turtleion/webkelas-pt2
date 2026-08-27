@@ -21,7 +21,7 @@ export default function Auth() {
   // Guest tidak boleh mengakses route-route ini — sembunyikan tombol
   // Guest kalau tujuan login adalah salah satunya. Untuk tujuan publik,
   // tombol tetap ditampilkan.
-  const GUEST_BLOCKED = ["/jadwal", "/pengumuman", "/agenda", "/admin"];
+  const GUEST_BLOCKED = ["/jadwal", "/tugas", "/artikel", "/agenda", "/admin"];
   const hideGuestButton = GUEST_BLOCKED.some(
     (p) => returnTo === p || returnTo.startsWith(p + "/"),
   );

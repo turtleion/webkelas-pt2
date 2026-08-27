@@ -6,12 +6,12 @@ import { Stamp } from "@/components/site/Stamp";
 import { PlaceholderNote } from "@/components/site/PlaceholderNote";
 import { inisialNama, padNomor, pecahTanggal } from "@/lib/tanggal";
 import { useTranslation } from "@/hooks/use-translation";
-import type { AnnouncementRow, AgendaRow, MemberRow, GalleryPhotoRow } from "@/lib/db";
+import type { ArticleRow, AgendaRow, MemberRow, GalleryPhotoRow } from "@/lib/db";
 import type { KelasInfo } from "@/data/kelas";
 
 interface HomeLayoutProps {
   kelas: KelasInfo;
-  pengumuman: AnnouncementRow[];
+  articles: ArticleRow[];
   agenda: AgendaRow[];
   anggota: MemberRow[];
   galeri: GalleryPhotoRow[];
@@ -61,7 +61,7 @@ function SectionHead({
 
 export function HomeClassic({
   kelas,
-  pengumuman,
+  articles,
   agenda,
   anggota,
   galeri,
@@ -79,23 +79,23 @@ export function HomeClassic({
     <div>
       {/* ================= HERO ================= */}
       <section className="border-b border-border">
-        {/* strip pengumuman terbaru */}
+        {/* strip artikel terbaru */}
         <div className="border-b border-border/70 bg-card/40">
           <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-2.5 md:px-8">
             <p className="kicker flex min-w-0 items-center gap-2.5 text-[10px]">
-              <span className="shrink-0 text-accent">{t.home.latestAnnouncements}</span>
+              <span className="shrink-0 text-accent">{t.home.latestArticles}</span>
               <span aria-hidden className="text-muted-foreground/60">
                 —
               </span>
               <span className="truncate text-muted-foreground">
-                {pengumuman[0]?.title || t.common.empty}
+                {articles[0]?.title || t.common.empty}
               </span>
             </p>
             <Link
-              to="/pengumuman"
+              to="/artikel"
               className="kicker shrink-0 text-[10px] text-muted-foreground transition-colors hover:text-foreground"
             >
-              {t.home.allAnnouncements} →
+              {t.home.allArticles} →
             </Link>
           </div>
         </div>
@@ -126,10 +126,10 @@ export function HomeClassic({
 
                 <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
                   <Link
-                    to="/pengumuman"
+                    to="/artikel"
                     className="inline-flex items-center gap-2 bg-primary px-5 py-2.5 font-mono text-[11px] uppercase tracking-[0.16em] text-primary-foreground transition-colors duration-150 hover:bg-primary/90"
                   >
-                    {t.home.readAnnouncements}
+                    {t.home.readArticles}
                     <ArrowRight className="size-3.5" aria-hidden />
                   </Link>
                   <Link
@@ -198,40 +198,45 @@ export function HomeClassic({
         </div>
       </section>
 
-      {/* ================= PENGUMUMAN TERBARU ================= */}
+      {/* ================= ARTIKEL TERBARU ================= */}
       <section className="border-b border-border bg-card/40">
         <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
           <SectionHead
             no="02"
-            label={t.nav.announcements}
-            title={t.home.latestAnnouncements}
-            linkTo="/pengumuman"
-            linkText={t.home.allAnnouncements}
+            label={t.nav.articles}
+            title={t.home.latestArticles}
+            linkTo="/artikel"
+            linkText={t.home.allArticles}
           />
           <ol className="mt-10">
-            {pengumuman.slice(0, 3).map((p) => {
-              const dateIso = (p.published_at || p.created_at).slice(0, 10);
+            {articles.slice(0, 3).map((p) => {
+              const dateIso = p.created_at.slice(0, 10);
               const tDate = pecahTanggal(dateIso);
               return (
                 <li key={p.id} className="border-b border-border last:border-b-0">
-                  <article className="group grid gap-3 py-6 md:grid-cols-[8rem_1fr] md:gap-8">
+                  <Link
+                    to={`/artikel/${p.slug}`}
+                    className="group grid gap-3 py-6 md:grid-cols-[8rem_1fr] md:gap-8"
+                  >
                     <p className="kicker pt-1 text-[10px]">
                       {tDate.hari} {tDate.bulanSingkat} {tDate.tahun}
                     </p>
                     <div>
                       <div className="flex flex-wrap items-center gap-2.5">
-                        <span className="kicker text-[9px] text-accent">
-                          {p.category}
-                        </span>
+                        {p.is_pinned && (
+                          <span className="kicker text-[9px] text-accent">
+                            {t.articles.pinned}
+                          </span>
+                        )}
                       </div>
                       <h3 className="mt-1.5 font-display text-2xl font-medium tracking-tight underline-offset-4 group-hover:underline md:text-[1.65rem]">
                         {p.title}
                       </h3>
                       <p className="mt-2 max-w-xl text-[14px] leading-relaxed text-muted-foreground">
-                        {p.summary}
+                        {p.description}
                       </p>
                     </div>
-                  </article>
+                  </Link>
                 </li>
               );
             })}

@@ -1,7 +1,7 @@
 import { AdminLayout } from "@/components/admin/AdminLayout";
 import { PageHeader } from "@/components/site/PageHeader";
 import { usePageTitle } from "@/hooks/use-page-title";
-import { useAnnouncements } from "@/hooks/use-announcements";
+import { useArticles } from "@/hooks/use-articles";
 import { useAgenda } from "@/hooks/use-agenda";
 import { useSchedule } from "@/hooks/use-schedule";
 import { useMembers } from "@/hooks/use-members";
@@ -10,7 +10,7 @@ import { useAuth } from "@/hooks/use-auth";
 import { useTranslation } from "@/hooks/use-translation";
 import { Link } from "react-router";
 import {
-  Megaphone,
+  FileText,
   CalendarDays,
   CalendarCheck2,
   Users,
@@ -23,7 +23,7 @@ export default function AdminDashboard() {
   usePageTitle(t.admin.overview);
   const { user } = useAuth();
 
-  const { data: pengumuman } = useAnnouncements(false);
+  const { data: articles } = useArticles();
   const { data: agenda } = useAgenda();
   const { data: jadwal } = useSchedule();
   const { data: anggota } = useMembers();
@@ -31,13 +31,13 @@ export default function AdminDashboard() {
 
   const stats = [
     {
-      title: t.admin.announcements,
-      count: pengumuman.length,
+      title: t.articles.heading,
+      count: articles.length,
       desc: interpolate(t.admin.publishedCount, {
-        count: pengumuman.filter((p) => p.published).length,
+        count: articles.filter((p) => p.published).length,
       }),
-      link: "/admin/pengumuman",
-      icon: Megaphone,
+      link: "/admin/artikel",
+      icon: FileText,
     },
     {
       title: t.admin.agenda,
