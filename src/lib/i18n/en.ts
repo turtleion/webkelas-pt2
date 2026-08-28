@@ -607,9 +607,9 @@ export const en: TranslationSchema = {
     heading: "Free Nutritious Meal Schedule",
     description: "MBG schedule for class {kelas}.",
     empty: "No MBG schedule for this week yet.",
-    menu: "Menu",
+    menu: "Members",
     notes: "Notes",
-    todayMenu: "Today's Menu",
+    todayMenu: "Today's Members",
   },
   duty: {
     pageTitle: "Duty Schedule",

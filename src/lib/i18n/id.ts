@@ -611,9 +611,9 @@ export const id: TranslationSchema = {
     heading: "Jadwal Makan Bergizi Gratis",
     description: "Jadwal MBG untuk kelas {kelas}.",
     empty: "Belum ada jadwal MBG untuk minggu ini.",
-    menu: "Menu",
+    menu: "Anggota",
     notes: "Catatan",
-    todayMenu: "Menu Hari Ini",
+    todayMenu: "Anggota Hari Ini",
   },
   duty: {
     pageTitle: "Jadwal Piket",

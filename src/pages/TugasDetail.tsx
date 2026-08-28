@@ -7,7 +7,7 @@ import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { pecahTanggal } from "@/lib/tanggal";
 import { ArrowLeft } from "lucide-react";
-import { marked } from "marked";
+import { renderMarkdown } from "@/lib/markdown";
 import { taskSlug } from "./Tugas";
 import type { TaskRow } from "@/lib/db";
 
@@ -60,7 +60,7 @@ export default function TugasDetail() {
               {task.description ? (
                 <div
                   className="prose prose-sm max-w-none text-foreground"
-                  dangerouslySetInnerHTML={{ __html: marked.parse(task.description) as string }}
+                  dangerouslySetInnerHTML={{ __html: renderMarkdown(task.description) }}
                 />
               ) : (
                 <p className="italic text-muted-foreground">

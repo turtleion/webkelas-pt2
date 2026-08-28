@@ -55,7 +55,6 @@ export interface ArticleRow {
 export interface MbgScheduleRow {
   id: string;
   day: string;
-  date: string;
   menu: string;
   notes: string | null;
   created_at: string;
@@ -65,7 +64,6 @@ export interface MbgScheduleRow {
 export interface DutyScheduleRow {
   id: string;
   day: string;
-  date: string;
   group_name: string;
   members: string[];
   area: string;
@@ -499,20 +497,19 @@ export async function getMbgSchedule(): Promise<MbgScheduleRow[]> {
   const { data, error } = await supabase
     .from("mbg_schedule")
     .select("*")
-    .order("date", { ascending: false });
+    .order("day");
   if (error) throw error;
   return data ?? [];
 }
 
 export async function createMbgSchedule(payload: {
   day: string;
-  date: string;
   menu: string;
   notes?: string | null;
 }): Promise<MbgScheduleRow> {
   const { data, error } = await supabase
     .from("mbg_schedule")
-    .insert({ day: payload.day, date: payload.date, menu: payload.menu, notes: payload.notes ?? null })
+    .insert({ day: payload.day, menu: payload.menu, notes: payload.notes ?? null })
     .select()
     .single();
   if (error) throw error;
@@ -545,14 +542,13 @@ export async function getDutySchedule(): Promise<DutyScheduleRow[]> {
   const { data, error } = await supabase
     .from("duty_schedule")
     .select("*")
-    .order("date", { ascending: false });
+    .order("day");
   if (error) throw error;
   return data ?? [];
 }
 
 export async function createDutySchedule(payload: {
   day: string;
-  date: string;
   group_name: string;
   members?: string[];
   area?: string;
@@ -561,7 +557,6 @@ export async function createDutySchedule(payload: {
     .from("duty_schedule")
     .insert({
       day: payload.day,
-      date: payload.date,
       group_name: payload.group_name,
       members: payload.members ?? [],
       area: payload.area ?? "",

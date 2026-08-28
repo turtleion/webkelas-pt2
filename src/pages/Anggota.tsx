@@ -3,11 +3,11 @@ import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { PageHeader } from "@/components/site/PageHeader";
 import { PlaceholderNote } from "@/components/site/PlaceholderNote";
+import { MemberList } from "@/components/site/MemberList";
 import { usePageTitle } from "@/hooks/use-page-title";
 import { useMembers } from "@/hooks/use-members";
 import { useOrganization } from "@/hooks/use-organization";
 import { useTranslation } from "@/hooks/use-translation";
-import { inisialNama, padNomor } from "@/lib/tanggal";
 import { Loader2 } from "lucide-react";
 
 export default function Anggota() {
@@ -74,29 +74,7 @@ export default function Anggota() {
             <Loader2 className="size-6 animate-spin text-primary" />
           </div>
         ) : (
-          <ul className="grid gap-px bg-border sm:grid-cols-2">
-            {hasil.map((a) => (
-              <li
-                key={a.id}
-                className="flex items-center gap-4 bg-background px-4 py-4 md:px-5"
-              >
-                <span className="kicker w-8 shrink-0 text-[10px]">
-                  {padNomor(a.absen_no)}
-                </span>
-                <span className="flex size-10 shrink-0 items-center justify-center border border-border bg-card/70 font-display text-sm italic">
-                  {inisialNama(a.name)}
-                </span>
-                <span className="min-w-0 flex-1">
-                  <span className="block truncate text-[14.5px]">{a.name}</span>
-                  {a.position && (
-                    <span className="kicker mt-0.5 block text-[9px] text-accent">
-                      {a.position}
-                    </span>
-                  )}
-                </span>
-              </li>
-            ))}
-          </ul>
+          <MemberList members={hasil} />
         )}
 
         {!isLoading && hasil.length === 0 && (

@@ -6,7 +6,7 @@ import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { getArticleBySlug, type ArticleRow } from "@/lib/db";
 import { pecahTanggal } from "@/lib/tanggal";
-import { marked } from "marked";
+import { renderMarkdown } from "@/lib/markdown";
 import { Loader2, ArrowLeft } from "lucide-react";
 
 export default function ArtikelDetail() {
@@ -41,7 +41,7 @@ export default function ArtikelDetail() {
   // Render article body as Markdown, same as Task descriptions (/tugas).
   const contentHtml = useMemo(() => {
     if (!article?.content) return null;
-    return marked.parse(article.content) as string;
+    return renderMarkdown(article.content);
   }, [article]);
 
   return (
