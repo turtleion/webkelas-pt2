@@ -25,6 +25,7 @@ const Agenda = lazy(() => import("./pages/Agenda.tsx"));
 const Galeri = lazy(() => import("./pages/Galeri.tsx"));
 const AuthPage = lazy(() => import("./pages/Auth.tsx"));
 const Register = lazy(() => import("./pages/Register.tsx"));
+const Pentest = lazy(() => import("./pages/Pentest.tsx"));
 const Settings = lazy(() => import("./pages/Settings.tsx"));
 const Dashboard = lazy(() => import("./pages/Dashboard.tsx"));
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
@@ -222,6 +223,7 @@ createRoot(document.getElementById("root")!).render(
               <Route path="/settings" element={<Settings />} />
               <Route path="/auth" element={<AuthPage />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/pentest" element={<Pentest />} />
               <Route
                 path="/dashboard"
                 element={

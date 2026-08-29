@@ -121,17 +121,30 @@
       "norm_label": "adminsidebarprops"
     },
     {
-      "label": "ProfileRow",
+      "label": "MemberListProps",
       "file_type": "code",
-      "source_file": "src/lib/db.ts",
-      "source_location": "L98",
+      "source_file": "src/components/site/MemberList.tsx",
+      "source_location": "L4",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "id": "src_lib_db_profilerow",
-      "community": 118,
-      "community_name": "pecahTanggal",
-      "norm_label": "profilerow"
+      "id": "src_components_site_memberlist_memberlistprops",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "memberlistprops"
+    },
+    {
+      "label": "TaskRow",
+      "file_type": "code",
+      "source_file": "src/lib/db.ts",
+      "source_location": "L3",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_lib_db_taskrow",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "taskrow"
     },
     {
       "label": "HomeLayoutProps",
@@ -143,7 +156,7 @@
       "_origin": "ast",
       "id": "src_components_home_homebento_homelayoutprops",
       "community": 13,
-      "community_name": "kelas.ts",
+      "community_name": "HomeClassic.tsx",
       "norm_label": "homelayoutprops"
     },
     {
@@ -156,7 +169,7 @@
       "_origin": "ast",
       "id": "src_components_home_homeclassic_homelayoutprops",
       "community": 13,
-      "community_name": "kelas.ts",
+      "community_name": "HomeClassic.tsx",
       "norm_label": "homelayoutprops"
     },
     {
@@ -169,7 +182,7 @@
       "_origin": "ast",
       "id": "src_components_home_homeexperimental_homelayoutprops",
       "community": 13,
-      "community_name": "kelas.ts",
+      "community_name": "HomeClassic.tsx",
       "norm_label": "homelayoutprops"
     },
     {
@@ -182,7 +195,7 @@
       "_origin": "ast",
       "id": "src_components_home_homemodern_homelayoutprops",
       "community": 13,
-      "community_name": "kelas.ts",
+      "community_name": "HomeClassic.tsx",
       "norm_label": "homelayoutprops"
     },
     {
@@ -195,7 +208,7 @@
       "_origin": "ast",
       "id": "src_components_home_homenature_homelayoutprops",
       "community": 13,
-      "community_name": "kelas.ts",
+      "community_name": "HomeClassic.tsx",
       "norm_label": "homelayoutprops"
     },
     {
@@ -208,21 +221,8 @@
       "_origin": "ast",
       "id": "src_components_home_homeshowcase_homelayoutprops",
       "community": 13,
-      "community_name": "kelas.ts",
+      "community_name": "HomeClassic.tsx",
       "norm_label": "homelayoutprops"
-    },
-    {
-      "label": "MemberListProps",
-      "file_type": "code",
-      "source_file": "src/components/site/MemberList.tsx",
-      "source_location": "L4",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_components_site_memberlist_memberlistprops",
-      "community": 13,
-      "community_name": "kelas.ts",
-      "norm_label": "memberlistprops"
     },
     {
       "label": "PhotoPlateProps",
@@ -234,60 +234,8 @@
       "_origin": "ast",
       "id": "src_components_site_photoplate_photoplateprops",
       "community": 13,
-      "community_name": "kelas.ts",
+      "community_name": "HomeClassic.tsx",
       "norm_label": "photoplateprops"
-    },
-    {
-      "label": "AgendaItem",
-      "file_type": "code",
-      "source_file": "src/data/kelas.ts",
-      "source_location": "L278",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_data_kelas_agendaitem",
-      "community": 13,
-      "community_name": "kelas.ts",
-      "norm_label": "agendaitem"
-    },
-    {
-      "label": "GaleriItem",
-      "file_type": "code",
-      "source_file": "src/data/kelas.ts",
-      "source_location": "L339",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_data_kelas_galeriitem",
-      "community": 13,
-      "community_name": "kelas.ts",
-      "norm_label": "galeriitem"
-    },
-    {
-      "label": "JadwalHari",
-      "file_type": "code",
-      "source_file": "src/data/kelas.ts",
-      "source_location": "L145",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_data_kelas_jadwalhari",
-      "community": 13,
-      "community_name": "kelas.ts",
-      "norm_label": "jadwalhari"
-    },
-    {
-      "label": "JadwalRow",
-      "file_type": "code",
-      "source_file": "src/data/kelas.ts",
-      "source_location": "L138",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_data_kelas_jadwalrow",
-      "community": 13,
-      "community_name": "kelas.ts",
-      "norm_label": "jadwalrow"
     },
     {
       "label": "KelasInfo",
@@ -299,47 +247,8 @@
       "_origin": "ast",
       "id": "src_data_kelas_kelasinfo",
       "community": 13,
-      "community_name": "kelas.ts",
+      "community_name": "HomeClassic.tsx",
       "norm_label": "kelasinfo"
-    },
-    {
-      "label": "Pengumuman",
-      "file_type": "code",
-      "source_file": "src/data/kelas.ts",
-      "source_location": "L215",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_data_kelas_pengumuman",
-      "community": 13,
-      "community_name": "kelas.ts",
-      "norm_label": "pengumuman"
-    },
-    {
-      "label": "Pengurus",
-      "file_type": "code",
-      "source_file": "src/data/kelas.ts",
-      "source_location": "L111",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_data_kelas_pengurus",
-      "community": 13,
-      "community_name": "kelas.ts",
-      "norm_label": "pengurus"
-    },
-    {
-      "label": "OrganizationData",
-      "file_type": "code",
-      "source_file": "src/hooks/use-organization.ts",
-      "source_location": "L14",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_hooks_use_organization_organizationdata",
-      "community": 13,
-      "community_name": "kelas.ts",
-      "norm_label": "organizationdata"
     },
     {
       "label": "AgendaRow",
@@ -351,7 +260,7 @@
       "_origin": "ast",
       "id": "src_lib_db_agendarow",
       "community": 13,
-      "community_name": "kelas.ts",
+      "community_name": "HomeClassic.tsx",
       "norm_label": "agendarow"
     },
     {
@@ -364,7 +273,7 @@
       "_origin": "ast",
       "id": "src_lib_db_articlerow",
       "community": 13,
-      "community_name": "kelas.ts",
+      "community_name": "HomeClassic.tsx",
       "norm_label": "articlerow"
     },
     {
@@ -377,7 +286,7 @@
       "_origin": "ast",
       "id": "src_lib_db_galleryphotorow",
       "community": 13,
-      "community_name": "kelas.ts",
+      "community_name": "HomeClassic.tsx",
       "norm_label": "galleryphotorow"
     },
     {
@@ -390,7 +299,7 @@
       "_origin": "ast",
       "id": "src_lib_db_memberrow",
       "community": 13,
-      "community_name": "kelas.ts",
+      "community_name": "HomeClassic.tsx",
       "norm_label": "memberrow"
     },
     {
@@ -403,14 +312,14 @@
       "_origin": "ast",
       "id": "src_pages_agenda_grupbulan",
       "community": 13,
-      "community_name": "kelas.ts",
+      "community_name": "HomeClassic.tsx",
       "norm_label": "grupbulan"
     },
     {
       "label": "RootErrorBoundary",
       "file_type": "code",
       "source_file": "src/main.tsx",
-      "source_location": "L86",
+      "source_location": "L87",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
@@ -423,7 +332,7 @@
       "label": "ToolbarErrorBoundary",
       "file_type": "code",
       "source_file": "src/main.tsx",
-      "source_location": "L69",
+      "source_location": "L70",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
@@ -431,58 +340,6 @@
       "community": 133,
       "community_name": "ToolbarErrorBoundary",
       "norm_label": "toolbarerrorboundary"
-    },
-    {
-      "label": "Anggota",
-      "file_type": "code",
-      "source_file": "src/data/kelas.ts",
-      "source_location": "L58",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_data_kelas_anggota",
-      "community": 14,
-      "community_name": "db.ts",
-      "norm_label": "anggota"
-    },
-    {
-      "label": "InvitationCodeRow",
-      "file_type": "code",
-      "source_file": "src/lib/db.ts",
-      "source_location": "L652",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_lib_db_invitationcoderow",
-      "community": 14,
-      "community_name": "db.ts",
-      "norm_label": "invitationcoderow"
-    },
-    {
-      "label": "OrganizationSettingsRow",
-      "file_type": "code",
-      "source_file": "src/lib/db.ts",
-      "source_location": "L109",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_lib_db_organizationsettingsrow",
-      "community": 14,
-      "community_name": "db.ts",
-      "norm_label": "organizationsettingsrow"
-    },
-    {
-      "label": "RedeemResult",
-      "file_type": "code",
-      "source_file": "src/lib/db.ts",
-      "source_location": "L665",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_lib_db_redeemresult",
-      "community": 14,
-      "community_name": "db.ts",
-      "norm_label": "redeemresult"
     },
     {
       "label": "CarouselApi",
@@ -563,17 +420,108 @@
       "norm_label": "usecarouselparameters"
     },
     {
-      "label": "TaskRow",
+      "label": "AgendaItem",
       "file_type": "code",
-      "source_file": "src/lib/db.ts",
-      "source_location": "L3",
+      "source_file": "src/data/kelas.ts",
+      "source_location": "L278",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "id": "src_lib_db_taskrow",
+      "id": "src_data_kelas_agendaitem",
       "community": 16,
-      "community_name": "Tugas.tsx",
-      "norm_label": "taskrow"
+      "community_name": "kelas.ts",
+      "norm_label": "agendaitem"
+    },
+    {
+      "label": "Anggota",
+      "file_type": "code",
+      "source_file": "src/data/kelas.ts",
+      "source_location": "L58",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_data_kelas_anggota",
+      "community": 16,
+      "community_name": "kelas.ts",
+      "norm_label": "anggota"
+    },
+    {
+      "label": "GaleriItem",
+      "file_type": "code",
+      "source_file": "src/data/kelas.ts",
+      "source_location": "L339",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_data_kelas_galeriitem",
+      "community": 16,
+      "community_name": "kelas.ts",
+      "norm_label": "galeriitem"
+    },
+    {
+      "label": "JadwalHari",
+      "file_type": "code",
+      "source_file": "src/data/kelas.ts",
+      "source_location": "L145",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_data_kelas_jadwalhari",
+      "community": 16,
+      "community_name": "kelas.ts",
+      "norm_label": "jadwalhari"
+    },
+    {
+      "label": "JadwalRow",
+      "file_type": "code",
+      "source_file": "src/data/kelas.ts",
+      "source_location": "L138",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_data_kelas_jadwalrow",
+      "community": 16,
+      "community_name": "kelas.ts",
+      "norm_label": "jadwalrow"
+    },
+    {
+      "label": "Pengumuman",
+      "file_type": "code",
+      "source_file": "src/data/kelas.ts",
+      "source_location": "L215",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_data_kelas_pengumuman",
+      "community": 16,
+      "community_name": "kelas.ts",
+      "norm_label": "pengumuman"
+    },
+    {
+      "label": "Pengurus",
+      "file_type": "code",
+      "source_file": "src/data/kelas.ts",
+      "source_location": "L111",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_data_kelas_pengurus",
+      "community": 16,
+      "community_name": "kelas.ts",
+      "norm_label": "pengurus"
+    },
+    {
+      "label": "OrganizationData",
+      "file_type": "code",
+      "source_file": "src/hooks/use-organization.ts",
+      "source_location": "L14",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_hooks_use_organization_organizationdata",
+      "community": 16,
+      "community_name": "kelas.ts",
+      "norm_label": "organizationdata"
     },
     {
       "label": "FormFieldContextValue",
@@ -689,7 +637,7 @@
       "_origin": "ast",
       "id": "src_lib_db_schedulerow",
       "community": 37,
-      "community_name": "Jadwal.tsx",
+      "community_name": "use-schedule.ts",
       "norm_label": "schedulerow"
     },
     {
@@ -923,8 +871,73 @@
       "_origin": "ast",
       "id": "src_lib_db_dutyschedulerow",
       "community": 41,
-      "community_name": "use-duty.ts",
+      "community_name": "db.ts",
       "norm_label": "dutyschedulerow"
+    },
+    {
+      "label": "InvitationCodeRow",
+      "file_type": "code",
+      "source_file": "src/lib/db.ts",
+      "source_location": "L652",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_lib_db_invitationcoderow",
+      "community": 41,
+      "community_name": "db.ts",
+      "norm_label": "invitationcoderow"
+    },
+    {
+      "label": "MbgScheduleRow",
+      "file_type": "code",
+      "source_file": "src/lib/db.ts",
+      "source_location": "L55",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_lib_db_mbgschedulerow",
+      "community": 41,
+      "community_name": "db.ts",
+      "norm_label": "mbgschedulerow"
+    },
+    {
+      "label": "OrganizationSettingsRow",
+      "file_type": "code",
+      "source_file": "src/lib/db.ts",
+      "source_location": "L109",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_lib_db_organizationsettingsrow",
+      "community": 41,
+      "community_name": "db.ts",
+      "norm_label": "organizationsettingsrow"
+    },
+    {
+      "label": "ProfileRow",
+      "file_type": "code",
+      "source_file": "src/lib/db.ts",
+      "source_location": "L98",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_lib_db_profilerow",
+      "community": 41,
+      "community_name": "db.ts",
+      "norm_label": "profilerow"
+    },
+    {
+      "label": "RedeemResult",
+      "file_type": "code",
+      "source_file": "src/lib/db.ts",
+      "source_location": "L665",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_lib_db_redeemresult",
+      "community": 41,
+      "community_name": "db.ts",
+      "norm_label": "redeemresult"
     },
     {
       "label": "UploadResult",
@@ -1016,19 +1029,6 @@
       "community": 9,
       "community_name": "use-auth.ts",
       "norm_label": "unsubscribe"
-    },
-    {
-      "label": "MbgScheduleRow",
-      "file_type": "code",
-      "source_file": "src/lib/db.ts",
-      "source_location": "L55",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_lib_db_mbgschedulerow",
-      "community": 92,
-      "community_name": "use-mbg.ts",
-      "norm_label": "mbgschedulerow"
     },
     {
       "label": "Window",
@@ -1584,6 +1584,18 @@
       "norm_label": "generateinvitationcode()"
     },
     {
+      "label": "hashCode()",
+      "file_type": "code",
+      "source_file": "src/lib/invitation-codes.ts",
+      "source_location": "L35",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_lib_invitation_codes_hashcode",
+      "community": 0,
+      "community_name": "AdminGallery.tsx",
+      "norm_label": "hashcode()"
+    },
+    {
       "label": "AdminArticles()",
       "file_type": "code",
       "source_file": "src/pages/admin/AdminArticles.tsx",
@@ -1644,6 +1656,18 @@
       "norm_label": "fadeheading()"
     },
     {
+      "label": "Orang()",
+      "file_type": "code",
+      "source_file": "Organisasi-BACKUP.tsx",
+      "source_location": "L9",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "organisasi_backup_orang",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "orang()"
+    },
+    {
       "label": "Organisasi()",
       "file_type": "code",
       "source_file": "Organisasi-BACKUP.tsx",
@@ -1668,40 +1692,40 @@
       "norm_label": "adminsidebar()"
     },
     {
-      "label": "HomeExperimental()",
+      "label": "HomeBento()",
       "file_type": "code",
-      "source_file": "src/components/home/HomeExperimental.tsx",
-      "source_location": "L15",
+      "source_file": "src/components/home/HomeBento.tsx",
+      "source_location": "L27",
       "_callable": true,
       "_origin": "ast",
-      "id": "src_components_home_homeexperimental_homeexperimental",
+      "id": "src_components_home_homebento_homebento",
       "community": 1,
       "community_name": "useTranslation",
-      "norm_label": "homeexperimental()"
+      "norm_label": "homebento()"
     },
     {
-      "label": "HomeModern()",
+      "label": "HomeClassic()",
       "file_type": "code",
-      "source_file": "src/components/home/HomeModern.tsx",
-      "source_location": "L16",
+      "source_file": "src/components/home/HomeClassic.tsx",
+      "source_location": "L62",
       "_callable": true,
       "_origin": "ast",
-      "id": "src_components_home_homemodern_homemodern",
+      "id": "src_components_home_homeclassic_homeclassic",
       "community": 1,
       "community_name": "useTranslation",
-      "norm_label": "homemodern()"
+      "norm_label": "homeclassic()"
     },
     {
-      "label": "HomeNature()",
+      "label": "HomeShowcase()",
       "file_type": "code",
-      "source_file": "src/components/home/HomeNature.tsx",
-      "source_location": "L16",
+      "source_file": "src/components/home/HomeShowcase.tsx",
+      "source_location": "L20",
       "_callable": true,
       "_origin": "ast",
-      "id": "src_components_home_homenature_homenature",
+      "id": "src_components_home_homeshowcase_homeshowcase",
       "community": 1,
       "community_name": "useTranslation",
-      "norm_label": "homenature()"
+      "norm_label": "homeshowcase()"
     },
     {
       "label": "KelasMark()",
@@ -1714,6 +1738,18 @@
       "community": 1,
       "community_name": "useTranslation",
       "norm_label": "kelasmark()"
+    },
+    {
+      "label": "MemberList()",
+      "file_type": "code",
+      "source_file": "src/components/site/MemberList.tsx",
+      "source_location": "L11",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_components_site_memberlist_memberlist",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "memberlist()"
     },
     {
       "label": "PlaceholderNote()",
@@ -1752,6 +1788,18 @@
       "norm_label": "siteheader()"
     },
     {
+      "label": "VerificationWarningBar()",
+      "file_type": "code",
+      "source_file": "src/components/VerificationWarningBar.tsx",
+      "source_location": "L12",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_components_verificationwarningbar_verificationwarningbar",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "verificationwarningbar()"
+    },
+    {
       "label": "useOrganization()",
       "file_type": "code",
       "source_file": "src/hooks/use-organization.ts",
@@ -1788,6 +1836,18 @@
       "norm_label": "usetranslation()"
     },
     {
+      "label": "redeemInvitationCode()",
+      "file_type": "code",
+      "source_file": "src/lib/db.ts",
+      "source_location": "L693",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_lib_db_redeeminvitationcode",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "redeeminvitationcode()"
+    },
+    {
       "label": "setOrganizationSetting()",
       "file_type": "code",
       "source_file": "src/lib/db.ts",
@@ -1812,6 +1872,150 @@
       "norm_label": "gettranslation()"
     },
     {
+      "label": "displayNormalized()",
+      "file_type": "code",
+      "source_file": "src/lib/invitation-codes.ts",
+      "source_location": "L50",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_lib_invitation_codes_displaynormalized",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "displaynormalized()"
+    },
+    {
+      "label": "normalizeCodeInput()",
+      "file_type": "code",
+      "source_file": "src/lib/invitation-codes.ts",
+      "source_location": "L45",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_lib_invitation_codes_normalizecodeinput",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "normalizecodeinput()"
+    },
+    {
+      "label": "renderMarkdown()",
+      "file_type": "code",
+      "source_file": "src/lib/markdown.ts",
+      "source_location": "L11",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_lib_markdown_rendermarkdown",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "rendermarkdown()"
+    },
+    {
+      "label": "resolveInternalRedirect()",
+      "file_type": "code",
+      "source_file": "src/lib/redirect.ts",
+      "source_location": "L8",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_lib_redirect_resolveinternalredirect",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "resolveinternalredirect()"
+    },
+    {
+      "label": "hariNama()",
+      "file_type": "code",
+      "source_file": "src/lib/tanggal.ts",
+      "source_location": "L56",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_lib_tanggal_harinama",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "harinama()"
+    },
+    {
+      "label": "inisialNama()",
+      "file_type": "code",
+      "source_file": "src/lib/tanggal.ts",
+      "source_location": "L62",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_lib_tanggal_inisialnama",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "inisialnama()"
+    },
+    {
+      "label": "padNomor()",
+      "file_type": "code",
+      "source_file": "src/lib/tanggal.ts",
+      "source_location": "L67",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_lib_tanggal_padnomor",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "padnomor()"
+    },
+    {
+      "label": "pecahTanggal()",
+      "file_type": "code",
+      "source_file": "src/lib/tanggal.ts",
+      "source_location": "L42",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_lib_tanggal_pecahtanggal",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "pecahtanggal()"
+    },
+    {
+      "label": "AdminAgenda()",
+      "file_type": "code",
+      "source_file": "src/pages/admin/AdminAgenda.tsx",
+      "source_location": "L24",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_pages_admin_adminagenda_adminagenda",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "adminagenda()"
+    },
+    {
+      "label": "AdminDuty()",
+      "file_type": "code",
+      "source_file": "src/pages/admin/AdminDuty.tsx",
+      "source_location": "L21",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_pages_admin_adminduty_adminduty",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "adminduty()"
+    },
+    {
+      "label": "AdminMbg()",
+      "file_type": "code",
+      "source_file": "src/pages/admin/AdminMbg.tsx",
+      "source_location": "L21",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_pages_admin_adminmbg_adminmbg",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "adminmbg()"
+    },
+    {
+      "label": "AdminMembers()",
+      "file_type": "code",
+      "source_file": "src/pages/admin/AdminMembers.tsx",
+      "source_location": "L23",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_pages_admin_adminmembers_adminmembers",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "adminmembers()"
+    },
+    {
       "label": "AdminOrganization()",
       "file_type": "code",
       "source_file": "src/pages/admin/AdminOrganization.tsx",
@@ -1822,6 +2026,42 @@
       "community": 1,
       "community_name": "useTranslation",
       "norm_label": "adminorganization()"
+    },
+    {
+      "label": "AdminSchedule()",
+      "file_type": "code",
+      "source_file": "src/pages/admin/AdminSchedule.tsx",
+      "source_location": "L37",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_pages_admin_adminschedule_adminschedule",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "adminschedule()"
+    },
+    {
+      "label": "Agenda()",
+      "file_type": "code",
+      "source_file": "src/pages/Agenda.tsx",
+      "source_location": "L31",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_pages_agenda_agenda",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "agenda()"
+    },
+    {
+      "label": "kelompokkanBulan()",
+      "file_type": "code",
+      "source_file": "src/pages/Agenda.tsx",
+      "source_location": "L19",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_pages_agenda_kelompokkanbulan",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "kelompokkanbulan()"
     },
     {
       "label": "Anggota()",
@@ -1846,6 +2086,18 @@
       "community": 1,
       "community_name": "useTranslation",
       "norm_label": "artikel()"
+    },
+    {
+      "label": "ArtikelDetail()",
+      "file_type": "code",
+      "source_file": "src/pages/ArtikelDetail.tsx",
+      "source_location": "L12",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_pages_artikeldetail_artikeldetail",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "artikeldetail()"
     },
     {
       "label": "Auth()",
@@ -1884,6 +2136,18 @@
       "norm_label": "home()"
     },
     {
+      "label": "Jadwal()",
+      "file_type": "code",
+      "source_file": "src/pages/Jadwal.tsx",
+      "source_location": "L24",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_pages_jadwal_jadwal",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "jadwal()"
+    },
+    {
       "label": "NotFound()",
       "file_type": "code",
       "source_file": "src/pages/NotFound.tsx",
@@ -1908,6 +2172,18 @@
       "norm_label": "fadeheading()"
     },
     {
+      "label": "Orang()",
+      "file_type": "code",
+      "source_file": "src/pages/Organisasi.tsx",
+      "source_location": "L11",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_pages_organisasi_orang",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "orang()"
+    },
+    {
       "label": "Organisasi()",
       "file_type": "code",
       "source_file": "src/pages/Organisasi.tsx",
@@ -1920,52 +2196,16 @@
       "norm_label": "organisasi()"
     },
     {
-      "label": "redeemInvitationCode()",
+      "label": "Pentest()",
       "file_type": "code",
-      "source_file": "src/lib/db.ts",
-      "source_location": "L693",
+      "source_file": "src/pages/Pentest.tsx",
+      "source_location": "L24",
       "_callable": true,
       "_origin": "ast",
-      "id": "src_lib_db_redeeminvitationcode",
-      "community": 104,
-      "community_name": "Register.tsx",
-      "norm_label": "redeeminvitationcode()"
-    },
-    {
-      "label": "displayNormalized()",
-      "file_type": "code",
-      "source_file": "src/lib/invitation-codes.ts",
-      "source_location": "L50",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_lib_invitation_codes_displaynormalized",
-      "community": 104,
-      "community_name": "Register.tsx",
-      "norm_label": "displaynormalized()"
-    },
-    {
-      "label": "hashCode()",
-      "file_type": "code",
-      "source_file": "src/lib/invitation-codes.ts",
-      "source_location": "L35",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_lib_invitation_codes_hashcode",
-      "community": 104,
-      "community_name": "Register.tsx",
-      "norm_label": "hashcode()"
-    },
-    {
-      "label": "normalizeCodeInput()",
-      "file_type": "code",
-      "source_file": "src/lib/invitation-codes.ts",
-      "source_location": "L45",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_lib_invitation_codes_normalizecodeinput",
-      "community": 104,
-      "community_name": "Register.tsx",
-      "norm_label": "normalizecodeinput()"
+      "id": "src_pages_pentest_pentest",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "pentest()"
     },
     {
       "label": "Register()",
@@ -1975,9 +2215,69 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_pages_register_register",
-      "community": 104,
-      "community_name": "Register.tsx",
+      "community": 1,
+      "community_name": "useTranslation",
       "norm_label": "register()"
+    },
+    {
+      "label": "getDaysInMonth()",
+      "file_type": "code",
+      "source_file": "src/pages/Tugas.tsx",
+      "source_location": "L22",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_pages_tugas_getdaysinmonth",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "getdaysinmonth()"
+    },
+    {
+      "label": "getFirstDayOfMonth()",
+      "file_type": "code",
+      "source_file": "src/pages/Tugas.tsx",
+      "source_location": "L25",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_pages_tugas_getfirstdayofmonth",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "getfirstdayofmonth()"
+    },
+    {
+      "label": "taskSlug()",
+      "file_type": "code",
+      "source_file": "src/pages/Tugas.tsx",
+      "source_location": "L28",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_pages_tugas_taskslug",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "taskslug()"
+    },
+    {
+      "label": "Tugas()",
+      "file_type": "code",
+      "source_file": "src/pages/Tugas.tsx",
+      "source_location": "L36",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_pages_tugas_tugas",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "tugas()"
+    },
+    {
+      "label": "TugasDetail()",
+      "file_type": "code",
+      "source_file": "src/pages/TugasDetail.tsx",
+      "source_location": "L14",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_pages_tugasdetail_tugasdetail",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "tugasdetail()"
     },
     {
       "label": "Drawer()",
@@ -2100,114 +2400,6 @@
       "norm_label": "drawertrigger()"
     },
     {
-      "label": "getAllProfiles()",
-      "file_type": "code",
-      "source_file": "src/lib/db.ts",
-      "source_location": "L624",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_lib_db_getallprofiles",
-      "community": 118,
-      "community_name": "pecahTanggal",
-      "norm_label": "getallprofiles()"
-    },
-    {
-      "label": "updateProfileRole()",
-      "file_type": "code",
-      "source_file": "src/lib/db.ts",
-      "source_location": "L634",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_lib_db_updateprofilerole",
-      "community": 118,
-      "community_name": "pecahTanggal",
-      "norm_label": "updateprofilerole()"
-    },
-    {
-      "label": "hariNama()",
-      "file_type": "code",
-      "source_file": "src/lib/tanggal.ts",
-      "source_location": "L56",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_lib_tanggal_harinama",
-      "community": 118,
-      "community_name": "pecahTanggal",
-      "norm_label": "harinama()"
-    },
-    {
-      "label": "pecahTanggal()",
-      "file_type": "code",
-      "source_file": "src/lib/tanggal.ts",
-      "source_location": "L42",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_lib_tanggal_pecahtanggal",
-      "community": 118,
-      "community_name": "pecahTanggal",
-      "norm_label": "pecahtanggal()"
-    },
-    {
-      "label": "AdminAgenda()",
-      "file_type": "code",
-      "source_file": "src/pages/admin/AdminAgenda.tsx",
-      "source_location": "L24",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_pages_admin_adminagenda_adminagenda",
-      "community": 118,
-      "community_name": "pecahTanggal",
-      "norm_label": "adminagenda()"
-    },
-    {
-      "label": "AdminUsers()",
-      "file_type": "code",
-      "source_file": "src/pages/admin/AdminUsers.tsx",
-      "source_location": "L14",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_pages_admin_adminusers_adminusers",
-      "community": 118,
-      "community_name": "pecahTanggal",
-      "norm_label": "adminusers()"
-    },
-    {
-      "label": "Agenda()",
-      "file_type": "code",
-      "source_file": "src/pages/Agenda.tsx",
-      "source_location": "L31",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_pages_agenda_agenda",
-      "community": 118,
-      "community_name": "pecahTanggal",
-      "norm_label": "agenda()"
-    },
-    {
-      "label": "kelompokkanBulan()",
-      "file_type": "code",
-      "source_file": "src/pages/Agenda.tsx",
-      "source_location": "L19",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_pages_agenda_kelompokkanbulan",
-      "community": 118,
-      "community_name": "pecahTanggal",
-      "norm_label": "kelompokkanbulan()"
-    },
-    {
-      "label": "RequireVerified()",
-      "file_type": "code",
-      "source_file": "src/components/RequireVerified.tsx",
-      "source_location": "L19",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_components_requireverified_requireverified",
-      "community": 119,
-      "community_name": "main.tsx",
-      "norm_label": "requireverified()"
-    },
-    {
       "label": "Toaster()",
       "file_type": "code",
       "source_file": "src/components/ui/sonner.tsx",
@@ -2223,7 +2415,7 @@
       "label": "RouteLoading()",
       "file_type": "code",
       "source_file": "src/main.tsx",
-      "source_location": "L57",
+      "source_location": "L58",
       "_callable": true,
       "_origin": "ast",
       "id": "src_main_routeloading",
@@ -2235,7 +2427,7 @@
       "label": "RouteSyncer()",
       "file_type": "code",
       "source_file": "src/main.tsx",
-      "source_location": "L133",
+      "source_location": "L134",
       "_callable": true,
       "_origin": "ast",
       "id": "src_main_routesyncer",
@@ -2247,7 +2439,7 @@
       "label": "ScrollToTop()",
       "file_type": "code",
       "source_file": "src/main.tsx",
-      "source_location": "L125",
+      "source_location": "L126",
       "_callable": true,
       "_origin": "ast",
       "id": "src_main_scrolltotop",
@@ -2760,42 +2952,6 @@
       "norm_label": "tabstrigger()"
     },
     {
-      "label": "getArticleBySlug()",
-      "file_type": "code",
-      "source_file": "src/lib/db.ts",
-      "source_location": "L430",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_lib_db_getarticlebyslug",
-      "community": 128,
-      "community_name": "ArtikelDetail.tsx",
-      "norm_label": "getarticlebyslug()"
-    },
-    {
-      "label": "renderMarkdown()",
-      "file_type": "code",
-      "source_file": "src/lib/markdown.ts",
-      "source_location": "L11",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_lib_markdown_rendermarkdown",
-      "community": 128,
-      "community_name": "ArtikelDetail.tsx",
-      "norm_label": "rendermarkdown()"
-    },
-    {
-      "label": "ArtikelDetail()",
-      "file_type": "code",
-      "source_file": "src/pages/ArtikelDetail.tsx",
-      "source_location": "L12",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_pages_artikeldetail_artikeldetail",
-      "community": 128,
-      "community_name": "ArtikelDetail.tsx",
-      "norm_label": "artikeldetail()"
-    },
-    {
       "label": "Avatar()",
       "file_type": "code",
       "source_file": "src/components/ui/avatar.tsx",
@@ -2840,7 +2996,7 @@
       "_origin": "ast",
       "id": "src_components_home_homeclassic_sectionhead",
       "community": 13,
-      "community_name": "kelas.ts",
+      "community_name": "HomeClassic.tsx",
       "norm_label": "sectionhead()"
     },
     {
@@ -2852,7 +3008,7 @@
       "_origin": "ast",
       "id": "src_components_site_fadein_fadein",
       "community": 13,
-      "community_name": "kelas.ts",
+      "community_name": "HomeClassic.tsx",
       "norm_label": "fadein()"
     },
     {
@@ -2864,7 +3020,7 @@
       "_origin": "ast",
       "id": "src_components_site_photoplate_photoplate",
       "community": 13,
-      "community_name": "kelas.ts",
+      "community_name": "HomeClassic.tsx",
       "norm_label": "photoplate()"
     },
     {
@@ -2876,20 +3032,8 @@
       "_origin": "ast",
       "id": "src_components_site_stamp_stamp",
       "community": 13,
-      "community_name": "kelas.ts",
+      "community_name": "HomeClassic.tsx",
       "norm_label": "stamp()"
-    },
-    {
-      "label": "cariAnggota()",
-      "file_type": "code",
-      "source_file": "src/data/kelas.ts",
-      "source_location": "L104",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_data_kelas_carianggota",
-      "community": 13,
-      "community_name": "kelas.ts",
-      "norm_label": "carianggota()"
     },
     {
       "label": "HoverCard()",
@@ -2967,7 +3111,7 @@
       "label": ".componentDidCatch()",
       "file_type": "code",
       "source_file": "src/main.tsx",
-      "source_location": "L98",
+      "source_location": "L99",
       "_callable": true,
       "_origin": "ast",
       "id": "src_main_rooterrorboundary_componentdidcatch",
@@ -2979,7 +3123,7 @@
       "label": ".getDerivedStateFromError()",
       "file_type": "code",
       "source_file": "src/main.tsx",
-      "source_location": "L91",
+      "source_location": "L92",
       "_callable": true,
       "_origin": "ast",
       "id": "src_main_rooterrorboundary_getderivedstatefromerror",
@@ -2991,7 +3135,7 @@
       "label": ".render()",
       "file_type": "code",
       "source_file": "src/main.tsx",
-      "source_location": "L101",
+      "source_location": "L102",
       "_callable": true,
       "_origin": "ast",
       "id": "src_main_rooterrorboundary_render",
@@ -3003,7 +3147,7 @@
       "label": ".componentDidCatch()",
       "file_type": "code",
       "source_file": "src/main.tsx",
-      "source_location": "L77",
+      "source_location": "L78",
       "_callable": true,
       "_origin": "ast",
       "id": "src_main_toolbarerrorboundary_componentdidcatch",
@@ -3015,7 +3159,7 @@
       "label": ".getDerivedStateFromError()",
       "file_type": "code",
       "source_file": "src/main.tsx",
-      "source_location": "L74",
+      "source_location": "L75",
       "_callable": true,
       "_origin": "ast",
       "id": "src_main_toolbarerrorboundary_getderivedstatefromerror",
@@ -3027,7 +3171,7 @@
       "label": ".render()",
       "file_type": "code",
       "source_file": "src/main.tsx",
-      "source_location": "L80",
+      "source_location": "L81",
       "_callable": true,
       "_origin": "ast",
       "id": "src_main_toolbarerrorboundary_render",
@@ -3096,16 +3240,40 @@
       "norm_label": "radiogroupitem()"
     },
     {
-      "label": "Dashboard()",
+      "label": "HomeExperimental()",
       "file_type": "code",
-      "source_file": "src/pages/Dashboard.tsx",
-      "source_location": "L7",
+      "source_file": "src/components/home/HomeExperimental.tsx",
+      "source_location": "L15",
       "_callable": true,
       "_origin": "ast",
-      "id": "src_pages_dashboard_dashboard",
-      "community": 137,
-      "community_name": "Dashboard.tsx",
-      "norm_label": "dashboard()"
+      "id": "src_components_home_homeexperimental_homeexperimental",
+      "community": 14,
+      "community_name": "Home.tsx",
+      "norm_label": "homeexperimental()"
+    },
+    {
+      "label": "HomeModern()",
+      "file_type": "code",
+      "source_file": "src/components/home/HomeModern.tsx",
+      "source_location": "L16",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_components_home_homemodern_homemodern",
+      "community": 14,
+      "community_name": "Home.tsx",
+      "norm_label": "homemodern()"
+    },
+    {
+      "label": "HomeNature()",
+      "file_type": "code",
+      "source_file": "src/components/home/HomeNature.tsx",
+      "source_location": "L16",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_components_home_homenature_homenature",
+      "community": 14,
+      "community_name": "Home.tsx",
+      "norm_label": "homenature()"
     },
     {
       "label": "useAgenda()",
@@ -3116,7 +3284,7 @@
       "_origin": "ast",
       "id": "src_hooks_use_agenda_useagenda",
       "community": 14,
-      "community_name": "db.ts",
+      "community_name": "Home.tsx",
       "norm_label": "useagenda()"
     },
     {
@@ -3128,7 +3296,7 @@
       "_origin": "ast",
       "id": "src_hooks_use_articles_usearticles",
       "community": 14,
-      "community_name": "db.ts",
+      "community_name": "Home.tsx",
       "norm_label": "usearticles()"
     },
     {
@@ -3140,20 +3308,8 @@
       "_origin": "ast",
       "id": "src_hooks_use_members_usemembers",
       "community": 14,
-      "community_name": "db.ts",
+      "community_name": "Home.tsx",
       "norm_label": "usemembers()"
-    },
-    {
-      "label": "useSchedule()",
-      "file_type": "code",
-      "source_file": "src/hooks/use-schedule.ts",
-      "source_location": "L11",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_hooks_use_schedule_useschedule",
-      "community": 14,
-      "community_name": "db.ts",
-      "norm_label": "useschedule()"
     },
     {
       "label": "createAgendaItem()",
@@ -3164,7 +3320,7 @@
       "_origin": "ast",
       "id": "src_lib_db_createagendaitem",
       "community": 14,
-      "community_name": "db.ts",
+      "community_name": "Home.tsx",
       "norm_label": "createagendaitem()"
     },
     {
@@ -3176,7 +3332,7 @@
       "_origin": "ast",
       "id": "src_lib_db_createarticle",
       "community": 14,
-      "community_name": "db.ts",
+      "community_name": "Home.tsx",
       "norm_label": "createarticle()"
     },
     {
@@ -3188,20 +3344,8 @@
       "_origin": "ast",
       "id": "src_lib_db_createmember",
       "community": 14,
-      "community_name": "db.ts",
+      "community_name": "Home.tsx",
       "norm_label": "createmember()"
-    },
-    {
-      "label": "createSchedule()",
-      "file_type": "code",
-      "source_file": "src/lib/db.ts",
-      "source_location": "L246",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_lib_db_createschedule",
-      "community": 14,
-      "community_name": "db.ts",
-      "norm_label": "createschedule()"
     },
     {
       "label": "deleteAgendaItem()",
@@ -3212,7 +3356,7 @@
       "_origin": "ast",
       "id": "src_lib_db_deleteagendaitem",
       "community": 14,
-      "community_name": "db.ts",
+      "community_name": "Home.tsx",
       "norm_label": "deleteagendaitem()"
     },
     {
@@ -3224,7 +3368,7 @@
       "_origin": "ast",
       "id": "src_lib_db_deletearticle",
       "community": 14,
-      "community_name": "db.ts",
+      "community_name": "Home.tsx",
       "norm_label": "deletearticle()"
     },
     {
@@ -3236,20 +3380,8 @@
       "_origin": "ast",
       "id": "src_lib_db_deletemember",
       "community": 14,
-      "community_name": "db.ts",
+      "community_name": "Home.tsx",
       "norm_label": "deletemember()"
-    },
-    {
-      "label": "deleteSchedule()",
-      "file_type": "code",
-      "source_file": "src/lib/db.ts",
-      "source_location": "L288",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_lib_db_deleteschedule",
-      "community": 14,
-      "community_name": "db.ts",
-      "norm_label": "deleteschedule()"
     },
     {
       "label": "getAgendaItems()",
@@ -3260,8 +3392,20 @@
       "_origin": "ast",
       "id": "src_lib_db_getagendaitems",
       "community": 14,
-      "community_name": "db.ts",
+      "community_name": "Home.tsx",
       "norm_label": "getagendaitems()"
+    },
+    {
+      "label": "getArticleBySlug()",
+      "file_type": "code",
+      "source_file": "src/lib/db.ts",
+      "source_location": "L430",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_lib_db_getarticlebyslug",
+      "community": 14,
+      "community_name": "Home.tsx",
+      "norm_label": "getarticlebyslug()"
     },
     {
       "label": "getArticles()",
@@ -3272,7 +3416,7 @@
       "_origin": "ast",
       "id": "src_lib_db_getarticles",
       "community": 14,
-      "community_name": "db.ts",
+      "community_name": "Home.tsx",
       "norm_label": "getarticles()"
     },
     {
@@ -3284,32 +3428,8 @@
       "_origin": "ast",
       "id": "src_lib_db_getmembers",
       "community": 14,
-      "community_name": "db.ts",
+      "community_name": "Home.tsx",
       "norm_label": "getmembers()"
-    },
-    {
-      "label": "getSchedules()",
-      "file_type": "code",
-      "source_file": "src/lib/db.ts",
-      "source_location": "L235",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_lib_db_getschedules",
-      "community": 14,
-      "community_name": "db.ts",
-      "norm_label": "getschedules()"
-    },
-    {
-      "label": "getUserSettings()",
-      "file_type": "code",
-      "source_file": "src/lib/db.ts",
-      "source_location": "L706",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_lib_db_getusersettings",
-      "community": 14,
-      "community_name": "db.ts",
-      "norm_label": "getusersettings()"
     },
     {
       "label": "updateAgendaItem()",
@@ -3320,7 +3440,7 @@
       "_origin": "ast",
       "id": "src_lib_db_updateagendaitem",
       "community": 14,
-      "community_name": "db.ts",
+      "community_name": "Home.tsx",
       "norm_label": "updateagendaitem()"
     },
     {
@@ -3332,7 +3452,7 @@
       "_origin": "ast",
       "id": "src_lib_db_updatearticle",
       "community": 14,
-      "community_name": "db.ts",
+      "community_name": "Home.tsx",
       "norm_label": "updatearticle()"
     },
     {
@@ -3344,20 +3464,8 @@
       "_origin": "ast",
       "id": "src_lib_db_updatemember",
       "community": 14,
-      "community_name": "db.ts",
+      "community_name": "Home.tsx",
       "norm_label": "updatemember()"
-    },
-    {
-      "label": "updateSchedule()",
-      "file_type": "code",
-      "source_file": "src/lib/db.ts",
-      "source_location": "L273",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_lib_db_updateschedule",
-      "community": 14,
-      "community_name": "db.ts",
-      "norm_label": "updateschedule()"
     },
     {
       "label": "AdminDashboard()",
@@ -3368,20 +3476,8 @@
       "_origin": "ast",
       "id": "src_pages_admin_admindashboard_admindashboard",
       "community": 14,
-      "community_name": "db.ts",
+      "community_name": "Home.tsx",
       "norm_label": "admindashboard()"
-    },
-    {
-      "label": "AdminSchedule()",
-      "file_type": "code",
-      "source_file": "src/pages/admin/AdminSchedule.tsx",
-      "source_location": "L37",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_pages_admin_adminschedule_adminschedule",
-      "community": 14,
-      "community_name": "db.ts",
-      "norm_label": "adminschedule()"
     },
     {
       "label": "Carousel()",
@@ -3456,6 +3552,18 @@
       "norm_label": "usecarousel()"
     },
     {
+      "label": "cariAnggota()",
+      "file_type": "code",
+      "source_file": "src/data/kelas.ts",
+      "source_location": "L104",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_data_kelas_carianggota",
+      "community": 16,
+      "community_name": "kelas.ts",
+      "norm_label": "carianggota()"
+    },
+    {
       "label": "useTasks()",
       "file_type": "code",
       "source_file": "src/hooks/use-tasks.ts",
@@ -3464,7 +3572,7 @@
       "_origin": "ast",
       "id": "src_hooks_use_tasks_usetasks",
       "community": 16,
-      "community_name": "Tugas.tsx",
+      "community_name": "kelas.ts",
       "norm_label": "usetasks()"
     },
     {
@@ -3476,7 +3584,7 @@
       "_origin": "ast",
       "id": "src_lib_db_createtask",
       "community": 16,
-      "community_name": "Tugas.tsx",
+      "community_name": "kelas.ts",
       "norm_label": "createtask()"
     },
     {
@@ -3488,7 +3596,7 @@
       "_origin": "ast",
       "id": "src_lib_db_deletetask",
       "community": 16,
-      "community_name": "Tugas.tsx",
+      "community_name": "kelas.ts",
       "norm_label": "deletetask()"
     },
     {
@@ -3500,7 +3608,7 @@
       "_origin": "ast",
       "id": "src_lib_db_gettasks",
       "community": 16,
-      "community_name": "Tugas.tsx",
+      "community_name": "kelas.ts",
       "norm_label": "gettasks()"
     },
     {
@@ -3512,68 +3620,8 @@
       "_origin": "ast",
       "id": "src_lib_db_updatetask",
       "community": 16,
-      "community_name": "Tugas.tsx",
+      "community_name": "kelas.ts",
       "norm_label": "updatetask()"
-    },
-    {
-      "label": "getDaysInMonth()",
-      "file_type": "code",
-      "source_file": "src/pages/Tugas.tsx",
-      "source_location": "L22",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_pages_tugas_getdaysinmonth",
-      "community": 16,
-      "community_name": "Tugas.tsx",
-      "norm_label": "getdaysinmonth()"
-    },
-    {
-      "label": "getFirstDayOfMonth()",
-      "file_type": "code",
-      "source_file": "src/pages/Tugas.tsx",
-      "source_location": "L25",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_pages_tugas_getfirstdayofmonth",
-      "community": 16,
-      "community_name": "Tugas.tsx",
-      "norm_label": "getfirstdayofmonth()"
-    },
-    {
-      "label": "taskSlug()",
-      "file_type": "code",
-      "source_file": "src/pages/Tugas.tsx",
-      "source_location": "L28",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_pages_tugas_taskslug",
-      "community": 16,
-      "community_name": "Tugas.tsx",
-      "norm_label": "taskslug()"
-    },
-    {
-      "label": "Tugas()",
-      "file_type": "code",
-      "source_file": "src/pages/Tugas.tsx",
-      "source_location": "L36",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_pages_tugas_tugas",
-      "community": 16,
-      "community_name": "Tugas.tsx",
-      "norm_label": "tugas()"
-    },
-    {
-      "label": "TugasDetail()",
-      "file_type": "code",
-      "source_file": "src/pages/TugasDetail.tsx",
-      "source_location": "L14",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_pages_tugasdetail_tugasdetail",
-      "community": 16,
-      "community_name": "Tugas.tsx",
-      "norm_label": "tugasdetail()"
     },
     {
       "label": "ContextMenu()",
@@ -4464,16 +4512,16 @@
       "norm_label": "requiresignedin()"
     },
     {
-      "label": "VerificationWarningBar()",
+      "label": "RequireVerified()",
       "file_type": "code",
-      "source_file": "src/components/VerificationWarningBar.tsx",
-      "source_location": "L12",
+      "source_file": "src/components/RequireVerified.tsx",
+      "source_location": "L19",
       "_callable": true,
       "_origin": "ast",
-      "id": "src_components_verificationwarningbar_verificationwarningbar",
+      "id": "src_components_requireverified_requireverified",
       "community": 21,
       "community_name": "useAuth",
-      "norm_label": "verificationwarningbar()"
+      "norm_label": "requireverified()"
     },
     {
       "label": "useAuth()",
@@ -4488,16 +4536,16 @@
       "norm_label": "useauth()"
     },
     {
-      "label": "resolveInternalRedirect()",
+      "label": "Dashboard()",
       "file_type": "code",
-      "source_file": "src/lib/redirect.ts",
-      "source_location": "L8",
+      "source_file": "src/pages/Dashboard.tsx",
+      "source_location": "L7",
       "_callable": true,
       "_origin": "ast",
-      "id": "src_lib_redirect_resolveinternalredirect",
+      "id": "src_pages_dashboard_dashboard",
       "community": 21,
       "community_name": "useAuth",
-      "norm_label": "resolveinternalredirect()"
+      "norm_label": "dashboard()"
     },
     {
       "label": "formatReactComponentHierarchy()",
@@ -5244,112 +5292,64 @@
       "norm_label": "tugaspage()"
     },
     {
-      "label": "Orang()",
+      "label": "useSchedule()",
       "file_type": "code",
-      "source_file": "Organisasi-BACKUP.tsx",
-      "source_location": "L9",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "organisasi_backup_orang",
-      "community": 37,
-      "community_name": "Jadwal.tsx",
-      "norm_label": "orang()"
-    },
-    {
-      "label": "HomeBento()",
-      "file_type": "code",
-      "source_file": "src/components/home/HomeBento.tsx",
-      "source_location": "L27",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_components_home_homebento_homebento",
-      "community": 37,
-      "community_name": "Jadwal.tsx",
-      "norm_label": "homebento()"
-    },
-    {
-      "label": "HomeClassic()",
-      "file_type": "code",
-      "source_file": "src/components/home/HomeClassic.tsx",
-      "source_location": "L62",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_components_home_homeclassic_homeclassic",
-      "community": 37,
-      "community_name": "Jadwal.tsx",
-      "norm_label": "homeclassic()"
-    },
-    {
-      "label": "HomeShowcase()",
-      "file_type": "code",
-      "source_file": "src/components/home/HomeShowcase.tsx",
-      "source_location": "L20",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_components_home_homeshowcase_homeshowcase",
-      "community": 37,
-      "community_name": "Jadwal.tsx",
-      "norm_label": "homeshowcase()"
-    },
-    {
-      "label": "MemberList()",
-      "file_type": "code",
-      "source_file": "src/components/site/MemberList.tsx",
+      "source_file": "src/hooks/use-schedule.ts",
       "source_location": "L11",
       "_callable": true,
       "_origin": "ast",
-      "id": "src_components_site_memberlist_memberlist",
+      "id": "src_hooks_use_schedule_useschedule",
       "community": 37,
-      "community_name": "Jadwal.tsx",
-      "norm_label": "memberlist()"
+      "community_name": "use-schedule.ts",
+      "norm_label": "useschedule()"
     },
     {
-      "label": "inisialNama()",
+      "label": "createSchedule()",
       "file_type": "code",
-      "source_file": "src/lib/tanggal.ts",
-      "source_location": "L62",
+      "source_file": "src/lib/db.ts",
+      "source_location": "L246",
       "_callable": true,
       "_origin": "ast",
-      "id": "src_lib_tanggal_inisialnama",
+      "id": "src_lib_db_createschedule",
       "community": 37,
-      "community_name": "Jadwal.tsx",
-      "norm_label": "inisialnama()"
+      "community_name": "use-schedule.ts",
+      "norm_label": "createschedule()"
     },
     {
-      "label": "padNomor()",
+      "label": "deleteSchedule()",
       "file_type": "code",
-      "source_file": "src/lib/tanggal.ts",
-      "source_location": "L67",
+      "source_file": "src/lib/db.ts",
+      "source_location": "L288",
       "_callable": true,
       "_origin": "ast",
-      "id": "src_lib_tanggal_padnomor",
+      "id": "src_lib_db_deleteschedule",
       "community": 37,
-      "community_name": "Jadwal.tsx",
-      "norm_label": "padnomor()"
+      "community_name": "use-schedule.ts",
+      "norm_label": "deleteschedule()"
     },
     {
-      "label": "AdminMembers()",
+      "label": "getSchedules()",
       "file_type": "code",
-      "source_file": "src/pages/admin/AdminMembers.tsx",
-      "source_location": "L23",
+      "source_file": "src/lib/db.ts",
+      "source_location": "L235",
       "_callable": true,
       "_origin": "ast",
-      "id": "src_pages_admin_adminmembers_adminmembers",
+      "id": "src_lib_db_getschedules",
       "community": 37,
-      "community_name": "Jadwal.tsx",
-      "norm_label": "adminmembers()"
+      "community_name": "use-schedule.ts",
+      "norm_label": "getschedules()"
     },
     {
-      "label": "Orang()",
+      "label": "updateSchedule()",
       "file_type": "code",
-      "source_file": "src/pages/Organisasi.tsx",
-      "source_location": "L11",
+      "source_file": "src/lib/db.ts",
+      "source_location": "L273",
       "_callable": true,
       "_origin": "ast",
-      "id": "src_pages_organisasi_orang",
+      "id": "src_lib_db_updateschedule",
       "community": 37,
-      "community_name": "Jadwal.tsx",
-      "norm_label": "orang()"
+      "community_name": "use-schedule.ts",
+      "norm_label": "updateschedule()"
     },
     {
       "label": "Field()",
@@ -5876,8 +5876,20 @@
       "_origin": "ast",
       "id": "src_hooks_use_duty_usedutyschedule",
       "community": 41,
-      "community_name": "use-duty.ts",
+      "community_name": "db.ts",
       "norm_label": "usedutyschedule()"
+    },
+    {
+      "label": "useMbgSchedule()",
+      "file_type": "code",
+      "source_file": "src/hooks/use-mbg.ts",
+      "source_location": "L10",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_hooks_use_mbg_usembgschedule",
+      "community": 41,
+      "community_name": "db.ts",
+      "norm_label": "usembgschedule()"
     },
     {
       "label": "createDutySchedule()",
@@ -5888,8 +5900,20 @@
       "_origin": "ast",
       "id": "src_lib_db_createdutyschedule",
       "community": 41,
-      "community_name": "use-duty.ts",
+      "community_name": "db.ts",
       "norm_label": "createdutyschedule()"
+    },
+    {
+      "label": "createMbgSchedule()",
+      "file_type": "code",
+      "source_file": "src/lib/db.ts",
+      "source_location": "L505",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_lib_db_creatembgschedule",
+      "community": 41,
+      "community_name": "db.ts",
+      "norm_label": "creatembgschedule()"
     },
     {
       "label": "deleteDutySchedule()",
@@ -5900,8 +5924,32 @@
       "_origin": "ast",
       "id": "src_lib_db_deletedutyschedule",
       "community": 41,
-      "community_name": "use-duty.ts",
+      "community_name": "db.ts",
       "norm_label": "deletedutyschedule()"
+    },
+    {
+      "label": "deleteMbgSchedule()",
+      "file_type": "code",
+      "source_file": "src/lib/db.ts",
+      "source_location": "L533",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_lib_db_deletembgschedule",
+      "community": 41,
+      "community_name": "db.ts",
+      "norm_label": "deletembgschedule()"
+    },
+    {
+      "label": "getAllProfiles()",
+      "file_type": "code",
+      "source_file": "src/lib/db.ts",
+      "source_location": "L624",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_lib_db_getallprofiles",
+      "community": 41,
+      "community_name": "db.ts",
+      "norm_label": "getallprofiles()"
     },
     {
       "label": "getDutySchedule()",
@@ -5912,8 +5960,32 @@
       "_origin": "ast",
       "id": "src_lib_db_getdutyschedule",
       "community": 41,
-      "community_name": "use-duty.ts",
+      "community_name": "db.ts",
       "norm_label": "getdutyschedule()"
+    },
+    {
+      "label": "getMbgSchedule()",
+      "file_type": "code",
+      "source_file": "src/lib/db.ts",
+      "source_location": "L496",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_lib_db_getmbgschedule",
+      "community": 41,
+      "community_name": "db.ts",
+      "norm_label": "getmbgschedule()"
+    },
+    {
+      "label": "getUserSettings()",
+      "file_type": "code",
+      "source_file": "src/lib/db.ts",
+      "source_location": "L706",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_lib_db_getusersettings",
+      "community": 41,
+      "community_name": "db.ts",
+      "norm_label": "getusersettings()"
     },
     {
       "label": "updateDutySchedule()",
@@ -5924,32 +5996,44 @@
       "_origin": "ast",
       "id": "src_lib_db_updatedutyschedule",
       "community": 41,
-      "community_name": "use-duty.ts",
+      "community_name": "db.ts",
       "norm_label": "updatedutyschedule()"
     },
     {
-      "label": "AdminDuty()",
+      "label": "updateMbgSchedule()",
       "file_type": "code",
-      "source_file": "src/pages/admin/AdminDuty.tsx",
-      "source_location": "L21",
+      "source_file": "src/lib/db.ts",
+      "source_location": "L519",
       "_callable": true,
       "_origin": "ast",
-      "id": "src_pages_admin_adminduty_adminduty",
+      "id": "src_lib_db_updatembgschedule",
       "community": 41,
-      "community_name": "use-duty.ts",
-      "norm_label": "adminduty()"
+      "community_name": "db.ts",
+      "norm_label": "updatembgschedule()"
     },
     {
-      "label": "Jadwal()",
+      "label": "updateProfileRole()",
       "file_type": "code",
-      "source_file": "src/pages/Jadwal.tsx",
-      "source_location": "L24",
+      "source_file": "src/lib/db.ts",
+      "source_location": "L634",
       "_callable": true,
       "_origin": "ast",
-      "id": "src_pages_jadwal_jadwal",
+      "id": "src_lib_db_updateprofilerole",
       "community": 41,
-      "community_name": "use-duty.ts",
-      "norm_label": "jadwal()"
+      "community_name": "db.ts",
+      "norm_label": "updateprofilerole()"
+    },
+    {
+      "label": "AdminUsers()",
+      "file_type": "code",
+      "source_file": "src/pages/admin/AdminUsers.tsx",
+      "source_location": "L14",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_pages_admin_adminusers_adminusers",
+      "community": 41,
+      "community_name": "db.ts",
+      "norm_label": "adminusers()"
     },
     {
       "label": "uploadGalleryImage()",
@@ -5974,6 +6058,18 @@
       "community": 42,
       "community_name": "storage.ts",
       "norm_label": "validateimagefile()"
+    },
+    {
+      "label": "AdminGallery()",
+      "file_type": "code",
+      "source_file": "src/pages/admin/AdminGallery.tsx",
+      "source_location": "L25",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_pages_admin_admingallery_admingallery",
+      "community": 42,
+      "community_name": "storage.ts",
+      "norm_label": "admingallery()"
     },
     {
       "label": "Breadcrumb()",
@@ -6420,18 +6516,6 @@
       "norm_label": "deletegalleryimage()"
     },
     {
-      "label": "AdminGallery()",
-      "file_type": "code",
-      "source_file": "src/pages/admin/AdminGallery.tsx",
-      "source_location": "L25",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_pages_admin_admingallery_admingallery",
-      "community": 67,
-      "community_name": "use-gallery.ts",
-      "norm_label": "admingallery()"
-    },
-    {
       "label": "Item()",
       "file_type": "code",
       "source_file": "src/components/ui/item.tsx",
@@ -6672,78 +6756,6 @@
       "norm_label": "signout()"
     },
     {
-      "label": "useMbgSchedule()",
-      "file_type": "code",
-      "source_file": "src/hooks/use-mbg.ts",
-      "source_location": "L10",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_hooks_use_mbg_usembgschedule",
-      "community": 92,
-      "community_name": "use-mbg.ts",
-      "norm_label": "usembgschedule()"
-    },
-    {
-      "label": "createMbgSchedule()",
-      "file_type": "code",
-      "source_file": "src/lib/db.ts",
-      "source_location": "L505",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_lib_db_creatembgschedule",
-      "community": 92,
-      "community_name": "use-mbg.ts",
-      "norm_label": "creatembgschedule()"
-    },
-    {
-      "label": "deleteMbgSchedule()",
-      "file_type": "code",
-      "source_file": "src/lib/db.ts",
-      "source_location": "L533",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_lib_db_deletembgschedule",
-      "community": 92,
-      "community_name": "use-mbg.ts",
-      "norm_label": "deletembgschedule()"
-    },
-    {
-      "label": "getMbgSchedule()",
-      "file_type": "code",
-      "source_file": "src/lib/db.ts",
-      "source_location": "L496",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_lib_db_getmbgschedule",
-      "community": 92,
-      "community_name": "use-mbg.ts",
-      "norm_label": "getmbgschedule()"
-    },
-    {
-      "label": "updateMbgSchedule()",
-      "file_type": "code",
-      "source_file": "src/lib/db.ts",
-      "source_location": "L519",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_lib_db_updatembgschedule",
-      "community": 92,
-      "community_name": "use-mbg.ts",
-      "norm_label": "updatembgschedule()"
-    },
-    {
-      "label": "AdminMbg()",
-      "file_type": "code",
-      "source_file": "src/pages/admin/AdminMbg.tsx",
-      "source_location": "L21",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_pages_admin_adminmbg_adminmbg",
-      "community": 92,
-      "community_name": "use-mbg.ts",
-      "norm_label": "adminmbg()"
-    },
-    {
       "label": "AdminLayout.tsx",
       "file_type": "code",
       "source_file": "src/components/admin/AdminLayout.tsx",
@@ -6920,6 +6932,17 @@
       "norm_label": "instrumentation.tsx"
     },
     {
+      "label": "invitation-codes.ts",
+      "file_type": "code",
+      "source_file": "src/lib/invitation-codes.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_lib_invitation_codes",
+      "community": 0,
+      "community_name": "AdminGallery.tsx",
+      "norm_label": "invitation-codes.ts"
+    },
+    {
       "label": "AdminAgenda.tsx",
       "file_type": "code",
       "source_file": "src/pages/admin/AdminAgenda.tsx",
@@ -7063,6 +7086,17 @@
       "norm_label": "days"
     },
     {
+      "label": "AdminUsers.tsx",
+      "file_type": "code",
+      "source_file": "src/pages/admin/AdminUsers.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_pages_admin_adminusers",
+      "community": 0,
+      "community_name": "AdminGallery.tsx",
+      "norm_label": "adminusers.tsx"
+    },
+    {
       "label": "Organisasi-BACKUP.tsx",
       "file_type": "code",
       "source_file": "Organisasi-BACKUP.tsx",
@@ -7096,6 +7130,17 @@
       "norm_label": "kelasmark.tsx"
     },
     {
+      "label": "MemberList.tsx",
+      "file_type": "code",
+      "source_file": "src/components/site/MemberList.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_components_site_memberlist",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "memberlist.tsx"
+    },
+    {
       "label": "PlaceholderNote.tsx",
       "file_type": "code",
       "source_file": "src/components/site/PlaceholderNote.tsx",
@@ -7127,6 +7172,17 @@
       "community": 1,
       "community_name": "useTranslation",
       "norm_label": "siteheader.tsx"
+    },
+    {
+      "label": "VerificationWarningBar.tsx",
+      "file_type": "code",
+      "source_file": "src/components/VerificationWarningBar.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_components_verificationwarningbar",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "verificationwarningbar.tsx"
     },
     {
       "label": "use-organization.ts",
@@ -7173,6 +7229,83 @@
       "norm_label": "use-translation.ts"
     },
     {
+      "label": "markdown.ts",
+      "file_type": "code",
+      "source_file": "src/lib/markdown.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_lib_markdown",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "markdown.ts"
+    },
+    {
+      "label": "redirect.ts",
+      "file_type": "code",
+      "source_file": "src/lib/redirect.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_lib_redirect",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "redirect.ts"
+    },
+    {
+      "label": "tanggal.ts",
+      "file_type": "code",
+      "source_file": "src/lib/tanggal.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_lib_tanggal",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "tanggal.ts"
+    },
+    {
+      "label": "BULAN",
+      "file_type": "code",
+      "source_file": "src/lib/tanggal.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_lib_tanggal_bulan",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "bulan"
+    },
+    {
+      "label": "BULAN_SINGKAT",
+      "file_type": "code",
+      "source_file": "src/lib/tanggal.ts",
+      "source_location": "L16",
+      "_origin": "ast",
+      "id": "src_lib_tanggal_bulan_singkat",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "bulan_singkat"
+    },
+    {
+      "label": "HARI",
+      "file_type": "code",
+      "source_file": "src/lib/tanggal.ts",
+      "source_location": "L31",
+      "_origin": "ast",
+      "id": "src_lib_tanggal_hari",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "hari"
+    },
+    {
+      "label": "Agenda.tsx",
+      "file_type": "code",
+      "source_file": "src/pages/Agenda.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_pages_agenda",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "agenda.tsx"
+    },
+    {
       "label": "Anggota.tsx",
       "file_type": "code",
       "source_file": "src/pages/Anggota.tsx",
@@ -7193,6 +7326,17 @@
       "community": 1,
       "community_name": "useTranslation",
       "norm_label": "artikel.tsx"
+    },
+    {
+      "label": "ArtikelDetail.tsx",
+      "file_type": "code",
+      "source_file": "src/pages/ArtikelDetail.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_pages_artikeldetail",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "artikeldetail.tsx"
     },
     {
       "label": "Auth.tsx",
@@ -7217,15 +7361,26 @@
       "norm_label": "galeri.tsx"
     },
     {
-      "label": "Home.tsx",
+      "label": "Jadwal.tsx",
       "file_type": "code",
-      "source_file": "src/pages/Home.tsx",
+      "source_file": "src/pages/Jadwal.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "src_pages_home",
+      "id": "src_pages_jadwal",
       "community": 1,
       "community_name": "useTranslation",
-      "norm_label": "home.tsx"
+      "norm_label": "jadwal.tsx"
+    },
+    {
+      "label": "DAYS",
+      "file_type": "code",
+      "source_file": "src/pages/Jadwal.tsx",
+      "source_location": "L16",
+      "_origin": "ast",
+      "id": "src_pages_jadwal_days",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "days"
     },
     {
       "label": "NotFound.tsx",
@@ -7248,6 +7403,94 @@
       "community": 1,
       "community_name": "useTranslation",
       "norm_label": "organisasi.tsx"
+    },
+    {
+      "label": "Pentest.tsx",
+      "file_type": "code",
+      "source_file": "src/pages/Pentest.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_pages_pentest",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "pentest.tsx"
+    },
+    {
+      "label": "Register.tsx",
+      "file_type": "code",
+      "source_file": "src/pages/Register.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_pages_register",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "register.tsx"
+    },
+    {
+      "label": "Tugas.tsx",
+      "file_type": "code",
+      "source_file": "src/pages/Tugas.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_pages_tugas",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "tugas.tsx"
+    },
+    {
+      "label": "DAYS_EN",
+      "file_type": "code",
+      "source_file": "src/pages/Tugas.tsx",
+      "source_location": "L17",
+      "_origin": "ast",
+      "id": "src_pages_tugas_days_en",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "days_en"
+    },
+    {
+      "label": "DAYS_ID",
+      "file_type": "code",
+      "source_file": "src/pages/Tugas.tsx",
+      "source_location": "L16",
+      "_origin": "ast",
+      "id": "src_pages_tugas_days_id",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "days_id"
+    },
+    {
+      "label": "MONTHS_EN",
+      "file_type": "code",
+      "source_file": "src/pages/Tugas.tsx",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "src_pages_tugas_months_en",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "months_en"
+    },
+    {
+      "label": "MONTHS_ID",
+      "file_type": "code",
+      "source_file": "src/pages/Tugas.tsx",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "src_pages_tugas_months_id",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "months_id"
+    },
+    {
+      "label": "TugasDetail.tsx",
+      "file_type": "code",
+      "source_file": "src/pages/TugasDetail.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_pages_tugasdetail",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "tugasdetail.tsx"
     },
     {
       "label": "components.json",
@@ -7446,39 +7689,6 @@
       "community": 10,
       "community_name": "components.json",
       "norm_label": "tsx"
-    },
-    {
-      "label": "invitation-codes.ts",
-      "file_type": "code",
-      "source_file": "src/lib/invitation-codes.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_lib_invitation_codes",
-      "community": 104,
-      "community_name": "Register.tsx",
-      "norm_label": "invitation-codes.ts"
-    },
-    {
-      "label": "Register",
-      "file_type": "code",
-      "source_file": "src/main.tsx",
-      "source_location": "L27",
-      "_origin": "ast",
-      "id": "src_main_register",
-      "community": 104,
-      "community_name": "Register.tsx",
-      "norm_label": "register"
-    },
-    {
-      "label": "Register.tsx",
-      "file_type": "code",
-      "source_file": "src/pages/Register.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_pages_register",
-      "community": 104,
-      "community_name": "Register.tsx",
-      "norm_label": "register.tsx"
     },
     {
       "label": "vite-env.d.ts",
@@ -7877,94 +8087,6 @@
       "norm_label": "3. existing supabase/user architecture"
     },
     {
-      "label": "tanggal.ts",
-      "file_type": "code",
-      "source_file": "src/lib/tanggal.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_lib_tanggal",
-      "community": 118,
-      "community_name": "pecahTanggal",
-      "norm_label": "tanggal.ts"
-    },
-    {
-      "label": "BULAN",
-      "file_type": "code",
-      "source_file": "src/lib/tanggal.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_lib_tanggal_bulan",
-      "community": 118,
-      "community_name": "pecahTanggal",
-      "norm_label": "bulan"
-    },
-    {
-      "label": "BULAN_SINGKAT",
-      "file_type": "code",
-      "source_file": "src/lib/tanggal.ts",
-      "source_location": "L16",
-      "_origin": "ast",
-      "id": "src_lib_tanggal_bulan_singkat",
-      "community": 118,
-      "community_name": "pecahTanggal",
-      "norm_label": "bulan_singkat"
-    },
-    {
-      "label": "HARI",
-      "file_type": "code",
-      "source_file": "src/lib/tanggal.ts",
-      "source_location": "L31",
-      "_origin": "ast",
-      "id": "src_lib_tanggal_hari",
-      "community": 118,
-      "community_name": "pecahTanggal",
-      "norm_label": "hari"
-    },
-    {
-      "label": "AdminUsers",
-      "file_type": "code",
-      "source_file": "src/main.tsx",
-      "source_location": "L42",
-      "_origin": "ast",
-      "id": "src_main_adminusers",
-      "community": 118,
-      "community_name": "pecahTanggal",
-      "norm_label": "adminusers"
-    },
-    {
-      "label": "AdminUsers.tsx",
-      "file_type": "code",
-      "source_file": "src/pages/admin/AdminUsers.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_pages_admin_adminusers",
-      "community": 118,
-      "community_name": "pecahTanggal",
-      "norm_label": "adminusers.tsx"
-    },
-    {
-      "label": "Agenda.tsx",
-      "file_type": "code",
-      "source_file": "src/pages/Agenda.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_pages_agenda",
-      "community": 118,
-      "community_name": "pecahTanggal",
-      "norm_label": "agenda.tsx"
-    },
-    {
-      "label": "RequireVerified.tsx",
-      "file_type": "code",
-      "source_file": "src/components/RequireVerified.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_components_requireverified",
-      "community": 119,
-      "community_name": "main.tsx",
-      "norm_label": "requireverified.tsx"
-    },
-    {
       "label": "sonner.tsx",
       "file_type": "code",
       "source_file": "src/components/ui/sonner.tsx",
@@ -7990,7 +8112,7 @@
       "label": "AdminAgenda",
       "file_type": "code",
       "source_file": "src/main.tsx",
-      "source_location": "L34",
+      "source_location": "L35",
       "_origin": "ast",
       "id": "src_main_adminagenda",
       "community": 119,
@@ -8001,7 +8123,7 @@
       "label": "AdminArticles",
       "file_type": "code",
       "source_file": "src/main.tsx",
-      "source_location": "L46",
+      "source_location": "L47",
       "_origin": "ast",
       "id": "src_main_adminarticles",
       "community": 119,
@@ -8009,21 +8131,10 @@
       "norm_label": "adminarticles"
     },
     {
-      "label": "AdminDashboard",
-      "file_type": "code",
-      "source_file": "src/main.tsx",
-      "source_location": "L33",
-      "_origin": "ast",
-      "id": "src_main_admindashboard",
-      "community": 119,
-      "community_name": "main.tsx",
-      "norm_label": "admindashboard"
-    },
-    {
       "label": "AdminDuty",
       "file_type": "code",
       "source_file": "src/main.tsx",
-      "source_location": "L52",
+      "source_location": "L53",
       "_origin": "ast",
       "id": "src_main_adminduty",
       "community": 119,
@@ -8034,7 +8145,7 @@
       "label": "AdminGallery",
       "file_type": "code",
       "source_file": "src/main.tsx",
-      "source_location": "L37",
+      "source_location": "L38",
       "_origin": "ast",
       "id": "src_main_admingallery",
       "community": 119,
@@ -8045,7 +8156,7 @@
       "label": "AdminInvitationCodes",
       "file_type": "code",
       "source_file": "src/main.tsx",
-      "source_location": "L43",
+      "source_location": "L44",
       "_origin": "ast",
       "id": "src_main_admininvitationcodes",
       "community": 119,
@@ -8056,7 +8167,7 @@
       "label": "AdminMbg",
       "file_type": "code",
       "source_file": "src/main.tsx",
-      "source_location": "L49",
+      "source_location": "L50",
       "_origin": "ast",
       "id": "src_main_adminmbg",
       "community": 119,
@@ -8067,7 +8178,7 @@
       "label": "AdminMembers",
       "file_type": "code",
       "source_file": "src/main.tsx",
-      "source_location": "L36",
+      "source_location": "L37",
       "_origin": "ast",
       "id": "src_main_adminmembers",
       "community": 119,
@@ -8078,7 +8189,7 @@
       "label": "AdminOrganization",
       "file_type": "code",
       "source_file": "src/main.tsx",
-      "source_location": "L38",
+      "source_location": "L39",
       "_origin": "ast",
       "id": "src_main_adminorganization",
       "community": 119,
@@ -8089,7 +8200,7 @@
       "label": "AdminSchedule",
       "file_type": "code",
       "source_file": "src/main.tsx",
-      "source_location": "L35",
+      "source_location": "L36",
       "_origin": "ast",
       "id": "src_main_adminschedule",
       "community": 119,
@@ -8100,12 +8211,23 @@
       "label": "AdminTheme",
       "file_type": "code",
       "source_file": "src/main.tsx",
-      "source_location": "L41",
+      "source_location": "L42",
       "_origin": "ast",
       "id": "src_main_admintheme",
       "community": 119,
       "community_name": "main.tsx",
       "norm_label": "admintheme"
+    },
+    {
+      "label": "AdminUsers",
+      "file_type": "code",
+      "source_file": "src/main.tsx",
+      "source_location": "L43",
+      "_origin": "ast",
+      "id": "src_main_adminusers",
+      "community": 119,
+      "community_name": "main.tsx",
+      "norm_label": "adminusers"
     },
     {
       "label": "Agenda",
@@ -8199,7 +8321,7 @@
       "label": "NotFound",
       "file_type": "code",
       "source_file": "src/main.tsx",
-      "source_location": "L30",
+      "source_location": "L31",
       "_origin": "ast",
       "id": "src_main_notfound",
       "community": 119,
@@ -8218,10 +8340,32 @@
       "norm_label": "organisasi"
     },
     {
-      "label": "Settings",
+      "label": "Pentest",
       "file_type": "code",
       "source_file": "src/main.tsx",
       "source_location": "L28",
+      "_origin": "ast",
+      "id": "src_main_pentest",
+      "community": 119,
+      "community_name": "main.tsx",
+      "norm_label": "pentest"
+    },
+    {
+      "label": "Register",
+      "file_type": "code",
+      "source_file": "src/main.tsx",
+      "source_location": "L27",
+      "_origin": "ast",
+      "id": "src_main_register",
+      "community": 119,
+      "community_name": "main.tsx",
+      "norm_label": "register"
+    },
+    {
+      "label": "Settings",
+      "file_type": "code",
+      "source_file": "src/main.tsx",
+      "source_location": "L29",
       "_origin": "ast",
       "id": "src_main_settings",
       "community": 119,
@@ -8350,28 +8494,6 @@
       "norm_label": "togglevariants"
     },
     {
-      "label": "class-variance-authority",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L46",
-      "_origin": "ast",
-      "id": "package_dependencies_class_variance_authority",
-      "community": 122,
-      "community_name": "class-variance-authority",
-      "norm_label": "class-variance-authority"
-    },
-    {
-      "label": "class-variance-authority",
-      "file_type": "concept",
-      "source_file": "package.json",
-      "source_location": "L46",
-      "_origin": "ast",
-      "id": "class_variance_authority",
-      "community": 122,
-      "community_name": "class-variance-authority",
-      "norm_label": "class-variance-authority"
-    },
-    {
       "label": "accordion.tsx",
       "file_type": "code",
       "source_file": "src/components/ui/accordion.tsx",
@@ -8438,28 +8560,6 @@
       "norm_label": "tabs.tsx"
     },
     {
-      "label": "markdown.ts",
-      "file_type": "code",
-      "source_file": "src/lib/markdown.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_lib_markdown",
-      "community": 128,
-      "community_name": "ArtikelDetail.tsx",
-      "norm_label": "markdown.ts"
-    },
-    {
-      "label": "ArtikelDetail.tsx",
-      "file_type": "code",
-      "source_file": "src/pages/ArtikelDetail.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_pages_artikeldetail",
-      "community": 128,
-      "community_name": "ArtikelDetail.tsx",
-      "norm_label": "artikeldetail.tsx"
-    },
-    {
       "label": "avatar.tsx",
       "file_type": "code",
       "source_file": "src/components/ui/avatar.tsx",
@@ -8478,7 +8578,7 @@
       "_origin": "ast",
       "id": "src_components_home_homebento",
       "community": 13,
-      "community_name": "kelas.ts",
+      "community_name": "HomeClassic.tsx",
       "norm_label": "homebento.tsx"
     },
     {
@@ -8489,7 +8589,7 @@
       "_origin": "ast",
       "id": "src_components_home_homeclassic",
       "community": 13,
-      "community_name": "kelas.ts",
+      "community_name": "HomeClassic.tsx",
       "norm_label": "homeclassic.tsx"
     },
     {
@@ -8500,7 +8600,7 @@
       "_origin": "ast",
       "id": "src_components_home_homeexperimental",
       "community": 13,
-      "community_name": "kelas.ts",
+      "community_name": "HomeClassic.tsx",
       "norm_label": "homeexperimental.tsx"
     },
     {
@@ -8511,7 +8611,7 @@
       "_origin": "ast",
       "id": "src_components_home_homemodern",
       "community": 13,
-      "community_name": "kelas.ts",
+      "community_name": "HomeClassic.tsx",
       "norm_label": "homemodern.tsx"
     },
     {
@@ -8522,7 +8622,7 @@
       "_origin": "ast",
       "id": "src_components_home_homenature",
       "community": 13,
-      "community_name": "kelas.ts",
+      "community_name": "HomeClassic.tsx",
       "norm_label": "homenature.tsx"
     },
     {
@@ -8533,7 +8633,7 @@
       "_origin": "ast",
       "id": "src_components_home_homeshowcase",
       "community": 13,
-      "community_name": "kelas.ts",
+      "community_name": "HomeClassic.tsx",
       "norm_label": "homeshowcase.tsx"
     },
     {
@@ -8544,7 +8644,7 @@
       "_origin": "ast",
       "id": "src_components_site_fadein",
       "community": 13,
-      "community_name": "kelas.ts",
+      "community_name": "HomeClassic.tsx",
       "norm_label": "fadein.tsx"
     },
     {
@@ -8555,7 +8655,7 @@
       "_origin": "ast",
       "id": "src_components_site_photoplate",
       "community": 13,
-      "community_name": "kelas.ts",
+      "community_name": "HomeClassic.tsx",
       "norm_label": "photoplate.tsx"
     },
     {
@@ -8566,63 +8666,8 @@
       "_origin": "ast",
       "id": "src_components_site_stamp",
       "community": 13,
-      "community_name": "kelas.ts",
+      "community_name": "HomeClassic.tsx",
       "norm_label": "stamp.tsx"
-    },
-    {
-      "label": "kelas.ts",
-      "file_type": "code",
-      "source_file": "src/data/kelas.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_data_kelas",
-      "community": 13,
-      "community_name": "kelas.ts",
-      "norm_label": "kelas.ts"
-    },
-    {
-      "label": "galeri",
-      "file_type": "code",
-      "source_file": "src/data/kelas.ts",
-      "source_location": "L348",
-      "_origin": "ast",
-      "id": "src_data_kelas_galeri",
-      "community": 13,
-      "community_name": "kelas.ts",
-      "norm_label": "galeri"
-    },
-    {
-      "label": "kelas",
-      "file_type": "code",
-      "source_file": "src/data/kelas.ts",
-      "source_location": "L30",
-      "_origin": "ast",
-      "id": "src_data_kelas_kelas",
-      "community": 13,
-      "community_name": "kelas.ts",
-      "norm_label": "kelas"
-    },
-    {
-      "label": "pengurusInti",
-      "file_type": "code",
-      "source_file": "src/data/kelas.ts",
-      "source_location": "L117",
-      "_origin": "ast",
-      "id": "src_data_kelas_pengurusinti",
-      "community": 13,
-      "community_name": "kelas.ts",
-      "norm_label": "pengurusinti"
-    },
-    {
-      "label": "sie",
-      "file_type": "code",
-      "source_file": "src/data/kelas.ts",
-      "source_location": "L124",
-      "_origin": "ast",
-      "id": "src_data_kelas_sie",
-      "community": 13,
-      "community_name": "kelas.ts",
-      "norm_label": "sie"
     },
     {
       "label": "hover-card.tsx",
@@ -8691,28 +8736,6 @@
       "norm_label": "radio-group.tsx"
     },
     {
-      "label": "Dashboard",
-      "file_type": "code",
-      "source_file": "src/main.tsx",
-      "source_location": "L29",
-      "_origin": "ast",
-      "id": "src_main_dashboard",
-      "community": 137,
-      "community_name": "Dashboard.tsx",
-      "norm_label": "dashboard"
-    },
-    {
-      "label": "Dashboard.tsx",
-      "file_type": "code",
-      "source_file": "src/pages/Dashboard.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_pages_dashboard",
-      "community": 137,
-      "community_name": "Dashboard.tsx",
-      "norm_label": "dashboard.tsx"
-    },
-    {
       "label": "dompurify",
       "file_type": "code",
       "source_file": "package.json",
@@ -8757,17 +8780,6 @@
       "norm_label": "@radix-ui/react-scroll-area"
     },
     {
-      "label": "jadwal",
-      "file_type": "code",
-      "source_file": "src/data/kelas.ts",
-      "source_location": "L151",
-      "_origin": "ast",
-      "id": "src_data_kelas_jadwal",
-      "community": 14,
-      "community_name": "db.ts",
-      "norm_label": "jadwal"
-    },
-    {
       "label": "use-agenda.ts",
       "file_type": "code",
       "source_file": "src/hooks/use-agenda.ts",
@@ -8775,7 +8787,7 @@
       "_origin": "ast",
       "id": "src_hooks_use_agenda",
       "community": 14,
-      "community_name": "db.ts",
+      "community_name": "Home.tsx",
       "norm_label": "use-agenda.ts"
     },
     {
@@ -8786,7 +8798,7 @@
       "_origin": "ast",
       "id": "src_hooks_use_articles",
       "community": 14,
-      "community_name": "db.ts",
+      "community_name": "Home.tsx",
       "norm_label": "use-articles.ts"
     },
     {
@@ -8797,30 +8809,19 @@
       "_origin": "ast",
       "id": "src_hooks_use_members",
       "community": 14,
-      "community_name": "db.ts",
+      "community_name": "Home.tsx",
       "norm_label": "use-members.ts"
     },
     {
-      "label": "use-schedule.ts",
+      "label": "AdminDashboard",
       "file_type": "code",
-      "source_file": "src/hooks/use-schedule.ts",
-      "source_location": "L1",
+      "source_file": "src/main.tsx",
+      "source_location": "L34",
       "_origin": "ast",
-      "id": "src_hooks_use_schedule",
+      "id": "src_main_admindashboard",
       "community": 14,
-      "community_name": "db.ts",
-      "norm_label": "use-schedule.ts"
-    },
-    {
-      "label": "db.ts",
-      "file_type": "code",
-      "source_file": "src/lib/db.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_lib_db",
-      "community": 14,
-      "community_name": "db.ts",
-      "norm_label": "db.ts"
+      "community_name": "Home.tsx",
+      "norm_label": "admindashboard"
     },
     {
       "label": "AdminDashboard.tsx",
@@ -8830,8 +8831,19 @@
       "_origin": "ast",
       "id": "src_pages_admin_admindashboard",
       "community": 14,
-      "community_name": "db.ts",
+      "community_name": "Home.tsx",
       "norm_label": "admindashboard.tsx"
+    },
+    {
+      "label": "Home.tsx",
+      "file_type": "code",
+      "source_file": "src/pages/Home.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_pages_home",
+      "community": 14,
+      "community_name": "Home.tsx",
+      "norm_label": "home.tsx"
     },
     {
       "label": "@radix-ui/react-switch",
@@ -8944,6 +8956,17 @@
       "norm_label": "carouselcontext"
     },
     {
+      "label": "kelas.ts",
+      "file_type": "code",
+      "source_file": "src/data/kelas.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_data_kelas",
+      "community": 16,
+      "community_name": "kelas.ts",
+      "norm_label": "kelas.ts"
+    },
+    {
       "label": "agenda",
       "file_type": "code",
       "source_file": "src/data/kelas.ts",
@@ -8951,8 +8974,41 @@
       "_origin": "ast",
       "id": "src_data_kelas_agenda",
       "community": 16,
-      "community_name": "Tugas.tsx",
+      "community_name": "kelas.ts",
       "norm_label": "agenda"
+    },
+    {
+      "label": "kelas",
+      "file_type": "code",
+      "source_file": "src/data/kelas.ts",
+      "source_location": "L30",
+      "_origin": "ast",
+      "id": "src_data_kelas_kelas",
+      "community": 16,
+      "community_name": "kelas.ts",
+      "norm_label": "kelas"
+    },
+    {
+      "label": "pengurusInti",
+      "file_type": "code",
+      "source_file": "src/data/kelas.ts",
+      "source_location": "L117",
+      "_origin": "ast",
+      "id": "src_data_kelas_pengurusinti",
+      "community": 16,
+      "community_name": "kelas.ts",
+      "norm_label": "pengurusinti"
+    },
+    {
+      "label": "sie",
+      "file_type": "code",
+      "source_file": "src/data/kelas.ts",
+      "source_location": "L124",
+      "_origin": "ast",
+      "id": "src_data_kelas_sie",
+      "community": 16,
+      "community_name": "kelas.ts",
+      "norm_label": "sie"
     },
     {
       "label": "use-tasks.ts",
@@ -8962,74 +9018,8 @@
       "_origin": "ast",
       "id": "src_hooks_use_tasks",
       "community": 16,
-      "community_name": "Tugas.tsx",
+      "community_name": "kelas.ts",
       "norm_label": "use-tasks.ts"
-    },
-    {
-      "label": "Tugas.tsx",
-      "file_type": "code",
-      "source_file": "src/pages/Tugas.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_pages_tugas",
-      "community": 16,
-      "community_name": "Tugas.tsx",
-      "norm_label": "tugas.tsx"
-    },
-    {
-      "label": "DAYS_EN",
-      "file_type": "code",
-      "source_file": "src/pages/Tugas.tsx",
-      "source_location": "L17",
-      "_origin": "ast",
-      "id": "src_pages_tugas_days_en",
-      "community": 16,
-      "community_name": "Tugas.tsx",
-      "norm_label": "days_en"
-    },
-    {
-      "label": "DAYS_ID",
-      "file_type": "code",
-      "source_file": "src/pages/Tugas.tsx",
-      "source_location": "L16",
-      "_origin": "ast",
-      "id": "src_pages_tugas_days_id",
-      "community": 16,
-      "community_name": "Tugas.tsx",
-      "norm_label": "days_id"
-    },
-    {
-      "label": "MONTHS_EN",
-      "file_type": "code",
-      "source_file": "src/pages/Tugas.tsx",
-      "source_location": "L15",
-      "_origin": "ast",
-      "id": "src_pages_tugas_months_en",
-      "community": 16,
-      "community_name": "Tugas.tsx",
-      "norm_label": "months_en"
-    },
-    {
-      "label": "MONTHS_ID",
-      "file_type": "code",
-      "source_file": "src/pages/Tugas.tsx",
-      "source_location": "L14",
-      "_origin": "ast",
-      "id": "src_pages_tugas_months_id",
-      "community": 16,
-      "community_name": "Tugas.tsx",
-      "norm_label": "months_id"
-    },
-    {
-      "label": "TugasDetail.tsx",
-      "file_type": "code",
-      "source_file": "src/pages/TugasDetail.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_pages_tugasdetail",
-      "community": 16,
-      "community_name": "Tugas.tsx",
-      "norm_label": "tugasdetail.tsx"
     },
     {
       "label": "context-menu.tsx",
@@ -9395,26 +9385,37 @@
       "norm_label": "requiresignedin.tsx"
     },
     {
-      "label": "VerificationWarningBar.tsx",
+      "label": "RequireVerified.tsx",
       "file_type": "code",
-      "source_file": "src/components/VerificationWarningBar.tsx",
+      "source_file": "src/components/RequireVerified.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "src_components_verificationwarningbar",
+      "id": "src_components_requireverified",
       "community": 21,
       "community_name": "useAuth",
-      "norm_label": "verificationwarningbar.tsx"
+      "norm_label": "requireverified.tsx"
     },
     {
-      "label": "redirect.ts",
+      "label": "Dashboard",
       "file_type": "code",
-      "source_file": "src/lib/redirect.ts",
-      "source_location": "L1",
+      "source_file": "src/main.tsx",
+      "source_location": "L30",
       "_origin": "ast",
-      "id": "src_lib_redirect",
+      "id": "src_main_dashboard",
       "community": 21,
       "community_name": "useAuth",
-      "norm_label": "redirect.ts"
+      "norm_label": "dashboard"
+    },
+    {
+      "label": "Dashboard.tsx",
+      "file_type": "code",
+      "source_file": "src/pages/Dashboard.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_pages_dashboard",
+      "community": 21,
+      "community_name": "useAuth",
+      "norm_label": "dashboard.tsx"
     },
     {
       "label": "vly-toolbar-readonly.tsx",
@@ -10803,37 +10804,26 @@
       "norm_label": "8. color scheme system"
     },
     {
-      "label": "MemberList.tsx",
+      "label": "jadwal",
       "file_type": "code",
-      "source_file": "src/components/site/MemberList.tsx",
-      "source_location": "L1",
+      "source_file": "src/data/kelas.ts",
+      "source_location": "L151",
       "_origin": "ast",
-      "id": "src_components_site_memberlist",
+      "id": "src_data_kelas_jadwal",
       "community": 37,
-      "community_name": "Jadwal.tsx",
-      "norm_label": "memberlist.tsx"
+      "community_name": "use-schedule.ts",
+      "norm_label": "jadwal"
     },
     {
-      "label": "Jadwal.tsx",
+      "label": "use-schedule.ts",
       "file_type": "code",
-      "source_file": "src/pages/Jadwal.tsx",
+      "source_file": "src/hooks/use-schedule.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "src_pages_jadwal",
+      "id": "src_hooks_use_schedule",
       "community": 37,
-      "community_name": "Jadwal.tsx",
-      "norm_label": "jadwal.tsx"
-    },
-    {
-      "label": "DAYS",
-      "file_type": "code",
-      "source_file": "src/pages/Jadwal.tsx",
-      "source_location": "L16",
-      "_origin": "ast",
-      "id": "src_pages_jadwal_days",
-      "community": 37,
-      "community_name": "Jadwal.tsx",
-      "norm_label": "days"
+      "community_name": "use-schedule.ts",
+      "norm_label": "use-schedule.ts"
     },
     {
       "label": "field.tsx",
@@ -11184,8 +11174,30 @@
       "_origin": "ast",
       "id": "src_hooks_use_duty",
       "community": 41,
-      "community_name": "use-duty.ts",
+      "community_name": "db.ts",
       "norm_label": "use-duty.ts"
+    },
+    {
+      "label": "use-mbg.ts",
+      "file_type": "code",
+      "source_file": "src/hooks/use-mbg.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_hooks_use_mbg",
+      "community": 41,
+      "community_name": "db.ts",
+      "norm_label": "use-mbg.ts"
+    },
+    {
+      "label": "db.ts",
+      "file_type": "code",
+      "source_file": "src/lib/db.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_lib_db",
+      "community": 41,
+      "community_name": "db.ts",
+      "norm_label": "db.ts"
     },
     {
       "label": "storage.ts",
@@ -11309,15 +11321,15 @@
       "norm_label": "dependencies"
     },
     {
-      "label": "clsx",
+      "label": "class-variance-authority",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L47",
+      "source_location": "L46",
       "_origin": "ast",
-      "id": "package_dependencies_clsx",
+      "id": "package_dependencies_class_variance_authority",
       "community": 45,
       "community_name": "dependencies",
-      "norm_label": "clsx"
+      "norm_label": "class-variance-authority"
     },
     {
       "label": "cmdk",
@@ -11386,15 +11398,15 @@
       "norm_label": "@zumer/snapdom"
     },
     {
-      "label": "clsx",
+      "label": "class-variance-authority",
       "file_type": "concept",
       "source_file": "package.json",
-      "source_location": "L47",
+      "source_location": "L46",
       "_origin": "ast",
-      "id": "clsx",
+      "id": "class_variance_authority",
       "community": 45,
       "community_name": "dependencies",
-      "norm_label": "clsx"
+      "norm_label": "class-variance-authority"
     },
     {
       "label": "cmdk",
@@ -12266,6 +12278,17 @@
       "norm_label": "@radix-ui/react-navigation-menu"
     },
     {
+      "label": "galeri",
+      "file_type": "code",
+      "source_file": "src/data/kelas.ts",
+      "source_location": "L348",
+      "_origin": "ast",
+      "id": "src_data_kelas_galeri",
+      "community": 67,
+      "community_name": "use-gallery.ts",
+      "norm_label": "galeri"
+    },
+    {
       "label": "use-gallery.ts",
       "file_type": "code",
       "source_file": "src/hooks/use-gallery.ts",
@@ -13135,15 +13158,26 @@
       "norm_label": "zod"
     },
     {
-      "label": "use-mbg.ts",
+      "label": "clsx",
       "file_type": "code",
-      "source_file": "src/hooks/use-mbg.ts",
-      "source_location": "L1",
+      "source_file": "package.json",
+      "source_location": "L47",
       "_origin": "ast",
-      "id": "src_hooks_use_mbg",
+      "id": "package_dependencies_clsx",
       "community": 92,
-      "community_name": "use-mbg.ts",
-      "norm_label": "use-mbg.ts"
+      "community_name": "clsx",
+      "norm_label": "clsx"
+    },
+    {
+      "label": "clsx",
+      "file_type": "concept",
+      "source_file": "package.json",
+      "source_location": "L47",
+      "_origin": "ast",
+      "id": "clsx",
+      "community": 92,
+      "community_name": "clsx",
+      "norm_label": "clsx"
     },
     {
       "label": "vly-integrations.ts",
@@ -19249,6 +19283,66 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
+      "source_file": "src/pages/Pentest.tsx",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_pages_pentest_pentest",
+      "target": "src_hooks_use_translation_usetranslation"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/Pentest.tsx",
+      "source_location": "L26",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_pages_pentest_pentest",
+      "target": "src_hooks_use_page_title_usepagetitle"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/Pentest.tsx",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_pages_pentest_pentest",
+      "target": "src_hooks_use_auth_useauth"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/Pentest.tsx",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_pages_pentest_pentest",
+      "target": "src_hooks_use_organization_useorganization"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/Pentest.tsx",
+      "source_location": "L32",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_pages_pentest_pentest",
+      "target": "src_lib_redirect_resolveinternalredirect"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
       "source_file": "src/pages/Register.tsx",
       "source_location": "L203",
       "weight": 1.0,
@@ -20906,7 +21000,7 @@
       "deferred": true,
       "confidence": "EXTRACTED",
       "source_file": "src/main.tsx",
-      "source_location": "L34",
+      "source_location": "L35",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main_adminagenda",
@@ -20919,7 +21013,7 @@
       "deferred": true,
       "confidence": "EXTRACTED",
       "source_file": "src/main.tsx",
-      "source_location": "L47",
+      "source_location": "L48",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main_adminarticles",
@@ -20932,7 +21026,7 @@
       "deferred": true,
       "confidence": "EXTRACTED",
       "source_file": "src/main.tsx",
-      "source_location": "L33",
+      "source_location": "L34",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main_admindashboard",
@@ -20945,7 +21039,7 @@
       "deferred": true,
       "confidence": "EXTRACTED",
       "source_file": "src/main.tsx",
-      "source_location": "L53",
+      "source_location": "L54",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main_adminduty",
@@ -20958,7 +21052,7 @@
       "deferred": true,
       "confidence": "EXTRACTED",
       "source_file": "src/main.tsx",
-      "source_location": "L37",
+      "source_location": "L38",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main_admingallery",
@@ -20971,7 +21065,7 @@
       "deferred": true,
       "confidence": "EXTRACTED",
       "source_file": "src/main.tsx",
-      "source_location": "L44",
+      "source_location": "L45",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main_admininvitationcodes",
@@ -20984,7 +21078,7 @@
       "deferred": true,
       "confidence": "EXTRACTED",
       "source_file": "src/main.tsx",
-      "source_location": "L50",
+      "source_location": "L51",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main_adminmbg",
@@ -20997,7 +21091,7 @@
       "deferred": true,
       "confidence": "EXTRACTED",
       "source_file": "src/main.tsx",
-      "source_location": "L36",
+      "source_location": "L37",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main_adminmembers",
@@ -21010,7 +21104,7 @@
       "deferred": true,
       "confidence": "EXTRACTED",
       "source_file": "src/main.tsx",
-      "source_location": "L39",
+      "source_location": "L40",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main_adminorganization",
@@ -21023,7 +21117,7 @@
       "deferred": true,
       "confidence": "EXTRACTED",
       "source_file": "src/main.tsx",
-      "source_location": "L35",
+      "source_location": "L36",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main_adminschedule",
@@ -21036,7 +21130,7 @@
       "deferred": true,
       "confidence": "EXTRACTED",
       "source_file": "src/main.tsx",
-      "source_location": "L41",
+      "source_location": "L42",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main_admintheme",
@@ -21049,7 +21143,7 @@
       "deferred": true,
       "confidence": "EXTRACTED",
       "source_file": "src/main.tsx",
-      "source_location": "L42",
+      "source_location": "L43",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main_adminusers",
@@ -21127,7 +21221,7 @@
       "deferred": true,
       "confidence": "EXTRACTED",
       "source_file": "src/main.tsx",
-      "source_location": "L29",
+      "source_location": "L30",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main_dashboard",
@@ -21179,7 +21273,7 @@
       "deferred": true,
       "confidence": "EXTRACTED",
       "source_file": "src/main.tsx",
-      "source_location": "L30",
+      "source_location": "L31",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main_notfound",
@@ -21205,6 +21299,19 @@
       "deferred": true,
       "confidence": "EXTRACTED",
       "source_file": "src/main.tsx",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_main_pentest",
+      "target": "src_pages_pentest",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "deferred": true,
+      "confidence": "EXTRACTED",
+      "source_file": "src/main.tsx",
       "source_location": "L27",
       "weight": 1.0,
       "_origin": "ast",
@@ -21218,7 +21325,7 @@
       "deferred": true,
       "confidence": "EXTRACTED",
       "source_file": "src/main.tsx",
-      "source_location": "L28",
+      "source_location": "L29",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main_settings",
@@ -29571,6 +29678,102 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "src/pages/Pentest.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_pages_pentest",
+      "target": "src_components_site_kelasmark_kelasmark",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/Pentest.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_pages_pentest",
+      "target": "src_components_ui_button_button",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/Pentest.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_pages_pentest",
+      "target": "src_hooks_use_auth_useauth",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/Pentest.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_pages_pentest",
+      "target": "src_hooks_use_organization_useorganization",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/Pentest.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_pages_pentest",
+      "target": "src_hooks_use_page_title_usepagetitle",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/Pentest.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_pages_pentest",
+      "target": "src_hooks_use_translation_usetranslation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/Pentest.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_pages_pentest",
+      "target": "src_lib_redirect_resolveinternalredirect",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/Pentest.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_pages_pentest",
+      "target": "src_lib_supabase_supabase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "src/pages/Register.tsx",
       "source_location": "L1",
       "weight": 1.0,
@@ -35337,6 +35540,102 @@
       "_origin": "ast",
       "source": "src_pages_organisasi",
       "target": "src_lib_tanggal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/Pentest.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_pages_pentest",
+      "target": "src_components_site_kelasmark",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/Pentest.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_pages_pentest",
+      "target": "src_components_ui_button",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/Pentest.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_pages_pentest",
+      "target": "src_hooks_use_auth",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/Pentest.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_pages_pentest",
+      "target": "src_hooks_use_organization",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/Pentest.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_pages_pentest",
+      "target": "src_hooks_use_page_title",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/Pentest.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_pages_pentest",
+      "target": "src_hooks_use_translation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/Pentest.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_pages_pentest",
+      "target": "src_lib_redirect",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/Pentest.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_pages_pentest",
+      "target": "src_lib_supabase",
       "confidence_score": 1.0
     },
     {
@@ -46864,7 +47163,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/main.tsx",
-      "source_location": "L125",
+      "source_location": "L126",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main",
@@ -46875,7 +47174,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/main.tsx",
-      "source_location": "L133",
+      "source_location": "L134",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main",
@@ -47022,7 +47321,7 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main",
-      "target": "src_main_settings",
+      "target": "src_main_pentest",
       "confidence_score": 1.0
     },
     {
@@ -47033,7 +47332,7 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main",
-      "target": "src_main_dashboard",
+      "target": "src_main_settings",
       "confidence_score": 1.0
     },
     {
@@ -47044,18 +47343,18 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main",
-      "target": "src_main_notfound",
+      "target": "src_main_dashboard",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/main.tsx",
-      "source_location": "L33",
+      "source_location": "L31",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main",
-      "target": "src_main_admindashboard",
+      "target": "src_main_notfound",
       "confidence_score": 1.0
     },
     {
@@ -47066,7 +47365,7 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main",
-      "target": "src_main_adminagenda",
+      "target": "src_main_admindashboard",
       "confidence_score": 1.0
     },
     {
@@ -47077,7 +47376,7 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main",
-      "target": "src_main_adminschedule",
+      "target": "src_main_adminagenda",
       "confidence_score": 1.0
     },
     {
@@ -47088,7 +47387,7 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main",
-      "target": "src_main_adminmembers",
+      "target": "src_main_adminschedule",
       "confidence_score": 1.0
     },
     {
@@ -47099,7 +47398,7 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main",
-      "target": "src_main_admingallery",
+      "target": "src_main_adminmembers",
       "confidence_score": 1.0
     },
     {
@@ -47110,18 +47409,18 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main",
-      "target": "src_main_adminorganization",
+      "target": "src_main_admingallery",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/main.tsx",
-      "source_location": "L41",
+      "source_location": "L39",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main",
-      "target": "src_main_admintheme",
+      "target": "src_main_adminorganization",
       "confidence_score": 1.0
     },
     {
@@ -47132,7 +47431,7 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main",
-      "target": "src_main_adminusers",
+      "target": "src_main_admintheme",
       "confidence_score": 1.0
     },
     {
@@ -47143,6 +47442,17 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main",
+      "target": "src_main_adminusers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/main.tsx",
+      "source_location": "L44",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_main",
       "target": "src_main_admininvitationcodes",
       "confidence_score": 1.0
     },
@@ -47150,7 +47460,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/main.tsx",
-      "source_location": "L46",
+      "source_location": "L47",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main",
@@ -47161,7 +47471,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/main.tsx",
-      "source_location": "L49",
+      "source_location": "L50",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main",
@@ -47172,7 +47482,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/main.tsx",
-      "source_location": "L52",
+      "source_location": "L53",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main",
@@ -47183,7 +47493,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/main.tsx",
-      "source_location": "L57",
+      "source_location": "L58",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main",
@@ -47194,7 +47504,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/main.tsx",
-      "source_location": "L69",
+      "source_location": "L70",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main",
@@ -47205,7 +47515,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/main.tsx",
-      "source_location": "L86",
+      "source_location": "L87",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main",
@@ -47595,6 +47905,17 @@
       "_origin": "ast",
       "source": "src_pages_organisasi",
       "target": "src_pages_organisasi_organisasi",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/Pentest.tsx",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_pages_pentest",
+      "target": "src_pages_pentest_pentest",
       "confidence_score": 1.0
     },
     {
@@ -48622,6 +48943,15 @@
       "source_file": "src/main.tsx",
       "_origin": "ast",
       "source": "src_main",
+      "target": "src_pages_pentest",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "dynamic_import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/main.tsx",
+      "_origin": "ast",
+      "source": "src_main",
       "target": "src_pages_register",
       "confidence_score": 1.0
     },
@@ -48700,7 +49030,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/main.tsx",
-      "source_location": "L101",
+      "source_location": "L102",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main_rooterrorboundary",
@@ -48711,7 +49041,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/main.tsx",
-      "source_location": "L91",
+      "source_location": "L92",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main_rooterrorboundary",
@@ -48722,7 +49052,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/main.tsx",
-      "source_location": "L98",
+      "source_location": "L99",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main_rooterrorboundary",
@@ -48733,7 +49063,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/main.tsx",
-      "source_location": "L74",
+      "source_location": "L75",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main_toolbarerrorboundary",
@@ -48744,7 +49074,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/main.tsx",
-      "source_location": "L77",
+      "source_location": "L78",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main_toolbarerrorboundary",
@@ -48755,7 +49085,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/main.tsx",
-      "source_location": "L80",
+      "source_location": "L81",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_main_toolbarerrorboundary",
@@ -49122,5 +49452,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "aaecab2ac35c2606f9f303251b95941806152654"
+  "built_at_commit": "cef119ad0e450618ec994a97aad096e7043f13ea"
 }
