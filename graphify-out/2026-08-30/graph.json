@@ -13,7 +13,7 @@
       "_origin": "ast",
       "id": "src_components_admin_datatable_datatableprops",
       "community": 0,
-      "community_name": "AdminGallery.tsx",
+      "community_name": "AdminAgenda.tsx",
       "norm_label": "datatableprops"
     },
     {
@@ -95,19 +95,6 @@
       "norm_label": "organizationdata"
     },
     {
-      "label": "InvitationCodeRow",
-      "file_type": "code",
-      "source_file": "src/lib/db.ts",
-      "source_location": "L652",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_lib_db_invitationcoderow",
-      "community": 1,
-      "community_name": "useTranslation",
-      "norm_label": "invitationcoderow"
-    },
-    {
       "label": "TaskRow",
       "file_type": "code",
       "source_file": "src/lib/db.ts",
@@ -121,17 +108,17 @@
       "norm_label": "taskrow"
     },
     {
-      "label": "Status",
+      "label": "GrupBulan",
       "file_type": "code",
-      "source_file": "src/pages/admin/AdminInvitationCodes.tsx",
-      "source_location": "L28",
+      "source_file": "src/pages/Agenda.tsx",
+      "source_location": "L13",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "id": "src_pages_admin_admininvitationcodes_status",
+      "id": "src_pages_agenda_grupbulan",
       "community": 1,
       "community_name": "useTranslation",
-      "norm_label": "status"
+      "norm_label": "grupbulan"
     },
     {
       "label": "HomeLayoutProps",
@@ -420,19 +407,6 @@
       "norm_label": "uploadresult"
     },
     {
-      "label": "GrupBulan",
-      "file_type": "code",
-      "source_file": "src/pages/Agenda.tsx",
-      "source_location": "L13",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "src_pages_agenda_grupbulan",
-      "community": 13,
-      "community_name": "db.ts",
-      "norm_label": "grupbulan"
-    },
-    {
       "label": "RootErrorBoundary",
       "file_type": "code",
       "source_file": "src/main.tsx",
@@ -598,7 +572,7 @@
       "_origin": "ast",
       "id": "src_lib_db_mbgschedulerow",
       "community": 17,
-      "community_name": "use-mbg.ts",
+      "community_name": "AdminMbg.tsx",
       "norm_label": "mbgschedulerow"
     },
     {
@@ -704,6 +678,32 @@
       "community": 24,
       "community_name": "pagination.tsx",
       "norm_label": "paginationlinkprops"
+    },
+    {
+      "label": "InvitationCodeRow",
+      "file_type": "code",
+      "source_file": "src/lib/db.ts",
+      "source_location": "L652",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_lib_db_invitationcoderow",
+      "community": 26,
+      "community_name": "AdminInvitationCodes.tsx",
+      "norm_label": "invitationcoderow"
+    },
+    {
+      "label": "Status",
+      "file_type": "code",
+      "source_file": "src/pages/admin/AdminInvitationCodes.tsx",
+      "source_location": "L28",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "src_pages_admin_admininvitationcodes_status",
+      "community": 26,
+      "community_name": "AdminInvitationCodes.tsx",
+      "norm_label": "status"
     },
     {
       "label": "EffectiveSettings",
@@ -936,7 +936,7 @@
       "_origin": "ast",
       "id": "src_lib_db_dutyschedulerow",
       "community": 41,
-      "community_name": "use-duty.ts",
+      "community_name": "AdminDuty.tsx",
       "norm_label": "dutyschedulerow"
     },
     {
@@ -949,7 +949,7 @@
       "_origin": "ast",
       "id": "src_lib_db_profilerow",
       "community": 42,
-      "community_name": "AdminUsers.tsx",
+      "community_name": "AdminGallery.tsx",
       "norm_label": "profilerow"
     },
     {
@@ -1044,30 +1044,6 @@
       "norm_label": "window"
     },
     {
-      "label": "AdminLayout()",
-      "file_type": "code",
-      "source_file": "src/components/admin/AdminLayout.tsx",
-      "source_location": "L12",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_components_admin_adminlayout_adminlayout",
-      "community": 0,
-      "community_name": "AdminGallery.tsx",
-      "norm_label": "adminlayout()"
-    },
-    {
-      "label": "ConfirmDialog()",
-      "file_type": "code",
-      "source_file": "src/components/admin/ConfirmDialog.tsx",
-      "source_location": "L25",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_components_admin_confirmdialog_confirmdialog",
-      "community": 0,
-      "community_name": "AdminGallery.tsx",
-      "norm_label": "confirmdialog()"
-    },
-    {
       "label": "DataTable()",
       "file_type": "code",
       "source_file": "src/components/admin/DataTable.tsx",
@@ -1076,7 +1052,7 @@
       "_origin": "ast",
       "id": "src_components_admin_datatable_datatable",
       "community": 0,
-      "community_name": "AdminGallery.tsx",
+      "community_name": "AdminAgenda.tsx",
       "norm_label": "datatable()"
     },
     {
@@ -1088,7 +1064,7 @@
       "_origin": "ast",
       "id": "src_components_ui_dialog_dialog",
       "community": 0,
-      "community_name": "AdminGallery.tsx",
+      "community_name": "AdminAgenda.tsx",
       "norm_label": "dialog()"
     },
     {
@@ -1100,7 +1076,7 @@
       "_origin": "ast",
       "id": "src_components_ui_dialog_dialogclose",
       "community": 0,
-      "community_name": "AdminGallery.tsx",
+      "community_name": "AdminAgenda.tsx",
       "norm_label": "dialogclose()"
     },
     {
@@ -1112,7 +1088,7 @@
       "_origin": "ast",
       "id": "src_components_ui_dialog_dialogcontent",
       "community": 0,
-      "community_name": "AdminGallery.tsx",
+      "community_name": "AdminAgenda.tsx",
       "norm_label": "dialogcontent()"
     },
     {
@@ -1124,20 +1100,8 @@
       "_origin": "ast",
       "id": "src_components_ui_dialog_dialogfooter",
       "community": 0,
-      "community_name": "AdminGallery.tsx",
+      "community_name": "AdminAgenda.tsx",
       "norm_label": "dialogfooter()"
-    },
-    {
-      "label": "DialogHeader()",
-      "file_type": "code",
-      "source_file": "src/components/ui/dialog.tsx",
-      "source_location": "L81",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_components_ui_dialog_dialogheader",
-      "community": 0,
-      "community_name": "AdminGallery.tsx",
-      "norm_label": "dialogheader()"
     },
     {
       "label": "DialogOverlay()",
@@ -1148,7 +1112,7 @@
       "_origin": "ast",
       "id": "src_components_ui_dialog_dialogoverlay",
       "community": 0,
-      "community_name": "AdminGallery.tsx",
+      "community_name": "AdminAgenda.tsx",
       "norm_label": "dialogoverlay()"
     },
     {
@@ -1160,20 +1124,8 @@
       "_origin": "ast",
       "id": "src_components_ui_dialog_dialogportal",
       "community": 0,
-      "community_name": "AdminGallery.tsx",
+      "community_name": "AdminAgenda.tsx",
       "norm_label": "dialogportal()"
-    },
-    {
-      "label": "DialogTitle()",
-      "file_type": "code",
-      "source_file": "src/components/ui/dialog.tsx",
-      "source_location": "L104",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_components_ui_dialog_dialogtitle",
-      "community": 0,
-      "community_name": "AdminGallery.tsx",
-      "norm_label": "dialogtitle()"
     },
     {
       "label": "DialogTrigger()",
@@ -1184,7 +1136,7 @@
       "_origin": "ast",
       "id": "src_components_ui_dialog_dialogtrigger",
       "community": 0,
-      "community_name": "AdminGallery.tsx",
+      "community_name": "AdminAgenda.tsx",
       "norm_label": "dialogtrigger()"
     },
     {
@@ -1196,7 +1148,7 @@
       "_origin": "ast",
       "id": "src_components_ui_textarea_textarea",
       "community": 0,
-      "community_name": "AdminGallery.tsx",
+      "community_name": "AdminAgenda.tsx",
       "norm_label": "textarea()"
     },
     {
@@ -1208,7 +1160,7 @@
       "_origin": "ast",
       "id": "src_pages_admin_adminarticles_adminarticles",
       "community": 0,
-      "community_name": "AdminGallery.tsx",
+      "community_name": "AdminAgenda.tsx",
       "norm_label": "adminarticles()"
     },
     {
@@ -1220,7 +1172,7 @@
       "_origin": "ast",
       "id": "src_pages_admin_adminarticles_slugify",
       "community": 0,
-      "community_name": "AdminGallery.tsx",
+      "community_name": "AdminAgenda.tsx",
       "norm_label": "slugify()"
     },
     {
@@ -1572,18 +1524,6 @@
       "norm_label": "usepagetitle()"
     },
     {
-      "label": "useTasks()",
-      "file_type": "code",
-      "source_file": "src/hooks/use-tasks.ts",
-      "source_location": "L11",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_hooks_use_tasks_usetasks",
-      "community": 1,
-      "community_name": "useTranslation",
-      "norm_label": "usetasks()"
-    },
-    {
       "label": "useTranslation()",
       "file_type": "code",
       "source_file": "src/hooks/use-translation.ts",
@@ -1596,64 +1536,16 @@
       "norm_label": "usetranslation()"
     },
     {
-      "label": "createInvitationCode()",
+      "label": "getArticleBySlug()",
       "file_type": "code",
       "source_file": "src/lib/db.ts",
-      "source_location": "L673",
+      "source_location": "L430",
       "_callable": true,
       "_origin": "ast",
-      "id": "src_lib_db_createinvitationcode",
+      "id": "src_lib_db_getarticlebyslug",
       "community": 1,
       "community_name": "useTranslation",
-      "norm_label": "createinvitationcode()"
-    },
-    {
-      "label": "createTask()",
-      "file_type": "code",
-      "source_file": "src/lib/db.ts",
-      "source_location": "L129",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_lib_db_createtask",
-      "community": 1,
-      "community_name": "useTranslation",
-      "norm_label": "createtask()"
-    },
-    {
-      "label": "deleteTask()",
-      "file_type": "code",
-      "source_file": "src/lib/db.ts",
-      "source_location": "L171",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_lib_db_deletetask",
-      "community": 1,
-      "community_name": "useTranslation",
-      "norm_label": "deletetask()"
-    },
-    {
-      "label": "getTasks()",
-      "file_type": "code",
-      "source_file": "src/lib/db.ts",
-      "source_location": "L119",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_lib_db_gettasks",
-      "community": 1,
-      "community_name": "useTranslation",
-      "norm_label": "gettasks()"
-    },
-    {
-      "label": "listInvitationCodes()",
-      "file_type": "code",
-      "source_file": "src/lib/db.ts",
-      "source_location": "L686",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_lib_db_listinvitationcodes",
-      "community": 1,
-      "community_name": "useTranslation",
-      "norm_label": "listinvitationcodes()"
+      "norm_label": "getarticlebyslug()"
     },
     {
       "label": "redeemInvitationCode()",
@@ -1668,18 +1560,6 @@
       "norm_label": "redeeminvitationcode()"
     },
     {
-      "label": "updateTask()",
-      "file_type": "code",
-      "source_file": "src/lib/db.ts",
-      "source_location": "L156",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_lib_db_updatetask",
-      "community": 1,
-      "community_name": "useTranslation",
-      "norm_label": "updatetask()"
-    },
-    {
       "label": "getTranslation()",
       "file_type": "code",
       "source_file": "src/lib/i18n/index.ts",
@@ -1692,18 +1572,6 @@
       "norm_label": "gettranslation()"
     },
     {
-      "label": "codePrefix()",
-      "file_type": "code",
-      "source_file": "src/lib/invitation-codes.ts",
-      "source_location": "L30",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_lib_invitation_codes_codeprefix",
-      "community": 1,
-      "community_name": "useTranslation",
-      "norm_label": "codeprefix()"
-    },
-    {
       "label": "displayNormalized()",
       "file_type": "code",
       "source_file": "src/lib/invitation-codes.ts",
@@ -1714,30 +1582,6 @@
       "community": 1,
       "community_name": "useTranslation",
       "norm_label": "displaynormalized()"
-    },
-    {
-      "label": "generateInvitationCode()",
-      "file_type": "code",
-      "source_file": "src/lib/invitation-codes.ts",
-      "source_location": "L16",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_lib_invitation_codes_generateinvitationcode",
-      "community": 1,
-      "community_name": "useTranslation",
-      "norm_label": "generateinvitationcode()"
-    },
-    {
-      "label": "hashCode()",
-      "file_type": "code",
-      "source_file": "src/lib/invitation-codes.ts",
-      "source_location": "L35",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_lib_invitation_codes_hashcode",
-      "community": 1,
-      "community_name": "useTranslation",
-      "norm_label": "hashcode()"
     },
     {
       "label": "normalizeCodeInput()",
@@ -1836,30 +1680,6 @@
       "norm_label": "adminagenda()"
     },
     {
-      "label": "AdminInvitationCodes()",
-      "file_type": "code",
-      "source_file": "src/pages/admin/AdminInvitationCodes.tsx",
-      "source_location": "L37",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_pages_admin_admininvitationcodes_admininvitationcodes",
-      "community": 1,
-      "community_name": "useTranslation",
-      "norm_label": "admininvitationcodes()"
-    },
-    {
-      "label": "deriveStatus()",
-      "file_type": "code",
-      "source_file": "src/pages/admin/AdminInvitationCodes.tsx",
-      "source_location": "L30",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_pages_admin_admininvitationcodes_derivestatus",
-      "community": 1,
-      "community_name": "useTranslation",
-      "norm_label": "derivestatus()"
-    },
-    {
       "label": "AdminMembers()",
       "file_type": "code",
       "source_file": "src/pages/admin/AdminMembers.tsx",
@@ -1882,42 +1702,6 @@
       "community": 1,
       "community_name": "useTranslation",
       "norm_label": "adminorganization()"
-    },
-    {
-      "label": "AdminTugas()",
-      "file_type": "code",
-      "source_file": "src/pages/admin/AdminTugas.tsx",
-      "source_location": "L37",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_pages_admin_admintugas_admintugas",
-      "community": 1,
-      "community_name": "useTranslation",
-      "norm_label": "admintugas()"
-    },
-    {
-      "label": "getDaysInMonth()",
-      "file_type": "code",
-      "source_file": "src/pages/admin/AdminTugas.tsx",
-      "source_location": "L30",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_pages_admin_admintugas_getdaysinmonth",
-      "community": 1,
-      "community_name": "useTranslation",
-      "norm_label": "getdaysinmonth()"
-    },
-    {
-      "label": "getFirstDayOfMonth()",
-      "file_type": "code",
-      "source_file": "src/pages/admin/AdminTugas.tsx",
-      "source_location": "L33",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_pages_admin_admintugas_getfirstdayofmonth",
-      "community": 1,
-      "community_name": "useTranslation",
-      "norm_label": "getfirstdayofmonth()"
     },
     {
       "label": "Agenda()",
@@ -2772,6 +2556,18 @@
       "norm_label": "useschedule()"
     },
     {
+      "label": "useTasks()",
+      "file_type": "code",
+      "source_file": "src/hooks/use-tasks.ts",
+      "source_location": "L11",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_hooks_use_tasks_usetasks",
+      "community": 13,
+      "community_name": "db.ts",
+      "norm_label": "usetasks()"
+    },
+    {
       "label": "createAgendaItem()",
       "file_type": "code",
       "source_file": "src/lib/db.ts",
@@ -2830,6 +2626,18 @@
       "community": 13,
       "community_name": "db.ts",
       "norm_label": "createschedule()"
+    },
+    {
+      "label": "createTask()",
+      "file_type": "code",
+      "source_file": "src/lib/db.ts",
+      "source_location": "L129",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_lib_db_createtask",
+      "community": 13,
+      "community_name": "db.ts",
+      "norm_label": "createtask()"
     },
     {
       "label": "deleteAgendaItem()",
@@ -2892,6 +2700,18 @@
       "norm_label": "deleteschedule()"
     },
     {
+      "label": "deleteTask()",
+      "file_type": "code",
+      "source_file": "src/lib/db.ts",
+      "source_location": "L171",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_lib_db_deletetask",
+      "community": 13,
+      "community_name": "db.ts",
+      "norm_label": "deletetask()"
+    },
+    {
       "label": "getAgendaItems()",
       "file_type": "code",
       "source_file": "src/lib/db.ts",
@@ -2902,18 +2722,6 @@
       "community": 13,
       "community_name": "db.ts",
       "norm_label": "getagendaitems()"
-    },
-    {
-      "label": "getArticleBySlug()",
-      "file_type": "code",
-      "source_file": "src/lib/db.ts",
-      "source_location": "L430",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_lib_db_getarticlebyslug",
-      "community": 13,
-      "community_name": "db.ts",
-      "norm_label": "getarticlebyslug()"
     },
     {
       "label": "getArticles()",
@@ -2962,6 +2770,18 @@
       "community": 13,
       "community_name": "db.ts",
       "norm_label": "getschedules()"
+    },
+    {
+      "label": "getTasks()",
+      "file_type": "code",
+      "source_file": "src/lib/db.ts",
+      "source_location": "L119",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_lib_db_gettasks",
+      "community": 13,
+      "community_name": "db.ts",
+      "norm_label": "gettasks()"
     },
     {
       "label": "updateAgendaItem()",
@@ -3022,6 +2842,18 @@
       "community": 13,
       "community_name": "db.ts",
       "norm_label": "updateschedule()"
+    },
+    {
+      "label": "updateTask()",
+      "file_type": "code",
+      "source_file": "src/lib/db.ts",
+      "source_location": "L156",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_lib_db_updatetask",
+      "community": 13,
+      "community_name": "db.ts",
+      "norm_label": "updatetask()"
     },
     {
       "label": "deleteGalleryImage()",
@@ -3166,18 +2998,6 @@
       "community": 14,
       "community_name": "instrumentation.tsx",
       "norm_label": "collapsibletrigger()"
-    },
-    {
-      "label": "DialogDescription()",
-      "file_type": "code",
-      "source_file": "src/components/ui/dialog.tsx",
-      "source_location": "L117",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "src_components_ui_dialog_dialogdescription",
-      "community": 14,
-      "community_name": "instrumentation.tsx",
-      "norm_label": "dialogdescription()"
     },
     {
       "label": ".componentDidCatch()",
@@ -3480,6 +3300,18 @@
       "norm_label": "alertdialogtrigger()"
     },
     {
+      "label": "DialogTitle()",
+      "file_type": "code",
+      "source_file": "src/components/ui/dialog.tsx",
+      "source_location": "L104",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_components_ui_dialog_dialogtitle",
+      "community": 17,
+      "community_name": "AdminMbg.tsx",
+      "norm_label": "dialogtitle()"
+    },
+    {
       "label": "useMbgSchedule()",
       "file_type": "code",
       "source_file": "src/hooks/use-mbg.ts",
@@ -3488,7 +3320,7 @@
       "_origin": "ast",
       "id": "src_hooks_use_mbg_usembgschedule",
       "community": 17,
-      "community_name": "use-mbg.ts",
+      "community_name": "AdminMbg.tsx",
       "norm_label": "usembgschedule()"
     },
     {
@@ -3500,7 +3332,7 @@
       "_origin": "ast",
       "id": "src_lib_db_creatembgschedule",
       "community": 17,
-      "community_name": "use-mbg.ts",
+      "community_name": "AdminMbg.tsx",
       "norm_label": "creatembgschedule()"
     },
     {
@@ -3512,7 +3344,7 @@
       "_origin": "ast",
       "id": "src_lib_db_deletembgschedule",
       "community": 17,
-      "community_name": "use-mbg.ts",
+      "community_name": "AdminMbg.tsx",
       "norm_label": "deletembgschedule()"
     },
     {
@@ -3524,7 +3356,7 @@
       "_origin": "ast",
       "id": "src_lib_db_getmbgschedule",
       "community": 17,
-      "community_name": "use-mbg.ts",
+      "community_name": "AdminMbg.tsx",
       "norm_label": "getmbgschedule()"
     },
     {
@@ -3536,7 +3368,7 @@
       "_origin": "ast",
       "id": "src_lib_db_updatembgschedule",
       "community": 17,
-      "community_name": "use-mbg.ts",
+      "community_name": "AdminMbg.tsx",
       "norm_label": "updatembgschedule()"
     },
     {
@@ -3548,7 +3380,7 @@
       "_origin": "ast",
       "id": "src_pages_admin_adminmbg_adminmbg",
       "community": 17,
-      "community_name": "use-mbg.ts",
+      "community_name": "AdminMbg.tsx",
       "norm_label": "adminmbg()"
     },
     {
@@ -4668,40 +4500,100 @@
       "norm_label": "commandshortcut()"
     },
     {
-      "label": "uploadGalleryImage()",
+      "label": "DialogDescription()",
       "file_type": "code",
-      "source_file": "src/lib/storage.ts",
-      "source_location": "L27",
+      "source_file": "src/components/ui/dialog.tsx",
+      "source_location": "L117",
       "_callable": true,
       "_origin": "ast",
-      "id": "src_lib_storage_uploadgalleryimage",
-      "community": 26,
-      "community_name": "AdminGallery",
-      "norm_label": "uploadgalleryimage()"
+      "id": "src_components_ui_dialog_dialogdescription",
+      "community": 25,
+      "community_name": "command.tsx",
+      "norm_label": "dialogdescription()"
     },
     {
-      "label": "validateImageFile()",
+      "label": "createInvitationCode()",
       "file_type": "code",
-      "source_file": "src/lib/storage.ts",
-      "source_location": "L17",
+      "source_file": "src/lib/db.ts",
+      "source_location": "L673",
       "_callable": true,
       "_origin": "ast",
-      "id": "src_lib_storage_validateimagefile",
+      "id": "src_lib_db_createinvitationcode",
       "community": 26,
-      "community_name": "AdminGallery",
-      "norm_label": "validateimagefile()"
+      "community_name": "AdminInvitationCodes.tsx",
+      "norm_label": "createinvitationcode()"
     },
     {
-      "label": "AdminGallery()",
+      "label": "listInvitationCodes()",
       "file_type": "code",
-      "source_file": "src/pages/admin/AdminGallery.tsx",
-      "source_location": "L25",
+      "source_file": "src/lib/db.ts",
+      "source_location": "L686",
       "_callable": true,
       "_origin": "ast",
-      "id": "src_pages_admin_admingallery_admingallery",
+      "id": "src_lib_db_listinvitationcodes",
       "community": 26,
-      "community_name": "AdminGallery",
-      "norm_label": "admingallery()"
+      "community_name": "AdminInvitationCodes.tsx",
+      "norm_label": "listinvitationcodes()"
+    },
+    {
+      "label": "codePrefix()",
+      "file_type": "code",
+      "source_file": "src/lib/invitation-codes.ts",
+      "source_location": "L30",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_lib_invitation_codes_codeprefix",
+      "community": 26,
+      "community_name": "AdminInvitationCodes.tsx",
+      "norm_label": "codeprefix()"
+    },
+    {
+      "label": "generateInvitationCode()",
+      "file_type": "code",
+      "source_file": "src/lib/invitation-codes.ts",
+      "source_location": "L16",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_lib_invitation_codes_generateinvitationcode",
+      "community": 26,
+      "community_name": "AdminInvitationCodes.tsx",
+      "norm_label": "generateinvitationcode()"
+    },
+    {
+      "label": "hashCode()",
+      "file_type": "code",
+      "source_file": "src/lib/invitation-codes.ts",
+      "source_location": "L35",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_lib_invitation_codes_hashcode",
+      "community": 26,
+      "community_name": "AdminInvitationCodes.tsx",
+      "norm_label": "hashcode()"
+    },
+    {
+      "label": "AdminInvitationCodes()",
+      "file_type": "code",
+      "source_file": "src/pages/admin/AdminInvitationCodes.tsx",
+      "source_location": "L37",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_pages_admin_admininvitationcodes_admininvitationcodes",
+      "community": 26,
+      "community_name": "AdminInvitationCodes.tsx",
+      "norm_label": "admininvitationcodes()"
+    },
+    {
+      "label": "deriveStatus()",
+      "file_type": "code",
+      "source_file": "src/pages/admin/AdminInvitationCodes.tsx",
+      "source_location": "L30",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_pages_admin_admininvitationcodes_derivestatus",
+      "community": 26,
+      "community_name": "AdminInvitationCodes.tsx",
+      "norm_label": "derivestatus()"
     },
     {
       "label": "Card()",
@@ -5220,6 +5112,18 @@
       "norm_label": "admintheme()"
     },
     {
+      "label": "DialogHeader()",
+      "file_type": "code",
+      "source_file": "src/components/ui/dialog.tsx",
+      "source_location": "L81",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_components_ui_dialog_dialogheader",
+      "community": 41,
+      "community_name": "AdminDuty.tsx",
+      "norm_label": "dialogheader()"
+    },
+    {
       "label": "useDutySchedule()",
       "file_type": "code",
       "source_file": "src/hooks/use-duty.ts",
@@ -5228,7 +5132,7 @@
       "_origin": "ast",
       "id": "src_hooks_use_duty_usedutyschedule",
       "community": 41,
-      "community_name": "use-duty.ts",
+      "community_name": "AdminDuty.tsx",
       "norm_label": "usedutyschedule()"
     },
     {
@@ -5240,7 +5144,7 @@
       "_origin": "ast",
       "id": "src_lib_db_createdutyschedule",
       "community": 41,
-      "community_name": "use-duty.ts",
+      "community_name": "AdminDuty.tsx",
       "norm_label": "createdutyschedule()"
     },
     {
@@ -5252,7 +5156,7 @@
       "_origin": "ast",
       "id": "src_lib_db_deletedutyschedule",
       "community": 41,
-      "community_name": "use-duty.ts",
+      "community_name": "AdminDuty.tsx",
       "norm_label": "deletedutyschedule()"
     },
     {
@@ -5264,7 +5168,7 @@
       "_origin": "ast",
       "id": "src_lib_db_getdutyschedule",
       "community": 41,
-      "community_name": "use-duty.ts",
+      "community_name": "AdminDuty.tsx",
       "norm_label": "getdutyschedule()"
     },
     {
@@ -5276,7 +5180,7 @@
       "_origin": "ast",
       "id": "src_lib_db_updatedutyschedule",
       "community": 41,
-      "community_name": "use-duty.ts",
+      "community_name": "AdminDuty.tsx",
       "norm_label": "updatedutyschedule()"
     },
     {
@@ -5288,8 +5192,32 @@
       "_origin": "ast",
       "id": "src_pages_admin_adminduty_adminduty",
       "community": 41,
-      "community_name": "use-duty.ts",
+      "community_name": "AdminDuty.tsx",
       "norm_label": "adminduty()"
+    },
+    {
+      "label": "AdminLayout()",
+      "file_type": "code",
+      "source_file": "src/components/admin/AdminLayout.tsx",
+      "source_location": "L12",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_components_admin_adminlayout_adminlayout",
+      "community": 42,
+      "community_name": "AdminGallery.tsx",
+      "norm_label": "adminlayout()"
+    },
+    {
+      "label": "ConfirmDialog()",
+      "file_type": "code",
+      "source_file": "src/components/admin/ConfirmDialog.tsx",
+      "source_location": "L25",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_components_admin_confirmdialog_confirmdialog",
+      "community": 42,
+      "community_name": "AdminGallery.tsx",
+      "norm_label": "confirmdialog()"
     },
     {
       "label": "getAllProfiles()",
@@ -5300,7 +5228,7 @@
       "_origin": "ast",
       "id": "src_lib_db_getallprofiles",
       "community": 42,
-      "community_name": "AdminUsers.tsx",
+      "community_name": "AdminGallery.tsx",
       "norm_label": "getallprofiles()"
     },
     {
@@ -5312,8 +5240,44 @@
       "_origin": "ast",
       "id": "src_lib_db_updateprofilerole",
       "community": 42,
-      "community_name": "AdminUsers.tsx",
+      "community_name": "AdminGallery.tsx",
       "norm_label": "updateprofilerole()"
+    },
+    {
+      "label": "uploadGalleryImage()",
+      "file_type": "code",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L27",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_lib_storage_uploadgalleryimage",
+      "community": 42,
+      "community_name": "AdminGallery.tsx",
+      "norm_label": "uploadgalleryimage()"
+    },
+    {
+      "label": "validateImageFile()",
+      "file_type": "code",
+      "source_file": "src/lib/storage.ts",
+      "source_location": "L17",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_lib_storage_validateimagefile",
+      "community": 42,
+      "community_name": "AdminGallery.tsx",
+      "norm_label": "validateimagefile()"
+    },
+    {
+      "label": "AdminGallery()",
+      "file_type": "code",
+      "source_file": "src/pages/admin/AdminGallery.tsx",
+      "source_location": "L25",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_pages_admin_admingallery_admingallery",
+      "community": 42,
+      "community_name": "AdminGallery.tsx",
+      "norm_label": "admingallery()"
     },
     {
       "label": "AdminUsers()",
@@ -5324,8 +5288,44 @@
       "_origin": "ast",
       "id": "src_pages_admin_adminusers_adminusers",
       "community": 42,
-      "community_name": "AdminUsers.tsx",
+      "community_name": "AdminGallery.tsx",
       "norm_label": "adminusers()"
+    },
+    {
+      "label": "AdminTugas()",
+      "file_type": "code",
+      "source_file": "src/pages/admin/AdminTugas.tsx",
+      "source_location": "L35",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_pages_admin_admintugas_admintugas",
+      "community": 46,
+      "community_name": "AdminTugas.tsx",
+      "norm_label": "admintugas()"
+    },
+    {
+      "label": "getDaysInMonth()",
+      "file_type": "code",
+      "source_file": "src/pages/admin/AdminTugas.tsx",
+      "source_location": "L28",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_pages_admin_admintugas_getdaysinmonth",
+      "community": 46,
+      "community_name": "AdminTugas.tsx",
+      "norm_label": "getdaysinmonth()"
+    },
+    {
+      "label": "getFirstDayOfMonth()",
+      "file_type": "code",
+      "source_file": "src/pages/admin/AdminTugas.tsx",
+      "source_location": "L31",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_pages_admin_admintugas_getfirstdayofmonth",
+      "community": 46,
+      "community_name": "AdminTugas.tsx",
+      "norm_label": "getfirstdayofmonth()"
     },
     {
       "label": "Accordion()",
@@ -6799,7 +6799,7 @@
       "_origin": "ast",
       "id": "src_components_admin_datatable",
       "community": 0,
-      "community_name": "AdminGallery.tsx",
+      "community_name": "AdminAgenda.tsx",
       "norm_label": "datatable.tsx"
     },
     {
@@ -6810,7 +6810,7 @@
       "_origin": "ast",
       "id": "src_components_ui_dialog",
       "community": 0,
-      "community_name": "AdminGallery.tsx",
+      "community_name": "AdminAgenda.tsx",
       "norm_label": "dialog.tsx"
     },
     {
@@ -6821,7 +6821,7 @@
       "_origin": "ast",
       "id": "src_components_ui_textarea",
       "community": 0,
-      "community_name": "AdminGallery.tsx",
+      "community_name": "AdminAgenda.tsx",
       "norm_label": "textarea.tsx"
     },
     {
@@ -6832,7 +6832,7 @@
       "_origin": "ast",
       "id": "src_main_adminagenda",
       "community": 0,
-      "community_name": "AdminGallery.tsx",
+      "community_name": "AdminAgenda.tsx",
       "norm_label": "adminagenda"
     },
     {
@@ -6843,41 +6843,8 @@
       "_origin": "ast",
       "id": "src_main_adminarticles",
       "community": 0,
-      "community_name": "AdminGallery.tsx",
+      "community_name": "AdminAgenda.tsx",
       "norm_label": "adminarticles"
-    },
-    {
-      "label": "AdminDuty",
-      "file_type": "code",
-      "source_file": "src/main.tsx",
-      "source_location": "L54",
-      "_origin": "ast",
-      "id": "src_main_adminduty",
-      "community": 0,
-      "community_name": "AdminGallery.tsx",
-      "norm_label": "adminduty"
-    },
-    {
-      "label": "AdminGallery",
-      "file_type": "code",
-      "source_file": "src/main.tsx",
-      "source_location": "L39",
-      "_origin": "ast",
-      "id": "src_main_admingallery",
-      "community": 0,
-      "community_name": "AdminGallery.tsx",
-      "norm_label": "admingallery"
-    },
-    {
-      "label": "AdminMbg",
-      "file_type": "code",
-      "source_file": "src/main.tsx",
-      "source_location": "L51",
-      "_origin": "ast",
-      "id": "src_main_adminmbg",
-      "community": 0,
-      "community_name": "AdminGallery.tsx",
-      "norm_label": "adminmbg"
     },
     {
       "label": "AdminSchedule",
@@ -6887,7 +6854,7 @@
       "_origin": "ast",
       "id": "src_main_adminschedule",
       "community": 0,
-      "community_name": "AdminGallery.tsx",
+      "community_name": "AdminAgenda.tsx",
       "norm_label": "adminschedule"
     },
     {
@@ -6898,7 +6865,7 @@
       "_origin": "ast",
       "id": "src_pages_admin_adminagenda",
       "community": 0,
-      "community_name": "AdminGallery.tsx",
+      "community_name": "AdminAgenda.tsx",
       "norm_label": "adminagenda.tsx"
     },
     {
@@ -6909,63 +6876,8 @@
       "_origin": "ast",
       "id": "src_pages_admin_adminarticles",
       "community": 0,
-      "community_name": "AdminGallery.tsx",
+      "community_name": "AdminAgenda.tsx",
       "norm_label": "adminarticles.tsx"
-    },
-    {
-      "label": "AdminDuty.tsx",
-      "file_type": "code",
-      "source_file": "src/pages/admin/AdminDuty.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_pages_admin_adminduty",
-      "community": 0,
-      "community_name": "AdminGallery.tsx",
-      "norm_label": "adminduty.tsx"
-    },
-    {
-      "label": "DAYS",
-      "file_type": "code",
-      "source_file": "src/pages/admin/AdminDuty.tsx",
-      "source_location": "L18",
-      "_origin": "ast",
-      "id": "src_pages_admin_adminduty_days",
-      "community": 0,
-      "community_name": "AdminGallery.tsx",
-      "norm_label": "days"
-    },
-    {
-      "label": "AdminGallery.tsx",
-      "file_type": "code",
-      "source_file": "src/pages/admin/AdminGallery.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_pages_admin_admingallery",
-      "community": 0,
-      "community_name": "AdminGallery.tsx",
-      "norm_label": "admingallery.tsx"
-    },
-    {
-      "label": "AdminMbg.tsx",
-      "file_type": "code",
-      "source_file": "src/pages/admin/AdminMbg.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_pages_admin_adminmbg",
-      "community": 0,
-      "community_name": "AdminGallery.tsx",
-      "norm_label": "adminmbg.tsx"
-    },
-    {
-      "label": "DAYS",
-      "file_type": "code",
-      "source_file": "src/pages/admin/AdminMbg.tsx",
-      "source_location": "L18",
-      "_origin": "ast",
-      "id": "src_pages_admin_adminmbg_days",
-      "community": 0,
-      "community_name": "AdminGallery.tsx",
-      "norm_label": "days"
     },
     {
       "label": "AdminSchedule.tsx",
@@ -6975,7 +6887,7 @@
       "_origin": "ast",
       "id": "src_pages_admin_adminschedule",
       "community": 0,
-      "community_name": "AdminGallery.tsx",
+      "community_name": "AdminAgenda.tsx",
       "norm_label": "adminschedule.tsx"
     },
     {
@@ -6986,7 +6898,7 @@
       "_origin": "ast",
       "id": "src_pages_admin_adminschedule_day_i18n_keys",
       "community": 0,
-      "community_name": "AdminGallery.tsx",
+      "community_name": "AdminAgenda.tsx",
       "norm_label": "day_i18n_keys"
     },
     {
@@ -6997,7 +6909,7 @@
       "_origin": "ast",
       "id": "src_pages_admin_adminschedule_days",
       "community": 0,
-      "community_name": "AdminGallery.tsx",
+      "community_name": "AdminAgenda.tsx",
       "norm_label": "days"
     },
     {
@@ -7188,17 +7100,6 @@
       "norm_label": "verificationwarningbar.tsx"
     },
     {
-      "label": "agenda",
-      "file_type": "code",
-      "source_file": "src/data/kelas.ts",
-      "source_location": "L286",
-      "_origin": "ast",
-      "id": "src_data_kelas_agenda",
-      "community": 1,
-      "community_name": "useTranslation",
-      "norm_label": "agenda"
-    },
-    {
       "label": "use-organization.ts",
       "file_type": "code",
       "source_file": "src/hooks/use-organization.ts",
@@ -7232,17 +7133,6 @@
       "norm_label": "use-page-title.ts"
     },
     {
-      "label": "use-tasks.ts",
-      "file_type": "code",
-      "source_file": "src/hooks/use-tasks.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_hooks_use_tasks",
-      "community": 1,
-      "community_name": "useTranslation",
-      "norm_label": "use-tasks.ts"
-    },
-    {
       "label": "use-translation.ts",
       "file_type": "code",
       "source_file": "src/hooks/use-translation.ts",
@@ -7252,17 +7142,6 @@
       "community": 1,
       "community_name": "useTranslation",
       "norm_label": "use-translation.ts"
-    },
-    {
-      "label": "invitation-codes.ts",
-      "file_type": "code",
-      "source_file": "src/lib/invitation-codes.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_lib_invitation_codes",
-      "community": 1,
-      "community_name": "useTranslation",
-      "norm_label": "invitation-codes.ts"
     },
     {
       "label": "markdown.ts",
@@ -7342,15 +7221,26 @@
       "norm_label": "utils.ts"
     },
     {
-      "label": "AdminInvitationCodes",
+      "label": "Agenda",
       "file_type": "code",
       "source_file": "src/main.tsx",
-      "source_location": "L45",
+      "source_location": "L24",
       "_origin": "ast",
-      "id": "src_main_admininvitationcodes",
+      "id": "src_main_agenda",
       "community": 1,
       "community_name": "useTranslation",
-      "norm_label": "admininvitationcodes"
+      "norm_label": "agenda"
+    },
+    {
+      "label": "ArtikelDetail",
+      "file_type": "code",
+      "source_file": "src/main.tsx",
+      "source_location": "L21",
+      "_origin": "ast",
+      "id": "src_main_artikeldetail",
+      "community": 1,
+      "community_name": "useTranslation",
+      "norm_label": "artikeldetail"
     },
     {
       "label": "Register",
@@ -7373,28 +7263,6 @@
       "community": 1,
       "community_name": "useTranslation",
       "norm_label": "tugas"
-    },
-    {
-      "label": "TugasDetail",
-      "file_type": "code",
-      "source_file": "src/main.tsx",
-      "source_location": "L23",
-      "_origin": "ast",
-      "id": "src_main_tugasdetail",
-      "community": 1,
-      "community_name": "useTranslation",
-      "norm_label": "tugasdetail"
-    },
-    {
-      "label": "AdminInvitationCodes.tsx",
-      "file_type": "code",
-      "source_file": "src/pages/admin/AdminInvitationCodes.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_pages_admin_admininvitationcodes",
-      "community": 1,
-      "community_name": "useTranslation",
-      "norm_label": "admininvitationcodes.tsx"
     },
     {
       "label": "AdminMembers.tsx",
@@ -8277,17 +8145,6 @@
       "norm_label": "adminorganization"
     },
     {
-      "label": "Agenda",
-      "file_type": "code",
-      "source_file": "src/main.tsx",
-      "source_location": "L24",
-      "_origin": "ast",
-      "id": "src_main_agenda",
-      "community": 119,
-      "community_name": "main.tsx",
-      "norm_label": "agenda"
-    },
-    {
       "label": "Anggota",
       "file_type": "code",
       "source_file": "src/main.tsx",
@@ -8308,17 +8165,6 @@
       "community": 119,
       "community_name": "main.tsx",
       "norm_label": "artikel"
-    },
-    {
-      "label": "ArtikelDetail",
-      "file_type": "code",
-      "source_file": "src/main.tsx",
-      "source_location": "L21",
-      "_origin": "ast",
-      "id": "src_main_artikeldetail",
-      "community": 119,
-      "community_name": "main.tsx",
-      "norm_label": "artikeldetail"
     },
     {
       "label": "AuthPage",
@@ -8407,6 +8253,17 @@
       "community": 119,
       "community_name": "main.tsx",
       "norm_label": "settings"
+    },
+    {
+      "label": "TugasDetail",
+      "file_type": "code",
+      "source_file": "src/main.tsx",
+      "source_location": "L23",
+      "_origin": "ast",
+      "id": "src_main_tugasdetail",
+      "community": 119,
+      "community_name": "main.tsx",
+      "norm_label": "tugasdetail"
     },
     {
       "label": "LogoDropdown.tsx",
@@ -8618,6 +8475,17 @@
       "norm_label": "kelas.ts"
     },
     {
+      "label": "agenda",
+      "file_type": "code",
+      "source_file": "src/data/kelas.ts",
+      "source_location": "L286",
+      "_origin": "ast",
+      "id": "src_data_kelas_agenda",
+      "community": 13,
+      "community_name": "db.ts",
+      "norm_label": "agenda"
+    },
+    {
       "label": "galeri",
       "file_type": "code",
       "source_file": "src/data/kelas.ts",
@@ -8726,6 +8594,17 @@
       "community": 13,
       "community_name": "db.ts",
       "norm_label": "use-schedule.ts"
+    },
+    {
+      "label": "use-tasks.ts",
+      "file_type": "code",
+      "source_file": "src/hooks/use-tasks.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_hooks_use_tasks",
+      "community": 13,
+      "community_name": "db.ts",
+      "norm_label": "use-tasks.ts"
     },
     {
       "label": "db.ts",
@@ -9032,8 +8911,41 @@
       "_origin": "ast",
       "id": "src_hooks_use_mbg",
       "community": 17,
-      "community_name": "use-mbg.ts",
+      "community_name": "AdminMbg.tsx",
       "norm_label": "use-mbg.ts"
+    },
+    {
+      "label": "AdminMbg",
+      "file_type": "code",
+      "source_file": "src/main.tsx",
+      "source_location": "L51",
+      "_origin": "ast",
+      "id": "src_main_adminmbg",
+      "community": 17,
+      "community_name": "AdminMbg.tsx",
+      "norm_label": "adminmbg"
+    },
+    {
+      "label": "AdminMbg.tsx",
+      "file_type": "code",
+      "source_file": "src/pages/admin/AdminMbg.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_pages_admin_adminmbg",
+      "community": 17,
+      "community_name": "AdminMbg.tsx",
+      "norm_label": "adminmbg.tsx"
+    },
+    {
+      "label": "DAYS",
+      "file_type": "code",
+      "source_file": "src/pages/admin/AdminMbg.tsx",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "src_pages_admin_adminmbg_days",
+      "community": 17,
+      "community_name": "AdminMbg.tsx",
+      "norm_label": "days"
     },
     {
       "label": "form.tsx",
@@ -9452,6 +9364,39 @@
       "community": 25,
       "community_name": "command.tsx",
       "norm_label": "command.tsx"
+    },
+    {
+      "label": "invitation-codes.ts",
+      "file_type": "code",
+      "source_file": "src/lib/invitation-codes.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_lib_invitation_codes",
+      "community": 26,
+      "community_name": "AdminInvitationCodes.tsx",
+      "norm_label": "invitation-codes.ts"
+    },
+    {
+      "label": "AdminInvitationCodes",
+      "file_type": "code",
+      "source_file": "src/main.tsx",
+      "source_location": "L45",
+      "_origin": "ast",
+      "id": "src_main_admininvitationcodes",
+      "community": 26,
+      "community_name": "AdminInvitationCodes.tsx",
+      "norm_label": "admininvitationcodes"
+    },
+    {
+      "label": "AdminInvitationCodes.tsx",
+      "file_type": "code",
+      "source_file": "src/pages/admin/AdminInvitationCodes.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_pages_admin_admininvitationcodes",
+      "community": 26,
+      "community_name": "AdminInvitationCodes.tsx",
+      "norm_label": "admininvitationcodes.tsx"
     },
     {
       "label": "domain.md",
@@ -11034,8 +10979,52 @@
       "_origin": "ast",
       "id": "src_hooks_use_duty",
       "community": 41,
-      "community_name": "use-duty.ts",
+      "community_name": "AdminDuty.tsx",
       "norm_label": "use-duty.ts"
+    },
+    {
+      "label": "AdminDuty",
+      "file_type": "code",
+      "source_file": "src/main.tsx",
+      "source_location": "L54",
+      "_origin": "ast",
+      "id": "src_main_adminduty",
+      "community": 41,
+      "community_name": "AdminDuty.tsx",
+      "norm_label": "adminduty"
+    },
+    {
+      "label": "AdminDuty.tsx",
+      "file_type": "code",
+      "source_file": "src/pages/admin/AdminDuty.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_pages_admin_adminduty",
+      "community": 41,
+      "community_name": "AdminDuty.tsx",
+      "norm_label": "adminduty.tsx"
+    },
+    {
+      "label": "DAYS",
+      "file_type": "code",
+      "source_file": "src/pages/admin/AdminDuty.tsx",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "src_pages_admin_adminduty_days",
+      "community": 41,
+      "community_name": "AdminDuty.tsx",
+      "norm_label": "days"
+    },
+    {
+      "label": "AdminGallery",
+      "file_type": "code",
+      "source_file": "src/main.tsx",
+      "source_location": "L39",
+      "_origin": "ast",
+      "id": "src_main_admingallery",
+      "community": 42,
+      "community_name": "AdminGallery.tsx",
+      "norm_label": "admingallery"
     },
     {
       "label": "AdminUsers",
@@ -11045,8 +11034,19 @@
       "_origin": "ast",
       "id": "src_main_adminusers",
       "community": 42,
-      "community_name": "AdminUsers.tsx",
+      "community_name": "AdminGallery.tsx",
       "norm_label": "adminusers"
+    },
+    {
+      "label": "AdminGallery.tsx",
+      "file_type": "code",
+      "source_file": "src/pages/admin/AdminGallery.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_pages_admin_admingallery",
+      "community": 42,
+      "community_name": "AdminGallery.tsx",
+      "norm_label": "admingallery.tsx"
     },
     {
       "label": "AdminUsers.tsx",
@@ -11056,7 +11056,7 @@
       "_origin": "ast",
       "id": "src_pages_admin_adminusers",
       "community": 42,
-      "community_name": "AdminUsers.tsx",
+      "community_name": "AdminGallery.tsx",
       "norm_label": "adminusers.tsx"
     },
     {
@@ -11115,15 +11115,15 @@
       "norm_label": "dependencies"
     },
     {
-      "label": "class-variance-authority",
+      "label": "clsx",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L46",
+      "source_location": "L47",
       "_origin": "ast",
-      "id": "package_dependencies_class_variance_authority",
+      "id": "package_dependencies_clsx",
       "community": 45,
       "community_name": "dependencies",
-      "norm_label": "class-variance-authority"
+      "norm_label": "clsx"
     },
     {
       "label": "cmdk",
@@ -11192,15 +11192,15 @@
       "norm_label": "@zumer/snapdom"
     },
     {
-      "label": "class-variance-authority",
+      "label": "clsx",
       "file_type": "concept",
       "source_file": "package.json",
-      "source_location": "L46",
+      "source_location": "L47",
       "_origin": "ast",
-      "id": "class_variance_authority",
+      "id": "clsx",
       "community": 45,
       "community_name": "dependencies",
-      "norm_label": "class-variance-authority"
+      "norm_label": "clsx"
     },
     {
       "label": "cmdk",
@@ -11294,7 +11294,7 @@
       "label": "DAYS_EN",
       "file_type": "code",
       "source_file": "src/pages/admin/AdminTugas.tsx",
-      "source_location": "L28",
+      "source_location": "L26",
       "_origin": "ast",
       "id": "src_pages_admin_admintugas_days_en",
       "community": 46,
@@ -11305,7 +11305,7 @@
       "label": "DAYS_ID",
       "file_type": "code",
       "source_file": "src/pages/admin/AdminTugas.tsx",
-      "source_location": "L27",
+      "source_location": "L25",
       "_origin": "ast",
       "id": "src_pages_admin_admintugas_days_id",
       "community": 46,
@@ -11316,7 +11316,7 @@
       "label": "MONTHS_EN",
       "file_type": "code",
       "source_file": "src/pages/admin/AdminTugas.tsx",
-      "source_location": "L26",
+      "source_location": "L24",
       "_origin": "ast",
       "id": "src_pages_admin_admintugas_months_en",
       "community": 46,
@@ -11327,7 +11327,7 @@
       "label": "MONTHS_ID",
       "file_type": "code",
       "source_file": "src/pages/admin/AdminTugas.tsx",
-      "source_location": "L25",
+      "source_location": "L23",
       "_origin": "ast",
       "id": "src_pages_admin_admintugas_months_id",
       "community": 46,
@@ -12204,26 +12204,26 @@
       "norm_label": "@radix-ui/react-hover-card"
     },
     {
-      "label": "clsx",
+      "label": "class-variance-authority",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L47",
+      "source_location": "L46",
       "_origin": "ast",
-      "id": "package_dependencies_clsx",
+      "id": "package_dependencies_class_variance_authority",
       "community": 65,
-      "community_name": "clsx",
-      "norm_label": "clsx"
+      "community_name": "class-variance-authority",
+      "norm_label": "class-variance-authority"
     },
     {
-      "label": "clsx",
+      "label": "class-variance-authority",
       "file_type": "concept",
       "source_file": "package.json",
-      "source_location": "L47",
+      "source_location": "L46",
       "_origin": "ast",
-      "id": "clsx",
+      "id": "class_variance_authority",
       "community": 65,
-      "community_name": "clsx",
-      "norm_label": "clsx"
+      "community_name": "class-variance-authority",
+      "norm_label": "class-variance-authority"
     },
     {
       "label": "@radix-ui/react-navigation-menu",
@@ -18606,7 +18606,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/pages/admin/AdminTugas.tsx",
-      "source_location": "L240",
+      "source_location": "L238",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_pages_admin_admintugas_admintugas",
@@ -18618,19 +18618,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/pages/admin/AdminTugas.tsx",
-      "source_location": "L272",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "src_pages_admin_admintugas_admintugas",
-      "target": "src_pages_tugas_taskslug"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/pages/admin/AdminTugas.tsx",
-      "source_location": "L38",
+      "source_location": "L36",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_pages_admin_admintugas_admintugas",
@@ -18642,7 +18630,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/pages/admin/AdminTugas.tsx",
-      "source_location": "L39",
+      "source_location": "L37",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_pages_admin_admintugas_admintugas",
@@ -18654,7 +18642,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/pages/admin/AdminTugas.tsx",
-      "source_location": "L41",
+      "source_location": "L39",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_pages_admin_admintugas_admintugas",
@@ -18665,7 +18653,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/pages/admin/AdminTugas.tsx",
-      "source_location": "L63",
+      "source_location": "L61",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_pages_admin_admintugas_admintugas",
@@ -18677,7 +18665,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/pages/admin/AdminTugas.tsx",
-      "source_location": "L64",
+      "source_location": "L62",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_pages_admin_admintugas_admintugas",
@@ -28642,18 +28630,6 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/pages/admin/AdminTugas.tsx",
-      "source_location": "L23",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "src_pages_admin_admintugas",
-      "target": "src_pages_tugas_taskslug",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/pages/admin/AdminTugas.tsx",
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
@@ -34803,18 +34779,6 @@
       "_origin": "ast",
       "source": "src_pages_admin_admintugas",
       "target": "src_components_admin_adminlayout",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/pages/admin/AdminTugas.tsx",
-      "source_location": "L23",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "src_pages_admin_admintugas",
-      "target": "src_pages_tugas",
       "confidence_score": 1.0
     },
     {
@@ -48294,7 +48258,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/pages/admin/AdminTugas.tsx",
-      "source_location": "L25",
+      "source_location": "L23",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_pages_admin_admintugas",
@@ -48305,7 +48269,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/pages/admin/AdminTugas.tsx",
-      "source_location": "L26",
+      "source_location": "L24",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_pages_admin_admintugas",
@@ -48316,7 +48280,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/pages/admin/AdminTugas.tsx",
-      "source_location": "L27",
+      "source_location": "L25",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_pages_admin_admintugas",
@@ -48327,7 +48291,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/pages/admin/AdminTugas.tsx",
-      "source_location": "L28",
+      "source_location": "L26",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_pages_admin_admintugas",
@@ -48338,7 +48302,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/pages/admin/AdminTugas.tsx",
-      "source_location": "L30",
+      "source_location": "L28",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_pages_admin_admintugas",
@@ -48349,7 +48313,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/pages/admin/AdminTugas.tsx",
-      "source_location": "L33",
+      "source_location": "L31",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_pages_admin_admintugas",
@@ -48360,7 +48324,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/pages/admin/AdminTugas.tsx",
-      "source_location": "L37",
+      "source_location": "L35",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_pages_admin_admintugas",

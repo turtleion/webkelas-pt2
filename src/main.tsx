@@ -22,6 +22,7 @@ const ArtikelDetail = lazy(() => import("./pages/ArtikelDetail.tsx"));
 const Tugas = lazy(() => import("./pages/Tugas.tsx"));
 const TugasDetail = lazy(() => import("./pages/TugasDetail.tsx"));
 const Agenda = lazy(() => import("./pages/Agenda.tsx"));
+const AdminTugas = lazy(() => import("./pages/admin/AdminTugas.tsx"));
 const Galeri = lazy(() => import("./pages/Galeri.tsx"));
 const AuthPage = lazy(() => import("./pages/Auth.tsx"));
 const Register = lazy(() => import("./pages/Register.tsx"));
@@ -263,6 +264,14 @@ createRoot(document.getElementById("root")!).render(
                 element={
                   <RequireAdmin>
                     <AdminDuty />
+                  </RequireAdmin>
+                }
+              />
+              <Route
+                path="/admin/tugas"
+                element={
+                  <RequireAdmin>
+                    <AdminTugas />
                   </RequireAdmin>
                 }
               />

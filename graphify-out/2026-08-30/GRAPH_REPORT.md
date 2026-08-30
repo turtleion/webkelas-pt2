@@ -1,11 +1,11 @@
 # Graph Report - arsip-kelas-digital-main  (2026-08-30)
 
 ## Corpus Check
-- 189 files · ~86,214 words
+- 189 files · ~86,180 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1164 nodes · 3132 edges · 127 communities (64 shown, 63 thin omitted)
+- 1164 nodes · 3129 edges · 127 communities (64 shown, 63 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 29 edges (avg confidence: 0.79)
 - Token cost: 0 input · 0 output
 
@@ -15,7 +15,7 @@
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
-- AdminGallery.tsx
+- AdminAgenda.tsx
 - useTranslation
 - sidebar.tsx
 - devDependencies
@@ -32,7 +32,7 @@
 - instrumentation.tsx
 - carousel.tsx
 - ConfirmDialog.tsx
-- use-mbg.ts
+- AdminMbg.tsx
 - form.tsx
 - chart.tsx
 - Implementation Plan — Personalization, Themes, Layouts & Localization
@@ -41,7 +41,7 @@
 - navigation-menu.tsx
 - pagination.tsx
 - command.tsx
-- AdminGallery
+- AdminInvitationCodes.tsx
 - Domain Docs
 - card.tsx
 - Issue tracker: Local Markdown
@@ -56,8 +56,8 @@
 - input-group.tsx
 - select.tsx
 - Graphify Rule
-- use-duty.ts
-- AdminUsers.tsx
+- AdminDuty.tsx
+- AdminGallery.tsx
 - @radix-ui/react-label
 - date-fns
 - dependencies
@@ -80,7 +80,7 @@
 - @radix-ui/react-context-menu
 - @radix-ui/react-dropdown-menu
 - @radix-ui/react-hover-card
-- clsx
+- class-variance-authority
 - @radix-ui/react-navigation-menu
 - @radix-ui/react-progress
 - @radix-ui/react-radio-group
@@ -166,13 +166,13 @@
 
 ## Communities (127 total, 63 thin omitted)
 
-### Community 0 - "AdminGallery.tsx"
-Cohesion: 0.15
-Nodes (24): AdminLayout(), ConfirmDialog(), DataTable(), DataTableProps, Dialog(), DialogContent(), DialogFooter(), DialogHeader() (+16 more)
+### Community 0 - "AdminAgenda.tsx"
+Cohesion: 0.16
+Nodes (15): DataTable(), DataTableProps, Dialog(), DialogContent(), DialogFooter(), DialogOverlay(), DialogTrigger(), Textarea() (+7 more)
 
 ### Community 1 - "useTranslation"
-Cohesion: 0.05
-Nodes (100): Orang(), Organisasi(), AdminLayoutProps, AdminSidebar(), AdminSidebarProps, HomeBento(), HomeClassic(), HomeExperimental() (+92 more)
+Cohesion: 0.07
+Nodes (84): Orang(), Organisasi(), AdminLayoutProps, AdminSidebar(), AdminSidebarProps, HomeBento(), HomeClassic(), HomeExperimental() (+76 more)
 
 ### Community 2 - "sidebar.tsx"
 Cohesion: 0.05
@@ -220,11 +220,11 @@ Nodes (16): LogoDropdown(), DropdownMenu(), DropdownMenuCheckboxItem(), Dropdown
 
 ### Community 13 - "db.ts"
 Cohesion: 0.06
-Nodes (65): HomeLayoutProps, HomeLayoutProps, HomeLayoutProps, HomeLayoutProps, HomeLayoutProps, HomeLayoutProps, FadeIn(), PhotoPlate() (+57 more)
+Nodes (69): HomeLayoutProps, HomeLayoutProps, HomeLayoutProps, HomeLayoutProps, HomeLayoutProps, HomeLayoutProps, FadeIn(), PhotoPlate() (+61 more)
 
 ### Community 14 - "instrumentation.tsx"
-Cohesion: 0.18
-Nodes (10): Collapsible(), CollapsibleContent(), CollapsibleTrigger(), DialogDescription(), ErrorBoundary, ErrorBoundaryState, GenericError, InstrumentationProvider() (+2 more)
+Cohesion: 0.19
+Nodes (9): Collapsible(), CollapsibleContent(), CollapsibleTrigger(), ErrorBoundary, ErrorBoundaryState, GenericError, InstrumentationProvider(), normalizeError() (+1 more)
 
 ### Community 15 - "carousel.tsx"
 Cohesion: 0.19
@@ -234,9 +234,9 @@ Nodes (13): Carousel(), CarouselApi, CarouselContent(), CarouselContext, Carouse
 Cohesion: 0.23
 Nodes (11): ConfirmDialogProps, AlertDialog(), AlertDialogAction(), AlertDialogCancel(), AlertDialogContent(), AlertDialogDescription(), AlertDialogFooter(), AlertDialogHeader() (+3 more)
 
-### Community 17 - "use-mbg.ts"
-Cohesion: 0.39
-Nodes (7): useMbgSchedule(), createMbgSchedule(), deleteMbgSchedule(), getMbgSchedule(), MbgScheduleRow, updateMbgSchedule(), AdminMbg()
+### Community 17 - "AdminMbg.tsx"
+Cohesion: 0.27
+Nodes (10): DialogTitle(), useMbgSchedule(), createMbgSchedule(), deleteMbgSchedule(), getMbgSchedule(), MbgScheduleRow, updateMbgSchedule(), AdminMbg (+2 more)
 
 ### Community 18 - "form.tsx"
 Cohesion: 0.23
@@ -267,12 +267,12 @@ Cohesion: 0.22
 Nodes (8): Pagination(), PaginationContent(), PaginationEllipsis(), PaginationItem(), PaginationLink(), PaginationLinkProps, PaginationNext(), PaginationPrevious()
 
 ### Community 25 - "command.tsx"
-Cohesion: 0.20
-Nodes (9): Command(), CommandDialog(), CommandEmpty(), CommandGroup(), CommandInput(), CommandItem(), CommandList(), CommandSeparator() (+1 more)
+Cohesion: 0.18
+Nodes (10): Command(), CommandDialog(), CommandEmpty(), CommandGroup(), CommandInput(), CommandItem(), CommandList(), CommandSeparator() (+2 more)
 
-### Community 26 - "AdminGallery"
-Cohesion: 1.00
-Nodes (3): uploadGalleryImage(), validateImageFile(), AdminGallery()
+### Community 26 - "AdminInvitationCodes.tsx"
+Cohesion: 0.30
+Nodes (10): createInvitationCode(), InvitationCodeRow, listInvitationCodes(), codePrefix(), generateInvitationCode(), hashCode(), AdminInvitationCodes, AdminInvitationCodes() (+2 more)
 
 ### Community 27 - "Domain Docs"
 Cohesion: 0.33
@@ -322,21 +322,21 @@ Nodes (8): InputGroup(), InputGroupAddon(), inputGroupAddonVariants, InputGroupB
 Cohesion: 0.18
 Nodes (10): Select(), SelectContent(), SelectGroup(), SelectItem(), SelectLabel(), SelectScrollDownButton(), SelectScrollUpButton(), SelectSeparator() (+2 more)
 
-### Community 41 - "use-duty.ts"
-Cohesion: 0.39
-Nodes (7): useDutySchedule(), createDutySchedule(), deleteDutySchedule(), DutyScheduleRow, getDutySchedule(), updateDutySchedule(), AdminDuty()
+### Community 41 - "AdminDuty.tsx"
+Cohesion: 0.27
+Nodes (10): DialogHeader(), useDutySchedule(), createDutySchedule(), deleteDutySchedule(), DutyScheduleRow, getDutySchedule(), updateDutySchedule(), AdminDuty (+2 more)
 
-### Community 42 - "AdminUsers.tsx"
-Cohesion: 0.47
-Nodes (5): getAllProfiles(), ProfileRow, updateProfileRole(), AdminUsers, AdminUsers()
+### Community 42 - "AdminGallery.tsx"
+Cohesion: 0.23
+Nodes (11): AdminLayout(), ConfirmDialog(), getAllProfiles(), ProfileRow, updateProfileRole(), uploadGalleryImage(), validateImageFile(), AdminGallery (+3 more)
 
 ### Community 45 - "dependencies"
 Cohesion: 0.13
-Nodes (15): class-variance-authority, cmdk, dependencies, class-variance-authority, cmdk, @radix-ui/react-dialog, @radix-ui/react-menubar, @radix-ui/react-popover (+7 more)
+Nodes (15): clsx, cmdk, dependencies, clsx, cmdk, @radix-ui/react-dialog, @radix-ui/react-menubar, @radix-ui/react-popover (+7 more)
 
 ### Community 46 - "AdminTugas.tsx"
-Cohesion: 0.33
-Nodes (5): AdminTugas, DAYS_EN, DAYS_ID, MONTHS_EN, MONTHS_ID
+Cohesion: 0.28
+Nodes (8): AdminTugas, AdminTugas(), DAYS_EN, DAYS_ID, getDaysInMonth(), getFirstDayOfMonth(), MONTHS_EN, MONTHS_ID
 
 ### Community 80 - "7.1 Built-in Theme Presets"
 Cohesion: 0.40
@@ -384,7 +384,7 @@ Nodes (3): 3.1 PostgreSQL Tables & Structures, 3.2 Authentication & Guest Mode (
 
 ### Community 119 - "main.tsx"
 Cohesion: 0.11
-Nodes (15): Toaster(), AdminMembers, AdminOrganization, Agenda, Anggota, Artikel, ArtikelDetail, AuthPage (+7 more)
+Nodes (14): Toaster(), AdminMembers, AdminOrganization, Anggota, Artikel, AuthPage, Galeri, Home (+6 more)
 
 ### Community 121 - "toggle-group.tsx"
 Cohesion: 0.43
@@ -406,17 +406,17 @@ Nodes (3): Popover(), PopoverContent(), PopoverTrigger()
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `cn()` connect `cn` to `AdminGallery.tsx`, `useTranslation`, `sidebar.tsx`, `PreferencesContext.tsx`, `ui/index.ts`, `drawer.tsx`, `dropdown-menu.tsx`, `db.ts`, `instrumentation.tsx`, `carousel.tsx`, `ConfirmDialog.tsx`, `form.tsx`, `chart.tsx`, `navigation-menu.tsx`, `pagination.tsx`, `command.tsx`, `card.tsx`, `button.tsx`, `input-group.tsx`, `select.tsx`, `toggle-group.tsx`, `alert.tsx`, `popover.tsx`?**
-  _High betweenness centrality (0.211) - this node is a cross-community bridge._
-- **Why does `useTranslation()` connect `useTranslation` to `AdminGallery.tsx`, `PreferencesContext.tsx`, `button.tsx`, `use-duty.ts`, `AdminUsers.tsx`, `db.ts`, `AdminTugas.tsx`, `use-mbg.ts`, `AdminGallery`?**
+- **Why does `cn()` connect `cn` to `AdminAgenda.tsx`, `useTranslation`, `sidebar.tsx`, `PreferencesContext.tsx`, `ui/index.ts`, `drawer.tsx`, `dropdown-menu.tsx`, `db.ts`, `carousel.tsx`, `ConfirmDialog.tsx`, `AdminMbg.tsx`, `form.tsx`, `chart.tsx`, `navigation-menu.tsx`, `pagination.tsx`, `command.tsx`, `card.tsx`, `button.tsx`, `input-group.tsx`, `select.tsx`, `AdminDuty.tsx`, `toggle-group.tsx`, `alert.tsx`, `popover.tsx`?**
+  _High betweenness centrality (0.212) - this node is a cross-community bridge._
+- **Why does `useTranslation()` connect `useTranslation` to `AdminAgenda.tsx`, `PreferencesContext.tsx`, `button.tsx`, `AdminDuty.tsx`, `AdminGallery.tsx`, `db.ts`, `AdminTugas.tsx`, `AdminMbg.tsx`, `AdminInvitationCodes.tsx`?**
   _High betweenness centrality (0.025) - this node is a cross-community bridge._
-- **Why does `Button()` connect `button.tsx` to `AdminGallery.tsx`, `useTranslation`, `sidebar.tsx`, `input-group.tsx`, `ui/index.ts`, `cn`, `dropdown-menu.tsx`, `instrumentation.tsx`, `carousel.tsx`, `AdminTugas.tsx`, `pagination.tsx`?**
+- **Why does `Button()` connect `button.tsx` to `AdminAgenda.tsx`, `useTranslation`, `sidebar.tsx`, `input-group.tsx`, `ui/index.ts`, `cn`, `AdminDuty.tsx`, `AdminGallery.tsx`, `dropdown-menu.tsx`, `instrumentation.tsx`, `carousel.tsx`, `AdminTugas.tsx`, `AdminMbg.tsx`, `pagination.tsx`, `AdminInvitationCodes.tsx`?**
   _High betweenness centrality (0.021) - this node is a cross-community bridge._
 - **Are the 3 inferred relationships involving `useAuth()` (e.g. with `signInAsGuest()` and `signInWithGoogle()`) actually correct?**
   _`useAuth()` has 3 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `ACCENTS`, `MONTHS`, `DAY_NAMES` to the rest of the system?**
   _309 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `AdminGallery.tsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.1495798319327731 - nodes in this community are weakly interconnected._
 - **Should `useTranslation` be split into smaller, more focused modules?**
-  _Cohesion score 0.054983467170524325 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06561679790026247 - nodes in this community are weakly interconnected._
+- **Should `sidebar.tsx` be split into smaller, more focused modules?**
+  _Cohesion score 0.054693877551020405 - nodes in this community are weakly interconnected._

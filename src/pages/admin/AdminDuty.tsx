@@ -16,19 +16,18 @@ import { useState } from "react";
 import { toast } from "sonner";
 
 const DAYS = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat"] as const;
-const todayDay = DAYS[new Date().getDay() === 0 ? 6 : new Date().getDay() - 1];
 
 export default function AdminDuty() {
   const { t } = useTranslation();
   usePageTitle(`${t.duty.heading} — Panel`);
   const { data, isLoading, error, refresh, create, update, remove } = useDutySchedule();
 
-  const [selectedDay, setSelectedDay] = useState<string>(todayDay);
+  const [selectedDay, setSelectedDay] = useState<string>("Senin");
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<DutyScheduleRow | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<DutyScheduleRow | null>(null);
 
-  const [day, setDay] = useState<string>(todayDay);
+  const [day, setDay] = useState<string>("Senin");
   const [members, setMembers] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
