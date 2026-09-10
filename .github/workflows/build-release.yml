@@ -2,70 +2,105 @@ name: Build & Release Prototype
 
 on:
   push:
-    branches:
-      - master
-  workflow_dispatch:
+    branches: [master]
+  workflow_dispatch: {}
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
+      # ------------------------------------------------------------------
+      # 1️⃣ Checkout repo
+      # ------------------------------------------------------------------
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Node & pnpm
+      # ------------------------------------------------------------------
+      # 2️⃣ Setup Node & pnpm
+      # ------------------------------------------------------------------
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'pnpm'
+          node-version: "20"
+          cache: "pnpm"
+
       - name: Install pnpm
         run: npm i -g pnpm
-      - name: Install dependencies
+
+      - name: Install project dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Set up Java 21
+      # ------------------------------------------------------------------
+      # 3️⃣ Setup Java 21 (required by Capacitor 8)
+      # ------------------------------------------------------------------
+      - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
-          java-version: '21'
-          cache: 'gradle'
+          distribution: temurin
+          java-version: "21"
+          cache: gradle
 
+      # ------------------------------------------------------------------
+      # 4️⃣ Install Android SDK (platform‑tools, build‑tools, platform 29‑36)
+      # ------------------------------------------------------------------
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
         with:
           api-level: 36
-          build-tools: '35.0.0'
-          ndk: '25.2.9519653'
+          build-tools: "35.0.0"
+          ndk: "25.2.9519653"
           cache: true
 
+      # ------------------------------------------------------------------
+      # 5️⃣ Capacitor sync (generates Android project files)
+      # ------------------------------------------------------------------
       - name: Sync Capacitor Android
         run: npx cap sync android
 
-      - name: Gradle clean & build debug APK
+      # ------------------------------------------------------------------
+      # 6️⃣ Gradle clean + assembleDebug (produces APK)
+      # ------------------------------------------------------------------
+      - name: Build debug APK
         working-directory: android
         run: |
           chmod +x gradlew
           ./gradlew clean assembleDebug --no-daemon
 
+      # ------------------------------------------------------------------
+      # 7️⃣ Gather build metadata (build number, commit hash, date)
+      # ------------------------------------------------------------------
       - name: Compute build metadata
         id: meta
         run: |
           echo "BUILD_NUMBER=$(git rev-list --count HEAD)" >> $GITHUB_OUTPUT
           echo "COMMIT_HASH=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-          echo "DATE=$(date +%Y%m%d)" >> $GITHUB_OUTPUT
+          echo "DATE=$(date +%Y%m%d)"               >> $GITHUB_OUTPUT
           echo "APK_PATH=android/app/build/outputs/apk/debug/app-debug.apk" >> $GITHUB_OUTPUT
 
+      # ------------------------------------------------------------------
+      # 8️⃣ Rename APK to the required pattern
+      # ------------------------------------------------------------------
       - name: Rename APK
+        env:
+          BUILD_NUMBER: ${{ steps.meta.outputs.BUILD_NUMBER }}
+          COMMIT_HASH:  ${{ steps.meta.outputs.COMMIT_HASH }}
+          DATE:         ${{ steps.meta.outputs.DATE }}
+          APK_PATH:     ${{ steps.meta.outputs.APK_PATH }}
         run: |
-          NEW_NAME="PROTOTYPE_TEST-${{ steps.meta.outputs.BUILD_NUMBER }}-${{ steps.meta.outputs.COMMIT_HASH }}(${{ steps.meta.outputs.DATE }}).apk"
-          mv ${{ steps.meta.outputs.APK_PATH }} ${{ steps.meta.outputs.APK_PATH%/* }}/$NEW_NAME
+          NEW_NAME="PROTOTYPE_TEST-${BUILD_NUMBER}-${COMMIT_HASH}(${DATE}).apk"
+          DIR=$(dirname "$APK_PATH")
+          mv "$APK_PATH" "$DIR/$NEW_NAME"
           echo "APK_NAME=$NEW_NAME" >> $GITHUB_ENV
+          echo "APK_FULL_PATH=$DIR/$NEW_NAME" >> $GITHUB_ENV
 
-      - name: Create draft release & upload APK
+      # ------------------------------------------------------------------
+      # 9️⃣ Create (or update) a draft release & upload the APK
+      # ------------------------------------------------------------------
+      - name: Draft release & upload APK
         uses: softprops/action-gh-release@v2
         with:
           tag_name: prototype-${{ steps.meta.outputs.COMMIT_HASH }}
           name: Prototype Build ${{ steps.meta.outputs.BUILD_NUMBER }}
           draft: true
           prerelease: true
-          files: android/app/build/outputs/apk/debug/${{ env.APK_NAME }}
+          files: ${{ env.APK_FULL_PATH }}
