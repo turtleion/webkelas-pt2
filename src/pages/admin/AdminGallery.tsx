@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { AdminLayout } from "@/components/admin/AdminLayout";
 import { PageHeader } from "@/components/site/PageHeader";
 import { ConfirmDialog } from "@/components/admin/ConfirmDialog";
@@ -43,6 +43,15 @@ export default function AdminGallery() {
   const [isDeleting, setIsDeleting] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  // Cleanup object URL saat dialog nutup / komponen unmount
+  useEffect(() => {
+    return () => {
+      if (previewUrl && previewUrl.startsWith("blob:")) {
+        URL.revokeObjectURL(previewUrl);
+      }
+    };
+  }, [previewUrl]);
+
   const openCreateModal = () => {
     setEditingItem(null);
     setTitle("");
@@ -78,8 +87,12 @@ export default function AdminGallery() {
     }
 
     setSelectedFile(file);
-    const objectUrl = URL.createObjectURL(file);
-    setPreviewUrl(objectUrl);
+    // Revoke URL lama kalau ada (preview dari edit item sebelumnya)
+    setPreviewUrl((prev) => {
+      if (prev && prev.startsWith("blob:")) URL.revokeObjectURL(prev);
+      const objectUrl = URL.createObjectURL(file);
+      return objectUrl;
+    });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {

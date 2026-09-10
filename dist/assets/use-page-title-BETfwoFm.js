@@ -1,0 +1,1 @@
+import{r as s}from"./react-vendor-Wc7WdVza.js";import{u as i}from"./use-organization-Bp28gAf8.js";function c(o){const{data:a}=i(),{kelas:t}=a;s.useEffect(()=>{const e=[t.nama,t.sekolah].filter(Boolean).join(" · ");document.title=e?`${o} — ${e}`:o},[o,t.nama,t.sekolah])}export{c as u};

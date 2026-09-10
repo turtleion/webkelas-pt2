@@ -1,0 +1,1 @@
+import{a1 as n}from"./index-BrUMRyNv.js";import"./framer-motion-Drt4dk_u.js";import"./react-vendor-Wc7WdVza.js";import"./radix-ui-CsxvpMgt.js";class p extends n{async show(e){}async hide(e){}}export{p as SplashScreenWeb};

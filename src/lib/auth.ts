@@ -1,4 +1,6 @@
 import type { User } from "@supabase/supabase-js";
+import { Capacitor } from "@capacitor/core";
+import { GoogleSignIn } from "@capawesome/capacitor-google-sign-in";
 import { supabase } from "./supabase";
 
 /**
@@ -55,9 +57,25 @@ function setGuestStored(value: boolean) {
 }
 
 export async function signInWithGoogle() {
-  // Bersihkan guest flag sebelum OAuth redirect. Setelah OAuth kembali,
-  // Supabase session ada dan guest flag harus tidak berlaku lagi.
+  // Bersihkan guest flag sebelum sign-in.
   setGuestStored(false);
+
+  // --- Native (Android/iOS): pakai GoogleSignIn plugin → signInWithIdToken ---
+  if (Capacitor.isNativePlatform()) {
+    const result = await GoogleSignIn.signIn();
+    const idToken = result.idToken;
+    if (!idToken) throw new Error("Google Sign-In failed: no ID token received");
+
+    const { error } = await supabase.auth.signInWithIdToken({
+      provider: "google",
+      token: idToken,
+      access_token: result.accessToken ?? undefined,
+    });
+    if (error) throw error;
+    return;
+  }
+
+  // --- Web fallback: OAuth redirect (tetap seperti sebelumnya) ---
   const { error } = await supabase.auth.signInWithOAuth({
     provider: "google",
     options: { redirectTo: window.location.origin },

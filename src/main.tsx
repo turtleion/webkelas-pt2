@@ -4,6 +4,8 @@ import { AuthStateRedirector } from "@/components/AuthStateRedirector";
 import { RequireAuth } from "@/components/RequireAuth";
 import { Toaster } from "@/components/ui/sonner";
 import { PreferencesProvider } from "@/context/PreferencesContext";
+import { Capacitor } from "@capacitor/core";
+import { initCapacitorNative, setupExternalLinkInterceptor } from "@/lib/capacitor";
 import "@vly-ai/integrations";
 import React, { lazy, StrictMode, Suspense, useEffect } from "react";
 import { createRoot } from "react-dom/client";
@@ -134,14 +136,18 @@ function ScrollToTop() {
 
 function RouteSyncer() {
   const location = useLocation();
+  const isEmbedded = window.parent !== window;
+
   useEffect(() => {
+    if (!isEmbedded) return; // Native/Capacitor & top-level web: tidak ada parent frame
     window.parent.postMessage(
       { type: "iframe-route-change", path: location.pathname },
       "*",
     );
-  }, [location.pathname]);
+  }, [location.pathname, isEmbedded]);
 
   useEffect(() => {
+    if (!isEmbedded) return;
     function handleMessage(event: MessageEvent) {
       if (event.data?.type === "navigate") {
         if (event.data.direction === "back") window.history.back();
@@ -150,9 +156,15 @@ function RouteSyncer() {
     }
     window.addEventListener("message", handleMessage);
     return () => window.removeEventListener("message", handleMessage);
-  }, []);
+  }, [isEmbedded]);
 
   return null;
+}
+
+// Native (Capacitor) init — no-op di browser biasa
+if (Capacitor.isNativePlatform()) {
+  initCapacitorNative();
+  setupExternalLinkInterceptor();
 }
 
 createRoot(document.getElementById("root")!).render(

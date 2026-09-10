@@ -22,6 +22,8 @@ import {
   type ColorPaletteTokens,
 } from "@/lib/theme-presets";
 import { loadFont } from "@/lib/font-loader";
+import { Capacitor } from "@capacitor/core";
+import { StatusBar, Style } from "@capacitor/status-bar";
 import { useAuth } from "@/hooks/use-auth";
 import {
   getOrganizationSetting,
@@ -317,6 +319,16 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
       availableFonts.find((f) => f.id === effectiveSettings.font) || BUILTIN_FONTS[0];
     loadFont(activeFont);
     applyTokensToDOM(effectiveSettings, activeFont);
+
+    // Sync status bar dengan warna background aktif — native only
+    if (Capacitor.isNativePlatform()) {
+      const isDark = effectiveSettings.mode === "dark";
+      const bg = isDark ? "#000000" : "#f4eddd";
+      void StatusBar.setBackgroundColor({ color: bg });
+      StatusBar.setStyle({
+        style: isDark ? Style.Dark : Style.Light,
+      });
+    }
   }, [effectiveSettings, availableFonts]);
 
   // Persistence handler

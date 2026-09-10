@@ -1,0 +1,13 @@
+[build]
+  # Build command for the web app (React+Vite)
+  command = "pnpm run build"
+  publish = "dist"
+  # Skip build when only Android / Capacitor files changed.
+  # The ignore script returns 0 (skip) if the diff contains ONLY those paths.
+  # If any other file changed, the build proceeds.
+  ignore = "git diff --quiet HEAD^ HEAD -- android/ capacitor.config.ts || git diff --quiet HEAD^ HEAD -- android/" 
+
+# Optional: specify environment versions
+[build.environment]
+  NODE_VERSION = "20"
+  JAVA_VERSION = "21"
