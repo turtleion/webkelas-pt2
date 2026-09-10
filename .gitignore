@@ -15,4 +15,6 @@ keys/*.keystore
 node_modules/
 
 # Optional lockfile (you may keep locally)
-#pnpm-lock.yaml
+pnpm-lock.yaml
+
+dist
