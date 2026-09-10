@@ -1,0 +1,18 @@
+# Android build artefacts
+android/app/build/
+android/.gradle/
+android/build/
+
+# Local keystores & credentials
+android/release.keystore
+android/keystore.properties
+keys/*.keystore
+
+# Environment files (contains Google client ID)
+.env.local
+
+# Node modules (re‑generated)
+node_modules/
+
+# Optional lockfile (you may keep locally)
+#pnpm-lock.yaml
