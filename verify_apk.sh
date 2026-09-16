@@ -1,0 +1,10 @@
+#!/bin/bash
+APK="android/app/build/outputs/apk/debug/app-debug.apk"
+echo "=== APK Info ==="
+ls -lh "$APK"
+echo ""
+echo "=== Signature Files ==="
+unzip -l "$APK" | grep -E "META-INF.*\.(RSA|SF|MF)"
+echo ""
+echo "=== Extract Certificate ==="
+unzip -p "$APK" META-INF/*.RSA 2>/dev/null | keytool -printcert 2>/dev/null | grep -A 3 "Certificate fingerprints" || echo "Certificate extraction method 1 failed"
