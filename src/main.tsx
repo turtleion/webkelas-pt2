@@ -1,6 +1,8 @@
 import { RequireAdmin } from "@/components/admin/RequireAdmin";
 import { RequireOwner } from "@/components/admin/RequireOwner";
 import { AuthStateRedirector } from "@/components/AuthStateRedirector";
+import { OAuthErrorBanner } from "@/components/OAuthErrorBanner";
+import { WelcomeModal } from "@/components/WelcomeModal";
 import { RequireAuth } from "@/components/RequireAuth";
 import { DailyNotificationBanner } from "@/components/site/DailyNotificationBanner";
 import { Toaster } from "@/components/ui/sonner";
@@ -39,6 +41,8 @@ const Pentest = lazy(() => import("./pages/Pentest.tsx"));
 const Settings = lazy(() => import("./pages/Settings.tsx"));
 const Dashboard = lazy(() => import("./pages/Dashboard.tsx"));
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
+const TermsOfService = lazy(() => import("./pages/agreements/TermsOfService.tsx"));
+const PrivacyPolicy = lazy(() => import("./pages/agreements/PrivacyPolicy.tsx"));
 
 // Lazy load admin route components
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard.tsx"));
@@ -62,6 +66,9 @@ const AdminNotification = lazy(
 );
 const AdminTestNotification = lazy(
   () => import("./pages/admin/AdminTestNotification.tsx"),
+);
+const AdminVerificationRequests = lazy(
+  () => import("./pages/admin/AdminVerificationRequests.tsx"),
 );
 
 // Simple loading fallback for route transitions
@@ -185,7 +192,9 @@ createRoot(document.getElementById("root")!).render(
           <RouteSyncer />
           <ScrollToTop />
           <AuthStateRedirector />
+          <OAuthErrorBanner />
           <DailyNotificationBanner />
+          <WelcomeModal />
           <Suspense fallback={<RouteLoading />}>
             <Routes>
               {/* Public Routes */}
@@ -253,6 +262,24 @@ createRoot(document.getElementById("root")!).render(
               <Route path="/auth" element={<AuthPage />} />
               <Route path="/register" element={<Register />} />
               <Route path="/pentest" element={<Pentest />} />
+
+              {/* Public agreements (no auth required) */}
+              <Route
+                path="/agreements/tos"
+                element={
+                  <Suspense fallback={<RouteLoading />}>
+                    <TermsOfService />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/agreements/privacy"
+                element={
+                  <Suspense fallback={<RouteLoading />}>
+                    <PrivacyPolicy />
+                  </Suspense>
+                }
+              />
               <Route
                 path="/dashboard"
                 element={
@@ -364,6 +391,14 @@ createRoot(document.getElementById("root")!).render(
                 element={
                   <RequireAdmin>
                     <AdminTestNotification />
+                  </RequireAdmin>
+                }
+              />
+              <Route
+                path="/admin/token-ask"
+                element={
+                  <RequireAdmin>
+                    <AdminVerificationRequests />
                   </RequireAdmin>
                 }
               />

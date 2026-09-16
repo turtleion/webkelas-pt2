@@ -262,8 +262,97 @@ export const id: TranslationSchema = {
   verificationBar: {
     title: "Akun Anda belum diaktivasi atau diverifikasi!",
     description:
-      "Selesaikan pendaftaran dengan kode undangan untuk membuka seluruh halaman anggota.",
+      "Selesaikan pendaftaran dengan kode undangan atau minta verifikasi ke admin.",
     cta: "Klik di sini untuk verifikasi",
+    notifyAdmin: "Minta Verifikasi",
+    pending: "Menunggu tinjauan admin…",
+  },
+  welcome: {
+    title: "SELAMAT DATANG",
+    badge: "Onboarding",
+    description:
+      "Akun Google Anda sudah masuk. Untuk mengakses seluruh fitur anggota, silakan terima persyaratan berikut dan minta verifikasi kepada admin.",
+    agreePrivacy:
+      "Saya menyetujui Kebijakan Privasi",
+    agreeTos:
+      "Saya menyetujui Ketentuan Layanan",
+    verificationHint:
+      "Setelah ini, minta verifikasi ke admin. Anda belum akan bisa membuka halaman anggota sampai admin menyetujui.",
+    notifyAdmin: "Minta Verifikasi",
+    notified: "Permintaan sudah dikirim!",
+    pending: "Menunggu tinjauan admin…",
+    error: "Gagal mengirim permintaan. Coba lagi.",
+    bothRequired: "Anda harus menyetujui Kebijakan Privasi dan Ketentuan Layanan.",
+    loading: "Mengirim…",
+    enterCode: "Masukkan Kode Invitasi",
+  },
+  agreements: {
+    pageTitleTos: "Ketentuan Layanan",
+    pageTitlePrivacy: "Kebijakan Privasi",
+    updatedLabel: "Terakhir diperbarui: {date}",
+    backHome: "Kembali ke beranda",
+    tosTitle: "Ketentuan Layanan",
+    tosIntro:
+      "Harap baca ketentuan ini dengan saksama sebelum menggunakan Arsip Kelas Digital. Dengan menggunakan aplikasi ini, Anda menyetujui seluruh ketentuan berikut.",
+    tosSection1Title: "1. Penerimaan Ketentuan",
+    tosSection1Body:
+      "Dengan mengakses atau menggunakan Arsip Kelas Digital, Anda menyetujui untuk terikat dengan ketentuan layanan ini. Jika Anda tidak menyetujui seluruh ketentuan, mohon untuk tidak menggunakan layanan ini.",
+    tosSection2Title: "2. Akun dan Autentikasi",
+    tosSection2Body:
+      "Layanan ini menggunakan akun Google untuk autentikasi. Anda bertanggung jawab menjaga keamanan akun Anda. Hanya akun Google resmi yang dapat digunakan untuk masuk ke dalam aplikasi.",
+    tosSection3Title: "3. Penggunaan yang Diperbolehkan",
+    tosSection3Body:
+      "Arsip Kelas Digital diperuntukkan bagi anggota kelas. Anda diperbolehkan menggunakan layanan ini untuk keperluan administrasi kelas, komunikasi antar anggota, dan akses informasi akademik yang tersedia.",
+    tosSection4Title: "4. Konten dan Tanggung Jawab",
+    tosSection4Body:
+      "Pengelola (admin/owner) berwenang mengelola seluruh data dan konten di dalam layanan. Pengguna memahami bahwa data di dalam layanan dimiliki oleh komunitas kelas, bukan oleh individu tertentu.",
+    tosSection5Title: "5. Perubahan Ketentuan",
+    tosSection5Body:
+      "Pengelola berhak mengubah ketentuan layanan ini sewaktu-waktu. Perubahan akan diberitahukan melalui aplikasi. Penggunaan layanan secara berkelanjutan setelah perubahan dianggap sebagai penerimaan atas ketentuan baru.",
+    privacyTitle: "Kebijakan Privasi",
+    privacyIntro:
+      "Kebijakan privasi ini menjelaskan bagaimana Arsip Kelas Digital mengumpulkan, menggunakan, dan melindungi informasi pengguna.",
+    privacySection1Title: "1. Data yang Dikumpulkan",
+    privacySection1Body:
+      "Kami mengumpulkan informasi berikut: (1) Informasi akun Google seperti nama, alamat email, dan foto profil yang diperlukan untuk autentikasi; (2) Data penggunaan aplikasi seperti halaman yang dikunjungi; (3) Token perangkat untuk pengiriman notifikasi push.",
+    privacySection2Title: "2. Penggunaan Data",
+    privacySection2Body:
+      "Data Anda digunakan untuk: (1) Autentikasi dan identifikasi Anda di dalam aplikasi; (2) Penyajian konten sesuai peran Anda (anggota/pengurus); (3) Pengiriman notifikasi harian; (4) Penyimpanan preferensi personalisasi Anda.",
+    privacySection3Title: "3. Penyimpanan dan Keamanan",
+    privacySection3Body:
+      "Data disimpan di infrastruktur cloud yang dioperasikan oleh Supabase. Akses data dikontrol menggunakan Row Level Security (RLS), yang memastikan hanya pengguna yang berwenang yang dapat mengakses data tertentu.",
+    privacySection4Title: "4. Berbagi Data",
+    privacySection4Body:
+      "Kami tidak menjual atau membagikan data pribadi Anda kepada pihak ketiga. Data hanya dapat diakses oleh pengelola kelas (admin/owner) untuk keperluan administrasi. Data dapat dibagikan hanya jika diwajibkan oleh hukum.",
+    privacySection5Title: "5. Hak Pengguna",
+    privacySection5Body:
+      "Anda berhak meminta penghapusan akun dan data pribadi Anda dari layanan dengan menghubungi pengelola. Penghapusan bersifat permanen dan tidak dapat dibatalkan.",
+  },
+  adminVerificationRequests: {
+    title: "Verifikasi Pengguna",
+    description:
+      "Daftar permintaan verifikasi dari pengguna baru yang belum memiliki kode undangan.",
+    empty: "Tidak ada permintaan verifikasi.",
+    pendingCount: "{count} menunggu",
+    requestDate: "Diminta",
+    statusPending: "Menunggu",
+    statusAccepted: "Diterima",
+    statusDeclined: "Ditolak",
+    acceptBtn: "Terima",
+    declineBtn: "Tolak",
+    acceptConfirmTitle: "Terima Permintaan",
+    acceptConfirmDesc:
+      "User {name} akan diverifikasi dan mendapatkan akses penuh sebagai anggota. Lanjutkan?",
+    declineConfirmTitle: "Tolak Permintaan",
+    declineConfirmDesc:
+      "Tolak permintaan verifikasi dari {name}? Permintaan ini tidak dapat dibatalkan.",
+    acceptedToast: "Permintaan {name} diterima.",
+    declinedToast: "Permintaan {name} ditolak.",
+    error: "Gagal memproses permintaan. Coba lagi.",
+    agreementsAccepted: "✓ Persyaratan diterima",
+    notAccepted: "✗ Belum menerima persyaratan",
+    userColumn: "Pengguna",
+    emailColumn: "Email",
   },
   dashboard: {
     pageTitle: "Ruang Anggota",
@@ -691,5 +780,8 @@ export const id: TranslationSchema = {
     academicYear: "Tahun ajaran {tahunAjaran} · Semester {semester}",
     description:
       "Ruang digital kelas X TKJ 1, {sekolah}. Pengumuman, jadwal, agenda, dan dokumentasi kelas dikumpulkan di satu tempat.",
+    legal: "Legal",
+    tos: "Ketentuan Layanan",
+    privacy: "Kebijakan Privasi",
   },
 };

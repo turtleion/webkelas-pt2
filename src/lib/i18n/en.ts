@@ -263,8 +263,95 @@ export const en: TranslationSchema = {
   verificationBar: {
     title: "Your account is not yet activated or verified!",
     description:
-      "Complete registration with an invitation code to unlock all member pages.",
+      "Complete registration with an invitation code or request verification from an admin.",
     cta: "Click here to verify",
+    notifyAdmin: "Request Verification",
+    pending: "Waiting for admin review…",
+  },
+  welcome: {
+    title: "WELCOME",
+    badge: "Onboarding",
+    description:
+      "Your Google account is now signed in. To access all member features, please accept the agreements below and request verification from an admin.",
+    agreePrivacy: "I agree to the Privacy Policy",
+    agreeTos: "I agree to the Terms of Service",
+    verificationHint:
+      "After this, request verification from an admin. You won't be able to access member pages until an admin approves your request.",
+    notifyAdmin: "Request Verification",
+    notified: "Request has been submitted!",
+    pending: "Waiting for admin review…",
+    error: "Failed to submit request. Please try again.",
+    bothRequired: "You must agree to both the Privacy Policy and Terms of Service.",
+    loading: "Submitting…",
+    enterCode: "Enter Invitation Code",
+  },
+  agreements: {
+    pageTitleTos: "Terms of Service",
+    pageTitlePrivacy: "Privacy Policy",
+    updatedLabel: "Last updated: {date}",
+    backHome: "Back to home",
+    tosTitle: "Terms of Service",
+    tosIntro:
+      "Please read these terms carefully before using Arsip Kelas Digital. By using this application, you agree to all the following terms.",
+    tosSection1Title: "1. Acceptance of Terms",
+    tosSection1Body:
+      "By accessing or using Arsip Kelas Digital, you agree to be bound by these terms of service. If you do not agree to all terms, please refrain from using this service.",
+    tosSection2Title: "2. Account and Authentication",
+    tosSection2Body:
+      "This service uses Google accounts for authentication. You are responsible for maintaining the security of your account. Only official Google accounts may be used to sign into the application.",
+    tosSection3Title: "3. Permitted Use",
+    tosSection3Body:
+      "Arsip Kelas Digital is intended for class members. You are permitted to use this service for class administration, member communication, and accessing available academic information.",
+    tosSection4Title: "4. Content and Responsibility",
+    tosSection4Body:
+      "The administrators (admin/owner) are authorized to manage all data and content within the service. Users understand that data within the service is owned by the class community, not by any individual.",
+    tosSection5Title: "5. Changes to Terms",
+    tosSection5Body:
+      "The administrators reserve the right to modify these terms of service at any time. Changes will be communicated through the application. Continued use of the service after changes constitutes acceptance of the new terms.",
+    privacyTitle: "Privacy Policy",
+    privacyIntro:
+      "This privacy policy explains how Arsip Kelas Digital collects, uses, and protects user information.",
+    privacySection1Title: "1. Data Collected",
+    privacySection1Body:
+      "We collect the following information: (1) Google account information such as name, email address, and profile photo required for authentication; (2) Application usage data such as pages visited; (3) Device tokens for push notification delivery.",
+    privacySection2Title: "2. Use of Data",
+    privacySection2Body:
+      "Your data is used for: (1) Authentication and identification within the application; (2) Presenting content according to your role (member/admin); (3) Sending daily notifications; (4) Storing your personal preferences.",
+    privacySection3Title: "3. Storage and Security",
+    privacySection3Body:
+      "Data is stored on cloud infrastructure operated by Supabase. Data access is controlled using Row Level Security (RLS), which ensures that only authorized users can access specific data.",
+    privacySection4Title: "4. Data Sharing",
+    privacySection4Body:
+      "We do not sell or share your personal data with third parties. Data can only be accessed by class administrators (admin/owner) for administrative purposes. Data will only be shared when required by law.",
+    privacySection5Title: "5. User Rights",
+    privacySection5Body:
+      "You have the right to request deletion of your account and personal data from the service by contacting the administrators. Deletion is permanent and cannot be undone.",
+  },
+  adminVerificationRequests: {
+    title: "User Verification",
+    description:
+      "List of verification requests from new users who do not have an invitation code.",
+    empty: "No verification requests.",
+    pendingCount: "{count} pending",
+    requestDate: "Requested",
+    statusPending: "Pending",
+    statusAccepted: "Accepted",
+    statusDeclined: "Declined",
+    acceptBtn: "Accept",
+    declineBtn: "Decline",
+    acceptConfirmTitle: "Accept Request",
+    acceptConfirmDesc:
+      "User {name} will be verified and gain full member access. Continue?",
+    declineConfirmTitle: "Decline Request",
+    declineConfirmDesc:
+      "Decline the verification request from {name}? This action cannot be undone.",
+    acceptedToast: "Request from {name} accepted.",
+    declinedToast: "Request from {name} declined.",
+    error: "Failed to process request. Please try again.",
+    agreementsAccepted: "✓ Agreements accepted",
+    notAccepted: "✗ Agreements not accepted",
+    userColumn: "User",
+    emailColumn: "Email",
   },
   dashboard: {
     pageTitle: "Member Space",
@@ -688,5 +775,8 @@ export const en: TranslationSchema = {
     academicYear: "Academic Year {tahunAjaran} · Semester {semester}",
     description:
       "X TKJ 1's digital class space, SMK Negeri 1 Cerme. Announcements, schedules, agendas, and class documentation, all gathered in one place.",
+    legal: "Legal",
+    tos: "Terms of Service",
+    privacy: "Privacy Policy",
   },
 };

@@ -18,6 +18,14 @@ export default function Auth() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const returnTo = resolveInternalRedirect(searchParams.get("returnTo"), "/");
+  const [error, setError] = useState<string | null>(() => {
+    // Baca error dari URL Supabase OAuth redirect
+    const desc = searchParams.get("error_description");
+    if (desc) return decodeURIComponent(desc);
+    const err = searchParams.get("error");
+    if (err) return `Login error: ${decodeURIComponent(err)}`;
+    return null;
+  });
   // Guest tidak boleh mengakses route-route ini — sembunyikan tombol
   // Guest kalau tujuan login adalah salah satunya. Untuk tujuan publik,
   // tombol tetap ditampilkan.
@@ -26,7 +34,6 @@ export default function Auth() {
     (p) => returnTo === p || returnTo.startsWith(p + "/"),
   );
   const [isLoadingAction, setIsLoadingAction] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
   const handleGoogle = async () => {
     setError(null);
