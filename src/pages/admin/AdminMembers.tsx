@@ -23,7 +23,8 @@ import { toast } from "sonner";
 export default function AdminMembers() {
   const { t } = useTranslation();
   usePageTitle(`${t.admin.members} — Panel`);
-  const { data, isLoading, error, refresh, create, update, remove } = useMembers();
+  const { data, isLoading, error, refresh, create, update, remove } =
+    useMembers();
 
   const [search, setSearch] = useState("");
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -40,7 +41,7 @@ export default function AdminMembers() {
     (m) =>
       m.name.toLowerCase().includes(search.toLowerCase()) ||
       String(m.absen_no).includes(search) ||
-      (m.position && m.position.toLowerCase().includes(search.toLowerCase()))
+      (m.position && m.position.toLowerCase().includes(search.toLowerCase())),
   );
 
   const openCreateModal = () => {
@@ -88,7 +89,9 @@ export default function AdminMembers() {
       setDialogOpen(false);
       await refresh();
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : t.admin.toastMemberSaveError);
+      toast.error(
+        err instanceof Error ? err.message : t.admin.toastMemberSaveError,
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -179,7 +182,9 @@ export default function AdminMembers() {
                         {m.position}
                       </span>
                     ) : (
-                      <span className="text-[12px] text-muted-foreground/60">—</span>
+                      <span className="text-[12px] text-muted-foreground/60">
+                        —
+                      </span>
                     )}
                   </td>
                   <td className="p-3 pr-4 text-right whitespace-nowrap">
@@ -221,7 +226,9 @@ export default function AdminMembers() {
           <form onSubmit={handleSubmit} className="mt-4 space-y-4">
             <div className="grid grid-cols-3 gap-3">
               <div>
-                <label className="kicker block text-[10px]">{t.admin.absenNo}</label>
+                <label className="kicker block text-[10px]">
+                  {t.admin.absenNo}
+                </label>
                 <Input
                   type="number"
                   min={1}
@@ -247,7 +254,9 @@ export default function AdminMembers() {
             </div>
 
             <div>
-              <label className="kicker block text-[10px]">{t.admin.studentName}</label>
+              <label className="kicker block text-[10px]">
+                {t.admin.studentName}
+              </label>
               <Input
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -271,7 +280,9 @@ export default function AdminMembers() {
                 disabled={isSubmitting}
                 className="bg-primary text-primary-foreground font-mono text-[11px] uppercase tracking-wider"
               >
-                {isSubmitting && <Loader2 className="size-3.5 animate-spin mr-1.5" />}
+                {isSubmitting && (
+                  <Loader2 className="size-3.5 animate-spin mr-1.5" />
+                )}
                 {t.common.save}
               </Button>
             </DialogFooter>

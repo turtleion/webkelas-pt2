@@ -18,3 +18,7 @@ node_modules/
 pnpm-lock.yaml
 
 dist
+
+# Android keystores (sensitive)
+android/keystores/*.keystore
+android/keystore.properties

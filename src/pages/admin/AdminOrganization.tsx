@@ -2,7 +2,10 @@ import { useState, useEffect } from "react";
 import { AdminLayout } from "@/components/admin/AdminLayout";
 import { PageHeader } from "@/components/site/PageHeader";
 import { usePageTitle } from "@/hooks/use-page-title";
-import { useOrganization, type OrganizationData } from "@/hooks/use-organization";
+import {
+  useOrganization,
+  type OrganizationData,
+} from "@/hooks/use-organization";
 import { useTranslation } from "@/hooks/use-translation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -67,7 +70,9 @@ export default function AdminOrganization() {
       await save(formData);
       toast.success(t.admin.toastOrgUpdated);
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : t.admin.toastOrgSaveError);
+      toast.error(
+        err instanceof Error ? err.message : t.admin.toastOrgSaveError,
+      );
     } finally {
       setIsSaving(false);
     }
@@ -100,7 +105,9 @@ export default function AdminOrganization() {
           </h2>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
             <div>
-              <label className="kicker block text-[10px]">{t.admin.orgLabelClassName}</label>
+              <label className="kicker block text-[10px]">
+                {t.admin.orgLabelClassName}
+              </label>
               <Input
                 value={formData.kelas.nama}
                 onChange={(e) => handleKelasChange("nama", e.target.value)}
@@ -109,7 +116,9 @@ export default function AdminOrganization() {
               />
             </div>
             <div>
-              <label className="kicker block text-[10px]">{t.admin.orgLabelSchoolName}</label>
+              <label className="kicker block text-[10px]">
+                {t.admin.orgLabelSchoolName}
+              </label>
               <Input
                 value={formData.kelas.sekolah}
                 onChange={(e) => handleKelasChange("sekolah", e.target.value)}
@@ -118,7 +127,9 @@ export default function AdminOrganization() {
               />
             </div>
             <div>
-              <label className="kicker block text-[10px]">{t.admin.orgLabelMajorFull}</label>
+              <label className="kicker block text-[10px]">
+                {t.admin.orgLabelMajorFull}
+              </label>
               <Input
                 value={formData.kelas.jurusan}
                 onChange={(e) => handleKelasChange("jurusan", e.target.value)}
@@ -127,25 +138,35 @@ export default function AdminOrganization() {
               />
             </div>
             <div>
-              <label className="kicker block text-[10px]">{t.admin.orgLabelMajorAbbr}</label>
+              <label className="kicker block text-[10px]">
+                {t.admin.orgLabelMajorAbbr}
+              </label>
               <Input
                 value={formData.kelas.jurusanSingkat}
-                onChange={(e) => handleKelasChange("jurusanSingkat", e.target.value)}
+                onChange={(e) =>
+                  handleKelasChange("jurusanSingkat", e.target.value)
+                }
                 className="mt-1 bg-background/50"
                 required
               />
             </div>
             <div>
-              <label className="kicker block text-[10px]">{t.admin.orgLabelAcademicYear}</label>
+              <label className="kicker block text-[10px]">
+                {t.admin.orgLabelAcademicYear}
+              </label>
               <Input
                 value={formData.kelas.tahunAjaran}
-                onChange={(e) => handleKelasChange("tahunAjaran", e.target.value)}
+                onChange={(e) =>
+                  handleKelasChange("tahunAjaran", e.target.value)
+                }
                 className="mt-1 bg-background/50"
                 required
               />
             </div>
             <div>
-              <label className="kicker block text-[10px]">{t.admin.orgLabelSemester}</label>
+              <label className="kicker block text-[10px]">
+                {t.admin.orgLabelSemester}
+              </label>
               <Input
                 value={formData.kelas.semester}
                 onChange={(e) => handleKelasChange("semester", e.target.value)}
@@ -154,7 +175,9 @@ export default function AdminOrganization() {
               />
             </div>
             <div>
-              <label className="kicker block text-[10px]">{t.admin.orgLabelRoom}</label>
+              <label className="kicker block text-[10px]">
+                {t.admin.orgLabelRoom}
+              </label>
               <Input
                 value={formData.kelas.ruang}
                 onChange={(e) => handleKelasChange("ruang", e.target.value)}
@@ -163,21 +186,29 @@ export default function AdminOrganization() {
               />
             </div>
             <div>
-              <label className="kicker block text-[10px]">{t.admin.orgLabelStudentCount}</label>
+              <label className="kicker block text-[10px]">
+                {t.admin.orgLabelStudentCount}
+              </label>
               <Input
                 type="number"
                 value={formData.kelas.jumlahSiswa}
-                onChange={(e) => handleKelasChange("jumlahSiswa", Number(e.target.value))}
+                onChange={(e) =>
+                  handleKelasChange("jumlahSiswa", Number(e.target.value))
+                }
                 className="mt-1 bg-background/50"
                 required
               />
             </div>
           </div>
           <div className="mt-4">
-            <label className="kicker block text-[10px]">{t.admin.orgLabelAddress}</label>
+            <label className="kicker block text-[10px]">
+              {t.admin.orgLabelAddress}
+            </label>
             <Textarea
               value={formData.kelas.alamatSekolah}
-              onChange={(e) => handleKelasChange("alamatSekolah", e.target.value)}
+              onChange={(e) =>
+                handleKelasChange("alamatSekolah", e.target.value)
+              }
               className="mt-1 bg-background/50 h-16 text-sm"
               required
             />
@@ -191,7 +222,9 @@ export default function AdminOrganization() {
           </h2>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
             <div>
-              <label className="kicker block text-[10px]">{t.admin.orgLabelHomeroomName}</label>
+              <label className="kicker block text-[10px]">
+                {t.admin.orgLabelHomeroomName}
+              </label>
               <Input
                 value={formData.kelas.waliKelas.nama}
                 onChange={(e) => handleWaliChange("nama", e.target.value)}
@@ -200,7 +233,9 @@ export default function AdminOrganization() {
               />
             </div>
             <div>
-              <label className="kicker block text-[10px]">{t.admin.orgLabelDegree}</label>
+              <label className="kicker block text-[10px]">
+                {t.admin.orgLabelDegree}
+              </label>
               <Input
                 value={formData.kelas.waliKelas.gelar}
                 onChange={(e) => handleWaliChange("gelar", e.target.value)}
@@ -209,7 +244,9 @@ export default function AdminOrganization() {
               />
             </div>
             <div className="sm:col-span-2">
-              <label className="kicker block text-[10px]">{t.admin.orgLabelRoleDesc}</label>
+              <label className="kicker block text-[10px]">
+                {t.admin.orgLabelRoleDesc}
+              </label>
               <Input
                 value={formData.kelas.waliKelas.peran}
                 onChange={(e) => handleWaliChange("peran", e.target.value)}
@@ -226,25 +263,35 @@ export default function AdminOrganization() {
           </h2>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
             <div>
-              <label className="kicker block text-[10px]">{t.admin.orgLabelInstagramUser}</label>
+              <label className="kicker block text-[10px]">
+                {t.admin.orgLabelInstagramUser}
+              </label>
               <Input
                 value={formData.kelas.kontak.instagram}
-                onChange={(e) => handleKontakChange("instagram", e.target.value)}
+                onChange={(e) =>
+                  handleKontakChange("instagram", e.target.value)
+                }
                 placeholder={t.admin.organizationPlaceholderInstagram}
                 className="mt-1 bg-background/50"
               />
             </div>
             <div>
-              <label className="kicker block text-[10px]">{t.admin.orgLabelInstagramLink}</label>
+              <label className="kicker block text-[10px]">
+                {t.admin.orgLabelInstagramLink}
+              </label>
               <Input
                 value={formData.kelas.kontak.instagramUrl}
-                onChange={(e) => handleKontakChange("instagramUrl", e.target.value)}
+                onChange={(e) =>
+                  handleKontakChange("instagramUrl", e.target.value)
+                }
                 placeholder={t.admin.organizationPlaceholderUrl}
                 className="mt-1 bg-background/50"
               />
             </div>
             <div>
-              <label className="kicker block text-[10px]">{t.admin.orgLabelEmail}</label>
+              <label className="kicker block text-[10px]">
+                {t.admin.orgLabelEmail}
+              </label>
               <Input
                 type="email"
                 value={formData.kelas.kontak.email}
@@ -253,7 +300,9 @@ export default function AdminOrganization() {
               />
             </div>
             <div>
-              <label className="kicker block text-[10px]">{t.admin.orgLabelWhatsApp}</label>
+              <label className="kicker block text-[10px]">
+                {t.admin.orgLabelWhatsApp}
+              </label>
               <Input
                 value={formData.kelas.kontak.whatsapp}
                 onChange={(e) => handleKontakChange("whatsapp", e.target.value)}

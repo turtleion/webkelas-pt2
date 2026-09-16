@@ -1,6 +1,12 @@
-import type { ArticleRow, AgendaRow, MemberRow, GalleryPhotoRow } from "@/lib/db";
+import type {
+  ArticleRow,
+  AgendaRow,
+  MemberRow,
+  GalleryPhotoRow,
+} from "@/lib/db";
 import type { KelasInfo } from "@/data/kelas";
 import { useTranslation } from "@/hooks/use-translation";
+import { HomeDownloadSection } from "@/components/home/HomeDownloadSection";
 import { Link } from "react-router";
 import { Leaf } from "lucide-react";
 
@@ -23,9 +29,10 @@ export function HomeNature({
 }: HomeLayoutProps) {
   const { t, interpolate } = useTranslation();
   const today = new Date().toISOString().slice(0, 10);
-  const upcoming = (agenda.filter((a) => a.date >= today).length > 0
-    ? agenda.filter((a) => a.date >= today)
-    : agenda.slice(-4)
+  const upcoming = (
+    agenda.filter((a) => a.date >= today).length > 0
+      ? agenda.filter((a) => a.date >= today)
+      : agenda.slice(-4)
   ).slice(0, 4);
 
   return (
@@ -38,7 +45,7 @@ export function HomeNature({
         <div className="absolute -left-32 top-32 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
         <div className="absolute right-0 top-1/3 h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
         <div className="absolute -right-20 bottom-20 h-80 w-80 rounded-full bg-accent/5 blur-3xl" />
-    </div>
+      </div>
 
       {/* ============ HERO ============ */}
       <section className="relative overflow-hidden border-b border-border/40">
@@ -47,18 +54,18 @@ export function HomeNature({
             <Leaf className="size-4" />
             <span className="kicker text-[10px] tracking-[0.3em]">
               {t.home.heroTag}
-          </span>
-        </div>
+            </span>
+          </div>
 
           <h1 className="mt-6 max-w-3xl font-display text-5xl font-medium leading-[1.05] tracking-tight md:text-7xl">
             {interpolate(t.home.heroSubtitle, {
               count: kelas.jumlahSiswa || anggota.length,
             })}
-        </h1>
+          </h1>
 
           <p className="mt-6 max-w-2xl font-display text-lg italic leading-relaxed text-muted-foreground md:text-xl">
             {interpolate(t.home.heroDescription, { kelas: kelas.nama })}
-        </p>
+          </p>
 
           {/* organic curved facts */}
           <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -75,13 +82,11 @@ export function HomeNature({
               >
                 <p className="font-mono text-[10px] uppercase tracking-widest text-accent">
                   {k}
-            </p>
-                <p className="mt-2 font-display text-base font-medium">
-                  {v}
-            </p>
-          </div>
+                </p>
+                <p className="mt-2 font-display text-base font-medium">{v}</p>
+              </div>
             ))}
-        </div>
+          </div>
 
           <div className="mt-10 flex flex-wrap gap-3">
             <Link
@@ -90,16 +95,16 @@ export function HomeNature({
             >
               {t.home.readArticles}
               <Leaf className="size-4" />
-          </Link>
+            </Link>
             <Link
               to="/anggota"
               className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-card/60 px-5 py-2.5 text-sm font-medium text-foreground transition-all hover:bg-card"
             >
               {t.home.viewMembers}
-          </Link>
+            </Link>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
       {/* ============ ARTIKEL — leaf-card list ============ */}
       <section className="relative border-b border-border/40">
@@ -108,8 +113,8 @@ export function HomeNature({
             <Leaf className="size-5 text-accent" />
             <h2 className="font-display text-3xl font-medium tracking-tight md:text-4xl">
               {t.home.latestArticles}
-          </h2>
-        </div>
+            </h2>
+          </div>
 
           <div className="mt-10 space-y-4">
             {articles.slice(0, 4).map((p, i) => (
@@ -126,23 +131,23 @@ export function HomeNature({
               >
                 <div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-accent/15 text-accent">
                   <Leaf className="size-5" />
-              </div>
+                </div>
                 <div className="flex-1">
                   <p className="font-mono text-[10px] uppercase tracking-widest text-accent">
                     {p.is_pinned ? t.articles.pinned : t.articles.heading}
-                </p>
+                  </p>
                   <p className="mt-1 font-display text-lg font-medium leading-snug transition-colors group-hover:text-primary md:text-xl">
                     {p.title}
-                </p>
+                  </p>
                   {p.description && (
                     <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
                       {p.description}
-                  </p>
+                    </p>
                   )}
-              </div>
-            </Link>
+                </div>
+              </Link>
             ))}
-        </div>
+          </div>
 
           <div className="mt-8 text-center">
             <Link
@@ -150,10 +155,10 @@ export function HomeNature({
               className="inline-flex items-center gap-1 text-sm text-primary hover:underline"
             >
               {t.home.allArticles} →
-          </Link>
+            </Link>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
       {/* ============ AGENDA — flowing timeline ============ */}
       <section className="relative border-b border-border/40">
@@ -162,8 +167,8 @@ export function HomeNature({
             <Leaf className="size-5 text-accent" />
             <h2 className="font-display text-3xl font-medium tracking-tight md:text-4xl">
               {t.home.upcomingAgenda}
-          </h2>
-        </div>
+            </h2>
+          </div>
 
           <div className="relative mt-10">
             {/* vertical vine */}
@@ -182,7 +187,7 @@ export function HomeNature({
                   {/* leaf bullet */}
                   <span className="absolute left-0 top-2 flex size-8 items-center justify-center rounded-full bg-background text-accent md:left-1/2 md:-translate-x-1/2">
                     <Leaf className="size-4" />
-                 </span>
+                  </span>
 
                   <div className="flex-1 md:w-1/2">
                     <div
@@ -196,23 +201,23 @@ export function HomeNature({
                     >
                       <p className="font-mono text-[10px] uppercase tracking-widest text-accent">
                         {a.category} — {a.date}
-                    </p>
+                      </p>
                       <p className="mt-2 font-display text-lg font-medium leading-snug md:text-xl">
                         {a.title}
-                    </p>
+                      </p>
                       {a.description && (
                         <p className="mt-3 line-clamp-2 text-sm text-muted-foreground">
                           {a.description}
-                      </p>
+                        </p>
                       )}
+                    </div>
                   </div>
-                </div>
-              </li>
+                </li>
               ))}
-          </ul>
+            </ul>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
       {/* ============ MEMBERS ============ */}
       <section className="relative border-b border-border/40">
@@ -221,8 +226,8 @@ export function HomeNature({
             <Leaf className="size-5 text-accent" />
             <h2 className="font-display text-3xl font-medium tracking-tight md:text-4xl">
               {interpolate(t.home.allMembers, { count: anggota.length })}
-          </h2>
-        </div>
+            </h2>
+          </div>
 
           <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5">
             {anggota.slice(0, 15).map((m, i) => (
@@ -237,12 +242,16 @@ export function HomeNature({
                 }}
               >
                 <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-accent/15 font-display text-xs font-medium text-accent">
-                  {m.name.split(" ").map((w) => w[0]).slice(0, 2).join("")}
-              </span>
+                  {m.name
+                    .split(" ")
+                    .map((w) => w[0])
+                    .slice(0, 2)
+                    .join("")}
+                </span>
                 <span className="line-clamp-1 text-xs">{m.name}</span>
-            </div>
+              </div>
             ))}
-        </div>
+          </div>
 
           <div className="mt-8 flex items-center justify-center" aria-hidden>
             <div className="flex items-center gap-1.5">
@@ -281,8 +290,8 @@ export function HomeNature({
               <Leaf className="size-5 text-accent" />
               <h2 className="font-display text-3xl font-medium tracking-tight md:text-4xl">
                 {t.home.galleryShowcase}
-            </h2>
-          </div>
+              </h2>
+            </div>
 
             <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4">
               {galeri.slice(0, 4).map((g, i) => (
@@ -304,13 +313,14 @@ export function HomeNature({
                   />
                   <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-4 opacity-0 transition-opacity group-hover:opacity-100">
                     <p className="text-xs font-medium text-white">{g.title}</p>
-                </div>
-              </a>
+                  </div>
+                </a>
               ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
       )}
-  </div>
+      <HomeDownloadSection />
+    </div>
   );
 }

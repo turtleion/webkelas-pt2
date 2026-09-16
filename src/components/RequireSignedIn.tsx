@@ -25,16 +25,13 @@ export function RequireSignedIn({ children }: { children: ReactNode }) {
     return (
       <main className="flex min-h-screen items-center justify-center">
         <Loader2 className="size-6 animate-spin text-muted-foreground" />
-     </main>
+      </main>
     );
   }
 
   if (!isAuthenticated || user?.guest) {
     return (
-      <Navigate
-        to={`/auth?returnTo=${encodeURIComponent(returnTo)}`}
-        replace
-      />
+      <Navigate to={`/auth?returnTo=${encodeURIComponent(returnTo)}`} replace />
     );
   }
 

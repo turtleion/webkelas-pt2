@@ -31,10 +31,7 @@ export function RequireVerified({ children }: { children: ReactNode }) {
 
   if (!isAuthenticated || user?.guest) {
     return (
-      <Navigate
-        to={`/auth?returnTo=${encodeURIComponent(returnTo)}`}
-        replace
-      />
+      <Navigate to={`/auth?returnTo=${encodeURIComponent(returnTo)}`} replace />
     );
   }
 

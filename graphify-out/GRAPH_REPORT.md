@@ -1,67 +1,71 @@
-# Graph Report - arsip-kelas-digital-main  (2026-08-30)
+# Graph Report - arsip-kelas-digital-main (2026-09-11)
 
 ## Corpus Check
-- 189 files · ~86,214 words
+
+- 206 files · ~88,972 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1164 nodes · 3132 edges · 127 communities (64 shown, 63 thin omitted)
+
+- 1149 nodes · 3230 edges · 142 communities (67 shown, 75 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 29 edges (avg confidence: 0.79)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `9367cbcf`
+
+- Built from commit: `1e30ea8d`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
-- AdminGallery.tsx
+
+- AdminDuty.tsx
 - useTranslation
 - sidebar.tsx
 - devDependencies
-- PreferencesContext.tsx
+- utils.ts
 - compilerOptions
 - ui/index.ts
 - cn
 - compilerOptions
-- use-auth.ts
+- useAuth
 - components.json
 - drawer.tsx
 - dropdown-menu.tsx
 - db.ts
-- instrumentation.tsx
+- AdminArticles.tsx
 - carousel.tsx
 - ConfirmDialog.tsx
 - use-mbg.ts
 - form.tsx
 - chart.tsx
-- Implementation Plan — Personalization, Themes, Layouts & Localization
-- useAuth
+- AdminInvitationCodes.tsx
+- resolveInternalRedirect
 - vly-toolbar-readonly.tsx
 - navigation-menu.tsx
-- pagination.tsx
-- command.tsx
-- AdminGallery
+- kelas.ts
+- context-menu.tsx
+- field.tsx
 - Domain Docs
-- card.tsx
+- item.tsx
 - Issue tracker: Local Markdown
 - tsconfig.json
-- 20. Testing Strategy
-- Implementation Plan — Invitation-Based Registration & Verified Access
+- storage.ts
+- AdminSchedule.tsx
 - Tugas.jsx
 - framer-motion
 - Agent skills
-- 8.1 Color Scheme Definitions
-- button.tsx
+- table.tsx
+- Dashboard.tsx
 - input-group.tsx
 - select.tsx
 - Graphify Rule
-- use-duty.ts
-- AdminUsers.tsx
+- AdminNotification.tsx
+- org.junit.Test
 - @radix-ui/react-label
 - date-fns
 - dependencies
-- AdminTugas.tsx
+- breadcrumb.tsx
 - hono
 - @hookform/resolvers
 - input-otp
@@ -72,16 +76,17 @@
 - @radix-ui/react-select
 - embla-carousel-react
 - @radix-ui/react-accordion
-- @radix-ui/react-alert-dialog
+- empty.tsx
 - @radix-ui/react-aspect-ratio
 - @radix-ui/react-avatar
 - @radix-ui/react-checkbox
 - @radix-ui/react-collapsible
-- @radix-ui/react-context-menu
+- button-group.tsx
 - @radix-ui/react-dropdown-menu
 - @radix-ui/react-hover-card
 - clsx
-- @radix-ui/react-navigation-menu
+- use-gallery.ts
+- accordion.tsx
 - @radix-ui/react-progress
 - @radix-ui/react-radio-group
 - vaul
@@ -93,7 +98,7 @@
 - @radix-ui/react-tooltip
 - react
 - react-day-picker
-- 7.1 Built-in Theme Presets
+- input-otp.tsx
 - react-hook-form
 - react-intersection-observer
 - react-dom
@@ -105,32 +110,40 @@
 - @tailwindcss/vite
 - @vly-ai/integrations
 - zod
+- tabs.tsx
 - Public Logo Asset
 - vly-integrations.ts
 - global.d.ts
 - Index HTML Entrypoint
-- VLY Integrations Specification
+- gradlew
 - Convex Auth Architecture
 - Convex Backend Guidelines
 - Frontend & UI Conventions
 - Project Overview & Tech Stack
-- 10. Home Layout System
-- 9. Font System
-- 11. Language/i18n System
-- 13. Settings Page (`/settings`)
-- 14. Admin Global Theme Page (`/admin/theme`)
-- 15. Database Strategy (Stability & Backward Compatibility)
-- 17. Runtime Settings Resolution & Custom Transition Engine
-- 18. File-Level Changes
-- 1. Current Architecture
-- 3. Existing Supabase/User Architecture
+- hover-card.tsx
+- resizable.tsx
+- MainActivity.java
+- badge.tsx
+- kbd.tsx
+- @capacitor/browser
+- capacitor.config.ts
+- @capacitor/core
+- @capacitor/keyboard
+- @capacitor/splash-screen
+- @capacitor/status-bar
+- @capawesome/capacitor-google-sign-in
 - main.tsx
+- class-variance-authority
 - toggle-group.tsx
+- cmdk
+- @radix-ui/react-dialog
 - alert.tsx
+- @radix-ui/react-menubar
 - popover.tsx
+- @radix-ui/react-separator
+- @zumer/snapdom
 - RootErrorBoundary
 - ToolbarErrorBoundary
-- dompurify
 - @radix-ui/react-scroll-area
 - @radix-ui/react-switch
 - @radix-ui/react-toggle
@@ -138,285 +151,333 @@
 - recharts
 
 ## God Nodes (most connected - your core abstractions)
+
 1. `cn()` - 302 edges
-2. `useTranslation()` - 101 edges
-3. `usePageTitle()` - 58 edges
+2. `useTranslation()` - 109 edges
+3. `usePageTitle()` - 62 edges
 4. `useAuth()` - 41 edges
-5. `useOrganization()` - 38 edges
+5. `useOrganization()` - 36 edges
 6. `pecahTanggal()` - 31 edges
-7. `Button()` - 25 edges
-8. `Implementation Plan — Personalization, Themes, Layouts & Localization` - 23 edges
+7. `Button()` - 26 edges
+8. `PageHeader()` - 23 edges
 9. `usePreferences()` - 22 edges
 10. `compilerOptions` - 22 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `Public Logo Asset` --semantically_similar_to--> `Source Logo Asset`  [INFERRED] [semantically similar]
+
+- `Public Logo Asset` --semantically_similar_to--> `Source Logo Asset` [INFERRED] [semantically similar]
   public/logo.svg → src/assets/logo.svg
-- `Orang()` --calls--> `inisialNama()`  [EXTRACTED]
-  Organisasi-BACKUP.tsx → src/lib/tanggal.ts
-- `Orang()` --calls--> `padNomor()`  [EXTRACTED]
-  Organisasi-BACKUP.tsx → src/lib/tanggal.ts
-- `Organisasi()` --calls--> `useOrganization()`  [EXTRACTED]
-  Organisasi-BACKUP.tsx → src/hooks/use-organization.ts
-- `Organisasi()` --calls--> `usePageTitle()`  [EXTRACTED]
-  Organisasi-BACKUP.tsx → src/hooks/use-page-title.ts
+- `LogoDropdown()` --calls--> `useAuth()` [EXTRACTED]
+  src/components/LogoDropdown.tsx → src/hooks/use-auth.ts
+- `AlertDialogOverlay()` --calls--> `cn()` [EXTRACTED]
+  src/components/ui/alert-dialog.tsx → src/lib/utils.ts
+- `ButtonGroupText()` --calls--> `cn()` [EXTRACTED]
+  src/components/ui/button-group.tsx → src/lib/utils.ts
+- `ButtonGroupSeparator()` --calls--> `cn()` [EXTRACTED]
+  src/components/ui/button-group.tsx → src/lib/utils.ts
 
 ## Import Cycles
+
 - None detected.
 
-## Communities (127 total, 63 thin omitted)
+## Communities (142 total, 75 thin omitted)
 
-### Community 0 - "AdminGallery.tsx"
-Cohesion: 0.15
-Nodes (24): AdminLayout(), ConfirmDialog(), DataTable(), DataTableProps, Dialog(), DialogContent(), DialogFooter(), DialogHeader() (+16 more)
+### Community 0 - "AdminDuty.tsx"
+
+Cohesion: 0.20
+Nodes (12): DataTable(), DataTableProps, Input(), useDutySchedule(), createDutySchedule(), deleteDutySchedule(), getDutySchedule(), updateDutySchedule() (+4 more)
 
 ### Community 1 - "useTranslation"
-Cohesion: 0.05
-Nodes (100): Orang(), Organisasi(), AdminLayoutProps, AdminSidebar(), AdminSidebarProps, HomeBento(), HomeClassic(), HomeExperimental() (+92 more)
+
+Cohesion: 0.06
+Nodes (95): AdminLayout(), AdminLayoutProps, AdminSidebar(), AdminSidebarProps, ConfirmDialog(), HomeBento(), HomeLayoutProps, HomeClassic() (+87 more)
 
 ### Community 2 - "sidebar.tsx"
-Cohesion: 0.05
-Nodes (42): Input(), Sheet(), SheetContent(), SheetDescription(), SheetFooter(), SheetHeader(), SheetOverlay(), SheetTitle() (+34 more)
+
+Cohesion: 0.06
+Nodes (41): Sheet(), SheetContent(), SheetDescription(), SheetFooter(), SheetHeader(), SheetOverlay(), SheetTitle(), SheetTrigger() (+33 more)
 
 ### Community 3 - "devDependencies"
-Cohesion: 0.05
-Nodes (41): eslint, eslint-config-prettier, @eslint/js, eslint-plugin-react-hooks, eslint-plugin-react-refresh, globals, devDependencies, eslint (+33 more)
 
-### Community 4 - "PreferencesContext.tsx"
-Cohesion: 0.10
-Nodes (42): applyTokensToDOM(), DEFAULT_GLOBAL, EffectiveSettings, getLocalPreferences(), GlobalThemeDefaults, PreferencesContext, PreferencesContextValue, PreferencesProvider() (+34 more)
+Cohesion: 0.04
+Nodes (45): eslint, eslint-config-prettier, @eslint/js, eslint-plugin-react-hooks, eslint-plugin-react-refresh, globals, devDependencies, eslint (+37 more)
+
+### Community 4 - "utils.ts"
+
+Cohesion: 0.08
+Nodes (52): BackgroundSelector(), ColorSchemePicker(), getLuminance(), hasContrastWarning(), FontSelector(), LanguageSelector(), LayoutSelector(), LivePreview() (+44 more)
 
 ### Community 5 - "compilerOptions"
+
 Cohesion: 0.07
 Nodes (28): DOM, DOM.Iterable, ES2020, src, vly-toolbar-readonly.tsx, compilerOptions, allowImportingTsExtensions, baseUrl (+20 more)
 
 ### Community 6 - "ui/index.ts"
-Cohesion: 0.05
-Nodes (58): Accordion(), AccordionContent(), AccordionItem(), AccordionTrigger(), AspectRatio(), Badge(), badgeVariants, Breadcrumb() (+50 more)
+
+Cohesion: 0.19
+Nodes (17): AspectRatio(), Menubar(), MenubarCheckboxItem(), MenubarContent(), MenubarGroup(), MenubarItem(), MenubarLabel(), MenubarMenu() (+9 more)
 
 ### Community 7 - "cn"
-Cohesion: 0.05
-Nodes (60): Avatar(), AvatarFallback(), AvatarImage(), ButtonGroup(), ButtonGroupSeparator(), ButtonGroupText(), buttonGroupVariants, Empty() (+52 more)
+
+Cohesion: 0.12
+Nodes (20): Avatar(), AvatarFallback(), AvatarImage(), Card(), CardAction(), CardContent(), CardDescription(), CardFooter() (+12 more)
 
 ### Community 8 - "compilerOptions"
+
 Cohesion: 0.10
 Nodes (20): ES2023, vite.config.ts, compilerOptions, allowImportingTsExtensions, erasableSyntaxOnly, lib, module, moduleDetection (+12 more)
 
-### Community 9 - "use-auth.ts"
-Cohesion: 0.20
-Nodes (18): UseAuthReturn, AuthChangeHandler, AuthState, AuthUser, getAuthState(), getUser(), GUEST_ID, isGuestStored() (+10 more)
+### Community 9 - "useAuth"
+
+Cohesion: 0.14
+Nodes (24): RequireAdmin(), RequireOwner(), RequireAuth(), RequireSignedIn(), RequireVerified(), useAuth(), UseAuthReturn, AuthChangeHandler (+16 more)
 
 ### Community 10 - "components.json"
+
 Cohesion: 0.11
 Nodes (17): aliases, components, hooks, lib, ui, utils, iconLibrary, rsc (+9 more)
 
 ### Community 11 - "drawer.tsx"
+
 Cohesion: 0.18
 Nodes (10): Drawer(), DrawerClose(), DrawerContent(), DrawerDescription(), DrawerFooter(), DrawerHeader(), DrawerOverlay(), DrawerPortal() (+2 more)
 
 ### Community 12 - "dropdown-menu.tsx"
+
 Cohesion: 0.14
 Nodes (16): LogoDropdown(), DropdownMenu(), DropdownMenuCheckboxItem(), DropdownMenuContent(), DropdownMenuGroup(), DropdownMenuItem(), DropdownMenuLabel(), DropdownMenuPortal() (+8 more)
 
 ### Community 13 - "db.ts"
-Cohesion: 0.06
-Nodes (65): HomeLayoutProps, HomeLayoutProps, HomeLayoutProps, HomeLayoutProps, HomeLayoutProps, HomeLayoutProps, FadeIn(), PhotoPlate() (+57 more)
 
-### Community 14 - "instrumentation.tsx"
-Cohesion: 0.18
-Nodes (10): Collapsible(), CollapsibleContent(), CollapsibleTrigger(), DialogDescription(), ErrorBoundary, ErrorBoundaryState, GenericError, InstrumentationProvider() (+2 more)
+Cohesion: 0.17
+Nodes (22): Anggota, useAgenda(), useArticles(), useMembers(), createAgendaItem(), createArticle(), createMember(), deleteAgendaItem() (+14 more)
+
+### Community 14 - "AdminArticles.tsx"
+
+Cohesion: 0.08
+Nodes (29): Collapsible(), CollapsibleContent(), CollapsibleTrigger(), Command(), CommandDialog(), CommandEmpty(), CommandGroup(), CommandInput() (+21 more)
 
 ### Community 15 - "carousel.tsx"
+
 Cohesion: 0.19
 Nodes (13): Carousel(), CarouselApi, CarouselContent(), CarouselContext, CarouselContextProps, CarouselItem(), CarouselNext(), CarouselOptions (+5 more)
 
 ### Community 16 - "ConfirmDialog.tsx"
-Cohesion: 0.23
-Nodes (11): ConfirmDialogProps, AlertDialog(), AlertDialogAction(), AlertDialogCancel(), AlertDialogContent(), AlertDialogDescription(), AlertDialogFooter(), AlertDialogHeader() (+3 more)
+
+Cohesion: 0.11
+Nodes (22): ConfirmDialogProps, AlertDialog(), AlertDialogAction(), AlertDialogCancel(), AlertDialogContent(), AlertDialogDescription(), AlertDialogFooter(), AlertDialogHeader() (+14 more)
 
 ### Community 17 - "use-mbg.ts"
-Cohesion: 0.39
-Nodes (7): useMbgSchedule(), createMbgSchedule(), deleteMbgSchedule(), getMbgSchedule(), MbgScheduleRow, updateMbgSchedule(), AdminMbg()
+
+Cohesion: 0.48
+Nodes (6): useMbgSchedule(), createMbgSchedule(), deleteMbgSchedule(), getMbgSchedule(), updateMbgSchedule(), AdminMbg()
 
 ### Community 18 - "form.tsx"
+
 Cohesion: 0.23
 Nodes (11): FormControl(), FormDescription(), FormField(), FormFieldContext, FormFieldContextValue, FormItem(), FormItemContext, FormItemContextValue (+3 more)
 
 ### Community 19 - "chart.tsx"
+
 Cohesion: 0.25
 Nodes (10): ChartConfig, ChartContainer(), ChartContext, ChartContextProps, ChartLegendContent(), ChartStyle(), ChartTooltipContent(), getPayloadConfigFromPayload() (+2 more)
 
-### Community 20 - "Implementation Plan — Personalization, Themes, Layouts & Localization"
-Cohesion: 0.15
-Nodes (12): 12. Global Admin Defaults vs User Preferences, 16.1 RLS Matrix for Personalization, 16. Authentication & RLS, 19. Implementation Order, 21. Migration & Backward Compatibility, 22. Risks & Decisions Required, 2.1 CSS Tokens (`src/index.css`), 2. Existing Theme/Design System (+4 more)
+### Community 20 - "AdminInvitationCodes.tsx"
 
-### Community 21 - "useAuth"
-Cohesion: 0.23
-Nodes (7): RequireAdmin(), RequireOwner(), AuthStateRedirector(), RequireAuth(), RequireSignedIn(), RequireVerified(), useAuth()
+Cohesion: 0.20
+Nodes (16): Button(), createInvitationCode(), InvitationCodeRow, listInvitationCodes(), redeemInvitationCode(), codePrefix(), displayNormalized(), generateInvitationCode() (+8 more)
+
+### Community 21 - "resolveInternalRedirect"
+
+Cohesion: 0.60
+Nodes (3): AuthStateRedirector(), VerificationWarningBar(), resolveInternalRedirect()
 
 ### Community 22 - "vly-toolbar-readonly.tsx"
+
 Cohesion: 0.29
 Nodes (9): ComponentInfo, FiberNode, formatReactComponentHierarchy(), getDomSelector(), getReactComponentHierarchy(), getSelectedElementAnnotation(), getSelectedElementsPrompt(), injectHighlightStyle() (+1 more)
 
 ### Community 23 - "navigation-menu.tsx"
+
 Cohesion: 0.22
 Nodes (9): NavigationMenu(), NavigationMenuContent(), NavigationMenuIndicator(), NavigationMenuItem(), NavigationMenuLink(), NavigationMenuList(), NavigationMenuTrigger(), navigationMenuTriggerStyle (+1 more)
 
-### Community 24 - "pagination.tsx"
-Cohesion: 0.22
-Nodes (8): Pagination(), PaginationContent(), PaginationEllipsis(), PaginationItem(), PaginationLink(), PaginationLinkProps, PaginationNext(), PaginationPrevious()
+### Community 24 - "kelas.ts"
 
-### Community 25 - "command.tsx"
-Cohesion: 0.20
-Nodes (9): Command(), CommandDialog(), CommandEmpty(), CommandGroup(), CommandInput(), CommandItem(), CommandList(), CommandSeparator() (+1 more)
+Cohesion: 0.13
+Nodes (16): agenda, AgendaItem, galeri, GaleriItem, jadwal, JadwalHari, JadwalRow, kelas (+8 more)
 
-### Community 26 - "AdminGallery"
-Cohesion: 1.00
-Nodes (3): uploadGalleryImage(), validateImageFile(), AdminGallery()
+### Community 25 - "context-menu.tsx"
+
+Cohesion: 0.12
+Nodes (15): ContextMenu(), ContextMenuCheckboxItem(), ContextMenuContent(), ContextMenuGroup(), ContextMenuItem(), ContextMenuLabel(), ContextMenuPortal(), ContextMenuRadioGroup() (+7 more)
+
+### Community 26 - "field.tsx"
+
+Cohesion: 0.16
+Nodes (12): Field(), FieldContent(), FieldDescription(), FieldError(), FieldGroup(), FieldLabel(), FieldLegend(), FieldSeparator() (+4 more)
 
 ### Community 27 - "Domain Docs"
+
 Cohesion: 0.33
 Nodes (5): Before exploring, read, Domain Docs, File structure, Flag ADR conflicts, Use glossary's vocabulary
 
-### Community 28 - "card.tsx"
-Cohesion: 0.25
-Nodes (7): Card(), CardAction(), CardContent(), CardDescription(), CardFooter(), CardHeader(), CardTitle()
+### Community 28 - "item.tsx"
+
+Cohesion: 0.18
+Nodes (12): Item(), ItemActions(), ItemContent(), ItemDescription(), ItemFooter(), ItemGroup(), ItemHeader(), ItemMedia() (+4 more)
 
 ### Community 29 - "Issue tracker: Local Markdown"
+
 Cohesion: 0.40
 Nodes (4): Conventions, Issue tracker: Local Markdown, When skill says "fetch relevant ticket", When skill says "publish issue tracker"
 
 ### Community 30 - "tsconfig.json"
+
 Cohesion: 0.33
 Nodes (5): compilerOptions, baseUrl, paths, files, references
 
-### Community 31 - "20. Testing Strategy"
-Cohesion: 0.25
-Nodes (8): 20.1 Theme & Mode Switching, 20.2 Custom Theme Detection, 20.3 Color Customization, 20.4 Dynamic Font Loading, 20.5 Home Layouts, 20.6 Localization (i18n), 20.7 Persistence & Role Separation, 20. Testing Strategy
+### Community 31 - "storage.ts"
 
-### Community 32 - "Implementation Plan — Invitation-Based Registration & Verified Access"
-Cohesion: 0.07
-Nodes (28): 10. Routing / Redirect Logic, 11. Supabase / RLS Changes, 12. Files Modify / Create, 13. Implementation Order, 14. Manual Actions (cannot be done by Claude Code), 1. Current Architecture Analysis, 2. Proposed Authentication State Model, 3. Route Protection Changes (+20 more)
+Cohesion: 0.20
+Nodes (8): GOOGLE_WEB_CLIENT_ID, initCapacitorNative(), setupExternalLinkInterceptor(), ALLOWED_MIME_TYPES, GALLERY_BUCKET, MAX_FILE_SIZE, UploadResult, supabase
+
+### Community 32 - "AdminSchedule.tsx"
+
+Cohesion: 0.29
+Nodes (9): useSchedule(), createSchedule(), deleteSchedule(), getSchedules(), updateSchedule(), AdminSchedule, AdminSchedule(), DAY_I18N_KEYS (+1 more)
 
 ### Community 33 - "Tugas.jsx"
+
 Cohesion: 0.40
 Nodes (5): ACCENTS, DAY_NAMES, formatKey(), MONTHS, TugasPage()
 
 ### Community 35 - "Agent skills"
+
 Cohesion: 0.40
 Nodes (4): Agent skills, Domain docs, graphify, Issue tracker
 
-### Community 36 - "8.1 Color Scheme Definitions"
-Cohesion: 0.33
-Nodes (6): 1. Paper Scheme, 2. Glass Scheme, 3. Cartoon Scheme (Light Only), 8.1 Color Scheme Definitions, 8.2 Custom Color Scheme (User-Created), 8. Color Scheme System
+### Community 36 - "table.tsx"
 
-### Community 37 - "button.tsx"
-Cohesion: 0.39
-Nodes (6): Button(), buttonVariants, Calendar(), CalendarDayButton(), Dashboard, Dashboard()
+Cohesion: 0.22
+Nodes (8): Table(), TableBody(), TableCaption(), TableCell(), TableFooter(), TableHead(), TableHeader(), TableRow()
 
 ### Community 38 - "input-group.tsx"
+
 Cohesion: 0.28
 Nodes (8): InputGroup(), InputGroupAddon(), inputGroupAddonVariants, InputGroupButton(), inputGroupButtonVariants, InputGroupInput(), InputGroupText(), InputGroupTextarea()
 
 ### Community 39 - "select.tsx"
+
 Cohesion: 0.18
 Nodes (10): Select(), SelectContent(), SelectGroup(), SelectItem(), SelectLabel(), SelectScrollDownButton(), SelectScrollUpButton(), SelectSeparator() (+2 more)
 
-### Community 41 - "use-duty.ts"
-Cohesion: 0.39
-Nodes (7): useDutySchedule(), createDutySchedule(), deleteDutySchedule(), DutyScheduleRow, getDutySchedule(), updateDutySchedule(), AdminDuty()
+### Community 41 - "AdminNotification.tsx"
 
-### Community 42 - "AdminUsers.tsx"
-Cohesion: 0.47
-Nodes (5): getAllProfiles(), ProfileRow, updateProfileRole(), AdminUsers, AdminUsers()
+Cohesion: 0.18
+Nodes (22): DailyNotificationBanner(), DailyBundle, useDailyOverview(), addDaysISO(), dayNameOf(), HARI_SEKOLAH, labelTanggal(), nextSchoolDay() (+14 more)
+
+### Community 42 - "org.junit.Test"
+
+Cohesion: 0.36
+Nodes (4): ExampleInstrumentedTest, ExampleUnitTest, org.junit.runner.RunWith, org.junit.Test
 
 ### Community 45 - "dependencies"
-Cohesion: 0.13
-Nodes (15): class-variance-authority, cmdk, dependencies, class-variance-authority, cmdk, @radix-ui/react-dialog, @radix-ui/react-menubar, @radix-ui/react-popover (+7 more)
 
-### Community 46 - "AdminTugas.tsx"
-Cohesion: 0.33
-Nodes (5): AdminTugas, DAYS_EN, DAYS_ID, MONTHS_EN, MONTHS_ID
+Cohesion: 0.12
+Nodes (17): @capacitor/android, @capacitor/app, @capacitor/cli, dompurify, dependencies, @capacitor/android, @capacitor/app, @capacitor/cli (+9 more)
 
-### Community 80 - "7.1 Built-in Theme Presets"
+### Community 46 - "breadcrumb.tsx"
+
+Cohesion: 0.25
+Nodes (7): Breadcrumb(), BreadcrumbEllipsis(), BreadcrumbItem(), BreadcrumbLink(), BreadcrumbList(), BreadcrumbPage(), BreadcrumbSeparator()
+
+### Community 57 - "empty.tsx"
+
+Cohesion: 0.29
+Nodes (7): Empty(), EmptyContent(), EmptyDescription(), EmptyHeader(), EmptyMedia(), emptyMediaVariants, EmptyTitle()
+
+### Community 62 - "button-group.tsx"
+
+Cohesion: 0.38
+Nodes (5): ButtonGroup(), ButtonGroupSeparator(), ButtonGroupText(), buttonGroupVariants, Separator()
+
+### Community 66 - "use-gallery.ts"
+
+Cohesion: 0.52
+Nodes (6): useGallery(), createGalleryPhoto(), deleteGalleryPhoto(), getGalleryPhotos(), updateGalleryPhoto(), deleteGalleryImage()
+
+### Community 67 - "accordion.tsx"
+
 Cohesion: 0.40
-Nodes (5): 7.1 Built-in Theme Presets, 7. Theme System, Theme 1: Paper (Default), Theme 2: Glass, Theme 3: Cartoon
+Nodes (4): Accordion(), AccordionContent(), AccordionItem(), AccordionTrigger()
 
-### Community 108 - "10. Home Layout System"
+### Community 80 - "input-otp.tsx"
+
+Cohesion: 0.40
+Nodes (4): InputOTP(), InputOTPGroup(), InputOTPSeparator(), InputOTPSlot()
+
+### Community 92 - "tabs.tsx"
+
+Cohesion: 0.40
+Nodes (4): Tabs(), TabsContent(), TabsList(), TabsTrigger()
+
+### Community 98 - "gradlew"
+
+Cohesion: 0.83
+Nodes (3): gradlew script, die(), warn()
+
+### Community 104 - "hover-card.tsx"
+
 Cohesion: 0.50
-Nodes (4): 10. Home Layout System, Layout 1: Editorial Classic (`HomeClassic.tsx`), Layout 2: Modern Bento Grid (`HomeBento.tsx`), Layout 3: Archive Showcase (`HomeShowcase.tsx`)
+Nodes (3): HoverCard(), HoverCardContent(), HoverCardTrigger()
 
-### Community 109 - "9. Font System"
+### Community 108 - "resizable.tsx"
+
 Cohesion: 0.50
-Nodes (4): 9.1 Built-in User Fonts, 9.2 Dynamic Font Loading Engine (`src/lib/font-loader.ts`), 9.3 Admin Font Management, 9. Font System
-
-### Community 110 - "11. Language/i18n System"
-Cohesion: 0.67
-Nodes (3): 11.1 Dictionary Architecture, 11.2 Translation Hook (`useTranslation()`), 11. Language/i18n System
-
-### Community 111 - "13. Settings Page (`/settings`)"
-Cohesion: 0.67
-Nodes (3): 13.1 Route & Layout, 13.2 Sections, 13. Settings Page (`/settings`)
-
-### Community 112 - "14. Admin Global Theme Page (`/admin/theme`)"
-Cohesion: 0.67
-Nodes (3): 14.1 Route & Access, 14.2 Functional Capabilities, 14. Admin Global Theme Page (`/admin/theme`)
-
-### Community 113 - "15. Database Strategy (Stability & Backward Compatibility)"
-Cohesion: 0.67
-Nodes (3): 15.1 Zero-Destructive Database Guarantee, 15.2 Schema Migration SQL (`supabase/migrations/202608180001_personalization.sql`), 15. Database Strategy (Stability & Backward Compatibility)
-
-### Community 114 - "17. Runtime Settings Resolution & Custom Transition Engine"
-Cohesion: 0.67
-Nodes (3): 17.1 Determination Algorithm, 17.2 DOM & Token Injection (`applyThemeToDOM()`), 17. Runtime Settings Resolution & Custom Transition Engine
-
-### Community 115 - "18. File-Level Changes"
-Cohesion: 0.67
-Nodes (3): 18.1 Files to Create, 18.2 Files to Modify, 18. File-Level Changes
-
-### Community 116 - "1. Current Architecture"
-Cohesion: 0.67
-Nodes (3): 1.1 Tech Stack, 1.2 Current Routing Architecture, 1. Current Architecture
-
-### Community 117 - "3. Existing Supabase/User Architecture"
-Cohesion: 0.67
-Nodes (3): 3.1 PostgreSQL Tables & Structures, 3.2 Authentication & Guest Mode (`src/lib/auth.ts` + `src/hooks/use-auth.ts`), 3. Existing Supabase/User Architecture
+Nodes (3): ResizableHandle(), ResizablePanel(), ResizablePanelGroup()
 
 ### Community 119 - "main.tsx"
-Cohesion: 0.11
-Nodes (15): Toaster(), AdminMembers, AdminOrganization, Agenda, Anggota, Artikel, ArtikelDetail, AuthPage (+7 more)
+
+Cohesion: 0.07
+Nodes (24): Toaster(), AdminAgenda, AdminGallery, AdminMbg, AdminMembers, AdminNotification, AdminOrganization, AdminTheme (+16 more)
 
 ### Community 121 - "toggle-group.tsx"
+
 Cohesion: 0.43
 Nodes (5): ToggleGroup(), ToggleGroupContext, ToggleGroupItem(), Toggle(), toggleVariants
 
 ### Community 124 - "alert.tsx"
+
 Cohesion: 0.50
 Nodes (4): Alert(), AlertDescription(), AlertTitle(), alertVariants
 
 ### Community 126 - "popover.tsx"
+
 Cohesion: 0.40
 Nodes (3): Popover(), PopoverContent(), PopoverTrigger()
 
 ## Knowledge Gaps
-- **309 isolated node(s):** `ACCENTS`, `MONTHS`, `DAY_NAMES`, `$schema`, `style` (+304 more)
+
+- **255 isolated node(s):** `ACCENTS`, `MONTHS`, `DAY_NAMES`, `config`, `$schema` (+250 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **63 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **75 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
+
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `cn()` connect `cn` to `AdminGallery.tsx`, `useTranslation`, `sidebar.tsx`, `PreferencesContext.tsx`, `ui/index.ts`, `drawer.tsx`, `dropdown-menu.tsx`, `db.ts`, `instrumentation.tsx`, `carousel.tsx`, `ConfirmDialog.tsx`, `form.tsx`, `chart.tsx`, `navigation-menu.tsx`, `pagination.tsx`, `command.tsx`, `card.tsx`, `button.tsx`, `input-group.tsx`, `select.tsx`, `toggle-group.tsx`, `alert.tsx`, `popover.tsx`?**
-  _High betweenness centrality (0.211) - this node is a cross-community bridge._
-- **Why does `useTranslation()` connect `useTranslation` to `AdminGallery.tsx`, `PreferencesContext.tsx`, `button.tsx`, `use-duty.ts`, `AdminUsers.tsx`, `db.ts`, `AdminTugas.tsx`, `use-mbg.ts`, `AdminGallery`?**
-  _High betweenness centrality (0.025) - this node is a cross-community bridge._
-- **Why does `Button()` connect `button.tsx` to `AdminGallery.tsx`, `useTranslation`, `sidebar.tsx`, `input-group.tsx`, `ui/index.ts`, `cn`, `dropdown-menu.tsx`, `instrumentation.tsx`, `carousel.tsx`, `AdminTugas.tsx`, `pagination.tsx`?**
-  _High betweenness centrality (0.021) - this node is a cross-community bridge._
+- **Why does `cn()` connect `cn` to `AdminDuty.tsx`, `useTranslation`, `sidebar.tsx`, `utils.ts`, `ui/index.ts`, `drawer.tsx`, `dropdown-menu.tsx`, `AdminArticles.tsx`, `carousel.tsx`, `ConfirmDialog.tsx`, `form.tsx`, `chart.tsx`, `AdminInvitationCodes.tsx`, `navigation-menu.tsx`, `context-menu.tsx`, `field.tsx`, `item.tsx`, `table.tsx`, `input-group.tsx`, `select.tsx`, `breadcrumb.tsx`, `empty.tsx`, `button-group.tsx`, `accordion.tsx`, `input-otp.tsx`, `tabs.tsx`, `hover-card.tsx`, `resizable.tsx`, `badge.tsx`, `kbd.tsx`, `toggle-group.tsx`, `alert.tsx`, `popover.tsx`?**
+  _High betweenness centrality (0.195) - this node is a cross-community bridge._
+- **Why does `dependencies` connect `dependencies` to `@zumer/snapdom`, `devDependencies`, `@radix-ui/react-scroll-area`, `@radix-ui/react-switch`, `@radix-ui/react-toggle`, `react-resizable-panels`, `recharts`, `framer-motion`, `@radix-ui/react-label`, `date-fns`, `hono`, `@hookform/resolvers`, `input-otp`, `@jridgewell/trace-mapping`, `lucide-react`, `next-themes`, `@radix-ui/react-select`, `embla-carousel-react`, `@radix-ui/react-accordion`, `@radix-ui/react-aspect-ratio`, `@radix-ui/react-avatar`, `@radix-ui/react-checkbox`, `@radix-ui/react-collapsible`, `@radix-ui/react-dropdown-menu`, `@radix-ui/react-hover-card`, `clsx`, `@radix-ui/react-progress`, `@radix-ui/react-radio-group`, `vaul`, `marked`, `@radix-ui/react-slider`, `@radix-ui/react-slot`, `@radix-ui/react-tabs`, `@radix-ui/react-toggle-group`, `@radix-ui/react-tooltip`, `react`, `react-day-picker`, `react-hook-form`, `react-intersection-observer`, `react-dom`, `react-router`, `@supabase/supabase-js`, `sonner`, `tailwind-merge`, `tailwindcss`, `@tailwindcss/vite`, `@vly-ai/integrations`, `zod`, `@capacitor/browser`, `@capacitor/core`, `@capacitor/keyboard`, `@capacitor/splash-screen`, `@capacitor/status-bar`, `@capawesome/capacitor-google-sign-in`, `class-variance-authority`, `cmdk`, `@radix-ui/react-dialog`, `@radix-ui/react-menubar`, `@radix-ui/react-separator`?**
+  _High betweenness centrality (0.031) - this node is a cross-community bridge._
+- **Why does `useTranslation()` connect `useTranslation` to `AdminDuty.tsx`, `AdminSchedule.tsx`, `utils.ts`, `Dashboard.tsx`, `AdminNotification.tsx`, `db.ts`, `AdminArticles.tsx`, `use-mbg.ts`, `AdminInvitationCodes.tsx`, `resolveInternalRedirect`?**
+  _High betweenness centrality (0.027) - this node is a cross-community bridge._
 - **Are the 3 inferred relationships involving `useAuth()` (e.g. with `signInAsGuest()` and `signInWithGoogle()`) actually correct?**
   _`useAuth()` has 3 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `ACCENTS`, `MONTHS`, `DAY_NAMES` to the rest of the system?**
-  _309 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `AdminGallery.tsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.1495798319327731 - nodes in this community are weakly interconnected._
+  _255 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `useTranslation` be split into smaller, more focused modules?**
-  _Cohesion score 0.054983467170524325 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06432923783837778 - nodes in this community are weakly interconnected._
+- **Should `sidebar.tsx` be split into smaller, more focused modules?**
+  _Cohesion score 0.05673758865248227 - nodes in this community are weakly interconnected._

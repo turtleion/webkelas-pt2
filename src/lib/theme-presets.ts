@@ -5,7 +5,13 @@ export type ThemePresetKey =
   | "dreamy"
   | "minimalistic"
   | "custom";
-export type HomeLayoutKey = "classic" | "bento" | "showcase" | "modern" | "experimental" | "nature";
+export type HomeLayoutKey =
+  | "classic"
+  | "bento"
+  | "showcase"
+  | "modern"
+  | "experimental"
+  | "nature";
 export type ModeKey = "light" | "dark";
 
 export interface ColorPaletteTokens {
@@ -116,7 +122,8 @@ export const BUILTIN_FONTS: FontDefinition[] = [
     fontDisplay: '"Space Grotesk", ui-sans-serif, system-ui, sans-serif',
     fontSans: '"Space Grotesk", ui-sans-serif, system-ui, sans-serif',
     fontMono: '"Space Mono", ui-monospace, monospace',
-    googleFont: "Space+Grotesk:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700",
+    googleFont:
+      "Space+Grotesk:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700",
     isBuiltIn: true,
   },
   {
@@ -166,8 +173,10 @@ export const COLOR_SCHEMES: Record<string, PresetColorScheme> = {
       glassBorder: "rgba(46, 70, 49, 0.18)",
       glassBorderBright: "rgba(46, 70, 49, 0.34)",
       glassHighlight: "rgba(255, 255, 255, 0.7)",
-      glassShadow: "0 1px 1px rgba(41, 36, 29, 0.05), 0 10px 30px -18px rgba(41, 36, 29, 0.28)",
-      glassShadowHover: "0 2px 2px rgba(41, 36, 29, 0.05), 0 18px 44px -20px rgba(41, 36, 29, 0.38)",
+      glassShadow:
+        "0 1px 1px rgba(41, 36, 29, 0.05), 0 10px 30px -18px rgba(41, 36, 29, 0.28)",
+      glassShadowHover:
+        "0 2px 2px rgba(41, 36, 29, 0.05), 0 18px 44px -20px rgba(41, 36, 29, 0.38)",
     },
     dark: {
       radius: "0.25rem",
@@ -198,8 +207,10 @@ export const COLOR_SCHEMES: Record<string, PresetColorScheme> = {
       glassBorder: "rgba(157, 179, 146, 0.16)",
       glassBorderBright: "rgba(157, 179, 146, 0.32)",
       glassHighlight: "rgba(231, 220, 193, 0.09)",
-      glassShadow: "0 1px 1px rgba(0, 0, 0, 0.28), 0 12px 32px -18px rgba(0, 0, 0, 0.55)",
-      glassShadowHover: "0 2px 2px rgba(0, 0, 0, 0.28), 0 20px 48px -20px rgba(0, 0, 0, 0.65)",
+      glassShadow:
+        "0 1px 1px rgba(0, 0, 0, 0.28), 0 12px 32px -18px rgba(0, 0, 0, 0.55)",
+      glassShadowHover:
+        "0 2px 2px rgba(0, 0, 0, 0.28), 0 20px 48px -20px rgba(0, 0, 0, 0.65)",
     },
   },
   glass: {
@@ -493,7 +504,8 @@ export const BACKGROUND_PRESETS: BackgroundPreset[] = [
         radial-gradient(ellipse at 30% 20%, rgba(196,168,120,0.15), transparent 60%),
         linear-gradient(#f0e7d2, #f0e7d2)
       `,
-      thumbnail: "linear-gradient(180deg, #f0e7d2 0%, #e5d9bf 50%, #f0e7d2 100%)",
+      thumbnail:
+        "linear-gradient(180deg, #f0e7d2 0%, #e5d9bf 50%, #f0e7d2 100%)",
     },
     dark: {
       css: `
@@ -501,7 +513,8 @@ export const BACKGROUND_PRESETS: BackgroundPreset[] = [
         radial-gradient(ellipse at 30% 20%, rgba(157,179,146,0.06), transparent 60%),
         linear-gradient(#16130e, #16130e)
       `,
-      thumbnail: "linear-gradient(180deg, #211c14 0%, #17140e 50%, #12100b 100%)",
+      thumbnail:
+        "linear-gradient(180deg, #211c14 0%, #17140e 50%, #12100b 100%)",
     },
   },
   {
@@ -535,7 +548,8 @@ export const BACKGROUND_PRESETS: BackgroundPreset[] = [
         radial-gradient(circle at 50% 0%, rgba(255,255,255,0.45), transparent 60%),
         linear-gradient(#f5edd8, #f5edd8)
       `,
-      thumbnail: "radial-gradient(ellipse at 50% 50%, #f5edd8 40%, #e2d5b8 100%)",
+      thumbnail:
+        "radial-gradient(ellipse at 50% 50%, #f5edd8 40%, #e2d5b8 100%)",
     },
     dark: {
       css: `
@@ -543,7 +557,8 @@ export const BACKGROUND_PRESETS: BackgroundPreset[] = [
         radial-gradient(circle at 50% 0%, rgba(201,106,65,0.05), transparent 60%),
         linear-gradient(#19150f, #19150f)
       `,
-      thumbnail: "radial-gradient(ellipse at 50% 50%, #241d14 40%, #0d0a07 100%)",
+      thumbnail:
+        "radial-gradient(ellipse at 50% 50%, #241d14 40%, #0d0a07 100%)",
     },
   },
   {
@@ -579,7 +594,8 @@ export const BACKGROUND_PRESETS: BackgroundPreset[] = [
         radial-gradient(ellipse at 80% 20%, rgba(14,165,233,0.1), transparent 40%),
         linear-gradient(135deg, #f0f4f8 0%, #e2ecf3 50%, #f0f4f8 100%)
       `,
-      thumbnail: "linear-gradient(135deg, #f0f4f8 0%, #dce8f2 50%, #f0f4f8 100%)",
+      thumbnail:
+        "linear-gradient(135deg, #f0f4f8 0%, #dce8f2 50%, #f0f4f8 100%)",
     },
     dark: {
       css: `
@@ -601,7 +617,8 @@ export const BACKGROUND_PRESETS: BackgroundPreset[] = [
         radial-gradient(ellipse at 50% 50%, rgba(14,165,233,0.06), transparent 60%),
         linear-gradient(160deg, #eef2f7 0%, #f0f4fa 50%, #edf0f8 100%)
       `,
-      thumbnail: "linear-gradient(135deg, #eef2f7 0%, #e5eaf8 50%, #edf0f8 100%)",
+      thumbnail:
+        "linear-gradient(135deg, #eef2f7 0%, #e5eaf8 50%, #edf0f8 100%)",
     },
     dark: {
       css: `
@@ -623,7 +640,8 @@ export const BACKGROUND_PRESETS: BackgroundPreset[] = [
         radial-gradient(ellipse at 70% 30%, rgba(14,165,233,0.09), transparent 40%),
         linear-gradient(180deg, #e8f0f6 0%, #dae6f0 50%, #e4eef6 100%)
       `,
-      thumbnail: "linear-gradient(180deg, #e8f0f6 0%, #dae6f0 50%, #e4eef6 100%)",
+      thumbnail:
+        "linear-gradient(180deg, #e8f0f6 0%, #dae6f0 50%, #e4eef6 100%)",
     },
     dark: {
       css: `
@@ -645,7 +663,8 @@ export const BACKGROUND_PRESETS: BackgroundPreset[] = [
         radial-gradient(circle at 50% 50%, rgba(236,72,153,0.05), transparent 50%),
         linear-gradient(150deg, #f0f2fa 0%, #edf0f8 50%, #f2f0fa 100%)
       `,
-      thumbnail: "linear-gradient(150deg, #f0f2fa 0%, #edf0f8 50%, #f2f0fa 100%)",
+      thumbnail:
+        "linear-gradient(150deg, #f0f2fa 0%, #edf0f8 50%, #f2f0fa 100%)",
     },
     dark: {
       css: `
@@ -667,7 +686,8 @@ export const BACKGROUND_PRESETS: BackgroundPreset[] = [
         radial-gradient(ellipse at 20% 80%, rgba(6,182,212,0.1), transparent 50%),
         linear-gradient(140deg, #edf7f4 0%, #e2f0ec 50%, #edf7f4 100%)
       `,
-      thumbnail: "linear-gradient(140deg, #edf7f4 0%, #d4eae4 50%, #edf7f4 100%)",
+      thumbnail:
+        "linear-gradient(140deg, #edf7f4 0%, #d4eae4 50%, #edf7f4 100%)",
     },
     dark: {
       css: `
@@ -690,7 +710,8 @@ export const BACKGROUND_PRESETS: BackgroundPreset[] = [
         radial-gradient(circle at 20% 80%, rgba(244,63,94,0.1), transparent 40%),
         linear-gradient(180deg, #fffbeb 0%, #fff7d6 40%, #fffbeb 100%)
       `,
-      thumbnail: "linear-gradient(180deg, #fffbeb 0%, #fff3c4 50%, #fffbeb 100%)",
+      thumbnail:
+        "linear-gradient(180deg, #fffbeb 0%, #fff3c4 50%, #fffbeb 100%)",
     },
     dark: {
       css: `
@@ -712,7 +733,8 @@ export const BACKGROUND_PRESETS: BackgroundPreset[] = [
         radial-gradient(circle at 50% 50%, rgba(96,165,250,0.08), transparent 50%),
         linear-gradient(160deg, #fff5f7 0%, #fffbeb 50%, #f0f9ff 100%)
       `,
-      thumbnail: "linear-gradient(160deg, #fff5f7 0%, #fffbeb 50%, #f0f9ff 100%)",
+      thumbnail:
+        "linear-gradient(160deg, #fff5f7 0%, #fffbeb 50%, #f0f9ff 100%)",
     },
     dark: {
       css: `
@@ -734,7 +756,8 @@ export const BACKGROUND_PRESETS: BackgroundPreset[] = [
         radial-gradient(circle at 70% 20%, rgba(251,191,36,0.12), transparent 35%),
         linear-gradient(170deg, #ecfdf5 0%, #fffbeb 50%, #ecfdf5 100%)
       `,
-      thumbnail: "linear-gradient(170deg, #ecfdf5 0%, #fffbeb 50%, #ecfdf5 100%)",
+      thumbnail:
+        "linear-gradient(170deg, #ecfdf5 0%, #fffbeb 50%, #ecfdf5 100%)",
     },
     dark: {
       css: `
@@ -756,7 +779,8 @@ export const BACKGROUND_PRESETS: BackgroundPreset[] = [
         radial-gradient(circle at 50% 90%, rgba(251,191,36,0.12), transparent 30%),
         linear-gradient(165deg, #fdf2f8 0%, #fffbeb 40%, #faf5ff 100%)
       `,
-      thumbnail: "linear-gradient(165deg, #fdf2f8 0%, #fffbeb 40%, #faf5ff 100%)",
+      thumbnail:
+        "linear-gradient(165deg, #fdf2f8 0%, #fffbeb 40%, #faf5ff 100%)",
     },
     dark: {
       css: `
@@ -1006,7 +1030,9 @@ export const BACKGROUND_PRESETS: BackgroundPreset[] = [
 ];
 
 /** Get background presets for a given theme */
-export function getBackgroundsForTheme(theme: ThemePresetKey): BackgroundPreset[] {
+export function getBackgroundsForTheme(
+  theme: ThemePresetKey,
+): BackgroundPreset[] {
   if (theme === "custom") return BACKGROUND_PRESETS;
   return BACKGROUND_PRESETS.filter((b) => b.theme === theme);
 }

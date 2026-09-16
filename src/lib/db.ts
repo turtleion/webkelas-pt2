@@ -112,7 +112,6 @@ export interface OrganizationSettingsRow<T = unknown> {
   updated_at: string;
 }
 
-
 // ---------------------------------------------------------------------------
 // Task API (`tugas` table, used by /tugas)
 // ---------------------------------------------------------------------------
@@ -427,7 +426,9 @@ export async function getArticles(publishedOnly = true): Promise<ArticleRow[]> {
   return data ?? [];
 }
 
-export async function getArticleBySlug(slug: string): Promise<ArticleRow | null> {
+export async function getArticleBySlug(
+  slug: string,
+): Promise<ArticleRow | null> {
   const { data, error } = await supabase
     .from("articles")
     .select("*")
@@ -509,7 +510,11 @@ export async function createMbgSchedule(payload: {
 }): Promise<MbgScheduleRow> {
   const { data, error } = await supabase
     .from("mbg_schedule")
-    .insert({ day: payload.day, menu: payload.menu, notes: payload.notes ?? null })
+    .insert({
+      day: payload.day,
+      menu: payload.menu,
+      notes: payload.notes ?? null,
+    })
     .select()
     .single();
   if (error) throw error;
@@ -698,6 +703,78 @@ export async function redeemInvitationCode(
   });
   if (error) throw error;
   return (data as RedeemResult) ?? "invalid";
+}
+
+// ---------------------------------------------------------------------------
+// Daily Overview API (`daily_overview` table, used by /daily)
+// ---------------------------------------------------------------------------
+export interface DailyOverviewRow {
+  target_date: string;
+  pakaian: string | null;
+  bawaan: string | null;
+  catatan: string | null;
+  is_intervened: boolean;
+  notified_at: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+/** Overview terbaru untuk tanggal `fromDate` ke atas (hari ini / besok). */
+export async function getCurrentDailyOverview(
+  fromDate: string,
+): Promise<DailyOverviewRow | null> {
+  const { data, error } = await supabase
+    .from("daily_overview")
+    .select("*")
+    .gte("target_date", fromDate)
+    .order("target_date", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
+  if (error) throw error;
+  return data;
+}
+
+/** Overview untuk satu tanggal spesifik. */
+export async function getDailyOverview(
+  date: string,
+): Promise<DailyOverviewRow | null> {
+  const { data, error } = await supabase
+    .from("daily_overview")
+    .select("*")
+    .eq("target_date", date)
+    .maybeSingle();
+
+  if (error) throw error;
+  return data;
+}
+
+/** Simpan data harian (admin). `is_intervened` menandai data jadi otoritatif. */
+export async function upsertDailyOverview(payload: {
+  target_date: string;
+  pakaian?: string | null;
+  bawaan?: string | null;
+  catatan?: string | null;
+  is_intervened?: boolean;
+}): Promise<DailyOverviewRow> {
+  const { data, error } = await supabase
+    .from("daily_overview")
+    .upsert(
+      {
+        target_date: payload.target_date,
+        pakaian: payload.pakaian ?? null,
+        bawaan: payload.bawaan ?? null,
+        catatan: payload.catatan ?? null,
+        is_intervened: payload.is_intervened ?? true,
+        updated_at: new Date().toISOString(),
+      },
+      { onConflict: "target_date" },
+    )
+    .select()
+    .single();
+
+  if (error) throw error;
+  return data;
 }
 
 // ---------------------------------------------------------------------------

@@ -18,7 +18,9 @@ export function PlaceholderNote({
         className,
       )}
     >
-      <span className="kicker shrink-0 text-[9px] text-accent">{t.common.noteLabel}</span>
+      <span className="kicker shrink-0 text-[9px] text-accent">
+        {t.common.noteLabel}
+      </span>
       <p className="text-[13px] leading-relaxed text-muted-foreground">
         {children ?? t.common.empty}
       </p>

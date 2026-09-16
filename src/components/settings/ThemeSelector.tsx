@@ -1,4 +1,12 @@
-import { Check, Sparkles, BookOpen, Layers, Palette, Cloud, Minus } from "lucide-react";
+import {
+  Check,
+  Sparkles,
+  BookOpen,
+  Layers,
+  Palette,
+  Cloud,
+  Minus,
+} from "lucide-react";
 import { usePreferences, type ThemePresetKey } from "@/hooks/use-preferences";
 import { useTranslation } from "@/hooks/use-translation";
 import { cn } from "@/lib/utils";
@@ -87,7 +95,7 @@ export function ThemeSelector() {
                 "glass glass-hover flex flex-col justify-between p-5 text-left transition-all cursor-pointer relative",
                 isSelected
                   ? "ring-2 ring-primary border-primary/60 bg-card"
-                  : "border-border/80 hover:bg-card/70"
+                  : "border-border/80 hover:bg-card/70",
               )}
             >
               {isSelected && (

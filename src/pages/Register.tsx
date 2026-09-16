@@ -20,14 +20,8 @@ import { toast } from "sonner";
 export default function Register() {
   const { t } = useTranslation();
   usePageTitle(t.register.pageTitle);
-  const {
-    isLoading,
-    isAuthenticated,
-    isVerified,
-    user,
-    signIn,
-    signOut,
-  } = useAuth();
+  const { isLoading, isAuthenticated, isVerified, user, signIn, signOut } =
+    useAuth();
   const { data: orgData } = useOrganization();
   const { kelas } = orgData;
   const navigate = useNavigate();
@@ -167,18 +161,18 @@ export default function Register() {
               <p className="kicker text-[10px]">{t.register.badge}</p>
               <h1 className="mt-3 font-display text-3xl font-medium tracking-tight">
                 {t.register.guestBlockTitle}
-             </h1>
+              </h1>
               <p className="mt-3 text-[14px] leading-relaxed text-muted-foreground">
                 {t.register.guestBlockDesc}
-             </p>
+              </p>
               <Button
                 type="button"
                 className="mt-7 h-11 w-full cursor-pointer bg-primary font-mono text-[12px] uppercase tracking-[0.14em] text-primary-foreground"
                 onClick={() => void handleSignOut()}
               >
                 {t.register.guestBlockCta}
-             </Button>
-           </div>
+              </Button>
+            </div>
           ) : (
             // Authenticated, unverified — form kode undangan.
             <>
@@ -190,7 +184,10 @@ export default function Register() {
                 {t.register.description}
               </p>
 
-              <form onSubmit={handleSubmit} className="mt-7 flex flex-col gap-4">
+              <form
+                onSubmit={handleSubmit}
+                className="mt-7 flex flex-col gap-4"
+              >
                 <div>
                   <label
                     className="kicker block text-[10px]"
@@ -200,7 +197,9 @@ export default function Register() {
                   </label>
                   <Input
                     id="invitation-code"
-                    value={code ? displayNormalized(normalizeCodeInput(code)) : ""}
+                    value={
+                      code ? displayNormalized(normalizeCodeInput(code)) : ""
+                    }
                     onChange={(e) => setCode(e.target.value)}
                     placeholder={t.register.codePlaceholder}
                     autoCapitalize="characters"

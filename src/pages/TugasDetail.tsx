@@ -31,8 +31,14 @@ export default function TugasDetail() {
   return (
     <div className="min-h-screen">
       <SiteHeader />
-      <main id="konten" className="mx-auto max-w-3xl px-5 py-12 md:px-8 md:py-16">
-        <Link to="/tugas" className="mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground">
+      <main
+        id="konten"
+        className="mx-auto max-w-3xl px-5 py-12 md:px-8 md:py-16"
+      >
+        <Link
+          to="/tugas"
+          className="mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+        >
           <ArrowLeft className="size-4" />
           {t.tasks.allTasks}
         </Link>
@@ -60,12 +66,12 @@ export default function TugasDetail() {
               {task.description ? (
                 <div
                   className="prose prose-sm max-w-none text-foreground"
-                  dangerouslySetInnerHTML={{ __html: renderMarkdown(task.description) }}
+                  dangerouslySetInnerHTML={{
+                    __html: renderMarkdown(task.description),
+                  }}
                 />
               ) : (
-                <p className="italic text-muted-foreground">
-                  {t.tasks.empty}
-                </p>
+                <p className="italic text-muted-foreground">{t.tasks.empty}</p>
               )}
             </div>
           </article>

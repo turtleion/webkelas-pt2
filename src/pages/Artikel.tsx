@@ -19,12 +19,18 @@ export default function Artikel() {
   return (
     <div className="min-h-screen">
       <SiteHeader />
-      <main id="konten" className="mx-auto max-w-6xl px-5 py-12 md:px-8 md:py-16">
+      <main
+        id="konten"
+        className="mx-auto max-w-6xl px-5 py-12 md:px-8 md:py-16"
+      >
         <PageHeader
           nomor="01"
           label={t.nav.articles}
           title={t.articles.heading}
-          description={t.articles.description.replace("{kelas}", kelas.nama || "")}
+          description={t.articles.description.replace(
+            "{kelas}",
+            kelas.nama || "",
+          )}
         />
 
         {isLoading ? (
@@ -32,7 +38,9 @@ export default function Artikel() {
             <Loader2 className="size-6 animate-spin text-primary" />
           </div>
         ) : error ? (
-          <p className="mt-14 text-center font-display text-xl text-destructive">{error}</p>
+          <p className="mt-14 text-center font-display text-xl text-destructive">
+            {error}
+          </p>
         ) : articles.length === 0 ? (
           <p className="mt-14 font-display text-xl italic text-muted-foreground">
             {t.articles.empty}

@@ -72,7 +72,7 @@ export function useGallery() {
       await deleteGalleryPhoto(id);
       await fetchGallery();
     },
-    [fetchGallery]
+    [fetchGallery],
   );
 
   return {

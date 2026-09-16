@@ -69,7 +69,9 @@ export function AuthStateRedirector() {
     if (!isAuthenticated && !isOnAuth && !isOnRegister) {
       const needsAuth = isOnDashboard || isOnAdmin;
       if (needsAuth) {
-        navigate(`/auth?returnTo=${encodeURIComponent(path)}`, { replace: true });
+        navigate(`/auth?returnTo=${encodeURIComponent(path)}`, {
+          replace: true,
+        });
       }
     }
   }, [isLoading, isAuthenticated, user, navigate, location, path]);

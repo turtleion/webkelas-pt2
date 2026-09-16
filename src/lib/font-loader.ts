@@ -38,7 +38,8 @@ export function loadGoogleFont(fontName: string): Promise<void> {
     link.href = `https://fonts.googleapis.com/css2?family=${formatted}:wght@400;500;600;700&display=swap`;
 
     link.onload = () => resolve();
-    link.onerror = () => reject(new Error(`Failed to load Google Font: ${fontName}`));
+    link.onerror = () =>
+      reject(new Error(`Failed to load Google Font: ${fontName}`));
 
     document.head.appendChild(link);
   });

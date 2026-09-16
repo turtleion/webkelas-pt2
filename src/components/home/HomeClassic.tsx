@@ -6,7 +6,12 @@ import { Stamp } from "@/components/site/Stamp";
 import { PlaceholderNote } from "@/components/site/PlaceholderNote";
 import { inisialNama, padNomor, pecahTanggal } from "@/lib/tanggal";
 import { useTranslation } from "@/hooks/use-translation";
-import type { ArticleRow, AgendaRow, MemberRow, GalleryPhotoRow } from "@/lib/db";
+import type {
+  ArticleRow,
+  AgendaRow,
+  MemberRow,
+  GalleryPhotoRow,
+} from "@/lib/db";
 import type { KelasInfo } from "@/data/kelas";
 
 interface HomeLayoutProps {
@@ -83,7 +88,9 @@ export function HomeClassic({
         <div className="border-b border-border/70 bg-card/40">
           <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-2.5 md:px-8">
             <p className="kicker flex min-w-0 items-center gap-2.5 text-[10px]">
-              <span className="shrink-0 text-accent">{t.home.latestArticles}</span>
+              <span className="shrink-0 text-accent">
+                {t.home.latestArticles}
+              </span>
               <span aria-hidden className="text-muted-foreground/60">
                 —
               </span>
@@ -117,7 +124,9 @@ export function HomeClassic({
                 </h1>
 
                 <p className="mt-5 max-w-lg font-display text-xl italic leading-snug text-muted-foreground md:text-2xl">
-                  {interpolate(t.home.heroSubtitle, { count: kelas.jumlahSiswa || anggota.length })}
+                  {interpolate(t.home.heroSubtitle, {
+                    count: kelas.jumlahSiswa || anggota.length,
+                  })}
                 </p>
 
                 <p className="mt-6 max-w-xl text-[15px] leading-relaxed text-foreground/80">
@@ -154,8 +163,15 @@ export function HomeClassic({
                       aspect="4 / 5"
                       src={galeri[0]?.image_url || undefined}
                       label="Dok. 001 — Foto kelas"
-                      caption={galeri[0]?.title || `Foto kelas ${kelas.nama} — MPLS ${kelas.tahunAjaran}`}
-                      date={galeri[0]?.date ? pecahTanggal(galeri[0].date).teks : "14 Jul 2026"}
+                      caption={
+                        galeri[0]?.title ||
+                        `Foto kelas ${kelas.nama} — MPLS ${kelas.tahunAjaran}`
+                      }
+                      date={
+                        galeri[0]?.date
+                          ? pecahTanggal(galeri[0].date).teks
+                          : "14 Jul 2026"
+                      }
                     />
                     <Stamp className="absolute -left-4 top-8 hidden -rotate-6 sm:inline-block">
                       Arsip Kelas · {kelas.tahunAjaran}
@@ -163,7 +179,10 @@ export function HomeClassic({
                   </div>
                 </FadeIn>
                 <p className="kicker hidden text-right text-[9px] lg:block">
-                  Dok. 001 — {galeri[0]?.image_url ? "Foto dokumentasi kelas" : "foto belum diarsip"}
+                  Dok. 001 —{" "}
+                  {galeri[0]?.image_url
+                    ? "Foto dokumentasi kelas"
+                    : "foto belum diarsip"}
                 </p>
               </div>
             </div>
@@ -176,7 +195,11 @@ export function HomeClassic({
         <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
           <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
             <div className="lg:col-span-4">
-              <SectionHead no="01" label={t.nav.organization} title={t.home.classIdentity} />
+              <SectionHead
+                no="01"
+                label={t.nav.organization}
+                title={t.home.classIdentity}
+              />
               <p className="mt-5 max-w-sm text-[14px] leading-relaxed text-muted-foreground">
                 {interpolate(t.home.classIdentityDesc, {
                   kelas: kelas.nama,
@@ -213,7 +236,10 @@ export function HomeClassic({
               const dateIso = p.created_at.slice(0, 10);
               const tDate = pecahTanggal(dateIso);
               return (
-                <li key={p.id} className="border-b border-border last:border-b-0">
+                <li
+                  key={p.id}
+                  className="border-b border-border last:border-b-0"
+                >
                   <Link
                     to={`/artikel/${p.slug}`}
                     className="group grid gap-3 py-6 md:grid-cols-[8rem_1fr] md:gap-8"
@@ -258,7 +284,10 @@ export function HomeClassic({
             {agendaTampil.map((item, i) => {
               const tDate = pecahTanggal(item.date);
               return (
-                <li key={item.id} className="border-b border-border last:border-b-0">
+                <li
+                  key={item.id}
+                  className="border-b border-border last:border-b-0"
+                >
                   <div className="flex gap-6 py-5 md:gap-10">
                     <div className="w-24 shrink-0 md:w-32">
                       <p className="font-display text-4xl font-medium leading-none tracking-tight">
@@ -275,7 +304,9 @@ export function HomeClassic({
                             {t.home.nearest}
                           </span>
                         )}
-                        <span className="kicker text-[9px]">{item.category}</span>
+                        <span className="kicker text-[9px]">
+                          {item.category}
+                        </span>
                       </div>
                       <h3 className="mt-1 font-display text-xl font-medium tracking-tight md:text-2xl">
                         {item.title}
@@ -362,7 +393,11 @@ export function HomeClassic({
                   src={galeri[0]?.image_url || undefined}
                   label="Dok. 001 — Kegiatan"
                   caption={galeri[0]?.title ?? "Kegiatan kelas"}
-                  date={galeri[0]?.date ? pecahTanggal(galeri[0].date).teks : undefined}
+                  date={
+                    galeri[0]?.date
+                      ? pecahTanggal(galeri[0].date).teks
+                      : undefined
+                  }
                 />
               </FadeIn>
             </div>
@@ -374,7 +409,11 @@ export function HomeClassic({
                   src={galeri[1]?.image_url || undefined}
                   label="Dok. 002 — Kegiatan"
                   caption={galeri[1]?.title ?? "Kegiatan kelas"}
-                  date={galeri[1]?.date ? pecahTanggal(galeri[1].date).teks : undefined}
+                  date={
+                    galeri[1]?.date
+                      ? pecahTanggal(galeri[1].date).teks
+                      : undefined
+                  }
                 />
               </FadeIn>
             </div>
@@ -386,7 +425,11 @@ export function HomeClassic({
                   src={galeri[2]?.image_url || undefined}
                   label="Dok. 003 — Kegiatan"
                   caption={galeri[2]?.title ?? "Kegiatan kelas"}
-                  date={galeri[2]?.date ? pecahTanggal(galeri[2].date).teks : undefined}
+                  date={
+                    galeri[2]?.date
+                      ? pecahTanggal(galeri[2].date).teks
+                      : undefined
+                  }
                 />
               </FadeIn>
             </div>

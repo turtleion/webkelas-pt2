@@ -34,7 +34,7 @@ export default function AdminUsers() {
       setProfiles(rows);
     } catch (err) {
       setError(
-        err instanceof Error ? err.message : t.admin.toastUsersLoadError
+        err instanceof Error ? err.message : t.admin.toastUsersLoadError,
       );
     } finally {
       setIsLoading(false);
@@ -49,17 +49,25 @@ export default function AdminUsers() {
     if (!roleChangeTarget) return;
     setIsUpdating(true);
     try {
-      await updateProfileRole(roleChangeTarget.profile.id, roleChangeTarget.newRole);
+      await updateProfileRole(
+        roleChangeTarget.profile.id,
+        roleChangeTarget.newRole,
+      );
       toast.success(
         t.admin.usersRoleToastSuccess
-          .replace("{name}", roleChangeTarget.profile.name || roleChangeTarget.profile.email || "")
-          .replace("{role}", roleChangeTarget.newRole)
+          .replace(
+            "{name}",
+            roleChangeTarget.profile.name ||
+              roleChangeTarget.profile.email ||
+              "",
+          )
+          .replace("{role}", roleChangeTarget.newRole),
       );
       setRoleChangeTarget(null);
       await fetchProfiles();
     } catch (err) {
       toast.error(
-        err instanceof Error ? err.message : t.admin.toastUsersRoleUpdateError
+        err instanceof Error ? err.message : t.admin.toastUsersRoleUpdateError,
       );
     } finally {
       setIsUpdating(false);
@@ -89,7 +97,9 @@ export default function AdminUsers() {
                 <th className="p-3">{t.admin.usersColEmail}</th>
                 <th className="p-3">{t.admin.usersColRegistered}</th>
                 <th className="p-3">{t.admin.usersColCurrentRole}</th>
-                <th className="p-3 pr-4 text-right">{t.admin.usersColChangeRole}</th>
+                <th className="p-3 pr-4 text-right">
+                  {t.admin.usersColChangeRole}
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border/60">
@@ -109,7 +119,9 @@ export default function AdminUsers() {
                           />
                         ) : (
                           <span className="flex size-8 items-center justify-center rounded-full border border-border bg-card font-display text-xs italic">
-                            {inisialNama(p.name || p.email || t.admin.usersNameFallback)}
+                            {inisialNama(
+                              p.name || p.email || t.admin.usersNameFallback,
+                            )}
                           </span>
                         )}
                         <div>
@@ -142,8 +154,8 @@ export default function AdminUsers() {
                           p.role === "owner"
                             ? "bg-accent/20 text-accent border border-accent/30"
                             : p.role === "admin"
-                            ? "bg-primary/20 text-primary border border-primary/30"
-                            : "bg-muted text-muted-foreground"
+                              ? "bg-primary/20 text-primary border border-primary/30"
+                              : "bg-muted text-muted-foreground"
                         }`}
                       >
                         {p.role === "owner" ? (
@@ -169,14 +181,23 @@ export default function AdminUsers() {
                             onChange={(e) =>
                               setRoleChangeTarget({
                                 profile: p,
-                                newRole: e.target.value as "admin" | "member" | "owner",
+                                newRole: e.target.value as
+                                  | "admin"
+                                  | "member"
+                                  | "owner",
                               })
                             }
                             className="cursor-pointer rounded border border-border bg-background/50 px-2 py-1 font-mono text-xs text-foreground outline-none"
                           >
-                            <option value="member">{t.admin.usersRoleMember}</option>
-                            <option value="admin">{t.admin.usersRoleAdmin}</option>
-                            <option value="owner">{t.admin.usersRoleOwner}</option>
+                            <option value="member">
+                              {t.admin.usersRoleMember}
+                            </option>
+                            <option value="admin">
+                              {t.admin.usersRoleAdmin}
+                            </option>
+                            <option value="owner">
+                              {t.admin.usersRoleOwner}
+                            </option>
                           </select>
                         </div>
                       )}
@@ -194,11 +215,14 @@ export default function AdminUsers() {
         open={Boolean(roleChangeTarget)}
         onOpenChange={(open) => !open && setRoleChangeTarget(null)}
         title={t.admin.usersRoleConfirmTitle}
-        description={
-          t.admin.usersRoleConfirmDesc
-            .replace("{name}", roleChangeTarget?.profile.name || roleChangeTarget?.profile.email || "")
-            .replace("{role}", roleChangeTarget?.newRole?.toUpperCase() || "")
-        }
+        description={t.admin.usersRoleConfirmDesc
+          .replace(
+            "{name}",
+            roleChangeTarget?.profile.name ||
+              roleChangeTarget?.profile.email ||
+              "",
+          )
+          .replace("{role}", roleChangeTarget?.newRole?.toUpperCase() || "")}
         confirmLabel={t.admin.usersRoleConfirmLabel}
         destructive={false}
         isLoading={isUpdating}

@@ -72,9 +72,7 @@ export default function Jadwal() {
           })}
         />
 
-        <PlaceholderNote className="mt-8">
-          {t.schedule.note}
-        </PlaceholderNote>
+        <PlaceholderNote className="mt-8">{t.schedule.note}</PlaceholderNote>
 
         {isLoading || mbgLoading || dutyLoading ? (
           <div className="mt-16 flex justify-center py-12">
@@ -90,7 +88,11 @@ export default function Jadwal() {
               const pelajaran = schedules.filter((s) => s.day === day);
               const piket = dutyData.filter((d) => d.day === day);
               const mbg = mbgData.filter((m) => m.day === day);
-              if (pelajaran.length === 0 && piket.length === 0 && mbg.length === 0)
+              if (
+                pelajaran.length === 0 &&
+                piket.length === 0 &&
+                mbg.length === 0
+              )
                 return null;
 
               return (
@@ -116,14 +118,22 @@ export default function Jadwal() {
                         <table className="w-full text-left text-[14px]">
                           <thead className="kicker border-b border-border text-[10px]">
                             <tr>
-                              <th className="py-2.5 pr-4 font-normal">{t.schedule.timeColumn}</th>
-                              <th className="py-2.5 px-4 font-normal">{t.schedule.subjectColumn}</th>
-                              <th className="py-2.5 pl-4 font-normal">{t.schedule.roomColumn}</th>
+                              <th className="py-2.5 pr-4 font-normal">
+                                {t.schedule.timeColumn}
+                              </th>
+                              <th className="py-2.5 px-4 font-normal">
+                                {t.schedule.subjectColumn}
+                              </th>
+                              <th className="py-2.5 pl-4 font-normal">
+                                {t.schedule.roomColumn}
+                              </th>
                             </tr>
                           </thead>
                           <tbody className="divide-y divide-border/60">
                             {pelajaran.map((r) => {
-                              const isIstirahat = r.subject.toLowerCase().includes("istirahat");
+                              const isIstirahat = r.subject
+                                .toLowerCase()
+                                .includes("istirahat");
                               return (
                                 <tr
                                   key={r.id}
@@ -134,10 +144,13 @@ export default function Jadwal() {
                                   }
                                 >
                                   <td className="py-3 pr-4 font-mono text-[12px] whitespace-nowrap">
-                                    {r.time_start} {r.time_end ? `– ${r.time_end}` : ""}
+                                    {r.time_start}{" "}
+                                    {r.time_end ? `– ${r.time_end}` : ""}
                                   </td>
                                   <td className="py-3 px-4 font-display text-[15px]">
-                                    {isIstirahat ? t.schedule.breakLabel : r.subject}
+                                    {isIstirahat
+                                      ? t.schedule.breakLabel
+                                      : r.subject}
                                   </td>
                                   <td className="py-3 pl-4 font-mono text-[12px] text-muted-foreground">
                                     {r.teacher || "—"}
@@ -159,7 +172,10 @@ export default function Jadwal() {
                       </h3>
                       <div className="mt-2">
                         {piket.map((item) => (
-                          <MemberList members={toMemberRows(item.members)} key={item.id} />
+                          <MemberList
+                            members={toMemberRows(item.members)}
+                            key={item.id}
+                          />
                         ))}
                       </div>
                     </div>
@@ -176,7 +192,10 @@ export default function Jadwal() {
                           <MemberList
                             key={item.id}
                             members={toMemberRows(
-                              item.menu.split(",").map((s) => s.trim()).filter(Boolean),
+                              item.menu
+                                .split(",")
+                                .map((s) => s.trim())
+                                .filter(Boolean),
                             )}
                           />
                         ))}

@@ -39,16 +39,16 @@ export function VerificationWarningBar() {
         <div className="flex-1 leading-snug">
           <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-destructive">
             {t.verificationBar.title}
-         </p>
+          </p>
           <p className="mt-0.5 text-[12.5px] text-foreground/80">
             {t.verificationBar.description}{" "}
             <span className="font-medium text-destructive underline underline-offset-2">
               {t.verificationBar.cta}
-           </span>
+            </span>
             .
-         </p>
-       </div>
-     </div>
-   </button>
+          </p>
+        </div>
+      </div>
+    </button>
   );
 }

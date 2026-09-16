@@ -81,7 +81,9 @@ export interface PreferencesContextValue {
   setLanguage: (lang: Locale) => Promise<void>;
   setCustomColors: (colors: CustomColorsMap) => Promise<void>;
   resetToDefaults: () => Promise<void>;
-  updateGlobalDefaults: (defaults: Partial<GlobalThemeDefaults>) => Promise<void>;
+  updateGlobalDefaults: (
+    defaults: Partial<GlobalThemeDefaults>,
+  ) => Promise<void>;
   addCustomFont: (font: FontDefinition) => Promise<void>;
   removeCustomFont: (fontId: string) => Promise<void>;
   refreshPreferences: () => Promise<void>;
@@ -123,7 +125,10 @@ function setLocalPreferences(prefs: UserPreferences) {
 /**
  * Apply token, background, and classes directly to DOM document.documentElement and body
  */
-function applyTokensToDOM(settings: EffectiveSettings, fontDef: FontDefinition) {
+function applyTokensToDOM(
+  settings: EffectiveSettings,
+  fontDef: FontDefinition,
+) {
   const root = document.documentElement;
 
   // 1. Light/Dark mode class
@@ -153,7 +158,8 @@ function applyTokensToDOM(settings: EffectiveSettings, fontDef: FontDefinition) 
   // 5. Color Palette Variables
   let basePalette: ColorPaletteTokens | undefined;
   const scheme = COLOR_SCHEMES[settings.colorScheme] || COLOR_SCHEMES.paper;
-  basePalette = settings.mode === "dark" && scheme.dark ? scheme.dark : scheme.light;
+  basePalette =
+    settings.mode === "dark" && scheme.dark ? scheme.dark : scheme.light;
 
   // Apply base tokens
   if (basePalette) {
@@ -199,9 +205,13 @@ function applyTokensToDOM(settings: EffectiveSettings, fontDef: FontDefinition) 
 
 export function PreferencesProvider({ children }: { children: ReactNode }) {
   const { user } = useAuth();
-  const [globalDefaults, setGlobalDefaults] = useState<GlobalThemeDefaults>(DEFAULT_GLOBAL);
-  const [availableFonts, setAvailableFonts] = useState<FontDefinition[]>(BUILTIN_FONTS);
-  const [userPrefs, setUserPrefs] = useState<UserPreferences>(getLocalPreferences());
+  const [globalDefaults, setGlobalDefaults] =
+    useState<GlobalThemeDefaults>(DEFAULT_GLOBAL);
+  const [availableFonts, setAvailableFonts] =
+    useState<FontDefinition[]>(BUILTIN_FONTS);
+  const [userPrefs, setUserPrefs] = useState<UserPreferences>(
+    getLocalPreferences(),
+  );
   const [isLoading, setIsLoading] = useState(true);
 
   // Load global defaults and custom fonts from Supabase
@@ -266,10 +276,13 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
   const effectiveSettings = useMemo<EffectiveSettings>(() => {
     const rawTheme = userPrefs.theme ?? globalDefaults.defaultTheme;
     let rawMode = userPrefs.mode ?? globalDefaults.defaultMode;
-    const rawScheme = userPrefs.colorScheme ?? (rawTheme !== "custom" ? rawTheme : globalDefaults.defaultColorScheme);
+    const rawScheme =
+      userPrefs.colorScheme ??
+      (rawTheme !== "custom" ? rawTheme : globalDefaults.defaultColorScheme);
     const rawFont = userPrefs.font ?? globalDefaults.defaultFont;
     const rawLayout = userPrefs.homeLayout ?? globalDefaults.defaultHomeLayout;
-    const rawBackground = userPrefs.background ?? globalDefaults.defaultBackground;
+    const rawBackground =
+      userPrefs.background ?? globalDefaults.defaultBackground;
     const rawLang = userPrefs.language ?? globalDefaults.defaultLanguage;
 
     // CARTOON DARK-MODE LOCK: Cartoon theme or color scheme NEVER supports dark mode
@@ -290,10 +303,22 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
         const layoutMismatch = rawLayout !== preset.homeLayout;
         const backgroundMismatch = rawBackground !== preset.defaultBackground;
         const hasCustomColors =
-          Boolean(userPrefs.customColors?.light && Object.keys(userPrefs.customColors.light).length > 0) ||
-          Boolean(userPrefs.customColors?.dark && Object.keys(userPrefs.customColors.dark).length > 0);
+          Boolean(
+            userPrefs.customColors?.light &&
+            Object.keys(userPrefs.customColors.light).length > 0,
+          ) ||
+          Boolean(
+            userPrefs.customColors?.dark &&
+            Object.keys(userPrefs.customColors.dark).length > 0,
+          );
 
-        if (schemeMismatch || fontMismatch || layoutMismatch || backgroundMismatch || hasCustomColors) {
+        if (
+          schemeMismatch ||
+          fontMismatch ||
+          layoutMismatch ||
+          backgroundMismatch ||
+          hasCustomColors
+        ) {
           effectiveTheme = "custom";
           isCustom = true;
         }
@@ -316,7 +341,8 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
   // Apply to DOM on change
   useEffect(() => {
     const activeFont =
-      availableFonts.find((f) => f.id === effectiveSettings.font) || BUILTIN_FONTS[0];
+      availableFonts.find((f) => f.id === effectiveSettings.font) ||
+      BUILTIN_FONTS[0];
     loadFont(activeFont);
     applyTokensToDOM(effectiveSettings, activeFont);
 
@@ -373,7 +399,10 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
 
   const setMode = async (mode: ModeKey) => {
     // If cartoon is active, lock to light
-    if (effectiveSettings.theme === "cartoon" || effectiveSettings.colorScheme === "cartoon") {
+    if (
+      effectiveSettings.theme === "cartoon" ||
+      effectiveSettings.colorScheme === "cartoon"
+    ) {
       return;
     }
     await savePreferences({
@@ -438,7 +467,9 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const updateGlobalDefaults = async (updated: Partial<GlobalThemeDefaults>) => {
+  const updateGlobalDefaults = async (
+    updated: Partial<GlobalThemeDefaults>,
+  ) => {
     const next: GlobalThemeDefaults = {
       ...globalDefaults,
       ...updated,
@@ -448,7 +479,10 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
   };
 
   const addCustomFont = async (newFont: FontDefinition) => {
-    const nextFonts = [...availableFonts.filter((f) => f.id !== newFont.id), newFont];
+    const nextFonts = [
+      ...availableFonts.filter((f) => f.id !== newFont.id),
+      newFont,
+    ];
     setAvailableFonts(nextFonts);
 
     // Persist only non-builtin custom fonts to Supabase
@@ -457,7 +491,9 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
   };
 
   const removeCustomFont = async (fontId: string) => {
-    const nextFonts = availableFonts.filter((f) => f.id !== fontId || f.isBuiltIn);
+    const nextFonts = availableFonts.filter(
+      (f) => f.id !== fontId || f.isBuiltIn,
+    );
     setAvailableFonts(nextFonts);
 
     const customOnly = nextFonts.filter((f) => !f.isBuiltIn);

@@ -15,6 +15,8 @@ import {
   FileText,
   Utensils,
   ClipboardList,
+  Bell,
+  Send,
 } from "lucide-react";
 import { KelasMark } from "@/components/site/KelasMark";
 import { useAuth } from "@/hooks/use-auth";
@@ -40,6 +42,12 @@ export function AdminSidebar({ onItemClick }: AdminSidebarProps) {
 
   const navItems = [
     { to: "/admin", label: t.admin.overview, icon: LayoutDashboard, end: true },
+    { to: "/admin/notification", label: t.admin.notification, icon: Bell },
+    {
+      to: "/admin/test-notification",
+      label: "Test Notifikasi",
+      icon: Send,
+    },
     { to: "/admin/artikel", label: t.articles.heading, icon: FileText },
     { to: "/admin/agenda", label: t.admin.agenda, icon: CalendarDays },
     { to: "/admin/tugas", label: t.tasks.heading, icon: ListTodo },
@@ -52,8 +60,16 @@ export function AdminSidebar({ onItemClick }: AdminSidebarProps) {
     { to: "/admin/theme", label: t.admin.themeManagement, icon: Palette },
     ...(isOwner
       ? [
-          { to: "/admin/users", label: t.admin.usersManagement, icon: ShieldCheck },
-          { to: "/admin/invitation-codes", label: t.admin.invitations, icon: Ticket },
+          {
+            to: "/admin/users",
+            label: t.admin.usersManagement,
+            icon: ShieldCheck,
+          },
+          {
+            to: "/admin/invitation-codes",
+            label: t.admin.invitations,
+            icon: Ticket,
+          },
         ]
       : []),
   ];
@@ -71,38 +87,38 @@ export function AdminSidebar({ onItemClick }: AdminSidebarProps) {
           <div className="leading-tight">
             <span className="block font-display text-base font-semibold tracking-tight">
               {t.admin.sidebarHeader}
-          </span>
+            </span>
             <span className="block font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground">
               {kelas.nama || "Arsip Kelas"}
-          </span>
-        </div>
-      </Link>
+            </span>
+          </div>
+        </Link>
 
         <div className="mt-4 rounded border border-border/60 bg-background/50 p-2.5">
           <p className="kicker text-[9px]">{t.admin.sessionLabel}</p>
           <p className="truncate font-display text-sm font-medium">
             {user?.name || user?.email || "—"}
-        </p>
+          </p>
           <div className="mt-1 flex items-center gap-2">
             <span
               className={cn(
                 "inline-block rounded px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-wider",
                 isOwner
                   ? "bg-accent/20 text-accent font-semibold"
-                  : "bg-primary/20 text-primary font-semibold"
+                  : "bg-primary/20 text-primary font-semibold",
               )}
             >
               {user?.role}
-          </span>
+            </span>
             <Link
               to="/"
               className="ml-auto inline-flex items-center gap-1 font-mono text-[10px] text-muted-foreground hover:text-foreground"
             >
               {t.admin.mainWebsiteLink} <ExternalLink className="size-3" />
-          </Link>
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
 
       {/* Middle — scrollable nav */}
       <nav className="sidebar-scroll flex flex-1 min-h-0 flex-col gap-1 overflow-y-auto px-5 py-6">
@@ -120,16 +136,16 @@ export function AdminSidebar({ onItemClick }: AdminSidebarProps) {
                   "flex items-center gap-2.5 rounded px-3 py-2 text-[13.5px] transition-colors",
                   isActive
                     ? "border border-border/80 bg-primary font-medium text-primary-foreground shadow-xs"
-                    : "text-muted-foreground hover:bg-card/80 hover:text-foreground"
+                    : "text-muted-foreground hover:bg-card/80 hover:text-foreground",
                 )
               }
             >
               <Icon className="size-4 shrink-0" />
               <span>{item.label}</span>
-          </NavLink>
+            </NavLink>
           );
         })}
-    </nav>
+      </nav>
 
       {/* Footer — sign out (fixed, tidak scroll) */}
       <div className="flex-shrink-0 border-t border-border/70 p-5 pt-4">
@@ -140,8 +156,8 @@ export function AdminSidebar({ onItemClick }: AdminSidebarProps) {
         >
           <LogOut className="size-4" />
           <span>{t.admin.signOutPanel}</span>
-      </button>
-    </div>
-  </aside>
+        </button>
+      </div>
+    </aside>
   );
 }

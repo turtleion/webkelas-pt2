@@ -253,14 +253,18 @@ export default function AdminSchedule() {
         <DialogContent className="glass glass-strong max-w-lg border-border/80 text-foreground">
           <DialogHeader>
             <DialogTitle className="font-display text-2xl font-medium tracking-tight">
-              {editingItem ? t.admin.scheduleFormTitle : t.admin.scheduleFormCreateTitle}
+              {editingItem
+                ? t.admin.scheduleFormTitle
+                : t.admin.scheduleFormCreateTitle}
             </DialogTitle>
           </DialogHeader>
 
           <form onSubmit={handleSubmit} className="mt-4 space-y-4">
             <div className="grid grid-cols-3 gap-3">
               <div>
-                <label className="kicker block text-[10px]">{t.admin.scheduleLabelDay}</label>
+                <label className="kicker block text-[10px]">
+                  {t.admin.scheduleLabelDay}
+                </label>
                 <select
                   value={day}
                   onChange={(e) => setDay(e.target.value as ScheduleRow["day"])}
@@ -275,7 +279,9 @@ export default function AdminSchedule() {
               </div>
 
               <div>
-                <label className="kicker block text-[10px]">{t.admin.scheduleLabelStart}</label>
+                <label className="kicker block text-[10px]">
+                  {t.admin.scheduleLabelStart}
+                </label>
                 <Input
                   value={timeStart}
                   onChange={(e) => setTimeStart(e.target.value)}
@@ -286,7 +292,9 @@ export default function AdminSchedule() {
               </div>
 
               <div>
-                <label className="kicker block text-[10px]">{t.admin.scheduleLabelEnd}</label>
+                <label className="kicker block text-[10px]">
+                  {t.admin.scheduleLabelEnd}
+                </label>
                 <Input
                   value={timeEnd}
                   onChange={(e) => setTimeEnd(e.target.value)}
@@ -297,7 +305,9 @@ export default function AdminSchedule() {
             </div>
 
             <div>
-              <label className="kicker block text-[10px]">{t.admin.scheduleLabelSubject}</label>
+              <label className="kicker block text-[10px]">
+                {t.admin.scheduleLabelSubject}
+              </label>
               <Input
                 value={subject}
                 onChange={(e) => setSubject(e.target.value)}
@@ -337,7 +347,9 @@ export default function AdminSchedule() {
               </div>
 
               <div className="flex items-center gap-2">
-                <label className="kicker text-[9px]">{t.admin.scheduleLabelOrder}</label>
+                <label className="kicker text-[9px]">
+                  {t.admin.scheduleLabelOrder}
+                </label>
                 <input
                   type="number"
                   value={sortOrder}

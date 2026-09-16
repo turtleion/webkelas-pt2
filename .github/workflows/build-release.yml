@@ -83,9 +83,9 @@ jobs:
       - name: Rename APK
         env:
           BUILD_NUMBER: ${{ steps.meta.outputs.BUILD_NUMBER }}
-          COMMIT_HASH:  ${{ steps.meta.outputs.COMMIT_HASH }}
-          DATE:         ${{ steps.meta.outputs.DATE }}
-          APK_PATH:     ${{ steps.meta.outputs.APK_PATH }}
+          COMMIT_HASH: ${{ steps.meta.outputs.COMMIT_HASH }}
+          DATE: ${{ steps.meta.outputs.DATE }}
+          APK_PATH: ${{ steps.meta.outputs.APK_PATH }}
         run: |
           NEW_NAME="PROTOTYPE_TEST-${BUILD_NUMBER}-${COMMIT_HASH}(${DATE}).apk"
           DIR=$(dirname "$APK_PATH")

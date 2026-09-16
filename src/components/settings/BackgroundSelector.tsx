@@ -37,7 +37,7 @@ export function BackgroundSelector() {
                 "glass glass-hover flex flex-col justify-between p-3 text-left transition-all cursor-pointer relative rounded-md overflow-hidden",
                 isSelected
                   ? "ring-2 ring-primary border-primary bg-card"
-                  : "border-border/80 hover:bg-card/70"
+                  : "border-border/80 hover:bg-card/70",
               )}
             >
               {/* Visual Preview Swatch */}

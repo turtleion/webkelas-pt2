@@ -41,7 +41,9 @@ export function DataTable({
       <div className="flex min-h-[200px] w-full items-center justify-center border border-destructive/30 bg-destructive/5 p-6 text-center">
         <div className="flex flex-col items-center gap-2">
           <AlertCircle className="size-6 text-destructive" />
-          <p className="font-display text-base text-destructive">{t.common.error}</p>
+          <p className="font-display text-base text-destructive">
+            {t.common.error}
+          </p>
           <p className="max-w-md text-[13px] text-muted-foreground">{error}</p>
         </div>
       </div>
@@ -62,7 +64,12 @@ export function DataTable({
   }
 
   return (
-    <div className={cn("overflow-x-auto border border-border/70 bg-card/40", className)}>
+    <div
+      className={cn(
+        "overflow-x-auto border border-border/70 bg-card/40",
+        className,
+      )}
+    >
       {children}
     </div>
   );

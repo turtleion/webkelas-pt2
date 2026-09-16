@@ -19,7 +19,9 @@ export function useDutySchedule() {
       const rows = await getDutySchedule();
       setData(rows);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Gagal memuat jadwal piket");
+      setError(
+        err instanceof Error ? err.message : "Gagal memuat jadwal piket",
+      );
     } finally {
       setIsLoading(false);
     }

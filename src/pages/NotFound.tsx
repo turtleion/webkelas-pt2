@@ -14,9 +14,7 @@ export default function NotFound() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center px-5 py-16 text-center">
       <KelasMark className="size-16 text-primary" />
-      <p className="kicker mt-8 text-[10px]">
-        {kelas.nama || t.nav.home}
-      </p>
+      <p className="kicker mt-8 text-[10px]">{kelas.nama || t.nav.home}</p>
       <h1 className="mt-4 font-display text-[clamp(4rem,12vw,8rem)] font-medium leading-none tracking-[-0.03em]">
         404
       </h1>

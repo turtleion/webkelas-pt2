@@ -153,58 +153,191 @@ export const jadwal: JadwalHari[] = [
     hari: "Senin",
     rows: [
       { waktu: "07.00–07.45", pelajaran: "Upacara Bendera", guru: "—" },
-      { waktu: "07.45–09.15", pelajaran: "Matematika", guru: "Pak Agus Santoso, S.Pd." },
-      { waktu: "09.15–09.45", pelajaran: "Istirahat", guru: "", istirahat: true },
-      { waktu: "09.45–11.15", pelajaran: "Dasar-dasar Kejuruan TKJ", guru: "Bu Rina Wijayanti, S.Kom." },
-      { waktu: "11.15–12.00", pelajaran: "Bahasa Indonesia", guru: "Bu Siti Nurhaliza, M.Pd." },
-      { waktu: "12.00–12.45", pelajaran: "Istirahat & ibadah", guru: "", istirahat: true },
-      { waktu: "12.45–14.15", pelajaran: "PPKn", guru: "Bu Anisa Rahmawati, S.Pd." },
+      {
+        waktu: "07.45–09.15",
+        pelajaran: "Matematika",
+        guru: "Pak Agus Santoso, S.Pd.",
+      },
+      {
+        waktu: "09.15–09.45",
+        pelajaran: "Istirahat",
+        guru: "",
+        istirahat: true,
+      },
+      {
+        waktu: "09.45–11.15",
+        pelajaran: "Dasar-dasar Kejuruan TKJ",
+        guru: "Bu Rina Wijayanti, S.Kom.",
+      },
+      {
+        waktu: "11.15–12.00",
+        pelajaran: "Bahasa Indonesia",
+        guru: "Bu Siti Nurhaliza, M.Pd.",
+      },
+      {
+        waktu: "12.00–12.45",
+        pelajaran: "Istirahat & ibadah",
+        guru: "",
+        istirahat: true,
+      },
+      {
+        waktu: "12.45–14.15",
+        pelajaran: "PPKn",
+        guru: "Bu Anisa Rahmawati, S.Pd.",
+      },
     ],
   },
   {
     hari: "Selasa",
     rows: [
-      { waktu: "07.00–08.30", pelajaran: "Bahasa Inggris", guru: "Pak Dedi Kurniawan, S.Pd." },
-      { waktu: "08.30–09.15", pelajaran: "Dasar-dasar Kejuruan TKJ", guru: "Bu Rina Wijayanti, S.Kom." },
-      { waktu: "09.15–09.45", pelajaran: "Istirahat", guru: "", istirahat: true },
-      { waktu: "09.45–11.15", pelajaran: "Dasar-dasar Kejuruan TKJ", guru: "Bu Rina Wijayanti, S.Kom." },
-      { waktu: "11.15–12.00", pelajaran: "Informatika", guru: "Pak Eko Prasetyo, S.Kom." },
-      { waktu: "12.00–12.45", pelajaran: "Istirahat & ibadah", guru: "", istirahat: true },
-      { waktu: "12.45–14.15", pelajaran: "Seni Budaya", guru: "Bu Lestari Putri, S.Sn." },
+      {
+        waktu: "07.00–08.30",
+        pelajaran: "Bahasa Inggris",
+        guru: "Pak Dedi Kurniawan, S.Pd.",
+      },
+      {
+        waktu: "08.30–09.15",
+        pelajaran: "Dasar-dasar Kejuruan TKJ",
+        guru: "Bu Rina Wijayanti, S.Kom.",
+      },
+      {
+        waktu: "09.15–09.45",
+        pelajaran: "Istirahat",
+        guru: "",
+        istirahat: true,
+      },
+      {
+        waktu: "09.45–11.15",
+        pelajaran: "Dasar-dasar Kejuruan TKJ",
+        guru: "Bu Rina Wijayanti, S.Kom.",
+      },
+      {
+        waktu: "11.15–12.00",
+        pelajaran: "Informatika",
+        guru: "Pak Eko Prasetyo, S.Kom.",
+      },
+      {
+        waktu: "12.00–12.45",
+        pelajaran: "Istirahat & ibadah",
+        guru: "",
+        istirahat: true,
+      },
+      {
+        waktu: "12.45–14.15",
+        pelajaran: "Seni Budaya",
+        guru: "Bu Lestari Putri, S.Sn.",
+      },
     ],
   },
   {
     hari: "Rabu",
     rows: [
-      { waktu: "07.00–08.30", pelajaran: "Matematika", guru: "Pak Agus Santoso, S.Pd." },
-      { waktu: "08.30–09.15", pelajaran: "Bahasa Indonesia", guru: "Bu Siti Nurhaliza, M.Pd." },
-      { waktu: "09.15–09.45", pelajaran: "Istirahat", guru: "", istirahat: true },
-      { waktu: "09.45–11.15", pelajaran: "Sejarah", guru: "Pak Bambang Sutrisno, M.Pd." },
-      { waktu: "11.15–12.00", pelajaran: "PJOK", guru: "Pak Yudi Prasetyo, S.Pd." },
-      { waktu: "12.00–12.45", pelajaran: "Istirahat & ibadah", guru: "", istirahat: true },
-      { waktu: "12.45–14.15", pelajaran: "Projek IPAS", guru: "Bu Ratna Dewi, M.Si." },
+      {
+        waktu: "07.00–08.30",
+        pelajaran: "Matematika",
+        guru: "Pak Agus Santoso, S.Pd.",
+      },
+      {
+        waktu: "08.30–09.15",
+        pelajaran: "Bahasa Indonesia",
+        guru: "Bu Siti Nurhaliza, M.Pd.",
+      },
+      {
+        waktu: "09.15–09.45",
+        pelajaran: "Istirahat",
+        guru: "",
+        istirahat: true,
+      },
+      {
+        waktu: "09.45–11.15",
+        pelajaran: "Sejarah",
+        guru: "Pak Bambang Sutrisno, M.Pd.",
+      },
+      {
+        waktu: "11.15–12.00",
+        pelajaran: "PJOK",
+        guru: "Pak Yudi Prasetyo, S.Pd.",
+      },
+      {
+        waktu: "12.00–12.45",
+        pelajaran: "Istirahat & ibadah",
+        guru: "",
+        istirahat: true,
+      },
+      {
+        waktu: "12.45–14.15",
+        pelajaran: "Projek IPAS",
+        guru: "Bu Ratna Dewi, M.Si.",
+      },
     ],
   },
   {
     hari: "Kamis",
     rows: [
-      { waktu: "07.00–08.30", pelajaran: "Dasar-dasar Kejuruan TKJ", guru: "Bu Rina Wijayanti, S.Kom." },
-      { waktu: "08.30–09.15", pelajaran: "Bahasa Inggris", guru: "Pak Dedi Kurniawan, S.Pd." },
-      { waktu: "09.15–09.45", pelajaran: "Istirahat", guru: "", istirahat: true },
-      { waktu: "09.45–11.15", pelajaran: "PAI & Budi Pekerti", guru: "Pak Ahmad Fauzi, S.Ag." },
-      { waktu: "11.15–12.00", pelajaran: "Informatika", guru: "Pak Eko Prasetyo, S.Kom." },
-      { waktu: "12.00–12.45", pelajaran: "Istirahat & ibadah", guru: "", istirahat: true },
-      { waktu: "12.45–14.15", pelajaran: "Bimbingan Konseling", guru: "Bu Maya Kartika, S.Pd." },
+      {
+        waktu: "07.00–08.30",
+        pelajaran: "Dasar-dasar Kejuruan TKJ",
+        guru: "Bu Rina Wijayanti, S.Kom.",
+      },
+      {
+        waktu: "08.30–09.15",
+        pelajaran: "Bahasa Inggris",
+        guru: "Pak Dedi Kurniawan, S.Pd.",
+      },
+      {
+        waktu: "09.15–09.45",
+        pelajaran: "Istirahat",
+        guru: "",
+        istirahat: true,
+      },
+      {
+        waktu: "09.45–11.15",
+        pelajaran: "PAI & Budi Pekerti",
+        guru: "Pak Ahmad Fauzi, S.Ag.",
+      },
+      {
+        waktu: "11.15–12.00",
+        pelajaran: "Informatika",
+        guru: "Pak Eko Prasetyo, S.Kom.",
+      },
+      {
+        waktu: "12.00–12.45",
+        pelajaran: "Istirahat & ibadah",
+        guru: "",
+        istirahat: true,
+      },
+      {
+        waktu: "12.45–14.15",
+        pelajaran: "Bimbingan Konseling",
+        guru: "Bu Maya Kartika, S.Pd.",
+      },
     ],
   },
   {
     hari: "Jumat",
     rows: [
       { waktu: "07.00–07.45", pelajaran: "Tadarus & literasi", guru: "—" },
-      { waktu: "07.45–09.15", pelajaran: "PPKn", guru: "Bu Anisa Rahmawati, S.Pd." },
-      { waktu: "09.15–09.45", pelajaran: "Istirahat", guru: "", istirahat: true },
-      { waktu: "09.45–11.15", pelajaran: "PJOK", guru: "Pak Yudi Prasetyo, S.Pd." },
-      { waktu: "11.15–12.00", pelajaran: "Projek IPAS", guru: "Bu Ratna Dewi, M.Si." },
+      {
+        waktu: "07.45–09.15",
+        pelajaran: "PPKn",
+        guru: "Bu Anisa Rahmawati, S.Pd.",
+      },
+      {
+        waktu: "09.15–09.45",
+        pelajaran: "Istirahat",
+        guru: "",
+        istirahat: true,
+      },
+      {
+        waktu: "09.45–11.15",
+        pelajaran: "PJOK",
+        guru: "Pak Yudi Prasetyo, S.Pd.",
+      },
+      {
+        waktu: "11.15–12.00",
+        pelajaran: "Projek IPAS",
+        guru: "Bu Ratna Dewi, M.Si.",
+      },
     ],
   },
 ];
@@ -309,7 +442,8 @@ export const agenda: AgendaItem[] = [
     tanggal: "2026-09-09",
     judul: "Ulangan harian Matematika",
     kategori: "Akademik",
-    keterangan: "Materi: bilangan real dan operasi aljabar. Pelajari lagi catatan Bab 1.",
+    keterangan:
+      "Materi: bilangan real dan operasi aljabar. Pelajari lagi catatan Bab 1.",
   },
   {
     tanggal: "2026-09-16",
@@ -329,7 +463,8 @@ export const agenda: AgendaItem[] = [
     tanggal: "2026-12-18",
     judul: "Pembagian rapor semester gasal",
     kategori: "Akademik",
-    keterangan: "Pengambilan rapor bersama orang tua di ruang kelas. Waktu menyusul.",
+    keterangan:
+      "Pengambilan rapor bersama orang tua di ruang kelas. Waktu menyusul.",
   },
 ];
 
@@ -346,12 +481,60 @@ export interface GaleriItem {
 
 // PLACEHOLDER — ganti dengan foto dokumentasi asli
 export const galeri: GaleriItem[] = [
-  { id: "g-01", judul: "MPLS — hari pertama", tanggal: "2026-07-14", kategori: "MPLS", aspect: "4 / 5" },
-  { id: "g-02", judul: "Latihan baris-berbaris", tanggal: "2026-07-20", kategori: "Kegiatan", aspect: "3 / 2" },
-  { id: "g-03", judul: "Pembentukan pengurus kelas", tanggal: "2026-07-21", kategori: "Kelas", aspect: "1 / 1" },
-  { id: "g-04", judul: "Kerja bakti ruang kelas", tanggal: "2026-08-01", kategori: "Kelas", aspect: "3 / 2" },
-  { id: "g-05", judul: "Latihan upacara 17 Agustus", tanggal: "2026-08-12", kategori: "Sekolah", aspect: "4 / 3" },
-  { id: "g-06", judul: "Upacara 17 Agustus", tanggal: "2026-08-17", kategori: "Sekolah", aspect: "3 / 2" },
-  { id: "g-07", judul: "Piket mingguan kelompok 3", tanggal: "2026-08-26", kategori: "Kelas", aspect: "1 / 1" },
-  { id: "g-08", judul: "Praktik instalasi jaringan", tanggal: "2026-09-02", kategori: "TKJ", aspect: "4 / 5" },
+  {
+    id: "g-01",
+    judul: "MPLS — hari pertama",
+    tanggal: "2026-07-14",
+    kategori: "MPLS",
+    aspect: "4 / 5",
+  },
+  {
+    id: "g-02",
+    judul: "Latihan baris-berbaris",
+    tanggal: "2026-07-20",
+    kategori: "Kegiatan",
+    aspect: "3 / 2",
+  },
+  {
+    id: "g-03",
+    judul: "Pembentukan pengurus kelas",
+    tanggal: "2026-07-21",
+    kategori: "Kelas",
+    aspect: "1 / 1",
+  },
+  {
+    id: "g-04",
+    judul: "Kerja bakti ruang kelas",
+    tanggal: "2026-08-01",
+    kategori: "Kelas",
+    aspect: "3 / 2",
+  },
+  {
+    id: "g-05",
+    judul: "Latihan upacara 17 Agustus",
+    tanggal: "2026-08-12",
+    kategori: "Sekolah",
+    aspect: "4 / 3",
+  },
+  {
+    id: "g-06",
+    judul: "Upacara 17 Agustus",
+    tanggal: "2026-08-17",
+    kategori: "Sekolah",
+    aspect: "3 / 2",
+  },
+  {
+    id: "g-07",
+    judul: "Piket mingguan kelompok 3",
+    tanggal: "2026-08-26",
+    kategori: "Kelas",
+    aspect: "1 / 1",
+  },
+  {
+    id: "g-08",
+    judul: "Praktik instalasi jaringan",
+    tanggal: "2026-09-02",
+    kategori: "TKJ",
+    aspect: "4 / 5",
+  },
 ];

@@ -59,9 +59,7 @@ export default function Agenda() {
           meta={t.agenda.chronologicalMeta}
         />
 
-        <PlaceholderNote className="mt-8">
-          {t.agenda.note}
-        </PlaceholderNote>
+        <PlaceholderNote className="mt-8">{t.agenda.note}</PlaceholderNote>
 
         {isLoading ? (
           <div className="mt-16 flex justify-center py-12">
@@ -100,7 +98,9 @@ export default function Agenda() {
                         </div>
                         <div className="min-w-0 flex-1 border-l border-border pl-6 md:pl-10">
                           <div className="flex flex-wrap items-center gap-2.5">
-                            <span className="kicker text-[9px]">{item.category}</span>
+                            <span className="kicker text-[9px]">
+                              {item.category}
+                            </span>
                             {terdekat && (
                               <span className="kicker text-[9px] text-accent">
                                 {t.agenda.nearestTag}

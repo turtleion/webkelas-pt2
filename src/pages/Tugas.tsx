@@ -11,10 +11,36 @@ import { pecahTanggal } from "@/lib/tanggal";
 import { Link } from "react-router";
 import type { TaskRow } from "@/lib/db";
 
-const MONTHS_ID = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
-const MONTHS_EN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-const DAYS_ID = ["Min","Sen","Sel","Rab","Kam","Jum","Sab"];
-const DAYS_EN = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+const MONTHS_ID = [
+  "Januari",
+  "Februari",
+  "Maret",
+  "April",
+  "Mei",
+  "Juni",
+  "Juli",
+  "Agustus",
+  "September",
+  "Oktober",
+  "November",
+  "Desember",
+];
+const MONTHS_EN = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+const DAYS_ID = ["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"];
+const DAYS_EN = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 // Max tasks shown in the compact right-side list. Change here to adjust.
 const TASK_LIST_CAP = 6;
@@ -65,14 +91,22 @@ export default function Tugas() {
   const navigateMonth = (delta: number) => {
     let m = currentMonth + delta;
     let y = currentYear;
-    if (m < 0) { m = 11; y--; }
-    if (m > 11) { m = 0; y++; }
+    if (m < 0) {
+      m = 11;
+      y--;
+    }
+    if (m > 11) {
+      m = 0;
+      y++;
+    }
     setCurrentMonth(m);
     setCurrentYear(y);
   };
 
-  const calendarDays: Array<{ date: number | null; dateStr: string | null }> = [];
-  for (let i = 0; i < firstDay; i++) calendarDays.push({ date: null, dateStr: null });
+  const calendarDays: Array<{ date: number | null; dateStr: string | null }> =
+    [];
+  for (let i = 0; i < firstDay; i++)
+    calendarDays.push({ date: null, dateStr: null });
   for (let d = 1; d <= daysInMonth; d++) {
     const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
     calendarDays.push({ date: d, dateStr });
@@ -94,10 +128,13 @@ export default function Tugas() {
 
   const renderTaskList = (tasks: TaskRow[]) => {
     const grouped = Object.entries(
-      tasks.reduce((acc, item) => {
-        (acc[item.date] = acc[item.date] || []).push(item);
-        return acc;
-      }, {} as Record<string, TaskRow[]>)
+      tasks.reduce(
+        (acc, item) => {
+          (acc[item.date] = acc[item.date] || []).push(item);
+          return acc;
+        },
+        {} as Record<string, TaskRow[]>,
+      ),
     ).sort(([a], [b]) => a.localeCompare(b));
 
     return (
@@ -105,7 +142,8 @@ export default function Tugas() {
         {grouped.map(([date, items]) => (
           <div key={date} className="mb-3 last:mb-0">
             <p className="mb-1.5 font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
-              {pecahTanggal(date).hari} {pecahTanggal(date).bulanSingkat} {pecahTanggal(date).tahun}
+              {pecahTanggal(date).hari} {pecahTanggal(date).bulanSingkat}{" "}
+              {pecahTanggal(date).tahun}
             </p>
             <div className="space-y-2">
               {items.map((item) => (
@@ -114,7 +152,9 @@ export default function Tugas() {
                   to={`/tugas/${taskSlug(item)}`}
                   className="group flex items-center gap-3 rounded-lg border border-border/60 bg-card/40 p-3 transition-colors hover:border-primary/40 hover:bg-card/60"
                 >
-                  <span className={`min-w-0 flex-1 text-sm font-medium ${item.completed ? "line-through text-muted-foreground" : ""}`}>
+                  <span
+                    className={`min-w-0 flex-1 text-sm font-medium ${item.completed ? "line-through text-muted-foreground" : ""}`}
+                  >
                     {item.title}
                   </span>
                   <span className="shrink-0 rounded bg-accent/15 px-2 py-0.5 font-mono text-[9px] uppercase tracking-wider text-accent">
@@ -133,7 +173,10 @@ export default function Tugas() {
   return (
     <div className="min-h-screen">
       <SiteHeader />
-      <main id="konten" className="mx-auto max-w-6xl px-5 py-12 md:px-8 md:py-16">
+      <main
+        id="konten"
+        className="mx-auto max-w-6xl px-5 py-12 md:px-8 md:py-16"
+      >
         <PageHeader
           nomor="02"
           label={t.nav.agenda}
@@ -147,31 +190,62 @@ export default function Tugas() {
           </div>
         ) : (
           <>
-            <div className={`mt-8 grid gap-8 ${showAll ? "lg:grid-cols-1" : "lg:grid-cols-3"}`}>
+            <div
+              className={`mt-8 grid gap-8 ${showAll ? "lg:grid-cols-1" : "lg:grid-cols-3"}`}
+            >
               {/* Calendar — main area */}
               <div className={showAll ? "" : "lg:col-span-2"}>
                 <div className="glass rounded-xl border border-border/60 p-5">
                   <div className="mb-4 flex items-center justify-between">
-                    <button type="button" onClick={() => navigateMonth(-1)} className="rounded px-3 py-1 font-mono text-sm text-muted-foreground hover:bg-card/80 hover:text-foreground">←</button>
-                    <h2 className="font-display text-xl font-medium">{months[currentMonth]} {currentYear}</h2>
-                    <button type="button" onClick={() => navigateMonth(1)} className="rounded px-3 py-1 font-mono text-sm text-muted-foreground hover:bg-card/80 hover:text-foreground">→</button>
+                    <button
+                      type="button"
+                      onClick={() => navigateMonth(-1)}
+                      className="rounded px-3 py-1 font-mono text-sm text-muted-foreground hover:bg-card/80 hover:text-foreground"
+                    >
+                      ←
+                    </button>
+                    <h2 className="font-display text-xl font-medium">
+                      {months[currentMonth]} {currentYear}
+                    </h2>
+                    <button
+                      type="button"
+                      onClick={() => navigateMonth(1)}
+                      className="rounded px-3 py-1 font-mono text-sm text-muted-foreground hover:bg-card/80 hover:text-foreground"
+                    >
+                      →
+                    </button>
                   </div>
 
                   {/* Balanced date cells: py matches horizontal gap */}
-                  <div className={`grid grid-cols-7 gap-1.5 text-center ${showAll ? "min-h-[300px]" : "min-h-[240px]"}`}>
+                  <div
+                    className={`grid grid-cols-7 gap-1.5 text-center ${showAll ? "min-h-[300px]" : "min-h-[240px]"}`}
+                  >
                     {dayNames.map((d) => (
-                      <div key={d} className="py-1.5 font-mono text-[10px] uppercase tracking-wider text-muted-foreground">{d}</div>
+                      <div
+                        key={d}
+                        className="py-1.5 font-mono text-[10px] uppercase tracking-wider text-muted-foreground"
+                      >
+                        {d}
+                      </div>
                     ))}
                     {calendarDays.map((cell, i) => {
-                      if (cell.date === null) return <div key={`empty-${i}`} className="py-3" />;
-                      const hasTasks = cell.dateStr && tasksByDate[cell.dateStr]?.length;
+                      if (cell.date === null)
+                        return <div key={`empty-${i}`} className="py-3" />;
+                      const hasTasks =
+                        cell.dateStr && tasksByDate[cell.dateStr]?.length;
                       const isToday = cell.dateStr === todayStr;
                       const isSelected = cell.dateStr === selectedDate;
                       return (
                         <button
                           key={cell.dateStr}
                           type="button"
-                          onClick={() => setSelectedDate(cell.dateStr === selectedDate ? null : cell.dateStr)}
+                          onClick={() =>
+                            setSelectedDate(
+                              cell.dateStr === selectedDate
+                                ? null
+                                : cell.dateStr,
+                            )
+                          }
                           className={`relative flex cursor-pointer flex-col items-center justify-center rounded-lg py-3 text-sm transition-colors ${
                             isSelected
                               ? "bg-primary/20 ring-2 ring-primary font-semibold text-primary"
@@ -185,9 +259,14 @@ export default function Tugas() {
                           <span>{cell.date}</span>
                           {hasTasks && (
                             <div className="mt-0.5 flex gap-0.5">
-                              {tasksByDate[cell.dateStr!].slice(0, 3).map((_, j) => (
-                                <span key={j} className="inline-block size-1 rounded-full bg-accent" />
-                              ))}
+                              {tasksByDate[cell.dateStr!]
+                                .slice(0, 3)
+                                .map((_, j) => (
+                                  <span
+                                    key={j}
+                                    className="inline-block size-1 rounded-full bg-accent"
+                                  />
+                                ))}
                             </div>
                           )}
                         </button>
@@ -204,10 +283,16 @@ export default function Tugas() {
               {/* Right-side task list (capped) — only when collapsed */}
               {!showAll && (
                 <div className="block">
-                  <h3 className="mb-3 font-display text-lg font-medium">{t.tasks.allTasks}</h3>
-                  <p className="mb-3 text-[12px] text-muted-foreground">{t.tasks.clickTaskHint}</p>
+                  <h3 className="mb-3 font-display text-lg font-medium">
+                    {t.tasks.allTasks}
+                  </h3>
+                  <p className="mb-3 text-[12px] text-muted-foreground">
+                    {t.tasks.clickTaskHint}
+                  </p>
                   {cappedTasks.length === 0 ? (
-                    <p className="text-sm italic text-muted-foreground">{t.tasks.empty}</p>
+                    <p className="text-sm italic text-muted-foreground">
+                      {t.tasks.empty}
+                    </p>
                   ) : (
                     <>
                       {renderTaskList(cappedTasks)}
@@ -229,8 +314,12 @@ export default function Tugas() {
             {/* Expanded full task list below calendar */}
             {showAll && (
               <div className="mt-8 border-t border-border/60 pt-6">
-                <h3 className="mb-1 font-display text-lg font-medium">{t.tasks.allTasks}</h3>
-                <p className="mb-3 text-[12px] text-muted-foreground">{t.tasks.clickTaskHint}</p>
+                <h3 className="mb-1 font-display text-lg font-medium">
+                  {t.tasks.allTasks}
+                </h3>
+                <p className="mb-3 text-[12px] text-muted-foreground">
+                  {t.tasks.clickTaskHint}
+                </p>
                 {renderTaskList(filteredTasks)}
                 <div className="mt-4 flex justify-center">
                   <button
@@ -284,7 +373,9 @@ export default function Tugas() {
               </div>
             ) : selectedDate ? (
               <div className="mt-10 border-t border-border/60 pt-8 text-center">
-                <p className="text-sm italic text-muted-foreground">{t.tasks.empty}</p>
+                <p className="text-sm italic text-muted-foreground">
+                  {t.tasks.empty}
+                </p>
               </div>
             ) : null}
           </>

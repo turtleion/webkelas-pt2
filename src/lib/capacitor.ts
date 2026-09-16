@@ -4,19 +4,65 @@ import { Browser } from "@capacitor/browser";
 import { StatusBar } from "@capacitor/status-bar";
 import { Keyboard } from "@capacitor/keyboard";
 import { SplashScreen } from "@capacitor/splash-screen";
+import { PushNotifications } from "@capacitor/push-notifications";
 import { GoogleSignIn } from "@capawesome/capacitor-google-sign-in";
 import { supabase } from "./supabase";
+
+const isAndroid = Capacitor.getPlatform() === "android";
+
+// Web Client ID dari Google Cloud Console (type "Web application", bukan Android)
+const GOOGLE_WEB_CLIENT_ID = import.meta.env
+  .VITE_GOOGLE_WEB_CLIENT_ID as string;
+
+let fcmToken: string | null = null;
+
+/** Simpan token FCM ke Supabase — pakai upsert, aman dijalankan ulang. */
+async function persistFcmToken(token: string) {
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return; // belum login → tidak ada user_id untuk token
+  await supabase
+    .from("push_tokens")
+    .upsert(
+      { user_id: user.id, token, platform: "android" },
+      { onConflict: "token" },
+    );
+}
+
+// Kalau token sudah ada (registrasi terjadi sebelum login), persist setelah
+// user masuk. Auth state listener aktif terus di native.
+if (Capacitor.isNativePlatform()) {
+  supabase.auth.onAuthStateChange((event, session) => {
+    if (event === "SIGNED_IN" && fcmToken) {
+      void persistFcmToken(fcmToken);
+    }
+  });
+}
+
+async function registerPush() {
+  if (!Capacitor.isNativePlatform() || !isAndroid) return;
+
+  // Android 13+: butuh izin runtime (POST_NOTIFICATIONS) sebelum bisa terima.
+  const perm = await PushNotifications.requestPermissions();
+  if (perm.receive !== "granted") return;
+
+  await PushNotifications.register();
+}
+
+async function refreshBannerAndToken() {
+  // Re-register kalau token berubah (FCM bisa rotate token).
+  if (fcmToken) {
+    await persistFcmToken(fcmToken);
+  } else {
+    await registerPush();
+  }
+}
 
 /**
  * Inisialisasi Capacitor — native-only. Dipanggil sekali dari src/main.tsx
  * dalam blok `if (Capacitor.isNativePlatform())`.
  */
-
-const isAndroid = Capacitor.getPlatform() === "android";
-
-// Web Client ID dari Google Cloud Console (type "Web application", bukan Android)
-const GOOGLE_WEB_CLIENT_ID = import.meta.env.VITE_GOOGLE_WEB_CLIENT_ID as string;
-
 export function initCapacitorNative() {
   if (!Capacitor.isNativePlatform()) return;
 
@@ -29,11 +75,31 @@ export function initCapacitorNative() {
     }
   });
 
-  // --- Refresh sesi Supabase saat app kembali aktif (token bisa expire) ---
+  // --- Refresh sesi + banner saat app kembali aktif (auto-refresh) ----------
   void App.addListener("appStateChange", ({ isActive }) => {
     if (isActive) {
       void supabase.auth.getSession();
+      void refreshBannerAndToken();
     }
+  });
+
+  // --- FCM: daftar token + listener notifikasi ------------------------------
+  void registerPush();
+  PushNotifications.addListener("registration", ({ value }) => {
+    fcmToken = value;
+    void persistFcmToken(value);
+  });
+  PushNotifications.addListener("registrationError", ({ error }) => {
+    console.warn("[FCM] registration error:", error);
+  });
+  PushNotifications.addListener("pushNotificationReceived", (notification) => {
+    // App aktif: tampilkan via banner in-app (bukan notif OS ganda).
+    console.log("[FCM] received:", notification);
+  });
+  PushNotifications.addListener("pushNotificationActionPerformed", (action) => {
+    // User tap notif OS → buka /daily. Reload penuh: app bisa mati saat itu.
+    const path = (action.notification.data?.path as string) ?? "/daily";
+    window.location.href = `${window.location.origin}${path}`;
   });
 
   // --- Status bar: ikuti tema (default web: paper cream #f4eddd) ---

@@ -21,6 +21,9 @@ export const en: TranslationSchema = {
     closeMenu: "Close menu",
     mainWebsite: "Main Website",
     memberSpace: "Member Space",
+    daily: "Daily",
+    dailyOverview: "Daily Overview",
+    download: "Download",
   },
   settings: {
     title: "Settings",
@@ -64,7 +67,8 @@ export const en: TranslationSchema = {
     dreamyDesc:
       "Soft pastels, dreamy haze, and thick frosted-cloud blur that feels calm and ethereal.",
     minimalistic: "Minimalist",
-    minimalisticDesc: "Clean, modern, professional monochrome in black, white, and gray.",
+    minimalisticDesc:
+      "Clean, modern, professional monochrome in black, white, and gray.",
     custom: "Custom",
     customDesc: "Your unique custom combination of colors, fonts, and layout.",
   },
@@ -338,7 +342,25 @@ export const en: TranslationSchema = {
     deleteConfirmTitle: "Confirm Deletion",
     deleteConfirmDesc:
       "Are you sure you want to delete this record? This action cannot be undone.",
-    // Announcements,
+
+    // Daily notification
+    notification: "Daily Notification",
+    notificationHeading: "Tomorrow's Notice",
+    notificationDesc:
+      "Prepare and correct the daily data for the next school day. While an intervention is active, the automatic process will not overwrite it.",
+    targetDateLabel: "Target Date",
+    clothingLabel: "Clothing",
+    belongingsLabel: "What to Bring (one per line)",
+    noteLabel: "Note",
+    interventionSave: "Save Intervention",
+    interventionClear: "Revert to Automatic",
+    interventionSaved: "Intervention saved. Manual data is now authoritative.",
+    interventionCleared: "Intervention cleared. Data reverts to automatic.",
+    interventionSaveError: "Failed to save the intervention.",
+    automaticData: "Automatic Data",
+    interventionData: "Admin Intervention",
+
+    // Announcements
     announcementsDesc:
       "Publish important announcements, homeroom teacher circulars, and school assignment information",
     announcementsTableSearch: "date",
@@ -620,6 +642,43 @@ export const en: TranslationSchema = {
     members: "Members",
     area: "Area",
     todayDuty: "Today's Duty",
+  },
+  daily: {
+    pageTitle: "Daily Overview",
+    heading: "Tomorrow's Notice",
+    description:
+      "A complete overview for the next school day: schedule, duty, MBG, tasks, clothing, and what to bring.",
+    empty: "Nothing yet for the next school day.",
+    notGenerated:
+      "Tomorrow's notice has not been generated yet. Admins can prepare it early from the admin panel.",
+    scheduleSection: "Lesson Schedule",
+    dutySection: "Duty Schedule",
+    mbgSection: "MBG Schedule",
+    tasksSection: "Tasks",
+    noTasks: "No tasks for this day.",
+    noSchedule: "No schedule for this day yet.",
+    clothing: "Clothing",
+    belongings: "What to Bring",
+    note: "Note",
+    bannerTitle: "Tomorrow's Notice",
+    bannerBody: "Tomorrow's notice is ready — take a look!",
+    bannerCta: "View overview",
+    bannerDismiss: "Dismiss notice",
+  },
+  download: {
+    pageTitle: "Download App",
+    heading: "Download the Android App",
+    description:
+      "Install Arsip Kelas Digital on your Android device for faster access without a browser.",
+    version: "Latest version",
+    downloadApk: "Download APK",
+    allReleases: "All releases",
+    requirement: "Requires Android 7.0 (API 24) or newer.",
+    stepsTitle: "How to install",
+    step1: "Download the APK file from the link above.",
+    step2:
+      "Open the APK on your device (allow installs from this source if prompted).",
+    step3: "Wait for the installation to finish, then open the app.",
   },
   footer: {
     explore: "Explore",

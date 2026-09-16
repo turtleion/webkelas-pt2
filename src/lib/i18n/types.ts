@@ -21,6 +21,9 @@ export interface TranslationSchema {
     closeMenu: string;
     mainWebsite: string;
     memberSpace: string;
+    daily: string;
+    dailyOverview: string;
+    download: string;
   };
   settings: {
     title: string;
@@ -303,6 +306,20 @@ export interface TranslationSchema {
     actions: string;
     deleteConfirmTitle: string;
     deleteConfirmDesc: string;
+    notification: string;
+    notificationHeading: string;
+    notificationDesc: string;
+    targetDateLabel: string;
+    clothingLabel: string;
+    belongingsLabel: string;
+    noteLabel: string;
+    interventionSave: string;
+    interventionClear: string;
+    interventionSaved: string;
+    interventionCleared: string;
+    interventionSaveError: string;
+    automaticData: string;
+    interventionData: string;
 
     // Toast messages — agenda
     toastAgendaRequired: string;
@@ -578,6 +595,39 @@ export interface TranslationSchema {
     members: string;
     area: string;
     todayDuty: string;
+  };
+  daily: {
+    pageTitle: string;
+    heading: string;
+    description: string;
+    empty: string;
+    notGenerated: string;
+    scheduleSection: string;
+    dutySection: string;
+    mbgSection: string;
+    tasksSection: string;
+    noTasks: string;
+    noSchedule: string;
+    clothing: string;
+    belongings: string;
+    note: string;
+    bannerTitle: string;
+    bannerBody: string;
+    bannerCta: string;
+    bannerDismiss: string;
+  };
+  download: {
+    pageTitle: string;
+    heading: string;
+    description: string;
+    version: string;
+    downloadApk: string;
+    allReleases: string;
+    requirement: string;
+    stepsTitle: string;
+    step1: string;
+    step2: string;
+    step3: string;
   };
   footer: {
     explore: string;

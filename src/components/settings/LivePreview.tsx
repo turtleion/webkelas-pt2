@@ -15,11 +15,13 @@ export function LivePreview() {
             {t.settings.previewLabel || "Pratinjau Langsung"}
           </h3>
           <p className="text-[13px] text-muted-foreground">
-            Tampilan interaktif komponen website menggunakan token tema dan corak aktif saat ini.
+            Tampilan interaktif komponen website menggunakan token tema dan
+            corak aktif saat ini.
           </p>
         </div>
         <span className="font-mono text-[10px] uppercase tracking-wider px-2 py-0.5 rounded bg-primary/10 text-primary border border-primary/20">
-          Mode: {preferences.mode.toUpperCase()} · Tema: {preferences.theme.toUpperCase()}
+          Mode: {preferences.mode.toUpperCase()} · Tema:{" "}
+          {preferences.theme.toUpperCase()}
         </span>
       </div>
 
@@ -54,7 +56,9 @@ export function LivePreview() {
           </div>
 
           <div className="hidden sm:flex items-center gap-4 font-mono text-[10px] uppercase tracking-wider opacity-85">
-            <span className="border-b border-accent pb-0.5 font-bold opacity-100">{t.nav.home}</span>
+            <span className="border-b border-accent pb-0.5 font-bold opacity-100">
+              {t.nav.home}
+            </span>
             <span>{t.nav.members}</span>
             <span>{t.nav.schedule}</span>
             <span>{t.nav.gallery}</span>
@@ -78,7 +82,8 @@ export function LivePreview() {
             Dokumentasi & Ruang Bersama
           </h2>
           <p className="text-xs text-muted-foreground leading-relaxed">
-            Satu kelas, 36 siswa, dan satu tahun pelajaran — seluruh arsip, jadwal, dan kegiatan dicatat secara rapi di sini.
+            Satu kelas, 36 siswa, dan satu tahun pelajaran — seluruh arsip,
+            jadwal, dan kegiatan dicatat secara rapi di sini.
           </p>
         </div>
 
@@ -104,7 +109,8 @@ export function LivePreview() {
                 Jadwal Ujian Semester
               </h4>
               <p className="text-[11px] text-muted-foreground line-clamp-2">
-                Pelaksanaan penilaian akhir semester ganjil dimulai hari Senin pekan depan.
+                Pelaksanaan penilaian akhir semester ganjil dimulai hari Senin
+                pekan depan.
               </p>
             </div>
             <div className="mt-3 pt-2 border-t border-border/40 flex justify-between items-center text-[10px] text-accent font-medium">
@@ -133,7 +139,8 @@ export function LivePreview() {
                 Kerja Bakti Lab TKJ
               </h4>
               <p className="text-[11px] text-muted-foreground line-clamp-2">
-                Pembersihan rutin perangkat PC dan perapihan kabel patch cord ruang lab 2.
+                Pembersihan rutin perangkat PC dan perapihan kabel patch cord
+                ruang lab 2.
               </p>
             </div>
             <div className="mt-3 pt-2 border-t border-border/40 flex justify-between items-center text-[10px] text-primary font-medium">

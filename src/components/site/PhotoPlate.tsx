@@ -73,7 +73,9 @@ export function PhotoPlate({
               <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/50">
                 Foto belum diarsip
               </span>
-              <span className="font-mono text-[10px] text-foreground/35">{label}</span>
+              <span className="font-mono text-[10px] text-foreground/35">
+                {label}
+              </span>
             </div>
           </>
         )}

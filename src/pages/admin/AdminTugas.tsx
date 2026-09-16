@@ -22,10 +22,36 @@ import { Link } from "react-router";
 import { toast } from "sonner";
 import { taskSlug } from "../Tugas";
 
-const MONTHS_ID = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
-const MONTHS_EN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-const DAYS_ID = ["Min","Sen","Sel","Rab","Kam","Jum","Sab"];
-const DAYS_EN = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+const MONTHS_ID = [
+  "Januari",
+  "Februari",
+  "Maret",
+  "April",
+  "Mei",
+  "Juni",
+  "Juli",
+  "Agustus",
+  "September",
+  "Oktober",
+  "November",
+  "Desember",
+];
+const MONTHS_EN = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+const DAYS_ID = ["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"];
+const DAYS_EN = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 function getDaysInMonth(year: number, month: number) {
   return new Date(year, month + 1, 0).getDate();
@@ -37,8 +63,15 @@ function getFirstDayOfMonth(year: number, month: number) {
 export default function AdminTugas() {
   const { t, locale } = useTranslation();
   usePageTitle(`${t.tasks.heading} — Panel`);
-  const { data: agendaItems, isLoading, error, refresh, create, update, remove } =
-    useTasks();
+  const {
+    data: agendaItems,
+    isLoading,
+    error,
+    refresh,
+    create,
+    update,
+    remove,
+  } = useTasks();
 
   const today = new Date();
   const [currentYear, setCurrentYear] = useState(today.getFullYear());
@@ -75,14 +108,22 @@ export default function AdminTugas() {
   const navigateMonth = (delta: number) => {
     let m = currentMonth + delta;
     let y = currentYear;
-    if (m < 0) { m = 11; y--; }
-    if (m > 11) { m = 0; y++; }
+    if (m < 0) {
+      m = 11;
+      y--;
+    }
+    if (m > 11) {
+      m = 0;
+      y++;
+    }
     setCurrentMonth(m);
     setCurrentYear(y);
   };
 
-  const calendarDays: Array<{ date: number | null; dateStr: string | null }> = [];
-  for (let i = 0; i < firstDay; i++) calendarDays.push({ date: null, dateStr: null });
+  const calendarDays: Array<{ date: number | null; dateStr: string | null }> =
+    [];
+  for (let i = 0; i < firstDay; i++)
+    calendarDays.push({ date: null, dateStr: null });
   for (let d = 1; d <= daysInMonth; d++) {
     const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
     calendarDays.push({ date: d, dateStr });
@@ -157,7 +198,7 @@ export default function AdminTugas() {
     }
   };
 
-  const dayTasks = selectedDate ? tasksByDate[selectedDate] ?? [] : [];
+  const dayTasks = selectedDate ? (tasksByDate[selectedDate] ?? []) : [];
 
   return (
     <AdminLayout>
@@ -186,17 +227,38 @@ export default function AdminTugas() {
           <div className="lg:col-span-2">
             <div className="glass rounded-xl border border-border/60 p-5">
               <div className="mb-4 flex items-center justify-between">
-                <button type="button" onClick={() => navigateMonth(-1)} className="rounded px-3 py-1 font-mono text-sm text-muted-foreground hover:bg-card/80 hover:text-foreground">←</button>
-                <h2 className="font-display text-xl font-medium">{months[currentMonth]} {currentYear}</h2>
-                <button type="button" onClick={() => navigateMonth(1)} className="rounded px-3 py-1 font-mono text-sm text-muted-foreground hover:bg-card/80 hover:text-foreground">→</button>
+                <button
+                  type="button"
+                  onClick={() => navigateMonth(-1)}
+                  className="rounded px-3 py-1 font-mono text-sm text-muted-foreground hover:bg-card/80 hover:text-foreground"
+                >
+                  ←
+                </button>
+                <h2 className="font-display text-xl font-medium">
+                  {months[currentMonth]} {currentYear}
+                </h2>
+                <button
+                  type="button"
+                  onClick={() => navigateMonth(1)}
+                  className="rounded px-3 py-1 font-mono text-sm text-muted-foreground hover:bg-card/80 hover:text-foreground"
+                >
+                  →
+                </button>
               </div>
               <div className="grid grid-cols-7 gap-1.5 text-center min-h-[260px]">
                 {dayNames.map((d) => (
-                  <div key={d} className="py-1.5 font-mono text-[10px] uppercase tracking-wider text-muted-foreground">{d}</div>
+                  <div
+                    key={d}
+                    className="py-1.5 font-mono text-[10px] uppercase tracking-wider text-muted-foreground"
+                  >
+                    {d}
+                  </div>
                 ))}
                 {calendarDays.map((cell, i) => {
-                  if (cell.date === null) return <div key={`empty-${i}`} className="py-3" />;
-                  const hasTasks = cell.dateStr && tasksByDate[cell.dateStr]?.length;
+                  if (cell.date === null)
+                    return <div key={`empty-${i}`} className="py-3" />;
+                  const hasTasks =
+                    cell.dateStr && tasksByDate[cell.dateStr]?.length;
                   const isToday = cell.dateStr === todayStr;
                   const isSelected = cell.dateStr === selectedDate;
                   return (
@@ -217,9 +279,14 @@ export default function AdminTugas() {
                       <span>{cell.date}</span>
                       {hasTasks && (
                         <div className="mt-0.5 flex gap-0.5">
-                          {tasksByDate[cell.dateStr!].slice(0, 3).map((_, j) => (
-                            <span key={j} className="inline-block size-1 rounded-full bg-accent" />
-                          ))}
+                          {tasksByDate[cell.dateStr!]
+                            .slice(0, 3)
+                            .map((_, j) => (
+                              <span
+                                key={j}
+                                className="inline-block size-1 rounded-full bg-accent"
+                              />
+                            ))}
                         </div>
                       )}
                     </button>
@@ -237,15 +304,25 @@ export default function AdminTugas() {
           <div className="block">
             <div className="mb-3 flex items-center justify-between">
               <h3 className="font-display text-lg font-medium">
-                {selectedDate ? pecahTanggal(selectedDate).hari + " " + pecahTanggal(selectedDate).bulanSingkat + " " + pecahTanggal(selectedDate).tahun : "Pilih tanggal"}
+                {selectedDate
+                  ? pecahTanggal(selectedDate).hari +
+                    " " +
+                    pecahTanggal(selectedDate).bulanSingkat +
+                    " " +
+                    pecahTanggal(selectedDate).tahun
+                  : "Pilih tanggal"}
               </h3>
-              <span className="font-mono text-[10px] uppercase text-muted-foreground">{selectedDate}</span>
+              <span className="font-mono text-[10px] uppercase text-muted-foreground">
+                {selectedDate}
+              </span>
             </div>
 
             {error ? (
               <p className="text-sm italic text-destructive">{error}</p>
             ) : dayTasks.length === 0 ? (
-              <p className="text-sm italic text-muted-foreground">{t.tasks.empty}</p>
+              <p className="text-sm italic text-muted-foreground">
+                {t.tasks.empty}
+              </p>
             ) : (
               <div className="space-y-3">
                 {dayTasks.map((item) => (
@@ -255,7 +332,9 @@ export default function AdminTugas() {
                   >
                     <div className="flex items-start justify-between gap-3">
                       <div className="min-w-0">
-                        <h4 className={`font-display text-base font-medium ${item.completed ? "line-through text-muted-foreground" : ""}`}>
+                        <h4
+                          className={`font-display text-base font-medium ${item.completed ? "line-through text-muted-foreground" : ""}`}
+                        >
                           {item.title}
                         </h4>
                         <span className="mt-1 inline-block rounded bg-accent/15 px-2 py-0.5 font-mono text-[9px] uppercase tracking-wider text-accent">
@@ -275,10 +354,20 @@ export default function AdminTugas() {
                         >
                           <ExternalLink className="size-3.5" />
                         </Link>
-                        <Button variant="ghost" size="icon-sm" onClick={() => openEditModal(item)} className="size-7 cursor-pointer hover:bg-background/80">
+                        <Button
+                          variant="ghost"
+                          size="icon-sm"
+                          onClick={() => openEditModal(item)}
+                          className="size-7 cursor-pointer hover:bg-background/80"
+                        >
                           <Edit2 className="size-3.5 text-muted-foreground" />
                         </Button>
-                        <Button variant="ghost" size="icon-sm" onClick={() => setDeleteTarget(item)} className="size-7 cursor-pointer text-destructive hover:bg-destructive/10">
+                        <Button
+                          variant="ghost"
+                          size="icon-sm"
+                          onClick={() => setDeleteTarget(item)}
+                          className="size-7 cursor-pointer text-destructive hover:bg-destructive/10"
+                        >
                           <Trash2 className="size-3.5" />
                         </Button>
                       </div>
@@ -361,7 +450,9 @@ export default function AdminTugas() {
                 disabled={isSubmitting}
                 className="bg-primary text-primary-foreground font-mono text-[11px] uppercase tracking-wider"
               >
-                {isSubmitting && <Loader2 className="size-3.5 animate-spin mr-1.5" />}
+                {isSubmitting && (
+                  <Loader2 className="size-3.5 animate-spin mr-1.5" />
+                )}
                 {t.common.save}
               </Button>
             </DialogFooter>

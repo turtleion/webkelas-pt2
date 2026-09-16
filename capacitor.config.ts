@@ -1,19 +1,19 @@
-import type { CapacitorConfig } from '@capacitor/cli';
+import type { CapacitorConfig } from "@capacitor/cli";
 
 const config: CapacitorConfig = {
-  appId: 'ts.arsipkelas.xtkj1',
-  appName: 'Arsip Kelas TKJ',
-  webDir: 'dist',
+  appId: "ts.arsipkelas.xtkj1",
+  appName: "Arsip Kelas TKJ",
+  webDir: "dist",
   server: {
-    androidScheme: 'https',
+    androidScheme: "https",
   },
   plugins: {
     SplashScreen: {
       launchShowDuration: 1500,
     },
     Keyboard: {
-      resize: 'body',
-      style: 'DARK',
+      resize: "body",
+      style: "DARK",
     },
   },
 };

@@ -25,11 +25,14 @@ import { toast } from "sonner";
 export default function AdminGallery() {
   const { t } = useTranslation();
   usePageTitle(`${t.admin.gallery} — Panel`);
-  const { data, isLoading, error, refresh, create, update, remove } = useGallery();
+  const { data, isLoading, error, refresh, create, update, remove } =
+    useGallery();
 
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<GalleryPhotoRow | null>(null);
-  const [deleteTarget, setDeleteTarget] = useState<GalleryPhotoRow | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<GalleryPhotoRow | null>(
+    null,
+  );
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -146,7 +149,9 @@ export default function AdminGallery() {
       setDialogOpen(false);
       await refresh();
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : t.admin.toastPhotoUploadError);
+      toast.error(
+        err instanceof Error ? err.message : t.admin.toastPhotoUploadError,
+      );
     } finally {
       setIsUploading(false);
     }
@@ -261,14 +266,18 @@ export default function AdminGallery() {
         <DialogContent className="glass glass-strong max-w-lg border-border/80 text-foreground">
           <DialogHeader>
             <DialogTitle className="font-display text-2xl font-medium tracking-tight">
-              {editingItem ? t.admin.galleryFormTitle : t.admin.galleryFormCreateTitle}
+              {editingItem
+                ? t.admin.galleryFormTitle
+                : t.admin.galleryFormCreateTitle}
             </DialogTitle>
           </DialogHeader>
 
           <form onSubmit={handleSubmit} className="mt-4 space-y-4">
             {/* File Upload Box */}
             <div>
-              <label className="kicker block text-[10px]">Pilih Berkas Foto</label>
+              <label className="kicker block text-[10px]">
+                Pilih Berkas Foto
+              </label>
               <input
                 ref={fileInputRef}
                 type="file"
@@ -306,7 +315,9 @@ export default function AdminGallery() {
             </div>
 
             <div>
-              <label className="kicker block text-[10px]">Judul Foto / Momen</label>
+              <label className="kicker block text-[10px]">
+                Judul Foto / Momen
+              </label>
               <Input
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
@@ -340,7 +351,9 @@ export default function AdminGallery() {
               </div>
 
               <div>
-                <label className="kicker block text-[10px]">Rasio Bingkai</label>
+                <label className="kicker block text-[10px]">
+                  Rasio Bingkai
+                </label>
                 <select
                   value={aspect}
                   onChange={(e) => setAspect(e.target.value)}
@@ -380,7 +393,9 @@ export default function AdminGallery() {
                 disabled={isUploading}
                 className="bg-primary text-primary-foreground font-mono text-[11px] uppercase tracking-wider"
               >
-                {isUploading && <Loader2 className="size-3.5 animate-spin mr-1.5" />}
+                {isUploading && (
+                  <Loader2 className="size-3.5 animate-spin mr-1.5" />
+                )}
                 {isUploading ? t.common.loading : t.common.save}
               </Button>
             </DialogFooter>

@@ -28,12 +28,15 @@ export default function ArtikelDetail() {
         if (mounted) setArticle(a);
       })
       .catch((e) => {
-        if (mounted) setError(e instanceof Error ? e.message : "Gagal memuat artikel");
+        if (mounted)
+          setError(e instanceof Error ? e.message : "Gagal memuat artikel");
       })
       .finally(() => {
         if (mounted) setIsLoading(false);
       });
-    return () => { mounted = false; };
+    return () => {
+      mounted = false;
+    };
   }, [slug]);
 
   const td = article ? pecahTanggal(article.created_at.slice(0, 10)) : null;
@@ -47,7 +50,10 @@ export default function ArtikelDetail() {
   return (
     <div className="min-h-screen">
       <SiteHeader />
-      <main id="konten" className="mx-auto max-w-3xl px-5 py-12 md:px-8 md:py-16">
+      <main
+        id="konten"
+        className="mx-auto max-w-3xl px-5 py-12 md:px-8 md:py-16"
+      >
         <Link
           to="/artikel"
           className="mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
@@ -61,7 +67,9 @@ export default function ArtikelDetail() {
             <Loader2 className="size-6 animate-spin text-primary" />
           </div>
         ) : error ? (
-          <p className="py-12 text-center font-display text-xl text-destructive">{error}</p>
+          <p className="py-12 text-center font-display text-xl text-destructive">
+            {error}
+          </p>
         ) : !article ? (
           <p className="py-12 text-center font-display text-xl italic text-muted-foreground">
             {t.articles.empty}

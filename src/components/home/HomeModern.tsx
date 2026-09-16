@@ -1,6 +1,12 @@
-import type { ArticleRow, AgendaRow, MemberRow, GalleryPhotoRow } from "@/lib/db";
+import type {
+  ArticleRow,
+  AgendaRow,
+  MemberRow,
+  GalleryPhotoRow,
+} from "@/lib/db";
 import type { KelasInfo } from "@/data/kelas";
 import { useTranslation } from "@/hooks/use-translation";
+import { HomeDownloadSection } from "@/components/home/HomeDownloadSection";
 import { Link } from "react-router";
 import { ArrowUpRight } from "lucide-react";
 
@@ -23,9 +29,10 @@ export function HomeModern({
 }: HomeLayoutProps) {
   const { t, interpolate } = useTranslation();
   const today = new Date().toISOString().slice(0, 10);
-  const upcoming = (agenda.filter((a) => a.date >= today).length > 0
-    ? agenda.filter((a) => a.date >= today)
-    : agenda.slice(-4)
+  const upcoming = (
+    agenda.filter((a) => a.date >= today).length > 0
+      ? agenda.filter((a) => a.date >= today)
+      : agenda.slice(-4)
   ).slice(0, 3);
 
   const stats = [
@@ -43,15 +50,15 @@ export function HomeModern({
           <div className="md:col-span-8">
             <span className="kicker text-[10px] tracking-[0.3em] text-primary">
               {t.home.heroTag}
-           </span>
+            </span>
             <h1 className="mt-5 font-display text-5xl font-medium leading-[1.05] tracking-tight md:text-7xl">
               {kelas.nama || "Arsip Kelas"}.
-           </h1>
+            </h1>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
               {interpolate(t.home.heroSubtitle, {
                 count: kelas.jumlahSiswa || anggota.length,
               })}
-           </p>
+            </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link
                 to="/artikel"
@@ -59,20 +66,20 @@ export function HomeModern({
               >
                 {t.home.readArticles}
                 <ArrowUpRight className="size-4" />
-             </Link>
+              </Link>
               <Link
                 to="/anggota"
                 className="inline-flex items-center gap-2 rounded-full border border-border bg-card/40 px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-card"
               >
                 {t.home.viewMembers}
-             </Link>
-           </div>
-         </div>
+              </Link>
+            </div>
+          </div>
 
           <div className="md:col-span-4 md:border-l md:border-border/60 md:pl-8">
             <p className="kicker mb-4 text-[10px] tracking-[0.25em] text-muted-foreground">
               {t.home.classIdentity}
-           </p>
+            </p>
             <dl className="space-y-3">
               {faktaIdentitas.slice(0, 5).map(([k, v]) => (
                 <div
@@ -81,13 +88,13 @@ export function HomeModern({
                 >
                   <dt className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
                     {k}
-                 </dt>
+                  </dt>
                   <dd className="text-right text-sm font-medium">{v}</dd>
-               </div>
+                </div>
               ))}
-           </dl>
-         </div>
-       </div>
+            </dl>
+          </div>
+        </div>
 
         {/* Stat strip */}
         <div className="border-t border-border/60 bg-card/30">
@@ -96,15 +103,15 @@ export function HomeModern({
               <div key={s.label} className="px-6 py-5">
                 <p className="font-display text-3xl font-medium tracking-tight">
                   {s.value}
-               </p>
+                </p>
                 <p className="mt-1 font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
                   {s.label}
-               </p>
-             </div>
+                </p>
+              </div>
             ))}
-         </div>
-       </div>
-     </section>
+          </div>
+        </div>
+      </section>
 
       {/* ============ ARTIKEL — editorial pull ============ */}
       <section className="border-b border-border/60">
@@ -112,17 +119,17 @@ export function HomeModern({
           <div className="md:col-span-4">
             <p className="kicker text-[10px] tracking-[0.25em] text-primary">
               01 — {t.home.latestArticles}
-           </p>
+            </p>
             <h2 className="mt-3 font-display text-3xl font-medium leading-tight tracking-tight md:text-4xl">
               {t.home.latestArticles}
-           </h2>
+            </h2>
             <Link
               to="/artikel"
               className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
             >
               {t.home.allArticles} <ArrowUpRight className="size-3.5" />
-           </Link>
-         </div>
+            </Link>
+          </div>
 
           <div className="md:col-span-8">
             <div className="space-y-px overflow-hidden rounded-lg border border-border/60 bg-border/40">
@@ -134,22 +141,22 @@ export function HomeModern({
                 >
                   <span className="font-mono text-[10px] text-muted-foreground">
                     {String(i + 1).padStart(2, "0")}
-                 </span>
+                  </span>
                   <div className="flex-1">
                     <p className="text-[10px] uppercase tracking-wider text-accent">
                       {p.is_pinned ? t.articles.pinned : t.articles.heading}
-                   </p>
+                    </p>
                     <p className="mt-1 font-display text-lg font-medium leading-snug transition-colors group-hover:text-primary">
                       {p.title}
-                   </p>
-                 </div>
+                    </p>
+                  </div>
                   <ArrowUpRight className="size-4 shrink-0 text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-               </Link>
+                </Link>
               ))}
-           </div>
-         </div>
-       </div>
-     </section>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ============ AGENDA — three-up ============ */}
       <section className="border-b border-border/60">
@@ -158,18 +165,18 @@ export function HomeModern({
             <div>
               <p className="kicker text-[10px] tracking-[0.25em] text-primary">
                 02 — {t.home.upcomingAgenda}
-             </p>
+              </p>
               <h2 className="mt-3 font-display text-3xl font-medium tracking-tight md:text-4xl">
                 {t.home.upcomingAgenda}
-             </h2>
-           </div>
+              </h2>
+            </div>
             <Link
               to="/agenda"
               className="hidden text-sm text-muted-foreground hover:text-foreground sm:inline"
             >
               {t.home.fullAgenda} →
-           </Link>
-         </div>
+            </Link>
+          </div>
 
           <div className="mt-10 grid gap-4 sm:grid-cols-3">
             {upcoming.map((a) => (
@@ -179,18 +186,18 @@ export function HomeModern({
               >
                 <p className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
                   {a.category}
-               </p>
+                </p>
                 <p className="mt-3 font-display text-lg font-medium leading-snug">
                   {a.title}
-               </p>
+                </p>
                 <p className="mt-auto pt-4 font-mono text-[11px] text-muted-foreground">
                   {a.date}
-               </p>
-             </div>
+                </p>
+              </div>
             ))}
-         </div>
-       </div>
-     </section>
+          </div>
+        </div>
+      </section>
 
       {/* ============ MEMBERS — minimal list ============ */}
       <section className="border-b border-border/60">
@@ -199,20 +206,20 @@ export function HomeModern({
             <div>
               <p className="kicker text-[10px] tracking-[0.25em] text-primary">
                 03 — {t.home.classMembers}
-             </p>
+              </p>
               <h2 className="mt-3 font-display text-3xl font-medium tracking-tight md:text-4xl">
                 {interpolate(t.home.allMembers, {
                   count: anggota.length,
                 })}
-             </h2>
-           </div>
+              </h2>
+            </div>
             <Link
               to="/anggota"
               className="text-sm text-muted-foreground hover:text-foreground"
             >
               {t.home.viewMembers} →
-           </Link>
-         </div>
+            </Link>
+          </div>
 
           <div className="mt-10 grid grid-cols-3 gap-x-4 gap-y-6 sm:grid-cols-6 md:grid-cols-8">
             {anggota.slice(0, 16).map((m) => (
@@ -222,16 +229,20 @@ export function HomeModern({
                 className="group flex flex-col items-center gap-2"
               >
                 <span className="flex size-14 items-center justify-center rounded-full border border-border bg-card font-display text-sm font-medium text-muted-foreground transition-colors group-hover:border-primary group-hover:text-primary">
-                  {m.name.split(" ").map((w) => w[0]).slice(0, 2).join("")}
-               </span>
+                  {m.name
+                    .split(" ")
+                    .map((w) => w[0])
+                    .slice(0, 2)
+                    .join("")}
+                </span>
                 <span className="line-clamp-1 text-center text-[11px] text-muted-foreground">
                   {m.name}
-               </span>
-             </Link>
+                </span>
+              </Link>
             ))}
-         </div>
-       </div>
-     </section>
+          </div>
+        </div>
+      </section>
 
       {/* ============ GALLERY ============ */}
       {galeri.length > 0 && (
@@ -241,18 +252,18 @@ export function HomeModern({
               <div>
                 <p className="kicker text-[10px] tracking-[0.25em] text-primary">
                   04 — {t.home.galleryShowcase}
-               </p>
+                </p>
                 <h2 className="mt-3 font-display text-3xl font-medium tracking-tight md:text-4xl">
                   {t.home.galleryShowcase}
-               </h2>
-             </div>
+                </h2>
+              </div>
               <Link
                 to="/galeri"
                 className="text-sm text-muted-foreground hover:text-foreground"
               >
                 {t.home.openGallery} →
-             </Link>
-           </div>
+              </Link>
+            </div>
 
             <div className="mt-10 grid grid-cols-2 gap-3 md:grid-cols-4">
               {galeri.slice(0, 4).map((g) => (
@@ -269,13 +280,14 @@ export function HomeModern({
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                   <span className="absolute bottom-3 left-3 right-3 text-xs font-medium text-white opacity-0 transition-opacity group-hover:opacity-100">
                     {g.title}
-                 </span>
-               </a>
+                  </span>
+                </a>
               ))}
-           </div>
-         </div>
-       </section>
+            </div>
+          </div>
+        </section>
       )}
-   </div>
+      <HomeDownloadSection />
+    </div>
   );
 }

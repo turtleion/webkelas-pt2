@@ -24,7 +24,7 @@ export default function Anggota() {
     (a) =>
       a.name.toLowerCase().includes(kata) ||
       String(a.absen_no).includes(kata) ||
-      (a.position ?? "").toLowerCase().includes(kata)
+      (a.position ?? "").toLowerCase().includes(kata),
   );
 
   return (
@@ -45,9 +45,7 @@ export default function Anggota() {
           meta={`${anggota.length} ${t.members.pageTitle.toLowerCase()}`}
         />
 
-        <PlaceholderNote className="mt-8">
-          {t.members.note}
-        </PlaceholderNote>
+        <PlaceholderNote className="mt-8">{t.members.note}</PlaceholderNote>
 
         <div className="mt-10 flex flex-wrap items-end justify-between gap-4 border-b border-border pb-4">
           <label className="block max-w-md flex-1">

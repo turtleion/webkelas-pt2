@@ -78,7 +78,10 @@ export function SiteFooter() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 text-[13.5px] text-foreground/80 underline-offset-4 transition-colors hover:text-accent hover:underline"
                   >
-                    <Instagram className="size-3.5 text-muted-foreground" aria-hidden />
+                    <Instagram
+                      className="size-3.5 text-muted-foreground"
+                      aria-hidden
+                    />
                     {kelas.kontak.instagram}
                   </a>
                 </li>
@@ -89,7 +92,10 @@ export function SiteFooter() {
                     href={`mailto:${kelas.kontak.email}`}
                     className="inline-flex items-center gap-2 text-[13.5px] text-foreground/80 underline-offset-4 transition-colors hover:text-accent hover:underline"
                   >
-                    <Mail className="size-3.5 text-muted-foreground" aria-hidden />
+                    <Mail
+                      className="size-3.5 text-muted-foreground"
+                      aria-hidden
+                    />
                     {kelas.kontak.email}
                   </a>
                 </li>

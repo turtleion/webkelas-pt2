@@ -3,7 +3,12 @@ import { usePreferences } from "@/hooks/use-preferences";
 import { useTranslation } from "@/hooks/use-translation";
 import { usePageTitle } from "@/hooks/use-page-title";
 import { AdminLayout } from "@/components/admin/AdminLayout";
-import { THEME_PRESETS, COLOR_SCHEMES, BUILTIN_FONTS, BACKGROUND_PRESETS } from "@/lib/theme-presets";
+import {
+  THEME_PRESETS,
+  COLOR_SCHEMES,
+  BUILTIN_FONTS,
+  BACKGROUND_PRESETS,
+} from "@/lib/theme-presets";
 import { loadGoogleFont } from "@/lib/font-loader";
 import {
   Palette,
@@ -20,18 +25,33 @@ import { cn } from "@/lib/utils";
 import type { ThemePresetKey, HomeLayoutKey } from "@/hooks/use-preferences";
 
 export default function AdminTheme() {
-  const { globalDefaults, availableFonts, updateGlobalDefaults, addCustomFont, removeCustomFont } =
-    usePreferences();
+  const {
+    globalDefaults,
+    availableFonts,
+    updateGlobalDefaults,
+    addCustomFont,
+    removeCustomFont,
+  } = usePreferences();
   const { t } = useTranslation();
   usePageTitle(`${t.admin.themeManagement} — Panel`);
 
   // Admin form state initialized from current global defaults
-  const [theme, setTheme] = useState<ThemePresetKey>(globalDefaults.defaultTheme);
-  const [colorScheme, setColorScheme] = useState<string>(globalDefaults.defaultColorScheme);
+  const [theme, setTheme] = useState<ThemePresetKey>(
+    globalDefaults.defaultTheme,
+  );
+  const [colorScheme, setColorScheme] = useState<string>(
+    globalDefaults.defaultColorScheme,
+  );
   const [font, setFont] = useState<string>(globalDefaults.defaultFont);
-  const [homeLayout, setHomeLayout] = useState<HomeLayoutKey>(globalDefaults.defaultHomeLayout);
-  const [background, setBackground] = useState<string>(globalDefaults.defaultBackground);
-  const [mode, setMode] = useState<"light" | "dark">(globalDefaults.defaultMode);
+  const [homeLayout, setHomeLayout] = useState<HomeLayoutKey>(
+    globalDefaults.defaultHomeLayout,
+  );
+  const [background, setBackground] = useState<string>(
+    globalDefaults.defaultBackground,
+  );
+  const [mode, setMode] = useState<"light" | "dark">(
+    globalDefaults.defaultMode,
+  );
   const [isSaving, setIsSaving] = useState(false);
 
   // New Google Font input state
@@ -52,7 +72,9 @@ export default function AdminTheme() {
         defaultBackground: background,
         defaultMode: isCartoonActive ? "light" : mode,
       });
-      toast.success(t.settings.saveSuccess || "Pengaturan tema global berhasil disimpan.");
+      toast.success(
+        t.settings.saveSuccess || "Pengaturan tema global berhasil disimpan.",
+      );
     } catch (err) {
       console.error("Failed to save global defaults:", err);
       toast.error(t.admin.toastThemeSaveError);
@@ -95,7 +117,9 @@ export default function AdminTheme() {
   };
 
   const handleRemoveFont = async (fontId: string, fontName: string) => {
-    if (window.confirm(t.admin.toastFontRemoveConfirm.replace("{name}", fontName))) {
+    if (
+      window.confirm(t.admin.toastFontRemoveConfirm.replace("{name}", fontName))
+    ) {
       await removeCustomFont(fontId);
       if (font === fontId) {
         setFont("fraunces");
@@ -148,8 +172,12 @@ export default function AdminTheme() {
         {/* 1. Default Theme Preset */}
         <div className="space-y-3">
           <div>
-            <h3 className="font-display text-lg font-medium">{t.admin.defaultTheme}</h3>
-            <p className="text-xs text-muted-foreground">{t.settings.themeSelect}</p>
+            <h3 className="font-display text-lg font-medium">
+              {t.admin.defaultTheme}
+            </h3>
+            <p className="text-xs text-muted-foreground">
+              {t.settings.themeSelect}
+            </p>
           </div>
           <div className="grid gap-3 sm:grid-cols-3">
             {Object.entries(THEME_PRESETS).map(([key, p]) => {
@@ -171,11 +199,13 @@ export default function AdminTheme() {
                     "glass glass-hover flex flex-col justify-between p-4 text-left transition-all cursor-pointer",
                     isSelected
                       ? "ring-2 ring-primary border-primary bg-card"
-                      : "border-border/80 hover:bg-card/70"
+                      : "border-border/80 hover:bg-card/70",
                   )}
                 >
                   <div className="flex items-center justify-between">
-                    <span className="font-display text-sm font-semibold">{p.name}</span>
+                    <span className="font-display text-sm font-semibold">
+                      {p.name}
+                    </span>
                     {isSelected && <Check className="size-4 text-primary" />}
                   </div>
                   <p className="mt-2 text-xs text-muted-foreground">
@@ -190,8 +220,12 @@ export default function AdminTheme() {
         {/* 2. Mode Default */}
         <div className="space-y-3">
           <div>
-            <h3 className="font-display text-lg font-medium">{t.admin.defaultMode}</h3>
-            <p className="text-xs text-muted-foreground">{t.settings.modeSection}</p>
+            <h3 className="font-display text-lg font-medium">
+              {t.admin.defaultMode}
+            </h3>
+            <p className="text-xs text-muted-foreground">
+              {t.settings.modeSection}
+            </p>
           </div>
 
           {isCartoonActive ? (
@@ -208,7 +242,7 @@ export default function AdminTheme() {
                   "px-4 py-2 text-xs font-medium rounded cursor-pointer transition-all",
                   mode === "light"
                     ? "bg-primary text-primary-foreground"
-                    : "text-muted-foreground hover:text-foreground"
+                    : "text-muted-foreground hover:text-foreground",
                 )}
               >
                 {t.settings.lightMode}
@@ -220,7 +254,7 @@ export default function AdminTheme() {
                   "px-4 py-2 text-xs font-medium rounded cursor-pointer transition-all",
                   mode === "dark"
                     ? "bg-primary text-primary-foreground"
-                    : "text-muted-foreground hover:text-foreground"
+                    : "text-muted-foreground hover:text-foreground",
                 )}
               >
                 {t.settings.darkMode}
@@ -232,8 +266,12 @@ export default function AdminTheme() {
         {/* 3. Background Default */}
         <div className="space-y-3">
           <div>
-            <h3 className="font-display text-lg font-medium">{t.admin.defaultBackground}</h3>
-            <p className="text-xs text-muted-foreground">{t.settings.backgroundSelect}</p>
+            <h3 className="font-display text-lg font-medium">
+              {t.admin.defaultBackground}
+            </h3>
+            <p className="text-xs text-muted-foreground">
+              {t.settings.backgroundSelect}
+            </p>
           </div>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
             {BACKGROUND_PRESETS.map((bg) => {
@@ -248,7 +286,7 @@ export default function AdminTheme() {
                     "glass glass-hover flex flex-col justify-between p-3 text-left transition-all cursor-pointer rounded-md overflow-hidden",
                     isSelected
                       ? "ring-2 ring-primary border-primary bg-card"
-                      : "border-border/80 hover:bg-card/70"
+                      : "border-border/80 hover:bg-card/70",
                   )}
                 >
                   <div
@@ -276,8 +314,12 @@ export default function AdminTheme() {
         {/* 4. Color Scheme Default */}
         <div className="space-y-3">
           <div>
-            <h3 className="font-display text-lg font-medium">{t.admin.defaultColorScheme}</h3>
-            <p className="text-xs text-muted-foreground">{t.settings.colorSchemeSection}</p>
+            <h3 className="font-display text-lg font-medium">
+              {t.admin.defaultColorScheme}
+            </h3>
+            <p className="text-xs text-muted-foreground">
+              {t.settings.colorSchemeSection}
+            </p>
           </div>
           <div className="grid gap-3 sm:grid-cols-3">
             {Object.values(COLOR_SCHEMES).map((s) => {
@@ -295,7 +337,7 @@ export default function AdminTheme() {
                     "glass glass-hover flex items-center justify-between p-3.5 text-left transition-all cursor-pointer",
                     isSelected
                       ? "ring-2 ring-primary border-primary bg-card"
-                      : "border-border/80 hover:bg-card/70"
+                      : "border-border/80 hover:bg-card/70",
                   )}
                 >
                   <div className="flex items-center gap-2.5">
@@ -313,7 +355,9 @@ export default function AdminTheme() {
                         style={{ backgroundColor: palette.accent }}
                       />
                     </div>
-                    <span className="font-display text-xs font-medium">{s.name}</span>
+                    <span className="font-display text-xs font-medium">
+                      {s.name}
+                    </span>
                   </div>
                   {isSelected && <Check className="size-4 text-primary" />}
                 </button>
@@ -325,19 +369,41 @@ export default function AdminTheme() {
         {/* 5. Home Layout Default */}
         <div className="space-y-3">
           <div>
-            <h3 className="font-display text-lg font-medium">{t.admin.defaultLayout}</h3>
+            <h3 className="font-display text-lg font-medium">
+              {t.admin.defaultLayout}
+            </h3>
             <p className="text-xs text-muted-foreground">
               {t.settings.homeLayoutSection}
             </p>
           </div>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {[
-              { id: "classic", name: t.layouts.classic, desc: t.layouts.classicDesc },
+              {
+                id: "classic",
+                name: t.layouts.classic,
+                desc: t.layouts.classicDesc,
+              },
               { id: "bento", name: t.layouts.bento, desc: t.layouts.bentoDesc },
-              { id: "showcase", name: t.layouts.showcase, desc: t.layouts.showcaseDesc },
-              { id: "modern", name: t.layouts.modern, desc: t.layouts.modernDesc },
-              { id: "experimental", name: t.layouts.experimental, desc: t.layouts.experimentalDesc },
-              { id: "nature", name: t.layouts.nature, desc: t.layouts.natureDesc },
+              {
+                id: "showcase",
+                name: t.layouts.showcase,
+                desc: t.layouts.showcaseDesc,
+              },
+              {
+                id: "modern",
+                name: t.layouts.modern,
+                desc: t.layouts.modernDesc,
+              },
+              {
+                id: "experimental",
+                name: t.layouts.experimental,
+                desc: t.layouts.experimentalDesc,
+              },
+              {
+                id: "nature",
+                name: t.layouts.nature,
+                desc: t.layouts.natureDesc,
+              },
             ].map((l) => {
               const isSelected = homeLayout === l.id;
               return (
@@ -349,14 +415,18 @@ export default function AdminTheme() {
                     "glass glass-hover flex flex-col justify-between p-4 text-left transition-all cursor-pointer",
                     isSelected
                       ? "ring-2 ring-primary border-primary bg-card"
-                      : "border-border/80 hover:bg-card/70"
+                      : "border-border/80 hover:bg-card/70",
                   )}
                 >
                   <div className="flex items-center justify-between">
-                    <span className="font-display text-xs font-semibold">{l.name}</span>
+                    <span className="font-display text-xs font-semibold">
+                      {l.name}
+                    </span>
                     {isSelected && <Check className="size-4 text-primary" />}
                   </div>
-                  <p className="mt-1 text-[11px] text-muted-foreground">{l.desc}</p>
+                  <p className="mt-1 text-[11px] text-muted-foreground">
+                    {l.desc}
+                  </p>
                 </button>
               );
             })}
@@ -379,7 +449,9 @@ export default function AdminTheme() {
             onSubmit={(e) => void handleAddGoogleFont(e)}
             className="rounded border border-border/80 bg-card/60 p-4 space-y-3"
           >
-            <label className="kicker block text-[10px]">{t.admin.addFont}</label>
+            <label className="kicker block text-[10px]">
+              {t.admin.addFont}
+            </label>
             <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
               <input
                 type="text"
@@ -398,7 +470,8 @@ export default function AdminTheme() {
               </button>
             </div>
             <p className="font-mono text-[10px] text-muted-foreground flex items-center gap-1">
-              <Sparkles className="size-3 text-accent" /> Masukkan nama persis sesuai di{" "}
+              <Sparkles className="size-3 text-accent" /> Masukkan nama persis
+              sesuai di{" "}
               <a
                 href="https://fonts.google.com"
                 target="_blank"
@@ -414,14 +487,18 @@ export default function AdminTheme() {
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {availableFonts.map((f) => {
               const isSelected = font === f.id;
-              const isBuiltin = Boolean(f.isBuiltIn || BUILTIN_FONTS.some((bf) => bf.id === f.id));
+              const isBuiltin = Boolean(
+                f.isBuiltIn || BUILTIN_FONTS.some((bf) => bf.id === f.id),
+              );
 
               return (
                 <div
                   key={f.id}
                   className={cn(
                     "glass flex flex-col justify-between p-4 transition-all relative",
-                    isSelected ? "ring-2 ring-primary border-primary bg-card" : "border-border/80"
+                    isSelected
+                      ? "ring-2 ring-primary border-primary bg-card"
+                      : "border-border/80",
                   )}
                 >
                   <div className="flex items-center justify-between">
@@ -444,10 +521,12 @@ export default function AdminTheme() {
                           "rounded px-2 py-0.5 font-mono text-[10px] uppercase cursor-pointer transition-colors",
                           isSelected
                             ? "bg-primary text-primary-foreground font-semibold"
-                            : "bg-background/80 hover:bg-background text-muted-foreground"
+                            : "bg-background/80 hover:bg-background text-muted-foreground",
                         )}
                       >
-                        {isSelected ? t.admin.toastThemeFontSelected : t.admin.toastThemeFontSelect}
+                        {isSelected
+                          ? t.admin.toastThemeFontSelected
+                          : t.admin.toastThemeFontSelect}
                       </button>
 
                       {!isBuiltin && (

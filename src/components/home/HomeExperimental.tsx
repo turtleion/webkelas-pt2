@@ -1,6 +1,12 @@
-import type { ArticleRow, AgendaRow, MemberRow, GalleryPhotoRow } from "@/lib/db";
+import type {
+  ArticleRow,
+  AgendaRow,
+  MemberRow,
+  GalleryPhotoRow,
+} from "@/lib/db";
 import type { KelasInfo } from "@/data/kelas";
 import { useTranslation } from "@/hooks/use-translation";
+import { HomeDownloadSection } from "@/components/home/HomeDownloadSection";
 import { Link } from "react-router";
 
 interface HomeLayoutProps {
@@ -22,9 +28,10 @@ export function HomeExperimental({
 }: HomeLayoutProps) {
   const { t, interpolate } = useTranslation();
   const today = new Date().toISOString().slice(0, 10);
-  const upcoming = (agenda.filter((a) => a.date >= today).length > 0
-    ? agenda.filter((a) => a.date >= today)
-    : agenda.slice(-3)
+  const upcoming = (
+    agenda.filter((a) => a.date >= today).length > 0
+      ? agenda.filter((a) => a.date >= today)
+      : agenda.slice(-3)
   ).slice(0, 3);
 
   return (
@@ -42,20 +49,22 @@ export function HomeExperimental({
           <div className="flex items-center justify-between border-b border-border pb-4">
             <span className="kicker text-[10px] tracking-[0.4em] text-muted-foreground">
               ◆ {t.home.heroTag} ◆
-          </span>
+            </span>
             <span className="font-mono text-[10px] tracking-widest text-muted-foreground">
               EST. {new Date().getFullYear()}
-          </span>
-        </div>
+            </span>
+          </div>
 
           {/* massive name */}
           <div className="relative mt-12">
             <h1 className="font-display text-[clamp(3rem,12vw,9rem)] font-black leading-[0.85] tracking-tighter">
-              <span className="block text-foreground">{kelas.nama || "Arsip"}</span>
+              <span className="block text-foreground">
+                {kelas.nama || "Arsip"}
+              </span>
               <span className="block -mt-4 italic text-primary md:-mt-8">
                 kelas.
-             </span>
-           </h1>
+              </span>
+            </h1>
 
             {/* offset subtitle floating right */}
             <div className="mt-8 max-w-md md:ml-auto md:-mt-16 md:text-right">
@@ -63,9 +72,9 @@ export function HomeExperimental({
                 {interpolate(t.home.heroSubtitle, {
                   count: kelas.jumlahSiswa || anggota.length,
                 })}
-             </p>
-           </div>
-         </div>
+              </p>
+            </div>
+          </div>
 
           {/* facts row — boxed */}
           <div className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-5">
@@ -76,13 +85,13 @@ export function HomeExperimental({
               >
                 <span className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground">
                   0{i + 1} — {k}
-              </span>
+                </span>
                 <span className="line-clamp-1 font-display text-sm font-medium">
                   {v}
-              </span>
-            </div>
+                </span>
+              </div>
             ))}
-         </div>
+          </div>
 
           <div className="mt-10 flex flex-wrap items-center gap-4">
             <Link
@@ -90,17 +99,19 @@ export function HomeExperimental({
               className="group inline-flex items-center gap-3 border-b border-foreground pb-1 text-lg italic text-foreground transition-colors hover:border-primary hover:text-primary"
             >
               {t.home.readArticles}
-              <span className="transition-transform group-hover:translate-x-1">→</span>
-           </Link>
+              <span className="transition-transform group-hover:translate-x-1">
+                →
+              </span>
+            </Link>
             <Link
               to="/anggota"
               className="text-lg italic text-muted-foreground hover:text-foreground"
             >
               /{t.home.viewMembers}
-           </Link>
-         </div>
-       </div>
-     </section>
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* ============ ARTIKEL — magazine split ============ */}
       <section className="relative border-b border-border/60 bg-foreground/[0.02] py-20">
@@ -108,20 +119,20 @@ export function HomeExperimental({
           <div className="md:col-span-5 md:sticky md:top-12 md:self-start">
             <p className="font-mono text-[10px] tracking-[0.4em] text-primary">
               [01]
-           </p>
+            </p>
             <h2 className="mt-3 font-display text-5xl font-medium leading-[0.95] tracking-tight md:text-6xl">
               {t.home.latestArticles}
-           </h2>
+            </h2>
             <p className="mt-6 font-display text-base italic text-muted-foreground">
               {interpolate(t.home.heroDescription, { kelas: kelas.nama })}
-           </p>
+            </p>
             <Link
               to="/artikel"
               className="mt-8 inline-block border-b border-foreground pb-1 text-sm italic hover:border-primary hover:text-primary"
             >
               {t.home.allArticles} →
-           </Link>
-         </div>
+            </Link>
+          </div>
 
           <div className="space-y-6 md:col-span-7">
             {articles.slice(0, 3).map((p, i) => (
@@ -133,26 +144,27 @@ export function HomeExperimental({
                 <div className="flex items-baseline gap-4">
                   <span className="font-mono text-xs text-muted-foreground">
                     {String(i + 1).padStart(2, "0")}.
-                 </span>
+                  </span>
                   <div className="flex-1">
                     <p className="font-mono text-[10px] uppercase tracking-widest text-accent">
-                      {p.is_pinned ? t.articles.pinned : t.articles.heading} — {p.created_at.slice(0, 10)}
-                   </p>
+                      {p.is_pinned ? t.articles.pinned : t.articles.heading} —{" "}
+                      {p.created_at.slice(0, 10)}
+                    </p>
                     <p className="mt-2 font-display text-3xl font-medium leading-tight tracking-tight transition-colors group-hover:text-primary md:text-4xl">
                       {p.title}
-                   </p>
+                    </p>
                     {p.description && (
                       <p className="mt-3 line-clamp-2 text-sm text-muted-foreground">
                         {p.description}
-                     </p>
+                      </p>
                     )}
-                 </div>
-               </div>
-             </Link>
+                  </div>
+                </div>
+              </Link>
             ))}
-         </div>
-       </div>
-     </section>
+          </div>
+        </div>
+      </section>
 
       {/* ============ AGENDA — horizontal scroll ============ */}
       <section className="border-b border-border/60 py-20">
@@ -161,18 +173,18 @@ export function HomeExperimental({
             <div>
               <p className="font-mono text-[10px] tracking-[0.4em] text-primary">
                 [02]
-             </p>
+              </p>
               <h2 className="mt-3 font-display text-5xl font-medium leading-[0.95] tracking-tight md:text-6xl">
                 {t.home.upcomingAgenda}
-             </h2>
-           </div>
+              </h2>
+            </div>
             <Link
               to="/agenda"
               className="hidden text-sm italic text-muted-foreground hover:text-foreground md:inline"
             >
               {t.home.fullAgenda} ↗
-           </Link>
-         </div>
+            </Link>
+          </div>
 
           <div className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-3">
             {upcoming.map((a, i) => (
@@ -182,18 +194,18 @@ export function HomeExperimental({
               >
                 <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
                   {String(i + 1).padStart(2, "0")} · {a.date}
-               </p>
+                </p>
                 <p className="mt-6 font-display text-2xl font-medium leading-snug">
                   {a.title}
-               </p>
+                </p>
                 <p className="mt-3 text-xs uppercase tracking-widest text-accent">
                   {a.category}
-               </p>
-             </div>
+                </p>
+              </div>
             ))}
-         </div>
-       </div>
-     </section>
+          </div>
+        </div>
+      </section>
 
       {/* ============ MEMBERS — offset diagonal ============ */}
       <section className="border-b border-border/60 py-20">
@@ -202,12 +214,12 @@ export function HomeExperimental({
             <div>
               <p className="font-mono text-[10px] tracking-[0.4em] text-primary">
                 [03]
-             </p>
+              </p>
               <h2 className="mt-3 font-display text-5xl font-medium leading-[0.95] tracking-tight md:text-6xl">
                 {interpolate(t.home.allMembers, { count: anggota.length })}
-             </h2>
-           </div>
-         </div>
+              </h2>
+            </div>
+          </div>
 
           <div className="mt-10 flex flex-wrap gap-2">
             {anggota.slice(0, 32).map((m) => (
@@ -216,11 +228,11 @@ export function HomeExperimental({
                 className="rounded-full border border-border bg-card/40 px-4 py-1.5 font-mono text-xs transition-colors hover:border-primary hover:bg-primary/5 hover:text-primary"
               >
                 {m.name}
-             </span>
+              </span>
             ))}
-         </div>
-       </div>
-     </section>
+          </div>
+        </div>
+      </section>
 
       {/* ============ GALLERY — magazine ============ */}
       {galeri.length > 0 && (
@@ -228,10 +240,10 @@ export function HomeExperimental({
           <div className="mx-auto max-w-7xl px-6 md:px-10">
             <p className="font-mono text-[10px] tracking-[0.4em] text-primary">
               [04]
-           </p>
+            </p>
             <h2 className="mt-3 font-display text-5xl font-medium leading-[0.95] tracking-tight md:text-6xl">
               {t.home.galleryShowcase}
-           </h2>
+            </h2>
 
             <div className="mt-10 grid grid-cols-12 gap-3">
               <a
@@ -243,7 +255,7 @@ export function HomeExperimental({
                   alt={galeri[0]?.title}
                   className="size-full object-cover transition-transform duration-700 hover:scale-105"
                 />
-             </a>
+              </a>
               <div className="col-span-12 grid grid-cols-2 gap-3 md:col-span-5">
                 {galeri.slice(1, 3).map((g) => (
                   <a
@@ -256,13 +268,14 @@ export function HomeExperimental({
                       alt={g.title}
                       className="size-full object-cover transition-transform duration-700 hover:scale-105"
                     />
-                 </a>
+                  </a>
                 ))}
-             </div>
-           </div>
-         </div>
-       </section>
+              </div>
+            </div>
+          </div>
+        </section>
       )}
-   </div>
+      <HomeDownloadSection />
+    </div>
   );
 }

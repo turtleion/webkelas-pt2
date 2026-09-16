@@ -173,7 +173,8 @@ export default function AdminInvitationCodes() {
                       </span>
                     </td>
                     <td className="p-3 font-mono text-[11px] whitespace-nowrap text-muted-foreground">
-                      {createdTd.hari} {createdTd.bulanSingkat} {createdTd.tahun}
+                      {createdTd.hari} {createdTd.bulanSingkat}{" "}
+                      {createdTd.tahun}
                     </td>
                     <td className="p-3 font-mono text-[11px] whitespace-nowrap text-muted-foreground">
                       {expiresTd.hari} {expiresTd.bulanSingkat}{" "}

@@ -21,9 +21,7 @@ export function generateInvitationCode(): string {
     chars.push(ALPHABET[bytes[i]! % ALPHABET.length]!);
   }
   // sisip dash tiap GROUP char
-  return chars
-    .map((c, i) => (i > 0 && i % GROUP === 0 ? `-${c}` : c))
-    .join("");
+  return chars.map((c, i) => (i > 0 && i % GROUP === 0 ? `-${c}` : c)).join("");
 }
 
 /** Awalan 4 char pertama untuk identifikasi Owner di tabel. */

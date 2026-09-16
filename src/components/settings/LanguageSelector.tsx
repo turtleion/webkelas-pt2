@@ -50,7 +50,7 @@ export function LanguageSelector() {
                 "glass glass-hover flex items-center justify-between p-4 text-left transition-all cursor-pointer",
                 isSelected
                   ? "ring-2 ring-primary border-primary bg-card"
-                  : "border-border/80 hover:bg-card/70"
+                  : "border-border/80 hover:bg-card/70",
               )}
             >
               <div className="flex items-center gap-3">

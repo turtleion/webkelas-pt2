@@ -37,9 +37,7 @@ export default function Galeri() {
           })}
         />
 
-        <PlaceholderNote className="mt-8">
-          {t.gallery.note}
-        </PlaceholderNote>
+        <PlaceholderNote className="mt-8">{t.gallery.note}</PlaceholderNote>
 
         {isLoading ? (
           <div className="mt-16 flex justify-center py-12">

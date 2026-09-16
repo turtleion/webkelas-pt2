@@ -205,7 +205,9 @@ export default function AdminAgenda() {
         <DialogContent className="glass glass-strong max-w-lg border-border/80 text-foreground">
           <DialogHeader>
             <DialogTitle className="font-display text-2xl font-medium tracking-tight">
-              {editingItem ? t.admin.agendaFormTitle : t.admin.agendaFormCreateTitle}
+              {editingItem
+                ? t.admin.agendaFormTitle
+                : t.admin.agendaFormCreateTitle}
             </DialogTitle>
           </DialogHeader>
 

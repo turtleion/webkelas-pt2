@@ -10,9 +10,15 @@ import {
 } from "lucide-react";
 import { FadeIn } from "@/components/site/FadeIn";
 import { PhotoPlate } from "@/components/site/PhotoPlate";
+import { HomeDownloadSection } from "@/components/home/HomeDownloadSection";
 import { inisialNama, padNomor, pecahTanggal } from "@/lib/tanggal";
 import { useTranslation } from "@/hooks/use-translation";
-import type { ArticleRow, AgendaRow, MemberRow, GalleryPhotoRow } from "@/lib/db";
+import type {
+  ArticleRow,
+  AgendaRow,
+  MemberRow,
+  GalleryPhotoRow,
+} from "@/lib/db";
 import type { KelasInfo } from "@/data/kelas";
 
 interface HomeLayoutProps {
@@ -92,7 +98,11 @@ export function HomeBento({
                 src={galeri[0]?.image_url || undefined}
                 label={`Dok. 001 — ${galeri[0]?.category || "MPLS"}`}
                 caption={galeri[0]?.title || `Foto Kelas ${kelas.nama}`}
-                date={galeri[0]?.date ? pecahTanggal(galeri[0].date).teks : undefined}
+                date={
+                  galeri[0]?.date
+                    ? pecahTanggal(galeri[0].date).teks
+                    : undefined
+                }
               />
             </div>
             <div className="md:col-span-5 flex flex-col gap-3">
@@ -186,7 +196,10 @@ export function HomeBento({
               </Link>
             </div>
             {latestArticle ? (
-              <Link to={`/artikel/${latestArticle.slug}`} className="group mt-4 block">
+              <Link
+                to={`/artikel/${latestArticle.slug}`}
+                className="group mt-4 block"
+              >
                 <p className="font-mono text-[10px] text-muted-foreground">
                   {pecahTanggal(latestArticle.created_at.slice(0, 10)).teks}
                 </p>
@@ -205,7 +218,9 @@ export function HomeBento({
           </div>
           <div className="mt-6 flex items-center justify-between border-t border-border/70 pt-3">
             <span className="font-mono text-[10px] uppercase tracking-wider text-accent">
-              {latestArticle?.is_pinned ? t.articles.pinned : t.articles.heading}
+              {latestArticle?.is_pinned
+                ? t.articles.pinned
+                : t.articles.heading}
             </span>
             <Link
               to={latestArticle ? `/artikel/${latestArticle.slug}` : "/artikel"}
@@ -233,7 +248,10 @@ export function HomeBento({
             </div>
             <div className="mt-5 grid grid-cols-4 gap-3 sm:grid-cols-6">
               {anggota.slice(0, 6).map((m) => (
-                <div key={m.id} className="flex flex-col items-center text-center">
+                <div
+                  key={m.id}
+                  className="flex flex-col items-center text-center"
+                >
                   <span className="flex size-10 items-center justify-center rounded-full border border-border bg-card font-display text-xs italic">
                     {inisialNama(m.name)}
                   </span>
@@ -270,6 +288,7 @@ export function HomeBento({
           ))}
         </div>
       </div>
+      <HomeDownloadSection />
     </div>
   );
 }

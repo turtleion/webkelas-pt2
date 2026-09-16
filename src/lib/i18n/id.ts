@@ -21,6 +21,9 @@ export const id: TranslationSchema = {
     closeMenu: "Tutup menu",
     mainWebsite: "Web Utama",
     memberSpace: "Ruang Anggota",
+    daily: "Harian",
+    dailyOverview: "Ringkasan Hari",
+    download: "Unduh",
   },
   settings: {
     title: "Pengaturan",
@@ -63,7 +66,8 @@ export const id: TranslationSchema = {
     dreamyDesc:
       "Pastel lembut, kabut kepulauan, dan blur tebal ala awan yang menenangkan.",
     minimalistic: "Minimalis",
-    minimalisticDesc: "Hitam-putih monokrom yang bersih, modern, dan profesional.",
+    minimalisticDesc:
+      "Hitam-putih monokrom yang bersih, modern, dan profesional.",
     custom: "Kustom",
     customDesc:
       "Kombinasi pengaturan pribadi Anda yang berbeda dari tema bawaan.",
@@ -338,6 +342,23 @@ export const id: TranslationSchema = {
     deleteConfirmTitle: "Konfirmasi Hapus",
     deleteConfirmDesc:
       "Apakah Anda yakin ingin menghapus data ini? Tindakan ini tidak dapat dibatalkan.",
+
+    // Notifikasi harian
+    notification: "Notifikasi Harian",
+    notificationHeading: "Pemberitahuan Hari Esok",
+    notificationDesc:
+      "Siapkan dan koreksi data harian untuk hari sekolah berikutnya. Selama intervensi aktif, proses otomatis tidak akan menimpa data ini.",
+    targetDateLabel: "Tanggal Sasaran",
+    clothingLabel: "Pakaian",
+    belongingsLabel: "Barang Bawaan (satu per baris)",
+    noteLabel: "Catatan",
+    interventionSave: "Simpan Intervensi",
+    interventionClear: "Kembalikan ke Otomatis",
+    interventionSaved: "Intervensi tersimpan. Data manual menjadi acuan.",
+    interventionCleared: "Intervensi dibatalkan. Data kembali otomatis.",
+    interventionSaveError: "Gagal menyimpan intervensi.",
+    automaticData: "Data Otomatis",
+    interventionData: "Intervensi Pengurus",
 
     // Pengumuman
     announcementsDesc:
@@ -624,6 +645,43 @@ export const id: TranslationSchema = {
     members: "Anggota",
     area: "Area",
     todayDuty: "Piket Hari Ini",
+  },
+  daily: {
+    pageTitle: "Ringkasan Hari",
+    heading: "Pemberitahuan Hari Esok",
+    description:
+      "Ringkasan lengkap untuk hari sekolah berikutnya: jadwal, piket, MBG, tugas, pakaian, dan barang bawaan.",
+    empty: "Belum ada data untuk hari sekolah berikutnya.",
+    notGenerated:
+      "Pemberitahuan hari esok belum dibuat. Pengurus dapat menyiapkannya lebih awal dari panel admin.",
+    scheduleSection: "Jadwal Pelajaran",
+    dutySection: "Jadwal Piket",
+    mbgSection: "Jadwal MBG",
+    tasksSection: "Tugas",
+    noTasks: "Tidak ada tugas untuk hari ini.",
+    noSchedule: "Belum ada jadwal untuk hari ini.",
+    clothing: "Pakaian",
+    belongings: "Barang Bawaan",
+    note: "Catatan",
+    bannerTitle: "Pemberitahuan Hari Esok",
+    bannerBody: "Pemberitahuan Hari Esok telah ada, yuk lihat!",
+    bannerCta: "Lihat ringkasan",
+    bannerDismiss: "Tutup pemberitahuan",
+  },
+  download: {
+    pageTitle: "Unduh Aplikasi",
+    heading: "Unduh Aplikasi Android",
+    description:
+      "Pasang Arsip Kelas Digital di perangkat Android untuk akses lebih cepat, tanpa membuka peramban.",
+    version: "Versi terbaru",
+    downloadApk: "Unduh APK",
+    allReleases: "Semua rilis",
+    requirement: "Membutuhkan Android 7.0 (API 24) atau lebih baru.",
+    stepsTitle: "Cara memasang",
+    step1: "Unduh berkas APK dari tautan di atas.",
+    step2:
+      "Buka berkas APK di perangkat (izinkan pemasangan dari sumber ini bila diminta).",
+    step3: "Tunggu proses pemasangan selesai, lalu buka aplikasi.",
   },
   footer: {
     explore: "Jelajahi",

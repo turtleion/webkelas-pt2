@@ -10,13 +10,22 @@ import { FontSelector } from "@/components/settings/FontSelector";
 import { BackgroundSelector } from "@/components/settings/BackgroundSelector";
 import { LayoutSelector } from "@/components/settings/LayoutSelector";
 import { LanguageSelector } from "@/components/settings/LanguageSelector";
-import { Sun, Moon, RotateCcw, Sliders, Globe, AlertTriangle } from "lucide-react";
+import {
+  Sun,
+  Moon,
+  RotateCcw,
+  Sliders,
+  Globe,
+  AlertTriangle,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function Settings() {
   const { preferences, setMode, resetToDefaults } = usePreferences();
   const { t } = useTranslation();
-  const [activeTab, setActiveTab] = useState<"personalization" | "language">("personalization");
+  const [activeTab, setActiveTab] = useState<"personalization" | "language">(
+    "personalization",
+  );
   const [isResetting, setIsResetting] = useState(false);
 
   const isCartoonActive =
@@ -62,7 +71,9 @@ export default function Settings() {
               disabled={isResetting}
               className="inline-flex items-center justify-center gap-2 self-start rounded border border-border/80 bg-card/60 px-3.5 py-2 text-xs font-medium text-muted-foreground hover:bg-card hover:text-foreground transition-all cursor-pointer disabled:opacity-50"
             >
-              <RotateCcw className={cn("size-3.5", isResetting && "animate-spin")} />
+              <RotateCcw
+                className={cn("size-3.5", isResetting && "animate-spin")}
+              />
               <span>{t.settings.resetDefaults}</span>
             </button>
           </div>
@@ -76,7 +87,7 @@ export default function Settings() {
                 "flex items-center gap-2 px-4 py-2.5 font-display text-sm font-medium border-b-2 transition-all cursor-pointer -mb-px",
                 activeTab === "personalization"
                   ? "border-primary text-primary"
-                  : "border-transparent text-muted-foreground hover:text-foreground"
+                  : "border-transparent text-muted-foreground hover:text-foreground",
               )}
             >
               <Sliders className="size-4" />
@@ -89,7 +100,7 @@ export default function Settings() {
                 "flex items-center gap-2 px-4 py-2.5 font-display text-sm font-medium border-b-2 transition-all cursor-pointer -mb-px",
                 activeTab === "language"
                   ? "border-primary text-primary"
-                  : "border-transparent text-muted-foreground hover:text-foreground"
+                  : "border-transparent text-muted-foreground hover:text-foreground",
               )}
             >
               <Globe className="size-4" />
@@ -128,7 +139,7 @@ export default function Settings() {
                         "flex items-center gap-2 rounded px-4 py-2 text-xs font-medium transition-all cursor-pointer",
                         preferences.mode === "light"
                           ? "bg-primary text-primary-foreground shadow-sm"
-                          : "text-muted-foreground hover:text-foreground"
+                          : "text-muted-foreground hover:text-foreground",
                       )}
                     >
                       <Sun className="size-3.5" />
@@ -141,7 +152,7 @@ export default function Settings() {
                         "flex items-center gap-2 rounded px-4 py-2 text-xs font-medium transition-all cursor-pointer",
                         preferences.mode === "dark"
                           ? "bg-primary text-primary-foreground shadow-sm"
-                          : "text-muted-foreground hover:text-foreground"
+                          : "text-muted-foreground hover:text-foreground",
                       )}
                     >
                       <Moon className="size-3.5" />

@@ -1,8 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import {
-  getOrganizationSetting,
-  setOrganizationSetting,
-} from "@/lib/db";
+import { getOrganizationSetting, setOrganizationSetting } from "@/lib/db";
 import {
   kelas as mockKelas,
   pengurusInti as mockPengurusInti,
@@ -32,7 +29,8 @@ export function useOrganization() {
     setIsLoading(true);
     setError(null);
     try {
-      const stored = await getOrganizationSetting<OrganizationData>(ORG_SETTINGS_KEY);
+      const stored =
+        await getOrganizationSetting<OrganizationData>(ORG_SETTINGS_KEY);
       if (stored && stored.kelas) {
         setData(stored);
       } else {
@@ -44,7 +42,10 @@ export function useOrganization() {
         });
       }
     } catch (err) {
-      console.warn("[useOrganization] fallback ke mock karena query gagal:", err);
+      console.warn(
+        "[useOrganization] fallback ke mock karena query gagal:",
+        err,
+      );
       setData({
         kelas: mockKelas,
         pengurusInti: mockPengurusInti,

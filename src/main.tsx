@@ -2,10 +2,14 @@ import { RequireAdmin } from "@/components/admin/RequireAdmin";
 import { RequireOwner } from "@/components/admin/RequireOwner";
 import { AuthStateRedirector } from "@/components/AuthStateRedirector";
 import { RequireAuth } from "@/components/RequireAuth";
+import { DailyNotificationBanner } from "@/components/site/DailyNotificationBanner";
 import { Toaster } from "@/components/ui/sonner";
 import { PreferencesProvider } from "@/context/PreferencesContext";
 import { Capacitor } from "@capacitor/core";
-import { initCapacitorNative, setupExternalLinkInterceptor } from "@/lib/capacitor";
+import {
+  initCapacitorNative,
+  setupExternalLinkInterceptor,
+} from "@/lib/capacitor";
 import "@vly-ai/integrations";
 import React, { lazy, StrictMode, Suspense, useEffect } from "react";
 import { createRoot } from "react-dom/client";
@@ -24,6 +28,9 @@ const ArtikelDetail = lazy(() => import("./pages/ArtikelDetail.tsx"));
 const Tugas = lazy(() => import("./pages/Tugas.tsx"));
 const TugasDetail = lazy(() => import("./pages/TugasDetail.tsx"));
 const Agenda = lazy(() => import("./pages/Agenda.tsx"));
+const Daily = lazy(() => import("./pages/Daily.tsx"));
+/** Halaman web-only: hanya didaftarkan saat bukan build native (Android). */
+const Download = lazy(() => import("./pages/Download.tsx"));
 const AdminTugas = lazy(() => import("./pages/admin/AdminTugas.tsx"));
 const Galeri = lazy(() => import("./pages/Galeri.tsx"));
 const AuthPage = lazy(() => import("./pages/Auth.tsx"));
@@ -47,14 +54,14 @@ const AdminUsers = lazy(() => import("./pages/admin/AdminUsers.tsx"));
 const AdminInvitationCodes = lazy(
   () => import("./pages/admin/AdminInvitationCodes.tsx"),
 );
-const AdminArticles = lazy(
-  () => import("./pages/admin/AdminArticles.tsx"),
+const AdminArticles = lazy(() => import("./pages/admin/AdminArticles.tsx"));
+const AdminMbg = lazy(() => import("./pages/admin/AdminMbg.tsx"));
+const AdminDuty = lazy(() => import("./pages/admin/AdminDuty.tsx"));
+const AdminNotification = lazy(
+  () => import("./pages/admin/AdminNotification.tsx"),
 );
-const AdminMbg = lazy(
-  () => import("./pages/admin/AdminMbg.tsx"),
-);
-const AdminDuty = lazy(
-  () => import("./pages/admin/AdminDuty.tsx"),
+const AdminTestNotification = lazy(
+  () => import("./pages/admin/AdminTestNotification.tsx"),
 );
 
 // Simple loading fallback for route transitions
@@ -178,6 +185,7 @@ createRoot(document.getElementById("root")!).render(
           <RouteSyncer />
           <ScrollToTop />
           <AuthStateRedirector />
+          <DailyNotificationBanner />
           <Suspense fallback={<RouteLoading />}>
             <Routes>
               {/* Public Routes */}
@@ -205,6 +213,14 @@ createRoot(document.getElementById("root")!).render(
                 element={
                   <RequireVerified>
                     <Tugas />
+                  </RequireVerified>
+                }
+              />
+              <Route
+                path="/daily"
+                element={
+                  <RequireVerified>
+                    <Daily />
                   </RequireVerified>
                 }
               />
@@ -335,6 +351,22 @@ createRoot(document.getElementById("root")!).render(
                   </RequireAdmin>
                 }
               />
+              <Route
+                path="/admin/notification"
+                element={
+                  <RequireAdmin>
+                    <AdminNotification />
+                  </RequireAdmin>
+                }
+              />
+              <Route
+                path="/admin/test-notification"
+                element={
+                  <RequireAdmin>
+                    <AdminTestNotification />
+                  </RequireAdmin>
+                }
+              />
 
               {/* Owner-Only Protected Routes */}
               <Route
@@ -353,6 +385,18 @@ createRoot(document.getElementById("root")!).render(
                   </RequireOwner>
                 }
               />
+
+              {/* Web-only: tidak pernah didaftarkan di build Android */}
+              {!Capacitor.isNativePlatform() && (
+                <Route
+                  path="/download"
+                  element={
+                    <Suspense fallback={<RouteLoading />}>
+                      <Download />
+                    </Suspense>
+                  }
+                />
+              )}
 
               <Route path="*" element={<NotFound />} />
             </Routes>

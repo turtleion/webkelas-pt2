@@ -1,7 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/use-auth";
 import { useTranslation } from "@/hooks/use-translation";
-import { LayoutDashboard, LogOut, UserX, ShieldCheck, ArrowRight } from "lucide-react";
+import {
+  LayoutDashboard,
+  LogOut,
+  UserX,
+  ShieldCheck,
+  ArrowRight,
+} from "lucide-react";
 import { Link, useNavigate } from "react-router";
 
 export default function Dashboard() {
@@ -14,15 +20,16 @@ export default function Dashboard() {
     navigate("/");
   };
 
-  const nama = user?.guest ? t.dashboard.guestName : user?.name ?? t.dashboard.memberName;
-  const peran =
-    user?.guest
-      ? t.dashboard.roleGuest
-      : user?.role === "owner"
+  const nama = user?.guest
+    ? t.dashboard.guestName
+    : (user?.name ?? t.dashboard.memberName);
+  const peran = user?.guest
+    ? t.dashboard.roleGuest
+    : user?.role === "owner"
       ? t.dashboard.roleOwner
       : user?.role === "admin"
-      ? t.dashboard.roleAdmin
-      : t.dashboard.roleMember;
+        ? t.dashboard.roleAdmin
+        : t.dashboard.roleMember;
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center px-5 py-16">

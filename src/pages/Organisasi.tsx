@@ -29,7 +29,9 @@ function Orang({
         {inisialNama(nama)}
       </span>
       <span className="min-w-0">
-        <span className="block truncate text-[14.5px] leading-tight">{nama}</span>
+        <span className="block truncate text-[14.5px] leading-tight">
+          {nama}
+        </span>
         {absenNo ? (
           <span className="kicker mt-0.5 block text-[9px] text-muted-foreground">
             No. {padNomor(absenNo)}
@@ -105,7 +107,10 @@ export default function Organisasi() {
             {/* pengurus inti */}
             {hasInti && (
               <section className="mt-14">
-                <FadeHeading kicker={t.organization.coreOfficers} title={t.organization.coreSubtitle} />
+                <FadeHeading
+                  kicker={t.organization.coreOfficers}
+                  title={t.organization.coreSubtitle}
+                />
                 <ul className="mt-8 grid gap-px bg-border sm:grid-cols-2 lg:grid-cols-4">
                   {pengurusInti.map((p) => (
                     <li key={p.jabatan} className="bg-background px-5 py-6">
@@ -129,18 +134,17 @@ export default function Organisasi() {
             {/* sie */}
             {hasSie && (
               <section className="mt-14">
-                <FadeHeading kicker={t.organization.divisions} title={t.organization.divisionsSubtitle} />
+                <FadeHeading
+                  kicker={t.organization.divisions}
+                  title={t.organization.divisionsSubtitle}
+                />
                 <ul className="mt-8 grid gap-px bg-border sm:grid-cols-2 lg:grid-cols-4">
                   {sie.map((s) => (
                     <li key={s.jabatan} className="bg-background px-5 py-6">
                       <p className="kicker text-[10px]">{s.jabatan}</p>
                       <div className="mt-4 space-y-3">
                         {s.nomor.map((no) => (
-                          <Orang
-                            key={no}
-                            nama={getName(no)}
-                            absenNo={no}
-                          />
+                          <Orang key={no} nama={getName(no)} absenNo={no} />
                         ))}
                       </div>
                     </li>

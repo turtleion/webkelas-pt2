@@ -3,9 +3,15 @@ import { ArrowRight, Sparkles, Calendar, FileText, Users } from "lucide-react";
 import { FadeIn } from "@/components/site/FadeIn";
 import { PhotoPlate } from "@/components/site/PhotoPlate";
 import { Stamp } from "@/components/site/Stamp";
+import { HomeDownloadSection } from "@/components/home/HomeDownloadSection";
 import { inisialNama, padNomor, pecahTanggal } from "@/lib/tanggal";
 import { useTranslation } from "@/hooks/use-translation";
-import type { ArticleRow, AgendaRow, MemberRow, GalleryPhotoRow } from "@/lib/db";
+import type {
+  ArticleRow,
+  AgendaRow,
+  MemberRow,
+  GalleryPhotoRow,
+} from "@/lib/db";
 import type { KelasInfo } from "@/data/kelas";
 
 interface HomeLayoutProps {
@@ -228,6 +234,7 @@ export function HomeShowcase({
           </div>
         </div>
       </section>
+      <HomeDownloadSection />
     </div>
   );
 }
