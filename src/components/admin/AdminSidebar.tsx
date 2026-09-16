@@ -58,6 +58,11 @@ export function AdminSidebar({ onItemClick }: AdminSidebarProps) {
     { to: "/admin/galeri", label: t.admin.gallery, icon: ImageIcon },
     { to: "/admin/organisasi", label: t.admin.organization, icon: Building2 },
     { to: "/admin/theme", label: t.admin.themeManagement, icon: Palette },
+    {
+      to: "/admin/token-ask",
+      label: t.adminVerificationRequests.title,
+      icon: ShieldCheck,
+    },
     ...(isOwner
       ? [
           {

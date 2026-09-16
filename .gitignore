@@ -17,8 +17,17 @@ node_modules/
 # Optional lockfile (you may keep locally)
 pnpm-lock.yaml
 
+# Build output
 dist
 
 # Android keystores (sensitive)
 android/keystores/*.keystore
 android/keystore.properties
+
+# Tool/agent dirs — bukan bagian repo
+.agents/
+.claude/
+.convex/
+.netlify/
+graphify-out/cache/
+supabase/.temp/

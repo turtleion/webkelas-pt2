@@ -44,6 +44,7 @@ export function DailyNotificationBanner() {
   if (!overview?.notified_at) return null;
   if (dismissed === overview.target_date) return null;
   if (location.pathname === "/daily") return null;
+  if (location.pathname.startsWith("/agreements")) return null;
 
   const handleDismiss = () => {
     window.localStorage.setItem(DISMISS_KEY, overview.target_date);

@@ -1,23 +1,25 @@
-name: Build & Release Prototype
+name: Build & Release Android APK
 
 on:
   push:
-    branches: [master]
-  workflow_dispatch: {}
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Version tag (e.g. v1.0.0)"
+        required: true
+        default: "v1.0.0"
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # ------------------------------------------------------------------
-      # 1️⃣ Checkout repo
-      # ------------------------------------------------------------------
+      # Checkout
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # ------------------------------------------------------------------
-      # 2️⃣ Setup Node & pnpm
-      # ------------------------------------------------------------------
+      # Node + pnpm
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -30,9 +32,7 @@ jobs:
       - name: Install project dependencies
         run: pnpm install --frozen-lockfile
 
-      # ------------------------------------------------------------------
-      # 3️⃣ Setup Java 21 (required by Capacitor 8)
-      # ------------------------------------------------------------------
+      # JDK 21
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
@@ -40,67 +40,74 @@ jobs:
           java-version: "21"
           cache: gradle
 
-      # ------------------------------------------------------------------
-      # 4️⃣ Install Android SDK (platform‑tools, build‑tools, platform 29‑36)
-      # ------------------------------------------------------------------
+      # Android SDK
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
-        with:
-          api-level: 36
-          build-tools: "35.0.0"
-          ndk: "25.2.9519653"
-          cache: true
 
-      # ------------------------------------------------------------------
-      # 5️⃣ Capacitor sync (generates Android project files)
-      # ------------------------------------------------------------------
+      # Reconstruct secrets as files
+      - name: Decode keystore
+        env:
+          RELEASE_KEYSTORE_BASE64: ${{ secrets.RELEASE_KEYSTORE_BASE64 }}
+        run: echo "$RELEASE_KEYSTORE_BASE64" | base64 -d > android/release.keystore
+
+      - name: Write keystore.properties
+        env:
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: |
+          printf 'storePassword=%s\nkeyAlias=%s\nkeyPassword=%s\nstoreFile=../release.keystore\n' \
+            "$KEYSTORE_PASSWORD" "$KEY_ALIAS" "$KEY_PASSWORD" > android/keystore.properties
+
+      - name: Decode google-services.json
+        env:
+          GOOGLE_SERVICES_JSON_BASE64: ${{ secrets.GOOGLE_SERVICES_JSON_BASE64 }}
+        run: echo "$GOOGLE_SERVICES_JSON_BASE64" | base64 -d > android/app/google-services.json
+
+      - name: Write .env.local
+        env:
+          VITE_GOOGLE_WEB_CLIENT_ID: ${{ secrets.VITE_GOOGLE_WEB_CLIENT_ID }}
+        run: echo "VITE_GOOGLE_WEB_CLIENT_ID=$VITE_GOOGLE_WEB_CLIENT_ID" > .env.local
+
+      # Build
+      - name: Build web
+        run: pnpm run build
+
       - name: Sync Capacitor Android
         run: npx cap sync android
 
-      # ------------------------------------------------------------------
-      # 6️⃣ Gradle clean + assembleDebug (produces APK)
-      # ------------------------------------------------------------------
-      - name: Build debug APK
+      - name: Build release APK
         working-directory: android
         run: |
           chmod +x gradlew
-          ./gradlew clean assembleDebug --no-daemon
+          ./gradlew assembleRelease --no-daemon
 
-      # ------------------------------------------------------------------
-      # 7️⃣ Gather build metadata (build number, commit hash, date)
-      # ------------------------------------------------------------------
+      # Metadata
       - name: Compute build metadata
         id: meta
         run: |
           echo "BUILD_NUMBER=$(git rev-list --count HEAD)" >> $GITHUB_OUTPUT
           echo "COMMIT_HASH=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-          echo "DATE=$(date +%Y%m%d)"               >> $GITHUB_OUTPUT
-          echo "APK_PATH=android/app/build/outputs/apk/debug/app-debug.apk" >> $GITHUB_OUTPUT
+          echo "DATE=$(date +%Y%m%d)"                     >> $GITHUB_OUTPUT
 
-      # ------------------------------------------------------------------
-      # 8️⃣ Rename APK to the required pattern
-      # ------------------------------------------------------------------
       - name: Rename APK
         env:
           BUILD_NUMBER: ${{ steps.meta.outputs.BUILD_NUMBER }}
           COMMIT_HASH: ${{ steps.meta.outputs.COMMIT_HASH }}
           DATE: ${{ steps.meta.outputs.DATE }}
-          APK_PATH: ${{ steps.meta.outputs.APK_PATH }}
+          INPUT_TAG: ${{ github.event.inputs.tag || github.ref_name }}
         run: |
-          NEW_NAME="PROTOTYPE_TEST-${BUILD_NUMBER}-${COMMIT_HASH}(${DATE}).apk"
-          DIR=$(dirname "$APK_PATH")
-          mv "$APK_PATH" "$DIR/$NEW_NAME"
+          APK_SRC="android/app/build/outputs/apk/release/app-release.apk"
+          NEW_NAME="arsip-kelas-${INPUT_TAG}-${BUILD_NUMBER}(${COMMIT_HASH}).apk"
+          mv "$APK_SRC" "$NEW_NAME"
           echo "APK_NAME=$NEW_NAME" >> $GITHUB_ENV
-          echo "APK_FULL_PATH=$DIR/$NEW_NAME" >> $GITHUB_ENV
 
-      # ------------------------------------------------------------------
-      # 9️⃣ Create (or update) a draft release & upload the APK
-      # ------------------------------------------------------------------
-      - name: Draft release & upload APK
+      # Upload to GitHub Release
+      - name: Upload to GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: prototype-${{ steps.meta.outputs.COMMIT_HASH }}
-          name: Prototype Build ${{ steps.meta.outputs.BUILD_NUMBER }}
-          draft: true
-          prerelease: true
-          files: ${{ env.APK_FULL_PATH }}
+          tag_name: ${{ github.event.inputs.tag || github.ref_name }}
+          name: "Arsip Kelas ${{ github.event.inputs.tag || github.ref_name }}"
+          draft: false
+          prerelease: false
+          files: ${{ env.APK_NAME }}

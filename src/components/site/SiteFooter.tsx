@@ -115,9 +115,23 @@ export function SiteFooter() {
               sekolah: kelas.sekolah || "",
             })}
           </p>
-          <p className="kicker text-[9px] text-muted-foreground/80">
-            {t.footer.sampleData}
-          </p>
+          <div className="flex items-center gap-4">
+            <Link
+              to="/agreements/tos"
+              className="kicker text-[9px] text-muted-foreground/80 underline-offset-4 hover:text-foreground/80 hover:underline"
+            >
+              {t.footer.tos}
+            </Link>
+            <Link
+              to="/agreements/privacy"
+              className="kicker text-[9px] text-muted-foreground/80 underline-offset-4 hover:text-foreground/80 hover:underline"
+            >
+              {t.footer.privacy}
+            </Link>
+            <span className="kicker text-[9px] text-muted-foreground/80">
+              {t.footer.sampleData}
+            </span>
+          </div>
         </div>
       </div>
     </footer>

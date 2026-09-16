@@ -52,16 +52,27 @@ export function AuthStateRedirector() {
     // 1) Post-login routing: ketika user ada di /auth dan sudah
     //    authenticated, kirim ke tujuan (returnTo).
     //    Verified → langsung ke tujuan.
-    //    Unverified → /register?returnTo=tujuan (alur aktivasi awal).
+    //    Unverified + belum setuju ToS/Privacy → home (WelcomeModal muncul di sana).
+    //    Unverified + sudah setuju → /register?returnTo=tujuan (tinggal kode).
     if (isOnAuth && isAuthenticated && !user?.guest) {
       const ret = resolveInternalRedirect(
         new URLSearchParams(location.search).get("returnTo"),
         "/dashboard",
       );
-      // Hindari loop kalau returnTo ternyata /auth atau /register.
-      const target = `/register?returnTo=${encodeURIComponent(ret)}`;
       const verified = user?.verified === true;
-      navigate(verified ? ret : target, { replace: true });
+      if (verified) {
+        navigate(ret, { replace: true });
+        return;
+      }
+      const agreed = Boolean(user?.acceptedTosAt) && Boolean(user?.acceptedPrivacyAt);
+      if (!agreed) {
+        // Minta setuju ToS/privacy dulu — WelcomeModal tampil di home.
+        navigate("/", { replace: true });
+        return;
+      }
+      // Sudah setuju → tinggal masukkan kode undangan.
+      const target = `/register?returnTo=${encodeURIComponent(ret)}`;
+      navigate(target, { replace: true });
       return;
     }
 

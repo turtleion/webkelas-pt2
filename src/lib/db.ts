@@ -102,8 +102,20 @@ export interface ProfileRow {
   email: string | null;
   role: "admin" | "member" | "owner";
   verified: boolean;
+  accepted_tos_at: string | null;
+  accepted_privacy_at: string | null;
   created_at: string;
   updated_at: string;
+}
+
+export interface VerificationRequestRow {
+  id: string;
+  user_id: string;
+  status: "pending" | "accepted" | "declined";
+  created_at: string;
+  updated_at: string;
+  reviewed_by: string | null;
+  reviewed_at: string | null;
 }
 
 export interface OrganizationSettingsRow<T = unknown> {
@@ -629,7 +641,9 @@ export async function setOrganizationSetting<T = unknown>(
 export async function getAllProfiles(): Promise<ProfileRow[]> {
   const { data, error } = await supabase
     .from("profiles")
-    .select("id, name, image, email, role, verified, created_at, updated_at")
+    .select(
+      "id, name, image, email, role, verified, accepted_tos_at, accepted_privacy_at, created_at, updated_at",
+    )
     .order("created_at", { ascending: false });
 
   if (error) throw error;
@@ -813,5 +827,96 @@ export async function updateUserSettings<T = Record<string, unknown>>(
     })
     .eq("id", userId);
 
+  if (error) throw error;
+}
+
+// ---------------------------------------------------------------------------
+// Verification Requests API (welcome flow / Notify Admin)
+// ---------------------------------------------------------------------------
+
+/** Tandai user telah menyetujui ToS dan/atau Privacy Policy (kolom sendiri). */
+export async function acceptAgreement(
+  userId: string,
+  which: "tos" | "privacy",
+): Promise<void> {
+  const { error } = await supabase
+    .from("profiles")
+    .update({
+      [which === "tos" ? "accepted_tos_at" : "accepted_privacy_at"]:
+        new Date().toISOString(),
+    })
+    .eq("id", userId);
+
+  if (error) throw error;
+}
+
+/** Kirim/minta verifikasi ke admin (idempotent di server). */
+export async function submitVerificationRequest(): Promise<VerificationRequestRow> {
+  const { data, error } = await supabase.rpc("submit_verification_request");
+  if (error) throw error;
+  return data as VerificationRequestRow;
+}
+
+/** Ambil request verifikasi milik user sendiri (pending/accepted/declined). */
+export async function getMyVerificationRequest(): Promise<VerificationRequestRow | null> {
+  const { data, error } = await supabase
+    .from("verification_requests")
+    .select("*")
+    .eq("user_id", (await supabase.auth.getUser()).data.user?.id ?? "")
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
+  if (error) throw error;
+  return data;
+}
+
+/** Daftar request untuk admin (join profiles utk nama/email). */
+export async function listVerificationRequests(): Promise<
+  (VerificationRequestRow & {
+    user_name: string | null;
+    user_email: string | null;
+    accepted_agreements: boolean;
+  })[]
+> {
+  const { data, error } = await supabase
+    .from("verification_requests")
+    .select(
+      `*, profiles!verification_requests_user_id_fkey (id, name, email, accepted_tos_at, accepted_privacy_at)`,
+    )
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    throw error;
+  }
+  const rows = (data ?? []) as (VerificationRequestRow & {
+    profiles: {
+      id: string;
+      name: string | null;
+      email: string | null;
+      accepted_tos_at: string | null;
+      accepted_privacy_at: string | null;
+    } | null;
+  })[];
+
+  return rows.map((r) => ({
+    ...r,
+    user_name: r.profiles?.name ?? null,
+    user_email: r.profiles?.email ?? null,
+    accepted_agreements:
+      Boolean(r.profiles?.accepted_tos_at) &&
+      Boolean(r.profiles?.accepted_privacy_at),
+  }));
+}
+
+/** Admin menyetujui/menolak request verifikasi (server-side check). */
+export async function reviewVerificationRequest(
+  requestId: string,
+  accept: boolean,
+): Promise<void> {
+  const { error } = await supabase.rpc("review_verification_request", {
+    p_request_id: requestId,
+    p_accept: accept,
+  });
   if (error) throw error;
 }

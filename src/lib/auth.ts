@@ -25,6 +25,8 @@ export type AuthUser = {
   role: Role;
   guest: boolean;
   verified: boolean;
+  acceptedTosAt?: string | null;
+  acceptedPrivacyAt?: string | null;
 };
 
 export interface AuthState {
@@ -121,7 +123,9 @@ async function mapUser(user: User | null): Promise<AuthUser | null> {
   if (!user) return null;
   const { data, error } = await supabase
     .from("profiles")
-    .select("id, name, image, email, role, verified")
+    .select(
+      "id, name, image, email, role, verified, accepted_tos_at, accepted_privacy_at",
+    )
     .eq("id", user.id)
     .maybeSingle();
 
@@ -137,6 +141,8 @@ async function mapUser(user: User | null): Promise<AuthUser | null> {
     email: string | null;
     role: string | null;
     verified: boolean | null;
+    accepted_tos_at: string | null;
+    accepted_privacy_at: string | null;
   } | null;
 
   let role: Role = "member";
@@ -154,6 +160,8 @@ async function mapUser(user: User | null): Promise<AuthUser | null> {
     role,
     guest: false,
     verified: row?.verified === true,
+    acceptedTosAt: row?.accepted_tos_at ?? null,
+    acceptedPrivacyAt: row?.accepted_privacy_at ?? null,
   };
 }
 

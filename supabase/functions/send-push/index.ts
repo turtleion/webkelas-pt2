@@ -110,8 +110,17 @@ async function sendToToken(
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers":
+    "authorization, x-client-info, apikey, content-type",
 };
+
+/** Helper — response JSON dengan CORS headers otomatis. */
+function json(body: unknown, status = 200) {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { "Content-Type": "application/json", ...corsHeaders },
+  });
+}
 
 serve(async (req) => {
   // Preflight CORS (browser kirim OPTIONS dulu untuk cross-origin).
@@ -127,21 +136,17 @@ serve(async (req) => {
     (serviceKey && auth === `Bearer ${serviceKey}`) ||
     (pushSecret && auth === `Bearer ${pushSecret}`);
   if (!valid) {
-    return new Response("Unauthorized", {
-      status: 401,
-      headers: corsHeaders,
-    });
+    return new Response("Unauthorized", { status: 401, headers: corsHeaders });
   }
 
   try {
     const url = new URL(req.url);
-    // Bisa dipanggil GET (dari pg_net) — parameter via query.
     const title = url.searchParams.get("title") ?? "Pemberitahuan Hari Esok";
     const body =
-      url.searchParams.get("body") ?? "Pemberitahuan Hari Esok telah ada, yuk lihat!";
+      url.searchParams.get("body") ??
+      "Pemberitahuan Hari Esok telah ada, yuk lihat!";
     const targetDate = url.searchParams.get("target_date") ?? "";
 
-    // Baca semua token (RLS admin / service role bypass)
     const sb = createClient(
       Deno.env.get("SUPABASE_URL") ?? "",
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
@@ -151,14 +156,15 @@ serve(async (req) => {
       .select("token");
 
     if (error || !tokens) {
-      return new Response(JSON.stringify({ ok: false, error: error?.message ?? "no tokens" }), {
-        status: 500,
-        headers: { "Content-Type": "application/json" },
-      });
+      return json(
+        { ok: false, error: error?.message ?? "no tokens" },
+        500,
+      );
     }
 
     const sa = Deno.env.get("FCM_SERVICE_ACCOUNT");
-    if (!sa) return new Response("FCM_SERVICE_ACCOUNT missing", { status: 500 });
+    if (!sa)
+      return json({ ok: false, error: "FCM_SERVICE_ACCOUNT missing" }, 500);
 
     try {
       const access = await getFcmAccessToken(sa);
@@ -168,14 +174,11 @@ serve(async (req) => {
         ),
       );
       const ok = results.filter(Boolean).length;
-      return new Response(
-        JSON.stringify({ ok: true, sent: ok, failed: results.length - ok }),
-        { headers: { "Content-Type": "application/json" } },
-      );
+      return json({ ok: true, sent: ok, failed: results.length - ok });
     } catch (e) {
-      return new Response(JSON.stringify({ ok: false, error: String(e) }), { status: 500 });
+      return json({ ok: false, error: String(e) }, 500);
     }
   } catch (e) {
-    return new Response(JSON.stringify({ ok: false, error: String(e) }), { status: 500 });
+    return json({ ok: false, error: String(e) }, 500);
   }
 });

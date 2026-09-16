@@ -15,6 +15,7 @@ const IS_WEB = !Capacitor.isNativePlatform();
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const mainRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
   const { data: orgData } = useOrganization();
   const { kelas } = orgData;
   const { isAuthenticated, isAdmin } = useAuth();
@@ -35,14 +36,17 @@ export function SiteHeader() {
   /** Harian — pintu langsung ke ringkasan hari berikutnya. */
   const DAILY = { to: "/daily", label: t.nav.dailyOverview };
 
-  // Tutup dropdown saat klik di luar menu utama.
+  // Tutup dropdown saat klik di luar menu utama (tapi abaikan trigger button —
+  // biar onClick-nya yang toggle, bukan pointerdown listener yang mencuri event).
   useEffect(() => {
     function onPointerDown(e: PointerEvent) {
-      if (!mainRef.current?.contains(e.target as Node)) setOpen(false);
+      if (mainRef.current?.contains(e.target as Node)) return;
+      if (triggerRef.current?.contains(e.target as Node)) return;
+      setOpen(false);
     }
     document.addEventListener("pointerdown", onPointerDown);
     return () => document.removeEventListener("pointerdown", onPointerDown);
-  }, [open]);
+  }, []);
 
   const toggleLanguage = () => void setLocale(locale === "id" ? "en" : "id");
 
@@ -88,6 +92,7 @@ export function SiteHeader() {
 
             {/* Hamburger — tampil di semua ukuran layar */}
             <button
+              ref={triggerRef}
               type="button"
               onClick={() => setOpen((v) => !v)}
               aria-expanded={open}

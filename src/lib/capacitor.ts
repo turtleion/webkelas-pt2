@@ -40,22 +40,11 @@ if (Capacitor.isNativePlatform()) {
   });
 }
 
-async function registerPush() {
-  if (!Capacitor.isNativePlatform() || !isAndroid) return;
-
-  // Android 13+: butuh izin runtime (POST_NOTIFICATIONS) sebelum bisa terima.
-  const perm = await PushNotifications.requestPermissions();
-  if (perm.receive !== "granted") return;
-
-  await PushNotifications.register();
-}
-
 async function refreshBannerAndToken() {
-  // Re-register kalau token berubah (FCM bisa rotate token).
+  // Persist token kalau sudah ada. TIDAK request izin notifikasi otomatis
+  // (popup hanya muncul kalau user minta push manual).
   if (fcmToken) {
     await persistFcmToken(fcmToken);
-  } else {
-    await registerPush();
   }
 }
 
@@ -84,7 +73,8 @@ export function initCapacitorNative() {
   });
 
   // --- FCM: daftar token + listener notifikasi ------------------------------
-  void registerPush();
+  // Izin notifikasi tidak diminta otomatis lagi (popup mengganggu setelah
+  // login). Kalau mau push aktif, minta izin manual di tempat lain nanti.
   PushNotifications.addListener("registration", ({ value }) => {
     fcmToken = value;
     void persistFcmToken(value);
