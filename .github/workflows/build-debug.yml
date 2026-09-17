@@ -76,7 +76,9 @@ jobs:
           cat .env.local
           echo "--- end ---"
 
-      - name: Sync Capacitor Android
+      - name: Build web
+        run: pnpm run build
+
         run: npx cap sync android
 
       - name: Build debug APK
