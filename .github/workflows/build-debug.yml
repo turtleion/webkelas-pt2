@@ -70,8 +70,11 @@ jobs:
           printf 'VITE_SUPABASE_URL="%s"\nVITE_SUPABASE_PUBLISHABLE_KEY="%s"\nVITE_GOOGLE_WEB_CLIENT_ID="%s"\n' \
             "$VITE_SUPABASE_URL" "$VITE_SUPABASE_PUBLISHABLE_KEY" "$VITE_GOOGLE_WEB_CLIENT_ID" > .env.local
 
-      - name: Build web
-        run: pnpm run build
+      - name: Verify .env.local
+        run: |
+          echo "--- .env.local content ---"
+          cat .env.local
+          echo "--- end ---"
 
       - name: Sync Capacitor Android
         run: npx cap sync android
