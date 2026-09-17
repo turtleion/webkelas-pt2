@@ -79,6 +79,7 @@ jobs:
       - name: Build web and sync
         run: |
           pnpm run build
+          cp .env.local dist/.env.local
           npx cap sync android
 
       - name: Build debug APK
