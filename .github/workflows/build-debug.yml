@@ -58,8 +58,8 @@ jobs:
 
       - name: Generate debug keystore
         run: |
-          mkdir -p android/keystores
-          keytool -genkeypair -alias androiddebugkey -keyalg RSA -keysize 2048 -validity 10000 -keystore android/keystores/debug.keystore -storepass android -keypass android -dname "CN=Android Debug,O=Android,C=US"
+          mkdir -p android/app/keystores
+          keytool -genkeypair -alias androiddebugkey -keyalg RSA -keysize 2048 -validity 10000 -keystore android/app/keystores/debug.keystore -storepass android -keypass android -dname "CN=Android Debug,O=Android,C=US"
 
       - name: Write .env.local
         env:
