@@ -108,19 +108,6 @@ APK dihasilkan di `android/app/build/outputs/apk/debug/app-debug.apk`.
 
 ---
 
-## 🔄 CI/CD
-
-Dua workflow GitHub Actions untuk build otomatis:
-
-| Workflow | Trigger | Output |
-|---|---|---|
-| **build-debug.yml** | Manual (workflow_dispatch) | APK debug sebagai artifact |
-| **build-release.yml** | Tag `v*` | APK release + GitHub Release |
-
-Web app di-deploy ke **Netlify** (konfigurasi di `netlify.toml`).
-
----
-
 ## 🏗️ Arsitektur Singkat
 
 - **SPA React** dengan lazy-loading per route — halaman hanya dimuat saat dibutuhkan.
