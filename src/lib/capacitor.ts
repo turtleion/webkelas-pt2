@@ -33,7 +33,7 @@ async function persistFcmToken(token: string) {
 // Kalau token sudah ada (registrasi terjadi sebelum login), persist setelah
 // user masuk. Auth state listener aktif terus di native.
 if (Capacitor.isNativePlatform()) {
-  supabase.auth.onAuthStateChange((event, session) => {
+  supabase.auth.onAuthStateChange((event) => {
     if (event === "SIGNED_IN" && fcmToken) {
       void persistFcmToken(fcmToken);
     }
@@ -82,9 +82,9 @@ export function initCapacitorNative() {
   PushNotifications.addListener("registrationError", ({ error }) => {
     console.warn("[FCM] registration error:", error);
   });
-  PushNotifications.addListener("pushNotificationReceived", (notification) => {
+  PushNotifications.addListener("pushNotificationReceived", () => {
     // App aktif: tampilkan via banner in-app (bukan notif OS ganda).
-    console.log("[FCM] received:", notification);
+    // Notification diterima; banner /daily menangani tampilan.
   });
   PushNotifications.addListener("pushNotificationActionPerformed", (action) => {
     // User tap notif OS → buka /daily. Reload penuh: app bisa mati saat itu.

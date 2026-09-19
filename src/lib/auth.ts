@@ -65,35 +65,22 @@ export async function signInWithGoogle() {
   // --- Native (Android/iOS): pakai GoogleSignIn plugin → signInWithIdToken ---
   if (Capacitor.isNativePlatform()) {
     try {
-      console.log("[AUTH] Starting Google Sign-In (native)...");
       const result = await GoogleSignIn.signIn();
-      console.log("[AUTH] GoogleSignIn.signIn() result:", JSON.stringify(result));
-      
+
       const idToken = result.idToken;
       if (!idToken) {
-        const err = "Google Sign-In failed: no ID token received";
-        console.error("[AUTH]", err);
-        alert(`[DEBUG] ${err}\n\nResult: ${JSON.stringify(result)}`);
-        throw new Error(err);
+        throw new Error("Google Sign-In failed: no ID token received");
       }
 
-      console.log("[AUTH] Got ID token, signing in to Supabase...");
       const { error } = await supabase.auth.signInWithIdToken({
         provider: "google",
         token: idToken,
         access_token: result.accessToken ?? undefined,
       });
-      if (error) {
-        console.error("[AUTH] Supabase signInWithIdToken error:", error);
-        alert(`[DEBUG] Supabase error:\n${error.message}\n\nCode: ${error.status}`);
-        throw error;
-      }
-      console.log("[AUTH] Sign-in successful!");
-      alert("[DEBUG] Login berhasil!");
+      if (error) throw error;
       return;
-    } catch (err: any) {
+    } catch (err) {
       console.error("[AUTH] Sign-in error:", err);
-      alert(`[DEBUG] Error:\n${err.message || err}\n\nCode: ${err.code || 'unknown'}`);
       throw err;
     }
   }
