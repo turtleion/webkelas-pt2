@@ -24,6 +24,26 @@ export interface TranslationSchema {
     daily: string;
     dailyOverview: string;
     download: string;
+    update: string;
+  };
+  update: {
+    pageTitle: string;
+    currentVersion: string;
+    latestVersion: string;
+    unknown: string;
+    checking: string;
+    checkForUpdates: string;
+    updateAvailable: string;
+    upToDate: string;
+    installUpdate: string;
+    downloading: string;
+    dontShowAgain: string;
+    note1: string;
+    note2: string;
+    popupTitle: string;
+    popupBody: string;
+    cancel: string;
+    update: string;
   };
   settings: {
     title: string;

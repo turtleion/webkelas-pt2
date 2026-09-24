@@ -15,7 +15,7 @@ import { Download, ArrowUpRight } from "lucide-react";
 
 const REPO_RELEASES =
   (import.meta.env.VITE_APP_DOWNLOAD_URL as string | undefined) ??
-  "https://github.com/turtleion/webkelas-pt2/releases/latest";
+  "https://github.com/Cetheline/tkj1smknice-webapp/releases/tag/BETA";
 
 const ALL_RELEASES = "https://github.com/turtleion/webkelas-pt2/releases";
 

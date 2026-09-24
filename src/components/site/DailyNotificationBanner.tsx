@@ -4,6 +4,7 @@ import { Bell, X } from "lucide-react";
 import { getCurrentDailyOverview, type DailyOverviewRow } from "@/lib/db";
 import { todayWIB } from "@/lib/daily";
 import { useTranslation } from "@/hooks/use-translation";
+import { useAuth } from "@/hooks/use-auth";
 
 const DISMISS_KEY = "ak-daily-notice-dismissed";
 
@@ -13,9 +14,14 @@ const DISMISS_KEY = "ak-daily-notice-dismissed";
  * Sumber datanya baris `daily_overview` yang dibuat penjadwal server
  * (pg_cron, 15:00 WIB). Yang dicatat di sini hanya status "sudah dibaca"
  * per tanggal sasaran — bukan timer, bukan penjadwal.
+ *
+ * HANYA tampil kalau user login (sesi Supabase ada). URL dipakai
+ * getCurrentDailyOverview yang butuh auth — tanpa autentikasi row
+ * daily_overview tidak akan diambil, jadi banner tidak muncul.
  */
 export function DailyNotificationBanner() {
   const { t } = useTranslation();
+  const { user } = useAuth();
   const location = useLocation();
   const [overview, setOverview] = useState<DailyOverviewRow | null>(null);
   const [dismissed, setDismissed] = useState<string | null>(() =>
@@ -25,6 +31,12 @@ export function DailyNotificationBanner() {
   );
 
   useEffect(() => {
+    // Tidak ada sesi → jangan ambil / tampilkan pemberitahuan harian.
+    if (!user) {
+      setOverview(null);
+      return;
+    }
+
     let mounted = true;
     void getCurrentDailyOverview(todayWIB())
       .then((row) => {
@@ -39,8 +51,9 @@ export function DailyNotificationBanner() {
     return () => {
       mounted = false;
     };
-  }, []);
+  }, [user]);
 
+  if (!user) return null;
   if (!overview?.notified_at) return null;
   if (dismissed === overview.target_date) return null;
   if (location.pathname === "/daily") return null;

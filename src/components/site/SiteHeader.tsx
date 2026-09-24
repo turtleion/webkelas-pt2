@@ -11,6 +11,8 @@ import { cn } from "@/lib/utils";
 
 /** Halaman unduh hanya untuk web — build Android tidak punya route ini. */
 const IS_WEB = !Capacitor.isNativePlatform();
+/** Halaman Update hanya untuk Android — build web tidak punya route ini. */
+const IS_ANDROID = Capacitor.isNativePlatform();
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -24,6 +26,7 @@ export function SiteHeader() {
   const NAV = [
     { to: "/", label: t.nav.home, end: true },
     ...(IS_WEB ? [{ to: "/download", label: t.nav.download }] : []),
+    ...(IS_ANDROID ? [{ to: "/update", label: "Update" }] : []),
     { to: "/anggota", label: t.nav.members },
     { to: "/organisasi", label: t.nav.organization },
     { to: "/jadwal", label: t.nav.schedule },

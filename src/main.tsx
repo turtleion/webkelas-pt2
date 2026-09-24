@@ -33,6 +33,8 @@ const Agenda = lazy(() => import("./pages/Agenda.tsx"));
 const Daily = lazy(() => import("./pages/Daily.tsx"));
 /** Halaman web-only: hanya didaftarkan saat bukan build native (Android). */
 const Download = lazy(() => import("./pages/Download.tsx"));
+/** Halaman Android-only: Update check & in-app install. */
+const Update = lazy(() => import("./pages/Update.tsx"));
 const AdminTugas = lazy(() => import("./pages/admin/AdminTugas.tsx"));
 const Galeri = lazy(() => import("./pages/Galeri.tsx"));
 const AuthPage = lazy(() => import("./pages/Auth.tsx"));
@@ -428,6 +430,18 @@ createRoot(document.getElementById("root")!).render(
                   element={
                     <Suspense fallback={<RouteLoading />}>
                       <Download />
+                    </Suspense>
+                  }
+                />
+              )}
+
+              {/* Android-only: Update page */}
+              {Capacitor.isNativePlatform() && (
+                <Route
+                  path="/update"
+                  element={
+                    <Suspense fallback={<RouteLoading />}>
+                      <Update />
                     </Suspense>
                   }
                 />
