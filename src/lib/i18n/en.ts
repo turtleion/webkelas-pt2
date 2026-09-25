@@ -38,13 +38,15 @@ export const en: TranslationSchema = {
     installUpdate: "Install Update",
     downloading: "Downloading...",
     dontShowAgain: "Don't show this again",
-    note1: "App uses the GitHub BETA release channel for updates.",
+    note1: "Updates are provided via the admin Update Configuration.",
     note2:
       "APK is signed with the same keystore — Android will verify compatibility.",
     popupTitle: "Update Available",
     popupBody: "A new version is available. Update now?",
     cancel: "Cancel",
     update: "Update",
+    notes: "Release notes",
+    forced: "Forced (mandatory update)",
   },
   settings: {
     title: "Settings",

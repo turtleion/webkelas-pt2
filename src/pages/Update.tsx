@@ -4,6 +4,7 @@ import { Capacitor } from "@capacitor/core";
 import { App } from "@capacitor/app";
 import { Browser } from "@capacitor/browser";
 import { Filesystem, Directory } from "@capacitor/filesystem";
+import { fetchLatestUpdate } from "@/lib/update";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { Button } from "@/components/ui/button";
@@ -12,47 +13,16 @@ import { toast } from "sonner";
 import { Loader2, Download, AlertTriangle, CheckCircle } from "lucide-react";
 
 const UPDATE_PREF_KEY = "ak-update-popup-disabled";
-const GITHUB_REPO = "Cetheline/tkj1smknice-webapp";
-const BETA_TAG = "BETA";
-
-interface ReleaseInfo {
-  tag_name: string;
-  name?: string | null;
-  body?: string | null;
-  assets: { name: string; browser_download_url: string }[];
-}
-
-interface ApkVersion {
-  major: number;
-  minor: number;
-  patch: number;
-}
-
-function parseVersion(versionString: string): ApkVersion | null {
-  const match = versionString.match(/v?(\d+)\.(\d+)\.(\d+)/);
-  if (!match) return null;
-  return {
-    major: parseInt(match[1], 10),
-    minor: parseInt(match[2], 10),
-    patch: parseInt(match[3], 10),
-  };
-}
-
-function versionCode(version: ApkVersion): number {
-  return version.major * 10000 + version.minor * 100 + version.patch;
-}
-
-function extractVersionFromApk(apkName: string): ApkVersion | null {
-  const match = apkName.match(/tkj1smknice-android-v(\d+\.\d+\.\d+)\.apk/);
-  if (!match) return null;
-  return parseVersion(match[1]);
-}
 
 export default function UpdatePage() {
   const { t } = useTranslation();
   const [currentVersion, setCurrentVersion] = useState<string>("v1.0");
+  const [currentCode, setCurrentCode] = useState<number>(0);
   const [latestVersion, setLatestVersion] = useState<string>("");
+  const [latestCode, setLatestCode] = useState<number>(0);
   const [apkUrl, setApkUrl] = useState<string>("");
+  const [releaseNotes, setReleaseNotes] = useState<string | null>(null);
+  const [isForced, setIsForced] = useState(false);
   const [isChecking, setIsChecking] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
   const [downloadProgress, setDownloadProgress] = useState<number>(0);
@@ -71,8 +41,10 @@ export default function UpdatePage() {
     const getVersion = async () => {
       if (Capacitor.isNativePlatform()) {
         try {
-          const { version } = await App.getInfo();
+          const { version, build } = await App.getInfo();
           setCurrentVersion(version);
+          const code = parseInt(build, 10);
+          if (!Number.isNaN(code)) setCurrentCode(code);
         } catch {
           setCurrentVersion("v1.0");
         }
@@ -93,69 +65,48 @@ export default function UpdatePage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const checkForUpdates = useCallback(async (silent = false) => {
-    if (!silent) setIsChecking(true);
-    setError(null);
+  const checkForUpdates = useCallback(
+    async (silent = false) => {
+      if (!silent) setIsChecking(true);
+      setError(null);
 
-    try {
-      const response = await fetch(
-        `https://api.github.com/repos/${GITHUB_REPO}/releases/tags/${BETA_TAG}`,
-        {
-          headers: { Accept: "application/vnd.github.v3+json" },
-        },
-      );
+      try {
+        const info = await fetchLatestUpdate();
 
-      if (!response.ok) {
-        throw new Error(`GitHub API error: ${response.status}`);
-      }
-
-      const release: ReleaseInfo = await response.json();
-
-      const apkAsset = release.assets.find((asset) =>
-        asset.name.match(/^tkj1smknice-android-v\d+\.\d+\.\d+\.apk$/),
-      );
-
-      if (!apkAsset) {
-        throw new Error("No valid APK asset found in BETA release");
-      }
-
-      const versionInfo = extractVersionFromApk(apkAsset.name);
-      const versionTag = release.tag_name.replace(/^v/, "");
-
-      if (versionInfo) {
-        setLatestVersion(
-          `v${versionInfo.major}.${versionInfo.minor}.${versionInfo.patch}`,
-        );
-        setApkUrl(apkAsset.browser_download_url);
-
-        const currentInfo = parseVersion(currentVersion);
-        let hasUpdate = false;
-
-        if (currentInfo) {
-          hasUpdate = versionCode(currentInfo) < versionCode(versionInfo);
-        } else {
-          hasUpdate = currentVersion !== versionTag;
+        if (!info) {
+          setLatestVersion("");
+          setApkUrl("");
+          setUpdateAvailable(false);
+          return;
         }
 
+        setLatestVersion(info.version_name);
+        setLatestCode(info.version_code);
+        setApkUrl(info.apk_url);
+        setReleaseNotes(info.notes);
+        setIsForced(info.is_forced);
+
+        const hasUpdate = info.version_code > currentCode;
         setUpdateAvailable(hasUpdate);
 
-        if (hasUpdate && !silent && !disablePopup) {
+        if (hasUpdate && !silent && (!disablePopup || info.is_forced)) {
           setShowUpdatePopup(true);
         }
+      } catch (err) {
+        const msg = err instanceof Error ? err.message : "Unknown error";
+        if (!silent) setError(msg);
+      } finally {
+        if (!silent) setIsChecking(false);
       }
-    } catch (err) {
-      const msg = err instanceof Error ? err.message : "Unknown error";
-      if (!silent) setError(msg);
-    } finally {
-      if (!silent) setIsChecking(false);
-    }
-  }, [currentVersion, disablePopup]);
+    },
+    [currentCode, disablePopup],
+  );
 
   const handleDownloadAndInstall = async () => {
     if (!Capacitor.isNativePlatform()) {
-      await Browser.open({
-        url: `https://github.com/${GITHUB_REPO}/releases/tag/${BETA_TAG}`,
-      });
+      if (apkUrl) {
+        await Browser.open({ url: apkUrl });
+      }
       return;
     }
 
@@ -171,7 +122,10 @@ export default function UpdatePage() {
       const response = await fetch(apkUrl);
       if (!response.ok) throw new Error("Download failed");
 
-      const contentLength = parseInt(response.headers.get("content-length") || "0", 10);
+      const contentLength = parseInt(
+        response.headers.get("content-length") || "0",
+        10,
+      );
       const reader = response.body?.getReader();
       if (!reader) throw new Error("No reader");
 
@@ -184,7 +138,9 @@ export default function UpdatePage() {
         chunks.push(value);
         receivedLength += value.length;
         if (contentLength > 0) {
-          setDownloadProgress(Math.round((receivedLength / contentLength) * 100));
+          setDownloadProgress(
+            Math.round((receivedLength / contentLength) * 100),
+          );
         }
       }
 
@@ -196,8 +152,13 @@ export default function UpdatePage() {
         offset += chunk.length;
       }
 
-      // Convert to base64 for Filesystem.writeFile (expects string or Blob)
-      const base64 = btoa(String.fromCharCode(...combined));
+      // Chunked base64 — hindari stack overflow String.fromCharCode(...) pada APK besar
+      let binary = "";
+      const CHUNK = 0x8000;
+      for (let i = 0; i < combined.length; i += CHUNK) {
+        binary += String.fromCharCode(...combined.subarray(i, i + CHUNK));
+      }
+      const base64 = btoa(binary);
 
       await Filesystem.writeFile({
         path: filePath,
@@ -254,17 +215,6 @@ export default function UpdatePage() {
             </h2>
             <p className="mt-2 text-muted-foreground">
               This page is only available in the Android app.
-              <br />
-              Web users: please visit{" "}
-              <a
-                href={`https://github.com/${GITHUB_REPO}/releases/tag/${BETA_TAG}`}
-                className="underline"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                the BETA release page
-              </a>
-              .
             </p>
           </div>
         </main>
@@ -300,10 +250,20 @@ export default function UpdatePage() {
                   {t.update.latestVersion}
                 </p>
                 <p className="mt-1 font-display text-lg font-medium">
-                  {latestVersion || (isChecking ? t.update.checking : t.update.unknown)}
+                  {latestVersion ||
+                    (isChecking ? t.update.checking : t.update.unknown)}
                 </p>
               </div>
             </div>
+
+            {releaseNotes && updateAvailable && (
+              <div className="mt-4 rounded border border-border/60 bg-background/40 p-3 text-sm text-muted-foreground">
+                <p className="font-mono text-[10px] uppercase tracking-wider">
+                  {t.update.notes}
+                </p>
+                <p className="mt-1 whitespace-pre-line">{releaseNotes}</p>
+              </div>
+            )}
 
             <div className="mt-6 flex flex-wrap items-center gap-3">
               <Button
@@ -369,6 +329,7 @@ export default function UpdatePage() {
                 id="disable-popup"
                 checked={disablePopup}
                 onCheckedChange={handleToggleDisablePopup}
+                disabled={isForced}
               />
               <label
                 htmlFor="disable-popup"
@@ -391,7 +352,7 @@ export default function UpdatePage() {
       {showUpdatePopup && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
-          onClick={() => handlePopupDismiss(false)}
+          onClick={() => !isForced && handlePopupDismiss(false)}
         >
           <div
             className="glass w-full max-w-md rounded-2xl border border-border/60 bg-card p-6 shadow-xl"
@@ -404,39 +365,64 @@ export default function UpdatePage() {
               {t.update.popupBody}
             </p>
 
+            {isForced && (
+              <p className="mt-2 text-sm font-medium text-destructive">
+                {t.update.forced}
+              </p>
+            )}
+
+            {releaseNotes && (
+              <div className="mt-3 rounded border border-border/60 bg-background/40 p-3 text-sm text-muted-foreground">
+                <p className="font-mono text-[10px] uppercase tracking-wider">
+                  {t.update.notes}
+                </p>
+                <p className="mt-1 whitespace-pre-line">{releaseNotes}</p>
+              </div>
+            )}
+
             <div className="mt-4 space-y-2 text-sm">
               <div className="flex justify-between">
-                <span className="text-muted-foreground">{t.update.currentVersion}</span>
+                <span className="text-muted-foreground">
+                  {t.update.currentVersion}
+                </span>
                 <span className="font-medium">{currentVersion}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-muted-foreground">{t.update.latestVersion}</span>
+                <span className="text-muted-foreground">
+                  {t.update.latestVersion}
+                </span>
                 <span className="font-medium">{latestVersion}</span>
               </div>
             </div>
 
-            <div className="mt-4 flex items-center gap-2">
-              <Checkbox
-                id="popup-disable"
-                checked={false}
-                onCheckedChange={(checked: boolean) => handlePopupDismiss(checked)}
-              />
-              <label
-                htmlFor="popup-disable"
-                className="text-sm text-muted-foreground"
-              >
-                {t.update.dontShowAgain}
-              </label>
-            </div>
+            {!isForced && (
+              <div className="mt-4 flex items-center gap-2">
+                <Checkbox
+                  id="popup-disable"
+                  checked={false}
+                  onCheckedChange={(checked: boolean) =>
+                    handlePopupDismiss(checked)
+                  }
+                />
+                <label
+                  htmlFor="popup-disable"
+                  className="text-sm text-muted-foreground"
+                >
+                  {t.update.dontShowAgain}
+                </label>
+              </div>
+            )}
 
             <div className="mt-6 flex gap-3">
-              <Button
-                variant="outline"
-                onClick={() => handlePopupDismiss(false)}
-                className="flex-1"
-              >
-                {t.update.cancel}
-              </Button>
+              {!isForced && (
+                <Button
+                  variant="outline"
+                  onClick={() => handlePopupDismiss(false)}
+                  className="flex-1"
+                >
+                  {t.update.cancel}
+                </Button>
+              )}
               <Button onClick={handleDownloadAndInstall} className="flex-1">
                 <Download className="size-4 mr-2" />
                 {t.update.update}

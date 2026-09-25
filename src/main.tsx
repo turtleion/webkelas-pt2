@@ -69,6 +69,9 @@ const AdminNotification = lazy(
 const AdminTestNotification = lazy(
   () => import("./pages/admin/AdminTestNotification.tsx"),
 );
+const AdminUpdateConfiguration = lazy(
+  () => import("./pages/admin/AdminUpdateConfiguration.tsx"),
+);
 const AdminVerificationRequests = lazy(
   () => import("./pages/admin/AdminVerificationRequests.tsx"),
 );
@@ -401,6 +404,14 @@ createRoot(document.getElementById("root")!).render(
                 element={
                   <RequireAdmin>
                     <AdminVerificationRequests />
+                  </RequireAdmin>
+                }
+              />
+              <Route
+                path="/admin/update-configuration"
+                element={
+                  <RequireAdmin>
+                    <AdminUpdateConfiguration />
                   </RequireAdmin>
                 }
               />

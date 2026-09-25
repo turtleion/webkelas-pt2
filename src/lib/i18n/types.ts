@@ -44,6 +44,8 @@ export interface TranslationSchema {
     popupBody: string;
     cancel: string;
     update: string;
+    notes: string;
+    forced: string;
   };
   settings: {
     title: string;

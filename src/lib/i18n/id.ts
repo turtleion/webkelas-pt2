@@ -38,13 +38,15 @@ export const id: TranslationSchema = {
     installUpdate: "Pasang Pembaruan",
     downloading: "Mengunduh...",
     dontShowAgain: "Jangan tampilkan lagi",
-    note1: "Aplikasi menggunakan saluran rilis BETA GitHub untuk pembaruan.",
+    note1: "Pembaruan disediakan lewat konfigurasi admin (Update Configuration).",
     note2:
       "APK ditandatangani dengan keystore yang sama — Android akan memverifikasi kecocokan.",
     popupTitle: "Pembaruan Tersedia",
     popupBody: "Versi baru tersedia. Perbarui sekarang?",
     cancel: "Batal",
     update: "Perbarui",
+    notes: "Catatan rilis",
+    forced: "Wajib (paksa update)",
   },
   settings: {
     title: "Pengaturan",

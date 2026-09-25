@@ -416,3 +416,6 @@ enabled = true
 
 [functions.send-push]
 verify_jwt = false
+
+[functions.fetch-update]
+verify_jwt = false

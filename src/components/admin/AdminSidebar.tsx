@@ -17,6 +17,7 @@ import {
   ClipboardList,
   Bell,
   Send,
+  Rocket,
 } from "lucide-react";
 import { KelasMark } from "@/components/site/KelasMark";
 import { useAuth } from "@/hooks/use-auth";
@@ -47,6 +48,11 @@ export function AdminSidebar({ onItemClick }: AdminSidebarProps) {
       to: "/admin/test-notification",
       label: "Test Notifikasi",
       icon: Send,
+    },
+    {
+      to: "/admin/update-configuration",
+      label: "Update Configuration",
+      icon: Rocket,
     },
     { to: "/admin/artikel", label: t.articles.heading, icon: FileText },
     { to: "/admin/agenda", label: t.admin.agenda, icon: CalendarDays },
