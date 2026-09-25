@@ -19,6 +19,7 @@ pnpm-lock.yaml
 
 # Build output
 dist
+tkj1smknice-android-*.apk
 
 # Android keystores (sensitive)
 android/keystores/*.keystore
