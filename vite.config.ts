@@ -95,4 +95,10 @@ export default defineConfig({
       overlay: false,
     },
   },
+  preview: {
+    host: true,
+    port: 4173,
+    // Allow ngrok tunnel hostname (free tier random subdomain)
+    allowedHosts: ["5828-103-184-180-139.ngrok-free.app"],
+  },
 });
